@@ -1,0 +1,14 @@
+Package: oncomop
+Title: Methods to Analyze Oncological Data In The OMOP-CDM
+Version: 0.0.0.9000
+Authors@R: 
+    person("Cesar", "Barboza", , "c.barboza@mi-erasmusmc.nl", role = c("aut", "cre")),
+    person("Anton", "Barchuk", email = "a.barchuk@mi-erasmusmc.nl", role = c("aut"))
+Description: What the package does (one paragraph).
+License: Apache License (>= 2)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 8.0.0
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
