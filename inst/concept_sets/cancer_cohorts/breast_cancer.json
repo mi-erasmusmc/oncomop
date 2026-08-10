@@ -1,0 +1,1011 @@
+{
+  "items": [
+    {
+      "concept": {
+        "CONCEPT_ID": 42512056,
+        "CONCEPT_NAME": "Papillary carcinoma, encapsulated, of thyroid of lower-inner quadrant of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8343/3-C50.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36559305,
+        "CONCEPT_NAME": "Papillary carcinoma, encapsulated, of thyroid of overlapping lesion of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8343/3-C50.8",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 44502235,
+        "CONCEPT_NAME": "Papillary carcinoma, encapsulated, of thyroid of upper-outer quadrant of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8343/3-C50.4",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403043,
+        "CONCEPT_NAME": "Apocrine adenocarcinoma in situ (C44._) of upper-outer quadrant of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8401/2-C50.4",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403047,
+        "CONCEPT_NAME": "Infiltrating lobular mixed with other types of carcinoma, in situ (C50._) of breast, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8524/2-C50.9",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403017,
+        "CONCEPT_NAME": "Paget disease in situ and intraductal carcinoma (C50._) of breast, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8543/2-C50.9",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403027,
+        "CONCEPT_NAME": "Paget disease in situ and intraductal carcinoma (C50._) of central portion of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8543/2-C50.1",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403025,
+        "CONCEPT_NAME": "Paget disease in situ and intraductal carcinoma (C50._) of lower-outer quadrant of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8543/2-C50.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36402993,
+        "CONCEPT_NAME": "Paget disease in situ and intraductal carcinoma (C50._) of nipple",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8543/2-C50.0",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403064,
+        "CONCEPT_NAME": "Paget disease in situ and intraductal carcinoma (C50._) of overlapping lesion of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8543/2-C50.8",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403075,
+        "CONCEPT_NAME": "Paget disease, mammary in situ (C50._) of nipple",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8540/2-C50.0",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 42536723,
+        "CONCEPT_NAME": "Primary osteosarcoma",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "735680008",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1517356800000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 42512498,
+        "CONCEPT_NAME": "Chondroblastic osteosarcoma of overlapping lesion of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "9181/3-C50.8",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 3173153,
+        "CONCEPT_NAME": "Basal cell carcinoma of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "22760001000004106",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "Nebraska Lexicon",
+        "CONCEPT_CLASS_ID": "Clinical Finding",
+        "VALID_START_DATE": 1453939200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 3184724,
+        "CONCEPT_NAME": "Invasive carcinoma of breast with extensive intraductal component",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "911751051000004106",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "Nebraska Lexicon",
+        "CONCEPT_CLASS_ID": "Clinical Finding",
+        "VALID_START_DATE": 1516838400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 3179883,
+        "CONCEPT_NAME": "Invasive carcinoma of breast without extensive intraductal component",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "911751061000004108",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "Nebraska Lexicon",
+        "CONCEPT_CLASS_ID": "Clinical Finding",
+        "VALID_START_DATE": 1516838400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 42512224,
+        "CONCEPT_NAME": "Papillary carcinoma, encapsulated, of thyroid of breast, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8343/3-C50.9",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4308306,
+        "CONCEPT_NAME": "Infiltrating ductal carcinoma of breast, stage 1",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "422399001",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1170201600000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4310988,
+        "CONCEPT_NAME": "Infiltrating ductal carcinoma of breast, stage 2",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "422479008",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1170201600000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4313043,
+        "CONCEPT_NAME": "Infiltrating ductal carcinoma of breast, stage 3",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "423114009",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1170201600000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4310721,
+        "CONCEPT_NAME": "Infiltrating ductal carcinoma of breast, stage 4",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "424229006",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1170201600000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36546126,
+        "CONCEPT_NAME": "Cystic hypersecretory carcinoma of axillary tail of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8508/3-C50.6",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36551039,
+        "CONCEPT_NAME": "Cystic hypersecretory carcinoma of breast, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8508/3-C50.9",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36559759,
+        "CONCEPT_NAME": "Cystic hypersecretory carcinoma of central portion of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8508/3-C50.1",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36536910,
+        "CONCEPT_NAME": "Cystic hypersecretory carcinoma of lower-inner quadrant of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8508/3-C50.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36553828,
+        "CONCEPT_NAME": "Cystic hypersecretory carcinoma of lower-outer quadrant of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8508/3-C50.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36554874,
+        "CONCEPT_NAME": "Cystic hypersecretory carcinoma of nipple",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8508/3-C50.0",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36540054,
+        "CONCEPT_NAME": "Cystic hypersecretory carcinoma of overlapping lesion of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8508/3-C50.8",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36545545,
+        "CONCEPT_NAME": "Cystic hypersecretory carcinoma of upper-inner quadrant of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8508/3-C50.2",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36524099,
+        "CONCEPT_NAME": "Cystic hypersecretory carcinoma of upper-outer quadrant of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8508/3-C50.4",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4112853,
+        "CONCEPT_NAME": "Malignant tumor of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "254837009",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 440059,
+        "CONCEPT_NAME": "Recurrent disease",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "58184002",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 141232,
+        "CONCEPT_NAME": "Malignant melanoma of skin",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "93655004",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 44811954,
+        "CONCEPT_NAME": "Breast cancer detected by national screening programme",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "94361000000105",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1075507200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4112075,
+        "CONCEPT_NAME": "Cancer en cuirasse",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "254841008",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4189640,
+        "CONCEPT_NAME": "Neoplasm of hematopoietic cell type",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "414825006",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1107129600000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4185470,
+        "CONCEPT_NAME": "Disorder of hematopoietic morphology",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "414026006",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1107129600000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 432851,
+        "CONCEPT_NAME": "Metastatic malignant neoplasm",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "128462008",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4154629,
+        "CONCEPT_NAME": "Malignant neoplasm of bone, connective tissue, skin and breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "271467005",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 434584,
+        "CONCEPT_NAME": "Kaposi's sarcoma (clinical)",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "109385007",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 433435,
+        "CONCEPT_NAME": "Carcinoma in situ",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "109355002",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 42512152,
+        "CONCEPT_NAME": "Paget disease in situ and intraductal carcinoma (C50._) of lower-inner quadrant of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8543/2-C50.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403034,
+        "CONCEPT_NAME": "Apocrine adenocarcinoma in situ (C44._) of breast, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8401/2-C50.9",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36402992,
+        "CONCEPT_NAME": "Apocrine adenocarcinoma in situ (C44._) of lower-inner quadrant of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8401/2-C50.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403054,
+        "CONCEPT_NAME": "Apocrine adenocarcinoma in situ (C44._) of lower-outer quadrant of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8401/2-C50.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403041,
+        "CONCEPT_NAME": "Apocrine adenocarcinoma in situ (C44._) of overlapping lesion of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8401/2-C50.8",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 2106968,
+        "CONCEPT_NAME": "Estrogen receptor (ER) and progesterone receptor (PR) negative breast cancer (ONC)",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "3316F",
+        "DOMAIN_ID": "Observation",
+        "VOCABULARY_ID": "CPT4",
+        "CONCEPT_CLASS_ID": "CPT4",
+        "VALID_START_DATE": 1238976000000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 2106967,
+        "CONCEPT_NAME": "Estrogen receptor (ER) or progesterone receptor (PR) positive breast cancer (ONC)",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "3315F",
+        "DOMAIN_ID": "Observation",
+        "VOCABULARY_ID": "CPT4",
+        "CONCEPT_CLASS_ID": "CPT4",
+        "VALID_START_DATE": 1238976000000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4089865,
+        "CONCEPT_NAME": "Malignant melanoma of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "188050009",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4247348,
+        "CONCEPT_NAME": "Primary malignant neoplasm of skin of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "94012007",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36402476,
+        "CONCEPT_NAME": "Papillary carcinoma, metastatic site of upper-outer quadrant of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8343/2-C50.4",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36402624,
+        "CONCEPT_NAME": "Papillary carcinoma, metastatic site of central portion of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8343/2-C50.1",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36402560,
+        "CONCEPT_NAME": "Papillary carcinoma, metastatic site of lower-outer quadrant of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8343/2-C50.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    }
+  ]
+}
