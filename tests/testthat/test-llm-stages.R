@@ -1,5 +1,9 @@
 test_that("Create test patients with TNM measurements for staging - UICC 7th edition", {
 
+  # Reference files:
+  # - extras/uicc_tnm_anatomic_stage_mapping 1.csv: mapping of TNM combinations to UICC stages
+  # - extras/universal_tnm_options 1.csv: mapping of each T/N/M to its UICC concept ids
+
   # For every cancer type creates 5 test patients, one per stage:
   # - a patient with stage 0 cancer (or substages)
   # - a patient with stage I cancer (or substages)
@@ -97,6 +101,7 @@ test_that("Create test patients with TNM measurements for staging - UICC 7th edi
 
   cdm <- TestGenerator::patientsCDM(
     testName = "test_patients_staging_uicc7",
+    vocabulary = "v20260227_complete",
     cdmVersion = "5.4"
   )
 
@@ -305,6 +310,7 @@ test_that("Create test patients with TNM measurements for staging - UICC 8th edi
 
   cdm <- TestGenerator::patientsCDM(
     testName = "test_patients_staging_uicc8",
+    vocabulary = "v20260227_complete",
     cdmVersion = "5.4"
   )
 
@@ -558,6 +564,7 @@ test_that("Create test patients with TNM measurements UICC 7th and 8th edition",
 
   cdm <- TestGenerator::patientsCDM(
     testName = "test_patients_staging_general",
+    vocabulary = "v20260227_complete",
     cdmVersion = "5.4"
   )
 

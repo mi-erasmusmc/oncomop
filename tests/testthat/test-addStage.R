@@ -27,7 +27,9 @@ test_that("addStage() insert column with last record", {
     expect_in(
       c(
       "ajcc_uicc_7th_m1_category_m90_to_90",
-      "ajcc_uicc_7th_clinical_m1_category_m90_to_90"
+      "ajcc_uicc_7th_clinical_m1_category_m90_to_90",
+      "ajcc_uicc_clinical_m1_category_m90_to_90",
+      "ajcc_uicc_clinical_m1_category_m90_to_90"
       )
     )
 })
@@ -60,6 +62,7 @@ test_that("Stages is added to cancer cohort", {
       expect_in(
         c("ajcc_uicc_m1_category_m90_to_90",
           "ajcc_uicc_7th_m1_category_m90_to_90",
+          "ajcc_uicc_clinical_m1_category_m90_to_90",
           "ajcc_uicc_7th_clinical_m1_category_m90_to_90")
       )
 })
@@ -75,9 +78,11 @@ test_that("Filter children concept sets after extraction", {
     cdm,
     path = "stages"
   )
-  codelist |>
-    filterStageConcepts()
-})
+  expect_no_error({
+    codelist |>
+      filterStageConcepts()
+    })
+  })
 
 test_that("Adding stages to patients with UICC 7th TNM measurements", {
 
@@ -298,7 +303,7 @@ test_that("Overlap of TNM codes", {
   stage_concepts <- codelist |>
     filterStageConcepts()
 
-  # Sample overlap of codelists
+  # Check overlap of codelists
   overlap <- length(intersect(codelist$`AJCC/UICC 7th M0 Category`, codelist$`AJCC/UICC 8th M0 Category`))
   expect_equal(overlap, 0)    # no overlap
   overlap <- length(intersect(codelist$`AJCC/UICC clinical M0 Category`, codelist$`AJCC/UICC 7th clinical M0 Category`))
@@ -306,11 +311,37 @@ test_that("Overlap of TNM codes", {
   overlap <- length(intersect(codelist$`AJCC/UICC clinical M0 Category`, codelist$`AJCC/UICC 8th clinical M0 Category`))
   expect_false(overlap == 0)  # OVERLAP
 
-  # Sample overlap of stage_concepts
+  intersection_codelists <- outer(
+    names(codelist),
+    names(codelist),
+    Vectorize(function(x, y) {
+      length(intersect(codelist[[x]], codelist[[y]]))
+      })
+    )
+  diag(intersection_codelists) <- 0
+  expect_true(any(intersection_codelists > 0)) # there is overall overlap of codelists
+
+  # Check overlap of stage_concepts
   overlap <- length(intersect(stage_concepts$`AJCC/UICC 7th M1 Category`, stage_concepts$`AJCC/UICC 8th M1 Category`))
   expect_equal(overlap, 0)    # no overlap
   overlap <- length(intersect(stage_concepts$`AJCC/UICC N2 Category`, stage_concepts$`AJCC/UICC 7th N2 Category`))
-  expect_equal(overlap, 0)    # no overlap
+  expect_false(overlap == 0)  # OVERLAP
   overlap <- length(intersect(stage_concepts$`AJCC/UICC N2 Category`, stage_concepts$`AJCC/UICC 8th N2 Category`))
-  expect_equal(overlap, 0)    # no overlap
+  expect_false(overlap == 0)  # OVERLAP
+
+  intersection_stage_concepts <- outer(
+    names(stage_concepts),
+    names(stage_concepts),
+    Vectorize(function(x, y) {
+      length(intersect(stage_concepts[[x]], stage_concepts[[y]]))
+    })
+  )
+  diag(intersection_stage_concepts) <- 0
+  expect_true(any(intersection_stage_concepts > 0)) # there is overall overlap of stage_concepts
+
+  # Check relation between codelists and stage_concepts
+  expect_equal(length(codelist), 134)
+  expect_equal(length(stage_concepts), 99)
+  expect_equal(intersect(codelist, stage_concepts), stage_concepts)  # stage_concepts is a subset of codelist
+  expect_equal(length(setdiff(codelist, stage_concepts)), 35)        # codelist has additional concepts for NX, Ta, Tis, TX
 })

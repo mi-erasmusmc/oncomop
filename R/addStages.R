@@ -67,6 +67,7 @@ addStages <- function(
     dplyr::rename(
       stages = strata_column
     )
+
   cdm <- omopgenerics::insertTable(
     cdm,
     name = name,
@@ -74,10 +75,12 @@ addStages <- function(
     overwrite = TRUE,
     temporary = FALSE
   )
+
   ParallelLogger::logInfo("Converting cancer_strata table into a cohort table")
   cdm[[name]] <- omopgenerics::newCohortTable(
     table = cdm[[name]]
   )
+
   return(cdm[[name]])
 }
 

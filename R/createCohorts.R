@@ -193,10 +193,12 @@ createCharacteristicsCohorts <- function(
   )
   pathToCohortJsonFiles <- system.file(
     path,
-    package = "P4C5006"
+    package = "oncomop"
     )
 
-  checkmate::assertDirectoryExists(pathToCohortJsonFiles)
+  checkmate::assertDirectoryExists(
+    pathToCohortJsonFiles
+  )
 
   all_characteristics <- list.files(
     pathToCohortJsonFiles
@@ -235,7 +237,7 @@ createCharacteristicsCohorts <- function(
     pathToCohortJsonFiles <- system.file(
       "concept_sets",
       characteristics[i],
-      package = "P4C5006"
+      package = "oncomop"
     )
 
     characteristics_codelist <- omopgenerics::importConceptSetExpression(

@@ -2,7 +2,7 @@ addWindow <- function(
   summarisedResult,
   window
 ) {
-  win_1 <- window[[1]][[1]] 
+  win_1 <- window[[1]][[1]]
   win_2 <- window[[1]][[2]]
 
   format_window_bound <- function(value) {
@@ -21,13 +21,13 @@ addWindow <- function(
     format_window_bound(win_1),
     format_window_bound(win_2)
   )
-  summarisedResult |> 
-    omopgenerics::splitAdditional() |> 
+  summarisedResult |>
+    omopgenerics::splitAdditional() |>
     dplyr::mutate(
       window = windowInCharacter
-    )  |> 
+    )  |>
     omopgenerics::uniteAdditional(
-      cols = "window" 
+      cols = "window"
     )
 }
 assertCharacteristic <- function(x, characteristics) {
@@ -53,11 +53,11 @@ filterCodelist <- function(
   codelist,
   pattern
 ) {
-  codelist |> 
+  codelist |>
     omopgenerics::assertList(
       named = TRUE
     )
-  pattern |> 
+  pattern |>
     checkmate::assertCharacter()
   index <- stringr::str_detect(
     names(codelist),
@@ -69,7 +69,7 @@ filterCodelist <- function(
 conceptSetsPath <- function() {
     system.file(
       "concept_sets",
-    package = "P4C5006"
+    package = "oncomop"
   )
 }
 #' Get a 90-day window around index
@@ -91,7 +91,7 @@ window90Days <- function() {
 windows30Days <- function() {
   starts <- seq(-90, 1825, by = 30)
   ends <- pmin(starts + 29, 1825)
-  lapply(seq_along(starts), function(i) c(starts[i], ends[i])) 
+  lapply(seq_along(starts), function(i) c(starts[i], ends[i]))
 }
 #' Zip study result files
 #'

@@ -1,0 +1,175 @@
+{
+  "items": [
+    {
+      "concept": {
+        "CONCEPT_ID": 1635320,
+        "CONCEPT_NAME": "AJCC/UICC N3 Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "AJCC/UICC-N3",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1633684,
+        "CONCEPT_NAME": "AJCC/UICC 7th N3 Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "7th_AJCC/UICC-N3",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1634147,
+        "CONCEPT_NAME": "AJCC/UICC 8th N3 Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8th_AJCC/UICC-N3",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1633914,
+        "CONCEPT_NAME": "AJCC/UICC clinical N3 Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "c-AJCC/UICC-N3",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1635706,
+        "CONCEPT_NAME": "AJCC/UICC pathological N3 Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "p-AJCC/UICC-N3",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1633668,
+        "CONCEPT_NAME": "AJCC/UICC 7th pathological N3 Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "p-7th_AJCC/UICC-N3",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1633854,
+        "CONCEPT_NAME": "AJCC/UICC 8th clinical N3 Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "c-8th_AJCC/UICC-N3",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1634037,
+        "CONCEPT_NAME": "AJCC/UICC 7th clinical N3 Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "c-7th_AJCC/UICC-N3",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1635307,
+        "CONCEPT_NAME": "AJCC/UICC 8th pathological N3 Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "p-8th_AJCC/UICC-N3",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    }
+  ]
+}
