@@ -12,7 +12,7 @@ test_that("Extract concept ids from filtered codelist", {
   ) |>
     filterStageConcepts() |>
     extractConceptIds() |>
-    pull(concept_id)
+    dplyr::pull(concept_id)
 
   concept_ids |>
     expect_length(99)
