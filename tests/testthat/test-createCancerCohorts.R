@@ -30,19 +30,19 @@ test_that("createCancerCohorts works with specific xlsx cancer files", {
     print(cancer_type)
 
     test_name <- paste0("test_", cancer_type)
-    TestGenerator::readPatients.xl(
-      filePath = file.path(
-        testthat::test_path(
-          "excel_files",
-          paste0(
-            "test_cdm_5.4_",
-            cancer_type,
-            ".xlsx"
-          )
-        )
-      ),
-      testName = test_name
-    )
+    # TestGenerator::readPatients.xl(
+    #   filePath = file.path(
+    #     testthat::test_path(
+    #       "excel_files",
+    #       paste0(
+    #         "test_cdm_5.4_",
+    #         cancer_type,
+    #         ".xlsx"
+    #       )
+    #     )
+    #   ),
+    #   testName = test_name
+    # )
 
     # create cdm instance with current cancer patients
     cdm <- TestGenerator::patientsCDM(
@@ -106,7 +106,7 @@ test_that("createCancerCohorts works with specific xlsx cancer files", {
       CohortConstructor::attrition() |>
       dplyr::filter(
         cohort_definition_id == cohort_id
-      ) |> 
+      ) |>
       dplyr::select(excluded_records) |>
       sum() |>
       expect_equal(1)
@@ -121,19 +121,19 @@ test_that("createCancerCohorts works with a xlsx file for all cancer types", {
   cdmVersion <- "5.4"
 
   test_name <- "test_all_cancer_patients"
-  TestGenerator::readPatients.xl(
-      filePath = file.path(
-        testthat::test_path(
-          "excel_files",
-          paste0(
-            "test_cdm_5.4_",
-            "all_cancer_patients",
-            ".xlsx"
-          )
-        )
-      ),
-      testName = test_name
-    )
+  # TestGenerator::readPatients.xl(
+  #     filePath = file.path(
+  #       testthat::test_path(
+  #         "excel_files",
+  #         paste0(
+  #           "test_cdm_5.4_",
+  #           "all_cancer_patients",
+  #           ".xlsx"
+  #         )
+  #       )
+  #     ),
+  #     testName = test_name
+  #   )
 
   # create cdm instance with current cancer patients
   cdm <- TestGenerator::patientsCDM(
@@ -209,7 +209,7 @@ test_that("createCancerCohorts works with a xlsx file for all cancer types", {
 
 })
 
-# DEPRECATED 
+# DEPRECATED
 # test_that("createCancerCohorts works with DECK concept sets", {
 
 #   cdmVersion <- "5.4"
