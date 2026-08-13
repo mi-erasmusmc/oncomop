@@ -42,29 +42,29 @@ extractInnerConcepts <- function(
       "Creating codelist from {pathToCohortJsonFiles}"
       )
     )
-  conceptSetExpresion <- omopgenerics::importConceptSetExpression(
+  conceptSetExpression <- omopgenerics::importConceptSetExpression(
     path = pathToCohortJsonFiles,
     type = "json"
   )
   if (path == "treatments_procedures") {
-    conceptSetExpresion <- filterCodelist(
-      codelist = conceptSetExpresion,
+    conceptSetExpression <- filterCodelist(
+      codelist = conceptSetExpression,
       pattern = cancerName
     )
   }
-  namesConceptSet <- conceptSetExpresion |>
+  namesConceptSet <- conceptSetExpression |>
     names()
   descendants <- list()
-  for (i in seq_along(conceptSetExpresion)) {
+  for (i in seq_along(conceptSetExpression)) {
     cli::cli_alert(
       glue::glue("Extracting codelist from '{namesConceptSet[i]}'")
     )
     conceptIds <- dplyr::pull(
-      conceptSetExpresion[[i]],
+      conceptSetExpression[[i]],
       concept_id
     )
     conceptSetExpressionNames <- dplyr::left_join(
-      conceptSetExpresion[[i]],
+      conceptSetExpression[[i]],
       dplyr::collect(
         dplyr::select(
           dplyr::filter(
