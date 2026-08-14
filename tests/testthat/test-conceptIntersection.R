@@ -56,3 +56,24 @@ test_that("vizConceptIntersection works with custom parameters", {
   )
 
 })
+
+
+test_that("shinyConceptIntersection opens up correctly", {
+
+  testName <- "stages_patients_one_patient"
+
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+
+  cdm <- createCancerCohorts(
+    cdm,
+    path = "cancer_cohorts",
+    name = "cancer_cohorts"
+  )
+
+  shinyConceptIntersection(cdm)
+
+})
