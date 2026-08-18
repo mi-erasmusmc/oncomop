@@ -1,3 +1,24 @@
+#' Check if concept sets have common elements
+#'
+#' @description
+#' This function performs a simple boolean check to determine whether the codelists
+#' generated from a number of concept sets have any element in common.
+#'
+#' @details
+#' The intersection of codelists is calculated as follows: given an array of codelists,
+#' the function uses the outer product of the array with the array itself to calculate
+#' the length of the intersection of every possible combination of two codelists.
+#' The result is a symmetric matrix where the element in position \eqn{(i, j)} is the number
+#' of common codes between codelist \eqn{i} and codelist \eqn{j}, and the elements on
+#' the diagonal represent the size of every codelist.
+#'
+#' To simply assess the presence of common codes, it is enough to set the diagonal to \eqn{0}
+#' and check if there is any other element \eqn{> 0} in the matrix.
+#'
+#' @param cdm A cdm instance, needed to extract concept sets.
+#' @param concept_folder The character string indicating the folder under `inst/concept_sets`
+#' where the concept sets of interest are saved in json files, default `"stages"`.
+#' @returns `TRUE` if the codelists have any elements in common, `FALSE` if they don't.
 checkConceptIntersection <- function(
     cdm,
     concept_folder = "stages"
@@ -25,6 +46,27 @@ checkConceptIntersection <- function(
 }
 
 
+#' Visualize static UpSet plot of staging codelists intersections
+#'
+#' @description
+#' An UpSet plot is a good alternative to a Venn diagram to visualize intersections
+#' of more than \eqn{3} sets: it shows which sets have common elements with which other set
+#' and the size of the intersection, as well as the original size of every set.
+#'
+#' The function `vizConceptIntersection()` allows to filter available staging codelists by subcategory,
+#' edition or classification and plots the intersections of codelists of interest.
+#'
+#' @param cdm A cdm instance, needed to extract concept sets.
+#' @param concept_folder The character string indicating the folder under `inst/concept_sets`
+#' where the concept sets of interest are saved in json files, default `"stages"`.
+#' @param input_subcategory The specific subcategory to filter by (`"T0"`, `"N0"`, `"M0"`, `...`),
+#' default `NULL` (corresponds to all subcategories).
+#' @param input_edition The staging system edition to filter by (`"7th"`, `"8th"`, `"unspecified`),
+#' default `NULL` (corresponds to all editions).
+#' @param input_classification The classification type to filter by (`"clinical"`, `"pathological"`,
+#' `"unspecified"`), default `NULL` (corresponds to all classifications).
+#'
+#' @returns Prints the plot and returns `NULL`.
 vizConceptIntersection <- function(
     cdm,
     concept_folder = "stages",
@@ -118,7 +160,7 @@ vizConceptIntersection <- function(
     drop = FALSE
   ]
 
-  UpSetR::upset(
+  p <- UpSetR::upset(
     df_to_plot,
     nsets = ncol(df_to_plot),
     matrix.color = "#1a359b",
@@ -127,9 +169,28 @@ vizConceptIntersection <- function(
     shade.color = "#58acdf",
     order.by = "freq"
     )
+
+  print(p)
+
+  return(NULL)
 }
 
 
+#' Visualize interactive UpSet plot of staging codelists intersections
+#'
+#' @description
+#' An UpSet plot is a good alternative to a Venn diagram to visualize intersections
+#' of more than \eqn{3} sets: it shows which sets have common elements with which other set
+#' and the size of the intersection, as well as the original size of every set.
+#'
+#' The function `shinyConceptIntersection()` launches a simple shiny app with filters for subcategory,
+#' edition and classification to display a dynamic UpSet plot of staging codelists intersection.
+#'
+#' @param cdm A cdm instance, needed to extract concept sets.
+#' @param concept_folder The character string indicating the folder under `inst/concept_sets`
+#' where the concept sets of interest are saved in json files, default `"stages"`.
+#'
+#' @returns Launches a Shiny app.
 shinyConceptIntersection <- function(
     cdm,
     concept_folder = "stages"
