@@ -1,0 +1,175 @@
+{
+  "items": [
+    {
+      "concept": {
+        "CONCEPT_ID": 1634530,
+        "CONCEPT_NAME": "AJCC/UICC Tis Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "AJCC/UICC-Tis",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1633798,
+        "CONCEPT_NAME": "AJCC/UICC 7th Tis Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "7th_AJCC/UICC-Tis",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1634720,
+        "CONCEPT_NAME": "AJCC/UICC 8th Tis Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8th_AJCC/UICC-Tis",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1634450,
+        "CONCEPT_NAME": "AJCC/UICC clinical Tis Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "c-AJCC/UICC-Tis",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1634581,
+        "CONCEPT_NAME": "AJCC/UICC pathological Tis Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "p-AJCC/UICC-Tis",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1633737,
+        "CONCEPT_NAME": "AJCC/UICC 8th clinical Tis Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "c-8th_AJCC/UICC-Tis",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1633920,
+        "CONCEPT_NAME": "AJCC/UICC 8th pathological Tis Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "p-8th_AJCC/UICC-Tis",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1634116,
+        "CONCEPT_NAME": "AJCC/UICC 7th pathological Tis Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "p-7th_AJCC/UICC-Tis",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1635227,
+        "CONCEPT_NAME": "AJCC/UICC 7th clinical Tis Category",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "c-7th_AJCC/UICC-Tis",
+        "DOMAIN_ID": "Measurement",
+        "VOCABULARY_ID": "Cancer Modifier",
+        "CONCEPT_CLASS_ID": "Staging/Grading",
+        "VALID_START_DATE": 1652054400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "person": [
+    {
+      "person_id": 1,
+      "gender_concept_id": 8532,
+      "year_of_birth": 1980,
+      "gender_source_value": "F"
+    },
+    {
+      "person_id": 2,
+      "gender_concept_id": 8507,
+      "year_of_birth": 1990,
+      "gender_source_value": "M"
+    },
+    {
+      "person_id": 3,
+      "gender_concept_id": 8532,
+      "year_of_birth": 2001,
+      "gender_source_value": "F"
+    }
+  ],
+  "observation_period": [
+    {
+      "observation_period_id": 1,
+      "person_id": 1,
+      "observation_period_start_date": "1990-01-01",
+      "observation_period_end_date": "2023-12-31",
+      "period_type_concept_id": 32828
+    },
+    {
+      "observation_period_id": 2,
+      "person_id": 2,
+      "observation_period_start_date": "2000-01-01",
+      "observation_period_end_date": "2023-12-31",
+      "period_type_concept_id": 32828
+    },
+    {
+      "observation_period_id": 3,
+      "person_id": 3,
+      "observation_period_start_date": "2005-01-01",
+      "observation_period_end_date": "2025-12-31",
+      "period_type_concept_id": 32828
+    }
+  ],
+  "condition_occurrence": [
+    {
+      "condition_occurrence_id": 1,
+      "person_id": 1,
+      "condition_concept_id": 133419,
+      "condition_start_date": "2020-01-01",
+      "condition_end_date": "2022-12-28",
+      "condition_type_concept_id": 32817
+    },
+    {
+      "condition_occurrence_id": 2,
+      "person_id": 2,
+      "condition_concept_id": 133419,
+      "condition_start_date": "2005-01-12",
+      "condition_end_date": "2008-08-13",
+      "condition_type_concept_id": 32817
+    },
+    {
+      "condition_occurrence_id": 3,
+      "person_id": 3,
+      "condition_concept_id": 133419,
+      "condition_start_date": "2024-04-16",
+      "condition_end_date": "2024-11-30",
+      "condition_type_concept_id": 32817
+    }
+  ]
+}
