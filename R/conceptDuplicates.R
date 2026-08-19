@@ -18,7 +18,8 @@
 #' @param cdm A cdm instance, needed to extract concept sets.
 #' @param concept_folder A character string with the folder name under `inst/concept_sets/`
 #' containing the concept set JSON files, default `stages`.
-#' @returns Invisible boolean: `TRUE` if the codelists have duplicates, `FALSE` otherwise.
+#'
+#' @returns Invisible boolean: `TRUE` if the codelists elements are unique, `FALSE` otherwise.
 assertUniqueConcepts <- function(
     cdm,
     concept_folder = "stages"
@@ -50,7 +51,7 @@ assertUniqueConcepts <- function(
       )
   }
 
-  invisible(res)
+  invisible(!res)
 }
 
 
