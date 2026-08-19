@@ -1,4 +1,4 @@
-#' Check if concept sets have common elements
+#' Check if codelists have common elements
 #'
 #' @description
 #' This function performs a simple boolean check to determine whether the codelists
@@ -16,10 +16,10 @@
 #' and check if there is any other element \eqn{> 0} in the matrix.
 #'
 #' @param cdm A cdm instance, needed to extract concept sets.
-#' @param concept_folder The character string indicating the folder under `inst/concept_sets`
-#' where the concept sets of interest are saved in json files, default `stages`.
-#' @returns `TRUE` if the codelists have any elements in common, `FALSE` if they don't.
-checkConceptIntersection <- function(
+#' @param concept_folder A character string with the folder name under `inst/concept_sets/`
+#' containing the concept set JSON files, default `stages`.
+#' @returns Invisible boolean: `TRUE` if the codelists have duplicates, `FALSE` otherwise.
+assertUniqueConcepts <- function(
     cdm,
     concept_folder = "stages"
     ) {
@@ -29,30 +29,39 @@ checkConceptIntersection <- function(
     path = concept_folder
   )
 
-  stage_concepts <- codelist |>
-    filterStageConcepts()
+  if (concept_folder == "stages") {
+    codelist <- codelist |>
+      filterStageConcepts()
+  }
 
   intersection_matrix <- outer(
-    names(stage_concepts),
-    names(stage_concepts),
+    names(codelist),
+    names(codelist),
     Vectorize(function(x, y) {
-      length(intersect(stage_concepts[[x]], stage_concepts[[y]]))
+      length(intersect(codelist[[x]], codelist[[y]]))
     })
   )
   diag(intersection_matrix) <- 0
 
-  return(any(intersection_matrix > 0))
+  res <- any(intersection_matrix > 0)
+  if (res) {
+    cli::cli_warn(
+      "Warning: codelists for {.var {concept_folder}} contain duplicates!"
+      )
+  }
+
+  invisible(res)
 }
 
 
-#' Visualize static UpSet plot of staging codelists intersections
+#' Visualize static UpSet plot of staging codelists with duplicates
 #'
 #' @description
 #' An UpSet plot is a good alternative to a Venn diagram to visualize intersections
 #' of more than \eqn{3} sets: it shows which sets have common elements with which other set
 #' and the size of the intersection, as well as the original size of every set.
 #'
-#' The function `vizConceptIntersection()` allows to filter available staging codelists by subcategory,
+#' The function `vizConceptDuplicates()` allows to filter available staging codelists by subcategory,
 #' edition or classification and plots the intersections of codelists of interest.
 #'
 #' @param cdm A cdm instance, needed to extract concept sets.
@@ -66,7 +75,7 @@ checkConceptIntersection <- function(
 #' `"unspecified"`), default `NULL` (corresponds to all classifications).
 #'
 #' @returns Prints the plot and returns `NULL`.
-vizConceptIntersection <- function(
+vizConceptDuplicates <- function(
     cdm,
     concept_folder = "stages",
     input_subcategory = NULL,
@@ -175,14 +184,14 @@ vizConceptIntersection <- function(
 }
 
 
-#' Visualize interactive UpSet plot of staging codelists intersections
+#' Visualize interactive UpSet plot of staging codelists with duplicates
 #'
 #' @description
 #' An UpSet plot is a good alternative to a Venn diagram to visualize intersections
 #' of more than \eqn{3} sets: it shows which sets have common elements with which other set
 #' and the size of the intersection, as well as the original size of every set.
 #'
-#' The function `shinyConceptIntersection()` launches a simple shiny app with filters for subcategory,
+#' The function `shinyConceptDuplicates()` launches a simple shiny app with filters for subcategory,
 #' edition and classification to display a dynamic UpSet plot of staging codelists intersection.
 #'
 #' @param cdm A cdm instance, needed to extract concept sets.
@@ -190,155 +199,72 @@ vizConceptIntersection <- function(
 #' where the concept sets of interest are saved in json files, default `"stages"`.
 #'
 #' @returns Launches a Shiny app.
-shinyConceptIntersection <- function(
+shinyConceptDuplicates <- function(
     cdm,
     concept_folder = "stages"
-    ) {
+  ) {
 
-  ui <- shiny::fluidPage(
+  ui <- bslib::page_sidebar(
 
-    # Shiny app style
-    shiny::tags$head(
+    title = "Cancer stages duplicates",
 
-      shiny::tags$style(shiny::HTML("
+    sidebar = bslib::sidebar(
 
-      h2 {
-      font-family: Calibri, sans-serif;
-      }
+      title = "Filters",
+      width = 300,
 
-      .well {
-        background-color: #f8f9fa;
-        border: 1px solid #dee2e6;
-        border-radius: 12px;
-        padding: 18px;
-      }
-
-      .control-label {
-        font-weight: 600;
-        margin-top: 8px;
-      }
-
-      .selectize-input {
-        border-radius: 8px;
-        min-height: 42px;
-      }
-
-      .selectize-dropdown {
-        border-radius: 8px;
-      }
-
-      .filter-row > div {
-        padding-left: 6px !important;
-        padding-right: 6px !important;
-      }
-
-    "))
-    ),
-
-    shiny::titlePanel("Cancer staging concept intersections"),
-
-    shiny::div(
-
-      style = "
-    max-width: 1500px;
-    margin-left: auto;
-    margin-right: auto;
-    ",
-
-      # filters card
-      shiny::div(
-
-        style = "
-        background: #f8f9fa;
-        border: 1px solid #dee2e6;
-        border-radius: 12px;
-        padding: 12px 16px 4px 16px
-        margin-bottom: 16px;
-      ",
-
-        shiny::fluidRow(
-
-          class = "filter-row",
-
-          shiny::column(
-            width = 3,
-            # Edition
-            shiny::selectizeInput(
-              inputId = "edition",
-              label = "Edition:",
-              choices = c("7th",
-                          "8th",
-                          "Unspecified"),
-              selected = c("7th",
-                           "8th"),
-              multiple = TRUE,
-              options = list(
-                plugins = list("remove_button"),
-                placeholder = "Select editions"
-              )
-            )
-          ),
-
-          shiny::column(
-            width = 4,
-            # Classification
-            shiny::selectizeInput(
-              inputId = "classification",
-              label = "Classification:",
-              choices = c("Clinical",
-                          "Pathological",
-                          "Unspecified"),
-              selected = c("Clinical",
-                           "Pathological"),
-              multiple = TRUE,
-              options = list(
-                plugins = list("remove_button"),
-                placeholder = "Select classifications"
-              )
-            )
-          ),
-
-          shiny::column(
-            width = 5,
-            shiny::selectizeInput(
-              inputId = "subcategory",
-              label = "Subcategory:",
-              choices = NULL,
-              selected = NULL,
-              multiple = TRUE,
-              options = list(
-                plugins = list("remove_button"),
-                placeholder = "Select T/N/M subcategories"
-              )
-            )
-          )
+      # Edition
+      shinyWidgets::pickerInput(
+        inputId = "filter_edition",
+        label = "Edition:",
+        choices = c("7th",
+                    "8th",
+                    "Unspecified"),
+        selected = NULL,
+        multiple = TRUE,
+        options = shinyWidgets::pickerOptions(
+          actionsBox = TRUE,
+          showTick = TRUE
         )
       ),
 
-      shiny::fluidRow(
-
-        shiny::column(
-          width = 12,
-
-          # plot card
-          shiny::div(
-
-            style = "
-          background: white;
-          border: 1px solid #dee2e6;
-          border-radius: 12px;
-          padding: 16px;
-          margin-top: 10px;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-          ",
-
-            # UpSet plot
-            shiny::plotOutput(
-              outputId = "upset_plot",
-              height = "900px"
-            )
-          )
+      # Classification
+      shinyWidgets::pickerInput(
+        inputId = "filter_classification",
+        label = "Classification:",
+        choices = c("Clinical",
+                    "Pathological",
+                    "Unspecified"),
+        selected = NULL,
+        multiple = TRUE,
+        options = shinyWidgets::pickerOptions(
+          actionsBox = TRUE,
+          showTick = TRUE
         )
+      ),
+
+      # Subcategory
+      shinyWidgets::pickerInput(
+        inputId = "filter_subcategory",
+        label = "Subcategory:",
+        choices = NULL,
+        selected = "T0",
+        multiple = TRUE,
+        options = shinyWidgets::pickerOptions(
+          actionsBox = TRUE,
+          showTick = TRUE
+        )
+      )
+
+    ),
+
+    bslib::card(
+
+      bslib::card_header("UpSet plot"),
+      # UpSet plot
+      shiny::plotOutput(
+        outputId = "upset_plot",
+        height = "700px"
       )
     )
   )
@@ -375,29 +301,33 @@ shinyConceptIntersection <- function(
     # Add other columns
     meta_stages$category <- substr(meta_stages$subcategory, 1, 1)
 
-    df <- stack(stage_concepts)
-    colnames(df) <- c("code", "codelist")
-
-    incidence <- xtabs(~ code + codelist, data = df)
-    incidence[incidence > 0] <- 1
-
+    # Get groups of subcategories
+    subcategory_choices <- list(
+      "T" = sort(unique(
+        meta_stages$subcategory[
+          meta_stages$category == "T"
+        ]
+      )),
+      "N" = sort(unique(
+        meta_stages$subcategory[
+          meta_stages$category == "N"
+        ]
+      )),
+      "M" = sort(unique(
+        meta_stages$subcategory[
+          meta_stages$category == "M"
+        ]
+      ))
+    )
 
     # Update subcategories based on what's in the data
     shiny::observeEvent(TRUE, {
-
-      available_subcategories <- meta_stages |>
-        dplyr::pull(subcategory) |>
-        unique() |>
-        sort()
-
-      shiny::updateSelectizeInput(
+      shinyWidgets::updatePickerInput(
         session = session,
-        inputId = "subcategory",
-        choices = available_subcategories,
-        selected = available_subcategories[1],
-        server = TRUE
+        inputId = "filter_subcategory",
+        choices = subcategory_choices,
+        selected = "T0"
       )
-
     }, once = TRUE)
 
     # Generate UpSet plot
@@ -406,24 +336,24 @@ shinyConceptIntersection <- function(
       selected_stages <- meta_stages
 
       # Filter by edition
-      if (length(input$edition) > 0) {
+      if (length(input$filter_edition) > 0) {
         selected_stages <- selected_stages |>
           dplyr::filter(
-            edition %in% tolower(input$edition)
+            edition %in% tolower(input$filter_edition)
           )
       }
       # Filter by classification
-      if (length(input$classification) > 0) {
+      if (length(input$filter_classification) > 0) {
         selected_stages <- selected_stages |>
           dplyr::filter(
-            classification %in% tolower(input$classification)
+            classification %in% tolower(input$filter_classification)
           )
       }
       # Filter by subcategory
-      if (length(input$subcategory) > 0) {
+      if (length(input$filter_subcategory) > 0) {
         selected_stages <- selected_stages |>
           dplyr::filter(
-            subcategory %in% input$subcategory
+            subcategory %in% input$filter_subcategory
           )
       }
 
@@ -432,17 +362,21 @@ shinyConceptIntersection <- function(
 
       # If no codelists match the selection, display empty plot and error message
       if (length(sel) == 0) {
-
         graphics::plot.new()
-
         graphics::text(
           x = 0.5,
           y = 0.5,
           labels = "No concept sets match the selected filters."
         )
-
         return()
       }
+
+      # Creating incidence matrix
+      df <- stack(stage_concepts)
+      colnames(df) <- c("code", "codelist")
+
+      incidence <- xtabs(~ code + codelist, data = df)
+      incidence[incidence > 0] <- 1
 
       # Select corresponding columns from incidence matrix
       upset_mat <- incidence[
@@ -451,7 +385,7 @@ shinyConceptIntersection <- function(
         drop = FALSE
       ]
 
-      # Convert to data.frame of 0/1 values
+      # Convert to dataframe of 0/1 values
       upset_df <- as.data.frame(upset_mat > 0)
 
       upset_df[] <- lapply(
@@ -468,15 +402,12 @@ shinyConceptIntersection <- function(
 
       # If there are no concepts to plot, display empty plot and error message
       if (nrow(df_to_plot) == 0) {
-
         graphics::plot.new()
-
         graphics::text(
           x = 0.5,
           y = 0.5,
           labels = "No concepts found for the selected codelists."
         )
-
         return()
       }
 
@@ -501,11 +432,12 @@ shinyConceptIntersection <- function(
           order.by = "freq"
         )
       )
-
     })
 
   }
 
-  shiny::shinyApp(ui = ui, server = server)
-
+  shiny::shinyApp(
+    ui = ui,
+    server = server
+  )
 }

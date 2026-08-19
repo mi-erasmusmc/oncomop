@@ -1,4 +1,4 @@
-test_that("checkConceptIntersection works on stages concept sets", {
+test_that("assertUniqueConcepts checks stages concept sets", {
 
   testName <- "stages_patients_one_patient"
 
@@ -14,12 +14,13 @@ test_that("checkConceptIntersection works on stages concept sets", {
     name = "cancer_cohorts"
   )
 
-  stages_intersection <- checkConceptIntersection(cdm, concept_folder = "stages")
-  expect_true(stages_intersection)
-
+  expect_warning(
+    assertUniqueConcepts(cdm, concept_folder = "stages")
+  )
 })
 
-test_that("vizConceptIntersection works with custom parameters", {
+
+test_that("vizConceptDuplicates works with custom parameters", {
 
   testName <- "stages_patients_one_patient"
 
@@ -37,14 +38,14 @@ test_that("vizConceptIntersection works with custom parameters", {
 
   # Visualize all available codelists for N2
   expect_no_error(
-    vizConceptIntersection(
+    vizConceptDuplicates(
       cdm,
       input_subcategory = "N2")
   )
 
   # Visualize all available codelists for M1 from 7th edition
   expect_no_error(
-    vizConceptIntersection(
+    vizConceptDuplicates(
       cdm,
       input_subcategory = "M1",
       input_edition = "7th"
@@ -53,7 +54,7 @@ test_that("vizConceptIntersection works with custom parameters", {
 
   # Visualize all available codelists for T4 of clinical type
   expect_no_error(
-    vizConceptIntersection(
+    vizConceptDuplicates(
       cdm,
       input_subcategory = "T4",
       input_classification = "clinical"
@@ -63,7 +64,7 @@ test_that("vizConceptIntersection works with custom parameters", {
 })
 
 
-test_that("shinyConceptIntersection opens up correctly", {
+test_that("shinyConceptDuplicates opens up correctly", {
 
   testName <- "stages_patients_one_patient"
 
@@ -79,6 +80,7 @@ test_that("shinyConceptIntersection opens up correctly", {
     name = "cancer_cohorts"
   )
 
-  shinyConceptIntersection(cdm)
-
+  expect_no_error(
+    shinyConceptDuplicates(cdm)
+  )
 })
