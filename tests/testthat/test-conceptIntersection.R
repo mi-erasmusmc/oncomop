@@ -35,22 +35,27 @@ test_that("vizConceptIntersection works with custom parameters", {
     name = "cancer_cohorts"
   )
 
-  expect_no_error(
-    vizConceptIntersection(cdm)
-  )
-
+  # Visualize all available codelists for N2
   expect_no_error(
     vizConceptIntersection(
       cdm,
-      input_subcategory = "N1",
+      input_subcategory = "N2")
+  )
+
+  # Visualize all available codelists for M1 from 7th edition
+  expect_no_error(
+    vizConceptIntersection(
+      cdm,
+      input_subcategory = "M1",
       input_edition = "7th"
     )
   )
 
+  # Visualize all available codelists for T4 of clinical type
   expect_no_error(
     vizConceptIntersection(
       cdm,
-      input_subcategory = "T3",
+      input_subcategory = "T4",
       input_classification = "clinical"
     )
   )

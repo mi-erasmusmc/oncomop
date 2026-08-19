@@ -17,7 +17,7 @@
 #'
 #' @param cdm A cdm instance, needed to extract concept sets.
 #' @param concept_folder The character string indicating the folder under `inst/concept_sets`
-#' where the concept sets of interest are saved in json files, default `"stages"`.
+#' where the concept sets of interest are saved in json files, default `stages`.
 #' @returns `TRUE` if the codelists have any elements in common, `FALSE` if they don't.
 checkConceptIntersection <- function(
     cdm,
@@ -42,7 +42,6 @@ checkConceptIntersection <- function(
   diag(intersection_matrix) <- 0
 
   return(any(intersection_matrix > 0))
-
 }
 
 
@@ -160,19 +159,19 @@ vizConceptIntersection <- function(
     drop = FALSE
   ]
 
-  p <- UpSetR::upset(
-    df_to_plot,
-    nsets = ncol(df_to_plot),
-    matrix.color = "#1a359b",
-    main.bar.color = "#1a359b",
-    sets.bar.color = "#1a359b",
-    shade.color = "#58acdf",
-    order.by = "freq"
+  p <- suppressWarnings(
+    UpSetR::upset(
+      df_to_plot,
+      nsets = ncol(df_to_plot),
+      matrix.color = "#1a359b",
+      main.bar.color = "#1a359b",
+      sets.bar.color = "#1a359b",
+      shade.color = "#58acdf",
+      order.by = "freq"
     )
+  )
 
   print(p)
-
-  return(NULL)
 }
 
 

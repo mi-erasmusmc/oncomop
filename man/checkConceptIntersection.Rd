@@ -10,7 +10,7 @@ checkConceptIntersection(cdm, concept_folder = "stages")
 \item{cdm}{A cdm instance, needed to extract concept sets.}
 
 \item{concept_folder}{The character string indicating the folder under \code{inst/concept_sets}
-where the concept sets of interest are saved in json files, default \code{"stages"}.}
+where the concept sets of interest are saved in json files, default \code{stages}.}
 }
 \value{
 \code{TRUE} if the codelists have any elements in common, \code{FALSE} if they don't.
