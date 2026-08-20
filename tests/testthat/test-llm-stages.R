@@ -1,3 +1,151 @@
+test_that("Create test patients baseline", {
+  skip_if(is.null(Sys.getenv("OPENAI_API_KEY")))
+  testName <- "stages_baseline"
+  # patientGenerator <- PatientGenerator::patientChat$new(
+  #   model = "gpt-5.6-luna"
+  # )
+  # patientGenerator$prompt({
+  #   "PERSON table:
+  #     - A population of 4 persons all over 18 years old.
+  #     - All persons have observation period from 2000 to 2024.
+  #     - 2 persons are females with gender_concept_id = 8532.
+  #     - 2 persons are males with gender_concept_id = 8507.  
+  #   CONDITION_OCCURRENCE table:
+  #   The patients from the PERSON table have occurrences of 7 different types of cancer recorded during their respective observation periods:
+  #     - 2 patients have colorectal cancer with condition_concept_id: 40481902    
+  #     - 1 patients (1 female) have breast cancer with condition_concept_id: 36556994
+  #     - 1 patients (1 male) have prostate cancer with condition_concept_id: 4163261
+  #     - Everyone has condition_type_concept_id 32817
+  #   MEASUREMENT table:
+  #   Cancer stage information is recorded in this table through TNM categories.
+  #     - The 2 persons with colorectal cancer has a Ta (concept ID: 1634394), a N0 (concept ID: 1633720) and a M0 (concept ID: 1633829).
+  #     - The 1 female with breast cancer has a T1 (concept ID: 1633549), a N0 (concept ID: 1633720) and a M0 (concept ID: 1633829).
+  #     - The 1 male with prostate cancer has a T2a (concept ID: 1635532), a N0 (concept ID: 1633720) and a M0 (concept ID: 1633829).
+  #   Output requirements:
+  #     - All patients in PERSON have an observation period.
+  #     - All conditions occurrences and measurement records of a patient must have happened during their observation period.
+  #     - Fill out the condition end date 2023-12-31 for everyone."
+  # })
+  # patientGenerator$save(testName)
+  cdm <- TestGenerator::patientsCDM(
+    testName = "stages_baseline",
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+  cdm <- createCancerCohorts(
+    cdm = cdm,
+    path = "cancer_cohorts",
+    name = "cancer_cohorts"
+  )
+
+  # test 34 persons in population [(5 persons x 7 cancers) - 1]
+  tot_person <- cdm$person |>
+    dplyr::collect() |>
+    nrow()
+  expect_equal(tot_person, 4)
+
+  # integrity checks for gender
+  n_females <- cdm$person |>
+    dplyr::collect() |>
+    dplyr::filter(gender_concept_id == 8532) |>
+    nrow()
+  expect_equal(n_females, 2)
+
+  n_males <- cdm$person |>
+    dplyr::collect() |>
+    dplyr::filter(gender_concept_id == 8507) |>
+    nrow()
+  expect_equal(n_males, 2)
+
+  # test 2 persons with colorectal cancer
+  n_persons_colorectal <- cdm$cancer_cohorts |>
+    PatientProfiles::addCohortName() |> 
+    dplyr::count(cohort_name) |>
+    dplyr::filter(cohort_name == "colorectal_cancer") |>
+    dplyr::pull(n)
+  expect_equal(n_persons_colorectal, 2)
+
+  # test 1 persons in prostate cancer cohort
+  n_persons_prostate <- cdm$cancer_cohorts |>
+    PatientProfiles::addCohortName() |> 
+    PatientProfiles::addSex() |> 
+    dplyr::count(
+      cohort_name,
+      sex
+    ) |>
+    dplyr::filter(
+      cohort_name == "prostate_cancer",
+      sex == "Male"
+    ) |>
+    dplyr::pull(n)
+  expect_equal(n_persons_prostate, 1)
+
+  # test 1 persons in prostate cancer cohort
+  n_persons_prostate <- cdm$cancer_cohorts |>
+    PatientProfiles::addCohortName() |> 
+     PatientProfiles::addSex() |> 
+    dplyr::count(
+      cohort_name,
+      sex
+    ) |>
+    dplyr::count(cohort_name) |>
+    dplyr::filter(cohort_name == "prostate_cancer") |>
+    dplyr::pull(n)
+  expect_equal(n_persons_prostate, 1)
+
+  # test 1 persons in breast cancer cohort
+  n_persons_breast <- cdm$cancer_cohorts |>
+    PatientProfiles::addCohortName() |> 
+     PatientProfiles::addSex() |> 
+    dplyr::count(
+      cohort_name,
+      sex
+    ) |>
+    dplyr::count(cohort_name) |>
+    dplyr::filter(cohort_name == "breast_cancer") |>
+    dplyr::pull(n)
+  expect_equal(n_persons_prostate, 1)
+
+  # test 12 total measurements (3 measurements x 4 persons)
+  tot_measurements <- cdm$measurement |>
+    dplyr::collect() |>
+    nrow()
+  expect_equal(tot_measurements, 12)
+
+  # test 3 measurements for each person
+  n_measurements_per_person <- cdm$measurement |>
+    dplyr::count(person_id) |>
+    dplyr::pull(n) |>
+    unique()
+  expect_equal(n_measurements_per_person, 3)
+
+  # integrity checks for condition and measurement dates
+  invalid_conditions <- cdm$condition_occurrence |>
+    dplyr::inner_join(
+      cdm$observation_period,
+      by = "person_id"
+    ) |>
+    dplyr::filter(
+      condition_start_date < observation_period_start_date |
+        condition_end_date > observation_period_end_date
+    ) |> dplyr::collect() |>
+    nrow()
+  expect_equal(invalid_conditions, 0)
+
+  invalid_measurements <- cdm$measurement |>
+    dplyr::inner_join(
+      cdm$observation_period,
+      by = "person_id"
+    ) |>
+    dplyr::filter(
+      measurement_date  < observation_period_start_date |
+        measurement_date  > observation_period_end_date
+    ) |> dplyr::collect() |>
+    nrow()
+  expect_equal(invalid_measurements, 0)
+
+})
+
 test_that("Create test patients with TNM measurements for staging - UICC 7th edition", {
 
   # Reference files:

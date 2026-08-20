@@ -1,20 +1,47 @@
+#' addCancerStages() information to a cohort
+#'
+#' It uses a codelist to date intersect with a cancer cohort. 
+#' Imposes a predefined or custom set of rules to identify
+#' summary stages.
+#'
+#' @param cohort A cohort table from a cdm reference object.
+#' @param cdm A cdm reference.
+#' @param stageConcepts A concept-set list containing cancer
+#' stage concepts.
+#' @param ruleSet A set of rules in list format that
+#' corresponds to each element of the stageConcepts codelist.
+#'
+#' @importFrom omopgenerics assertList assertTable
+#' @returns A cohort table containing the identified cancer stages.
+#'
+#' @export
 addStages <- function(
-  cohortTable,
+  cohort,
   cdm,
-  stageConcepts,
-  name
+  cancer,
+  window = c(0,0),
+  edition = "eight",
+  type = "base",
+  order = "last"
 ) {
-  cohortTable |>
+  # Checks --------------------------------------------
+  cohort |>
     omopgenerics::assertTable()
-  stageConcepts |>
+  cdm |> 
+    omopgenerics::validateCdmArgument()
+  stageCodelist |>
     omopgenerics::assertList()
-  outcome_table <- CohortConstructor::copyCohorts(
-    cohortTable,
-    name = "outcome_table"
-  )
-  outcome_table <- cohortTable |>
+  window |> 
+    omopgenerics::assertList()
+  ruleSet |>
+    omopgenerics::assertList()
+  # outcome_table <- CohortConstructor::copyCohorts(
+  #   cohort,
+  #   name = "outcome_table"
+  # )
+  outcome_table <- cohort |>
     PatientProfiles::addConceptIntersectDate(
-      conceptSet = stageConcepts,
+      conceptSet = stageCodelist,
       indexDate = "cohort_start_date",
       censorDate = NULL,
       window = list(c(-90, 90)),
