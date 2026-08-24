@@ -14,11 +14,16 @@
 #'
 #' @param path Character directory where the original .csv files are stored.
 #' @param results_path Character directory where the RDS files are to be saved.
+#' 
+#' @importFrom here here
 #'
 #' @returns `NULL`, called for its side effects.
 saveTNMRules <- function(
     path =  here::here("extras"),
-    results_path =  here::here("inst")
+    results_path =  system.file(
+      "tnm_files",
+      package = "oncomop"
+    )
     ) {
 
   tnm_files <- c(
@@ -26,6 +31,10 @@ saveTNMRules <- function(
     "tnm_stage_mapping",
     "tnm_stage_shortcut_mapping"
   )
+
+  if (!dir.exists(results_path)) {
+    dir.create(results_path)
+  }
 
   for (f in tnm_files) {
 
@@ -38,4 +47,20 @@ saveTNMRules <- function(
       file.path(results_path, paste0(f, ".rds"))
     )
   }
+}
+
+readStagesRDS <- function(tnm_files) {
+  tnm_files |> 
+    checkmate::assertFileExists() |> 
+    basename() |> 
+    identical(
+      c( "tnm_concepts.rds",
+         "tnm_stage_mapping.rds",
+         "tnm_stage_shortcut_mapping.rds")) |> 
+    checkmate::assertTRUE()
+
+  setNames(
+    lapply(tnm_files, readRDS),
+    basename(tnm_files)
+  )
 }

@@ -40,6 +40,14 @@ addStages <- function(
       c("base", "clinical", "pathological")
     )
   # read stages ---------------------------------------------------
+  tnm_files <- system.file(
+    "tnm_files",
+    package = "oncomop"
+  ) |> 
+    list.files(
+      full.names = TRUE
+    ) |>
+    readStagesRDS()
   
   # outcome_table <- CohortConstructor::copyCohorts(
   #   cohort,
