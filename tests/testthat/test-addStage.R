@@ -18,8 +18,11 @@ test_that("addStage() insert column with last record", {
   cdm$cancer_cohorts |>
     addStages(
       cdm,
-      stageConcepts = stage_inner_concepts,
-      name = "cancer_stage_concepts"
+      cancer = "breast",
+      window = list(c(0,0)),
+      edition = "eight",
+      type = "base",
+      order = "last"
     ) |>
     dplyr::collect() |>
     dplyr::pull(stages) |>

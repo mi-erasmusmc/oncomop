@@ -9,7 +9,7 @@
 #' @param stageConcepts A concept-set list containing cancer
 #' stage concepts.
 #' @param ruleSet A set of rules in list format that
-#' corresponds to each element of the stageConcepts codelist.
+#' corresponds to each element of the sstageConcepts codelist.
 #'
 #' @importFrom omopgenerics assertList assertTable
 #' @returns A cohort table containing the identified cancer stages.
@@ -19,22 +19,28 @@ addStages <- function(
   cohort,
   cdm,
   cancer,
-  window = c(0,0),
+  window = list(c(0,0)),
   edition = "eight",
   type = "base",
   order = "last"
 ) {
-  # Checks --------------------------------------------
+  # assert parameters --------------------------------------------
   cohort |>
     omopgenerics::assertTable()
   cdm |> 
     omopgenerics::validateCdmArgument()
-  stageCodelist |>
-    omopgenerics::assertList()
   window |> 
     omopgenerics::assertList()
-  ruleSet |>
-    omopgenerics::assertList()
+  edition |> 
+    checkmate::assertChoice(
+      c("seventh", "eight")
+    )
+  type |> 
+    checkmate::assertChoice(
+      c("base", "clinical", "pathological")
+    )
+  # read stages ---------------------------------------------------
+  
   # outcome_table <- CohortConstructor::copyCohorts(
   #   cohort,
   #   name = "outcome_table"
