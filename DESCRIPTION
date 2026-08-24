@@ -14,5 +14,6 @@ Suggests:
 Config/testthat/edition: 3
 Imports: 
     CohortConstructor,
-    omopgenerics
+    omopgenerics,
+    here
 Config/roxygen2/version: 8.0.0
