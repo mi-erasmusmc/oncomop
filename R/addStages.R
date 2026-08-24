@@ -34,7 +34,7 @@ addStages <- function(
     omopgenerics::assertList()
   edition |> 
     checkmate::assertChoice(
-      c("unspecified", "seventh", "eight")
+      c("unspecified", "7th", "8th")
     )
   type |> 
     checkmate::assertChoice(
@@ -58,22 +58,25 @@ addStages <- function(
       .type = type
     ) 
   
-  # outcome_table <- CohortConstructor::copyCohorts(
-  #   cohort,
-  #   name = "outcome_table"
-  # )
-  outcome_table <- cohort |>
+
+  # .addColumn() -------------------------------------------------
+  cohort_intersect_date <- cohort |>
     PatientProfiles::addConceptIntersectDate(
-      conceptSet = stageCodelist,
+      conceptSet = tnm_codelist,
       indexDate = "cohort_start_date",
       censorDate = NULL,
-      window = list(c(-90, 90)),
+      window = window,
       targetDate = "event_start_date",
       order = "last",
       inObservation = TRUE,
-      nameStyle = "{concept_name}_{window_name}",
+      nameStyle = "{concept_name}",
       name = NULL
     )
+  
+ # -- imposeRules()
+  
+  
+  
   prefix <- "ajcc_uicc"
   strataColumnTable <- outcome_table |>
     dplyr::collect() |>
