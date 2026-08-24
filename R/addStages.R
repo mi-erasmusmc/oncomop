@@ -24,6 +24,7 @@ addStages <- function(
   type = "base",
   order = "last"
 ) {
+  
   # assert parameters --------------------------------------------
   cohort |>
     omopgenerics::assertTable()
@@ -33,14 +34,15 @@ addStages <- function(
     omopgenerics::assertList()
   edition |> 
     checkmate::assertChoice(
-      c("seventh", "eight")
+      c("unspecified", "7th", "8th")
     )
   type |> 
     checkmate::assertChoice(
       c("base", "clinical", "pathological")
     )
-  # read stages ---------------------------------------------------
-  tnm_files <- system.file(
+  
+  # read stages rules data ---------------------------------------
+  tnm_files_data <- system.file(
     "tnm_files",
     package = "oncomop"
   ) |> 
@@ -48,23 +50,33 @@ addStages <- function(
       full.names = TRUE
     ) |>
     readStagesRDS()
+
+  # Extract codelist for intersection ----------------------------
+  tnm_codelist <- tnm_files_data$tnm_concepts |>
+    createTNMCodelist(
+      .edition = edition,
+      .type = type
+    ) 
   
-  # outcome_table <- CohortConstructor::copyCohorts(
-  #   cohort,
-  #   name = "outcome_table"
-  # )
-  outcome_table <- cohort |>
+
+  # .addColumn() -------------------------------------------------
+  cohort_intersect_date <- cohort |>
     PatientProfiles::addConceptIntersectDate(
-      conceptSet = stageCodelist,
+      conceptSet = tnm_codelist,
       indexDate = "cohort_start_date",
       censorDate = NULL,
-      window = list(c(-90, 90)),
+      window = window,
       targetDate = "event_start_date",
       order = "last",
       inObservation = TRUE,
-      nameStyle = "{concept_name}_{window_name}",
+      nameStyle = "{concept_name}",
       name = NULL
     )
+  
+ # -- imposeRules()
+  
+  
+  
   prefix <- "ajcc_uicc"
   strataColumnTable <- outcome_table |>
     dplyr::collect() |>

@@ -20,7 +20,7 @@ test_that("addStage() insert column with last record", {
       cdm,
       cancer = "breast",
       window = list(c(0,0)),
-      edition = "eight",
+      edition = "8th",
       type = "base",
       order = "last"
     ) |>

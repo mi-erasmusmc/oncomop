@@ -64,3 +64,31 @@ readStagesRDS <- function(tnm_files) {
     basename(tnm_files)
   )
 }
+
+createTNMCodelist <- function(
+  tnm_concepts,
+  .edition,
+  .type
+) {
+  checkmate::assertDataFrame(tnm_concepts)
+  tnm_stages_concept <- tnm_concepts |>
+    dplyr::filter(
+      .data$classification_version == .edition,
+      .data$type == .type,
+    ) |>
+    dplyr::filter(      
+      !is.na(.data$concept_id)
+    ) 
+  tnm_codelist <- tnm_stages_concept |> 
+    dplyr::pull(
+      concept_id
+    ) |> lapply(
+      FUN = function(x) {
+        return(x)
+      }
+    ) |> setNames(
+      tnm_stages_concept$component_tnm
+    ) |> 
+    omopgenerics::newCodelist()
+  return(tnm_codelist)
+}
