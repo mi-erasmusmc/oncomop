@@ -47,3 +47,27 @@ test_that("read stages rds", {
       )
     )
 })
+
+test_that("to form tnmCodelist", {
+
+  tnm_files_data <- system.file(
+    "tnm_files",
+    package = "oncomop"
+  ) |> 
+    list.files(
+      full.names = TRUE
+    ) |>
+    readStagesRDS() 
+
+  expect_no_error({
+    tnm_codelist <- tnm_files_data$tnm_concepts |>
+      createTNMCodelist(
+        .edition = "7th",
+        .type = "clinical"
+      ) 
+    })
+  
+  tnm_codelist |> 
+    expect_length(42)
+  
+})

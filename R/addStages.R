@@ -24,6 +24,7 @@ addStages <- function(
   type = "base",
   order = "last"
 ) {
+  
   # assert parameters --------------------------------------------
   cohort |>
     omopgenerics::assertTable()
@@ -33,14 +34,15 @@ addStages <- function(
     omopgenerics::assertList()
   edition |> 
     checkmate::assertChoice(
-      c("seventh", "eight")
+      c("unspecified", "seventh", "eight")
     )
   type |> 
     checkmate::assertChoice(
       c("base", "clinical", "pathological")
     )
-  # read stages ---------------------------------------------------
-  tnm_files <- system.file(
+  
+  # read stages rules data ---------------------------------------
+  tnm_files_data <- system.file(
     "tnm_files",
     package = "oncomop"
   ) |> 
@@ -48,6 +50,13 @@ addStages <- function(
       full.names = TRUE
     ) |>
     readStagesRDS()
+
+  # Extract codelist for intersection ----------------------------
+  tnm_codelist <- tnm_files_data$tnm_concepts |>
+    createTNMCodelist(
+      .edition = "7th",
+      .type = "clinical"
+    ) 
   
   # outcome_table <- CohortConstructor::copyCohorts(
   #   cohort,
