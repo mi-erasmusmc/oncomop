@@ -1,0 +1,72 @@
+edition,site,stage_grouping_scope,histology,rule_type,T,N,M,uicc_stage,ignored_components,rule_expression,source_file,source_pages
+7,Breast,both,all,M determines stage,Any,Any,M1,IV,"T, N",M = M1 -> Stage IV,uicc/UICC_7th edition.pdf,191
+7,Breast,both,all,N and M determine stage,Any,"N3, N3a, N3b, N3c",M0,IIIC,T,"N = N3, N3a, N3b, N3c; M = M0 -> Stage IIIC",uicc/UICC_7th edition.pdf,191
+7,Colorectal,both,all,M determines stage,Any,Any,M1,IV,"T, N",M = M1 -> Stage IV,uicc/UICC_7th edition.pdf,104
+7,Colorectal,both,all,M determines stage,Any,Any,M1a,IVA,"T, N",M = M1a -> Stage IVA,uicc/UICC_7th edition.pdf,104
+7,Colorectal,both,all,M determines stage,Any,Any,M1b,IVB,"T, N",M = M1b -> Stage IVB,uicc/UICC_7th edition.pdf,104
+7,Lung,both,all,M determines stage,Any,Any,"M1, M1a, M1b",IV,"T, N","M = M1, M1a, M1b -> Stage IV",uicc/UICC_7th edition.pdf,143
+7,Lung,both,all,N and M determine stage,Any,N3,M0,IIIB,T,N = N3; M = M0 -> Stage IIIB,uicc/UICC_7th edition.pdf,143
+7,Oesophagus,both,all,M determines stage,Any,Any,M1,IV,"T, N",M = M1 -> Stage IV,uicc/UICC_7th edition.pdf,70
+7,Oesophagus,both,all,N and M determine stage,Any,N3,M0,IIIC,T,N = N3; M = M0 -> Stage IIIC,uicc/UICC_7th edition.pdf,70
+7,Oesophagus,both,all,T and M determine stage,T4b,Any,M0,IIIC,N,T = T4b; M = M0 -> Stage IIIC,uicc/UICC_7th edition.pdf,70
+7,Prostate,both,adenocarcinoma,M determines stage,Any,Any,"M1, M1a, M1b, M1c",IV,"T, N","M = M1, M1a, M1b, M1c -> Stage IV",uicc/UICC_7th edition.pdf,246
+7,Prostate,both,adenocarcinoma,N and M determine stage,Any,N1,M0,IV,T,N = N1; M = M0 -> Stage IV,uicc/UICC_7th edition.pdf,246
+7,Prostate,both,adenocarcinoma,T and M determine stage,T4,Any,M0,IV,N,T = T4; M = M0 -> Stage IV,uicc/UICC_7th edition.pdf,246
+7,Skin melanoma,pathological,all,M determines stage,Any,Any,"M1, M1a, M1b, M1c",IV,"T, N","M = M1, M1a, M1b, M1c -> Stage IV",uicc/UICC_7th edition.pdf,175
+7,Skin melanoma,pathological,all,N and M determine stage,Any,N3,M0,IIIC,T,N = N3; M = M0 -> Stage IIIC,uicc/UICC_7th edition.pdf,175
+7,Urinary bladder,both,carcinoma,M determines stage,Any,Any,"M1, M1a, M1b",IV,"T, N","M = M1, M1a, M1b -> Stage IV",uicc/UICC_7th edition.pdf,264
+7,Urinary bladder,both,carcinoma,N and M determine stage,Any,"N1, N2, N3",M0,IV,T,"N = N1, N2, N3; M = M0 -> Stage IV",uicc/UICC_7th edition.pdf,264
+7,Urinary bladder,both,carcinoma,T and M determine stage,T4b,Any,M0,IV,N,T = T4b; M = M0 -> Stage IV,uicc/UICC_7th edition.pdf,264
+8,Breast,both,all,M determines stage,Any,Any,M1,IV,"T, N",M = M1 -> Stage IV,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,151-158
+8,Breast,both,all,N and M determine stage,Any,"N3, N3a, N3b, N3c",M0,IIIC,T,"N = N3, N3a, N3b, N3c; M = M0 -> Stage IIIC",uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,151-158
+8,Colorectal,both,all,M determines stage,Any,Any,M1,IV,"T, N",M = M1 -> Stage IV,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,73-76
+8,Colorectal,both,all,M determines stage,Any,Any,M1a,IVA,"T, N",M = M1a -> Stage IVA,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,73-76
+8,Colorectal,both,all,M determines stage,Any,Any,M1b,IVB,"T, N",M = M1b -> Stage IVB,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,73-76
+8,Colorectal,both,all,M determines stage,Any,Any,M1c,IVC,"T, N",M = M1c -> Stage IVC,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,73-76
+8,Lung,both,all,M determines stage,Any,Any,M1,IV,"T, N",M = M1 -> Stage IV,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,106-112
+8,Lung,both,all,M determines stage,Any,Any,"M1a, M1b",IVA,"T, N","M = M1a, M1b -> Stage IVA",uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,106-112
+8,Lung,both,all,M determines stage,Any,Any,M1c,IVB,"T, N",M = M1c -> Stage IVB,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,106-112
+8,Oesophagus,clinical,adenocarcinoma,M determines stage,Any,Any,M1,IVB,"T, N",M = M1 -> Stage IVB,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,57-62
+8,Oesophagus,clinical,adenocarcinoma,N and M determine stage,Any,N3,M0,IVA,T,N = N3; M = M0 -> Stage IVA,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,57-62
+8,Oesophagus,clinical,adenocarcinoma,T and M determine stage,T4b,Any,M0,IVA,N,T = T4b; M = M0 -> Stage IVA,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,57-62
+8,Oesophagus,clinical,squamous_cell_carcinoma,M determines stage,Any,Any,M1,IVB,"T, N",M = M1 -> Stage IVB,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,57-62
+8,Oesophagus,clinical,squamous_cell_carcinoma,N and M determine stage,Any,N3,M0,IVA,T,N = N3; M = M0 -> Stage IVA,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,57-62
+8,Oesophagus,clinical,squamous_cell_carcinoma,T and M determine stage,"T4a, T4b",Any,M0,IVA,N,"T = T4a, T4b; M = M0 -> Stage IVA",uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,57-62
+8,Oesophagus,pathological,all_carcinoma,M determines stage,Any,Any,M1,IVB,"T, N",M = M1 -> Stage IVB,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,57-62
+8,Oesophagus,pathological,all_carcinoma,N and M determine stage,Any,N3,M0,IVA,T,N = N3; M = M0 -> Stage IVA,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,57-62
+8,Oesophagus,pathological,all_carcinoma,T and M determine stage,T4b,Any,M0,IVA,N,T = T4b; M = M0 -> Stage IVA,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,57-62
+8,Prostate,clinical,adenocarcinoma,M determines stage,Any,Any,"M1, M1a, M1b, M1c",IV,"T, N","M = M1, M1a, M1b, M1c -> Stage IV",uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,191-194
+8,Prostate,clinical,adenocarcinoma,N and M determine stage,Any,N1,M0,IV,T,N = N1; M = M0 -> Stage IV,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,191-194
+8,Skin melanoma,clinical,all,M determines stage,Any,Any,"M1, M1a, M1b, M1c, M1d",IV,"T, N","M = M1, M1a, M1b, M1c, M1d -> Stage IV",uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,142-146
+8,Skin melanoma,pathological,all,M determines stage,Any,Any,"M1, M1a, M1b, M1c, M1d",IV,"T, N","M = M1, M1a, M1b, M1c, M1d -> Stage IV",uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,142-146
+8,Urinary bladder,both,carcinoma,M determines stage,Any,Any,M1,IV,"T, N",M = M1 -> Stage IV,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,204-207
+8,Urinary bladder,both,carcinoma,M determines stage,Any,Any,M1a,IVA,"T, N",M = M1a -> Stage IVA,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,204-207
+8,Urinary bladder,both,carcinoma,M determines stage,Any,Any,M1b,IVB,"T, N",M = M1b -> Stage IVB,uicc/UICC_8th edition.pdf; corroborated by nhs/*.pdf,204-207
+9,Breast,both,all,M determines stage,Any,Any,M1,IV,"T, N",M = M1 -> Stage IV,uicc/UICC_9th edition.pdf,151-157
+9,Breast,both,all,N and M determine stage,Any,"N3, N3a, N3b, N3c",M0,IIIC,T,"N = N3, N3a, N3b, N3c; M = M0 -> Stage IIIC",uicc/UICC_9th edition.pdf,151-157
+9,Colorectal,both,all,M determines stage,Any,Any,M1,IV,"T, N",M = M1 -> Stage IV,uicc/UICC_9th edition.pdf,75-78
+9,Colorectal,both,all,M determines stage,Any,Any,M1a,IVA,"T, N",M = M1a -> Stage IVA,uicc/UICC_9th edition.pdf,75-78
+9,Colorectal,both,all,M determines stage,Any,Any,M1b,IVB,"T, N",M = M1b -> Stage IVB,uicc/UICC_9th edition.pdf,75-78
+9,Colorectal,both,all,M determines stage,Any,Any,M1c,IVC,"T, N",M = M1c -> Stage IVC,uicc/UICC_9th edition.pdf,75-78
+9,Lung,both,all,M determines stage,Any,Any,M1,IV,"T, N",M = M1 -> Stage IV,uicc/UICC_9th edition.pdf,109-113
+9,Lung,both,all,M determines stage,Any,Any,"M1a, M1b",IVA,"T, N","M = M1a, M1b -> Stage IVA",uicc/UICC_9th edition.pdf,109-113
+9,Lung,both,all,M determines stage,Any,Any,"M1c, M1c1, M1c2",IVB,"T, N","M = M1c, M1c1, M1c2 -> Stage IVB",uicc/UICC_9th edition.pdf,109-113
+9,Oesophagus,clinical,adenocarcinoma,M determines stage,Any,Any,M1,IVB,"T, N",M = M1 -> Stage IVB,uicc/UICC_9th edition.pdf,60-65
+9,Oesophagus,clinical,adenocarcinoma,N and M determine stage,Any,N3,M0,IVA,T,N = N3; M = M0 -> Stage IVA,uicc/UICC_9th edition.pdf,60-65
+9,Oesophagus,clinical,adenocarcinoma,T and M determine stage,T4b,Any,M0,IVA,N,T = T4b; M = M0 -> Stage IVA,uicc/UICC_9th edition.pdf,60-65
+9,Oesophagus,clinical,squamous_cell_carcinoma,M determines stage,Any,Any,M1,IVB,"T, N",M = M1 -> Stage IVB,uicc/UICC_9th edition.pdf,60-65
+9,Oesophagus,clinical,squamous_cell_carcinoma,N and M determine stage,Any,N3,M0,IVA,T,N = N3; M = M0 -> Stage IVA,uicc/UICC_9th edition.pdf,60-65
+9,Oesophagus,clinical,squamous_cell_carcinoma,T and M determine stage,"T4a, T4b",Any,M0,IVA,N,"T = T4a, T4b; M = M0 -> Stage IVA",uicc/UICC_9th edition.pdf,60-65
+9,Oesophagus,pathological,all_carcinoma,M determines stage,Any,Any,M1,IVB,"T, N",M = M1 -> Stage IVB,uicc/UICC_9th edition.pdf,60-65
+9,Oesophagus,pathological,all_carcinoma,N and M determine stage,Any,N3,M0,IVA,T,N = N3; M = M0 -> Stage IVA,uicc/UICC_9th edition.pdf,60-65
+9,Oesophagus,pathological,all_carcinoma,T and M determine stage,T4b,Any,M0,IVA,N,T = T4b; M = M0 -> Stage IVA,uicc/UICC_9th edition.pdf,60-65
+9,Prostate,clinical,adenocarcinoma,M determines stage,Any,Any,"M1, M1a, M1b, M1c",IV,"T, N","M = M1, M1a, M1b, M1c -> Stage IV",uicc/UICC_9th edition.pdf,187-189
+9,Prostate,clinical,adenocarcinoma,N and M determine stage,Any,N1,M0,IV,T,N = N1; M = M0 -> Stage IV,uicc/UICC_9th edition.pdf,187-189
+9,Prostate,pathological,adenocarcinoma,M determines stage,Any,Any,"M1, M1a, M1b, M1c",IV,"T, N","M = M1, M1a, M1b, M1c -> Stage IV",uicc/UICC_9th edition.pdf,187-189
+9,Prostate,pathological,adenocarcinoma,N and M determine stage,Any,N1,M0,IV,T,N = N1; M = M0 -> Stage IV,uicc/UICC_9th edition.pdf,187-189
+9,Skin melanoma,clinical,all,M determines stage,Any,Any,"M1, M1a, M1b, M1c, M1d",IV,"T, N","M = M1, M1a, M1b, M1c, M1d -> Stage IV",uicc/UICC_9th edition.pdf,144-148
+9,Skin melanoma,pathological,all,M determines stage,Any,Any,"M1, M1a, M1b, M1c, M1d",IV,"T, N","M = M1, M1a, M1b, M1c, M1d -> Stage IV",uicc/UICC_9th edition.pdf,144-148
+9,Urinary bladder,both,carcinoma,M determines stage,Any,Any,M1,IV,"T, N",M = M1 -> Stage IV,uicc/UICC_9th edition.pdf,198-200
+9,Urinary bladder,both,carcinoma,M determines stage,Any,Any,M1a,IVA,"T, N",M = M1a -> Stage IVA,uicc/UICC_9th edition.pdf,198-200
+9,Urinary bladder,both,carcinoma,M determines stage,Any,Any,M1b,IVB,"T, N",M = M1b -> Stage IVB,uicc/UICC_9th edition.pdf,198-200
+9,Urinary bladder,both,carcinoma,T and M determine stage,T4b,Any,M0,IVA,N,T = T4b; M = M0 -> Stage IVA,uicc/UICC_9th edition.pdf,198-200

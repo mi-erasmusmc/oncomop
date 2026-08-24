@@ -1,0 +1,394 @@
+component_tnm,type,classification_version,concept_id,note
+TX,base,7th,1633390,Unknown category; cannot produce a definitive stage group.
+TX,base,8th,1635667,Unknown category; cannot produce a definitive stage group.
+TX,base,unspecified,1635682,Unknown category; cannot produce a definitive stage group.
+TX,clinical,7th,1634269,Unknown category; cannot produce a definitive stage group.
+TX,clinical,8th,1633589,Unknown category; cannot produce a definitive stage group.
+TX,clinical,unspecified,1634460,Unknown category; cannot produce a definitive stage group.
+TX,pathology,7th,1635402,Unknown category; cannot produce a definitive stage group.
+TX,pathology,8th,1634986,Unknown category; cannot produce a definitive stage group.
+TX,pathology,unspecified,1633925,Unknown category; cannot produce a definitive stage group.
+T0,base,7th,1634965,
+T0,base,8th,1635539,
+T0,base,unspecified,1634213,
+T0,clinical,7th,1633815,
+T0,clinical,8th,1635794,
+T0,clinical,unspecified,1635155,
+T0,pathology,7th,1634675,
+T0,pathology,8th,1634635,
+T0,pathology,unspecified,1635740,
+Tis,base,7th,1633798,
+Tis,base,8th,1634720,
+Tis,base,unspecified,1634530,
+Tis,clinical,7th,1635227,
+Tis,clinical,8th,1633737,
+Tis,clinical,unspecified,1634450,
+Tis,pathology,7th,1634116,
+Tis,pathology,8th,1633920,
+Tis,pathology,unspecified,1634581,
+Ta,base,7th,1634394,
+Ta,base,8th,1634071,
+Ta,base,unspecified,1635114,
+Ta,clinical,7th,1633663,
+Ta,clinical,8th,1635468,
+Ta,clinical,unspecified,1633281,
+Ta,pathology,7th,1634791,
+Ta,pathology,8th,1633613,
+Ta,pathology,unspecified,1635888,
+T1,base,7th,1633549,
+T1,base,8th,1635793,
+T1,base,unspecified,1635564,
+T1,clinical,7th,1635664,
+T1,clinical,8th,1633883,
+T1,clinical,unspecified,1635661,
+T1,pathology,7th,1635422,
+T1,pathology,8th,1635070,
+T1,pathology,unspecified,1634004,
+T1a,base,7th,1633764,
+T1a,base,8th,1634584,
+T1a,base,unspecified,1633880,
+T1a,clinical,7th,1634728,
+T1a,clinical,8th,1635229,
+T1a,clinical,unspecified,1633742,
+T1a,pathology,7th,1633268,
+T1a,pathology,8th,1633374,
+T1a,pathology,unspecified,1633722,
+T1b,base,7th,1634319,
+T1b,base,8th,1635687,
+T1b,base,unspecified,1633921,
+T1b,clinical,7th,1634662,
+T1b,clinical,8th,1633531,
+T1b,clinical,unspecified,1635039,
+T1b,pathology,7th,1634236,
+T1b,pathology,8th,1633282,
+T1b,pathology,unspecified,1633693,
+T1c,base,7th,1635626,
+T1c,base,8th,1634817,
+T1c,base,unspecified,1633529,
+T1c,clinical,7th,1635861,
+T1c,clinical,8th,1635647,
+T1c,clinical,unspecified,1634320,
+T1c,pathology,7th,1635010,
+T1c,pathology,8th,1635810,
+T1c,pathology,unspecified,1635017,
+T1mi,base,7th,1634186,
+T1mi,base,8th,1635751,
+T1mi,base,unspecified,1635083,
+T1mi,clinical,7th,1633858,
+T1mi,clinical,8th,1633949,
+T1mi,clinical,unspecified,1635832,
+T1mi,pathology,7th,1634265,
+T1mi,pathology,8th,1633506,
+T1mi,pathology,unspecified,1634428,
+T2,base,7th,1634506,
+T2,base,8th,1633339,
+T2,base,unspecified,1635562,
+T2,clinical,7th,1634029,
+T2,clinical,8th,1634651,
+T2,clinical,unspecified,1635033,
+T2,pathology,7th,1634491,
+T2,pathology,8th,1633307,
+T2,pathology,unspecified,1633978,
+T2a,base,7th,1635532,
+T2a,base,8th,1635181,
+T2a,base,unspecified,1635327,
+T2a,clinical,7th,1635700,
+T2a,clinical,8th,1635635,
+T2a,clinical,unspecified,1634689,
+T2a,pathology,7th,1633341,
+T2a,pathology,8th,1633453,
+T2a,pathology,unspecified,1634597,
+T2b,base,7th,1635301,
+T2b,base,8th,1634429,
+T2b,base,unspecified,1633593,
+T2b,clinical,7th,1633958,
+T2b,clinical,8th,1635451,
+T2b,clinical,unspecified,1633781,
+T2b,pathology,7th,1635038,
+T2b,pathology,8th,1634781,
+T2b,pathology,unspecified,1635575,
+T2c,base,7th,1635192,
+T2c,base,8th,1634169,
+T2c,base,unspecified,1635270,
+T2c,clinical,7th,1634936,
+T2c,clinical,8th,1635287,
+T2c,clinical,unspecified,1634514,
+T2c,pathology,7th,1635254,
+T2c,pathology,8th,1634709,
+T2c,pathology,unspecified,1634503,
+T3,base,7th,1635854,
+T3,base,8th,1633528,
+T3,base,unspecified,1634376,
+T3,clinical,7th,1633324,
+T3,clinical,8th,1635556,
+T3,clinical,unspecified,1635895,
+T3,pathology,7th,1634658,
+T3,pathology,8th,1634386,
+T3,pathology,unspecified,1634406,
+T3a,base,7th,1634577,
+T3a,base,8th,1634913,
+T3a,base,unspecified,1633771,
+T3a,clinical,7th,1635375,
+T3a,clinical,8th,1635116,
+T3a,clinical,unspecified,1633758,
+T3a,pathology,7th,1634714,
+T3a,pathology,8th,1635171,
+T3a,pathology,unspecified,1633288,
+T3b,base,7th,1635777,
+T3b,base,8th,1634691,
+T3b,base,unspecified,1634980,
+T3b,clinical,7th,1633946,
+T3b,clinical,8th,1635813,
+T3b,clinical,unspecified,1633765,
+T3b,pathology,7th,1635333,
+T3b,pathology,8th,1635037,
+T3b,pathology,unspecified,1633406,
+T4,base,7th,1634576,
+T4,base,8th,1635242,
+T4,base,unspecified,1634654,
+T4,clinical,7th,1635530,
+T4,clinical,8th,1634973,
+T4,clinical,unspecified,1635558,
+T4,pathology,7th,1635341,
+T4,pathology,8th,1635396,
+T4,pathology,unspecified,1633943,
+T4a,base,7th,1634724,
+T4a,base,8th,1633411,
+T4a,base,unspecified,1635222,
+T4a,clinical,7th,1634522,
+T4a,clinical,8th,1634963,
+T4a,clinical,unspecified,1634192,
+T4a,pathology,7th,1633723,
+T4a,pathology,8th,1634894,
+T4a,pathology,unspecified,1633300,
+T4b,base,7th,1634162,
+T4b,base,8th,1634318,
+T4b,base,unspecified,1634436,
+T4b,clinical,7th,1634120,
+T4b,clinical,8th,1634854,
+T4b,clinical,unspecified,1634291,
+T4b,pathology,7th,1633699,
+T4b,pathology,8th,1633658,
+T4b,pathology,unspecified,1634957,
+T4c,base,7th,1634476,
+T4c,base,8th,1633399,
+T4c,base,unspecified,1635526,
+T4c,clinical,7th,1634046,
+T4c,clinical,8th,1633767,
+T4c,clinical,unspecified,1634877,
+T4c,pathology,7th,1635241,
+T4c,pathology,8th,1635592,
+T4c,pathology,unspecified,1635446,
+T4d,base,7th,1635275,
+T4d,base,8th,1634582,
+T4d,base,unspecified,1633909,
+T4d,clinical,7th,1635768,
+T4d,clinical,8th,1635022,
+T4d,clinical,unspecified,1635368,
+T4d,pathology,7th,1634941,
+T4d,pathology,8th,1633892,
+T4d,pathology,unspecified,1635003,
+NX,base,7th,1635816,Unknown category; cannot produce a definitive stage group.
+NX,base,8th,1634216,Unknown category; cannot produce a definitive stage group.
+NX,base,unspecified,1633885,Unknown category; cannot produce a definitive stage group.
+NX,clinical,7th,1633679,Unknown category; cannot produce a definitive stage group.
+NX,clinical,8th,1634797,Unknown category; cannot produce a definitive stage group.
+NX,clinical,unspecified,1634722,Unknown category; cannot produce a definitive stage group.
+NX,pathology,7th,1634505,Unknown category; cannot produce a definitive stage group.
+NX,pathology,8th,1634117,Unknown category; cannot produce a definitive stage group.
+NX,pathology,unspecified,1635170,Unknown category; cannot produce a definitive stage group.
+N0,base,7th,1633720,
+N0,base,8th,1634780,
+N0,base,unspecified,1633440,
+N0,clinical,7th,1633942,
+N0,clinical,8th,1634070,
+N0,clinical,unspecified,1634145,
+N0,pathology,7th,1633726,
+N0,pathology,8th,1635560,
+N0,pathology,unspecified,1635597,
+N1,base,7th,1635103,
+N1,base,8th,1633688,
+N1,base,unspecified,1634434,
+N1,clinical,7th,1634139,
+N1,clinical,8th,1633651,
+N1,clinical,unspecified,1635729,
+N1,pathology,7th,1634245,
+N1,pathology,8th,1633659,
+N1,pathology,unspecified,1635613,
+N1a,base,7th,1634098,
+N1a,base,8th,1635731,
+N1a,base,unspecified,1633735,
+N1a,clinical,7th,1633275,
+N1a,clinical,8th,1633839,
+N1a,clinical,unspecified,1635164,
+N1a,pathology,7th,1633640,
+N1a,pathology,8th,1635860,
+N1a,pathology,unspecified,1634206,
+N1b,base,7th,1634366,
+N1b,base,8th,1633956,
+N1b,base,unspecified,1635130,
+N1b,clinical,7th,1635480,
+N1b,clinical,8th,1635679,
+N1b,clinical,unspecified,1635599,
+N1b,pathology,7th,1633730,
+N1b,pathology,8th,1633404,
+N1b,pathology,unspecified,1633830,
+N1c,base,7th,1634519,
+N1c,base,8th,1635504,
+N1c,base,unspecified,1634620,
+N1c,clinical,7th,1634445,
+N1c,clinical,8th,1633785,
+N1c,clinical,unspecified,1634934,
+N1c,pathology,7th,1634882,
+N1c,pathology,8th,1633819,
+N1c,pathology,unspecified,1634589,
+N1mi,base,7th,1635204,
+N1mi,base,8th,1633622,
+N1mi,base,unspecified,1635335,
+N1mi,clinical,7th,1633351,
+N1mi,clinical,8th,1633972,
+N1mi,clinical,unspecified,1635121,
+N1mi,pathology,7th,1634638,
+N1mi,pathology,8th,1634244,
+N1mi,pathology,unspecified,1633502,
+N2,base,7th,1634240,
+N2,base,8th,1635585,
+N2,base,unspecified,1634119,
+N2,clinical,7th,1635634,
+N2,clinical,8th,1633763,
+N2,clinical,unspecified,1634523,
+N2,pathology,7th,1633569,
+N2,pathology,8th,1633336,
+N2,pathology,unspecified,1633864,
+N2a,base,7th,1633840,
+N2a,base,8th,1634748,
+N2a,base,unspecified,1635644,
+N2a,clinical,7th,1635739,
+N2a,clinical,8th,1633788,
+N2a,clinical,unspecified,1633429,
+N2a,pathology,7th,1635717,
+N2a,pathology,8th,1635871,
+N2a,pathology,unspecified,1633890,
+N2b,base,7th,1635194,
+N2b,base,8th,1635096,
+N2b,base,unspecified,1634134,
+N2b,clinical,7th,1635677,
+N2b,clinical,8th,1633323,
+N2b,clinical,unspecified,1634977,
+N2b,pathology,7th,1633607,
+N2b,pathology,8th,1634645,
+N2b,pathology,unspecified,1633460,
+N2c,base,7th,1635746,
+N2c,base,8th,1635001,
+N2c,base,unspecified,1634080,
+N2c,clinical,7th,1634727,
+N2c,clinical,8th,1633271,
+N2c,clinical,unspecified,1634118,
+N2c,pathology,7th,1634601,
+N2c,pathology,8th,1634383,
+N2c,pathology,unspecified,1633301,
+N3,base,7th,1633684,
+N3,base,8th,1634147,
+N3,base,unspecified,1635320,
+N3,clinical,7th,1634037,
+N3,clinical,8th,1633854,
+N3,clinical,unspecified,1633914,
+N3,pathology,7th,1633668,
+N3,pathology,8th,1635307,
+N3,pathology,unspecified,1635706,
+N3a,base,7th,1635109,
+N3a,base,8th,1634183,
+N3a,base,unspecified,1635590,
+N3a,clinical,7th,1635004,
+N3a,clinical,8th,1635496,
+N3a,clinical,unspecified,1634649,
+N3a,pathology,7th,1634397,
+N3a,pathology,8th,1635545,
+N3a,pathology,unspecified,1633401,
+N3b,base,7th,1633277,
+N3b,base,8th,1635091,
+N3b,base,unspecified,1633422,
+N3b,clinical,7th,1635084,
+N3b,clinical,8th,1635828,
+N3b,clinical,unspecified,1635610,
+N3b,pathology,7th,1634847,
+N3b,pathology,8th,1634770,
+N3b,pathology,unspecified,1633384,
+N3c,base,7th,1634478,
+N3c,base,8th,1634198,
+N3c,base,unspecified,1634735,
+N3c,clinical,7th,1633934,
+N3c,clinical,8th,1635133,
+N3c,clinical,unspecified,1634650,
+N3c,pathology,7th,1634723,
+N3c,pathology,8th,1633895,
+N3c,pathology,unspecified,1634305,
+M0,base,7th,1633829,pM0 is not valid; absence of distant metastasis is recorded clinically as cM0.
+M0,base,8th,1633299,pM0 is not valid; absence of distant metastasis is recorded clinically as cM0.
+M0,base,unspecified,1635624,pM0 is not valid; absence of distant metastasis is recorded clinically as cM0.
+M0,clinical,7th,1633468,pM0 is not valid; absence of distant metastasis is recorded clinically as cM0.
+M0,clinical,8th,1634757,pM0 is not valid; absence of distant metastasis is recorded clinically as cM0.
+M0,clinical,unspecified,1635291,pM0 is not valid; absence of distant metastasis is recorded clinically as cM0.
+M1,base,7th,1633696,Pathological M requires microscopic confirmation of distant metastasis.
+M1,base,8th,1633498,Pathological M requires microscopic confirmation of distant metastasis.
+M1,base,unspecified,1635142,Pathological M requires microscopic confirmation of distant metastasis.
+M1,clinical,7th,1633276,Pathological M requires microscopic confirmation of distant metastasis.
+M1,clinical,8th,1633974,Pathological M requires microscopic confirmation of distant metastasis.
+M1,clinical,unspecified,1635085,Pathological M requires microscopic confirmation of distant metastasis.
+M1,pathology,7th,1635336,Pathological M requires microscopic confirmation of distant metastasis.
+M1,pathology,8th,1634891,Pathological M requires microscopic confirmation of distant metastasis.
+M1,pathology,unspecified,1635505,Pathological M requires microscopic confirmation of distant metastasis.
+M1a,base,7th,1634775,Pathological M requires microscopic confirmation of distant metastasis.
+M1a,base,8th,1634082,Pathological M requires microscopic confirmation of distant metastasis.
+M1a,base,unspecified,1635100,Pathological M requires microscopic confirmation of distant metastasis.
+M1a,clinical,7th,1635878,Pathological M requires microscopic confirmation of distant metastasis.
+M1a,clinical,8th,1635149,Pathological M requires microscopic confirmation of distant metastasis.
+M1a,clinical,unspecified,1633777,Pathological M requires microscopic confirmation of distant metastasis.
+M1a,pathology,7th,1634268,Pathological M requires microscopic confirmation of distant metastasis.
+M1a,pathology,8th,1635097,Pathological M requires microscopic confirmation of distant metastasis.
+M1a,pathology,unspecified,1634312,Pathological M requires microscopic confirmation of distant metastasis.
+M1b,base,7th,1635747,Pathological M requires microscopic confirmation of distant metastasis.
+M1b,base,8th,1634661,Pathological M requires microscopic confirmation of distant metastasis.
+M1b,base,unspecified,1634463,Pathological M requires microscopic confirmation of distant metastasis.
+M1b,clinical,7th,1635302,Pathological M requires microscopic confirmation of distant metastasis.
+M1b,clinical,8th,1633375,Pathological M requires microscopic confirmation of distant metastasis.
+M1b,clinical,unspecified,1635090,Pathological M requires microscopic confirmation of distant metastasis.
+M1b,pathology,7th,1635008,Pathological M requires microscopic confirmation of distant metastasis.
+M1b,pathology,8th,1634712,Pathological M requires microscopic confirmation of distant metastasis.
+M1b,pathology,unspecified,1634093,Pathological M requires microscopic confirmation of distant metastasis.
+M1c,base,7th,1635843,Pathological M requires microscopic confirmation of distant metastasis.
+M1c,base,8th,1634975,Pathological M requires microscopic confirmation of distant metastasis.
+M1c,base,unspecified,1635519,Pathological M requires microscopic confirmation of distant metastasis.
+M1c,clinical,7th,1635461,Pathological M requires microscopic confirmation of distant metastasis.
+M1c,clinical,8th,1633784,Pathological M requires microscopic confirmation of distant metastasis.
+M1c,clinical,unspecified,1635255,Pathological M requires microscopic confirmation of distant metastasis.
+M1c,pathology,7th,1634188,Pathological M requires microscopic confirmation of distant metastasis.
+M1c,pathology,8th,1634657,Pathological M requires microscopic confirmation of distant metastasis.
+M1c,pathology,unspecified,1635338,Pathological M requires microscopic confirmation of distant metastasis.
+M1c1,base,7th,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1c1,base,8th,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1c1,base,unspecified,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1c1,clinical,7th,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1c1,clinical,8th,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1c1,clinical,unspecified,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1c1,pathology,7th,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1c1,pathology,8th,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1c1,pathology,unspecified,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1c2,base,7th,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1c2,base,8th,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1c2,base,unspecified,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1c2,clinical,7th,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1c2,clinical,8th,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1c2,clinical,unspecified,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1c2,pathology,7th,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1c2,pathology,8th,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1c2,pathology,unspecified,,"Pathological M requires microscopic confirmation of distant metastasis. No exact 7th-, 8th-, or version-unspecified standard Cancer Modifier concept was present in the Athena export."
+M1d,base,7th,1633866,Pathological M requires microscopic confirmation of distant metastasis.
+M1d,base,8th,1634259,Pathological M requires microscopic confirmation of distant metastasis.
+M1d,base,unspecified,1634064,Pathological M requires microscopic confirmation of distant metastasis.
+M1d,clinical,7th,1633666,Pathological M requires microscopic confirmation of distant metastasis.
+M1d,clinical,8th,1633799,Pathological M requires microscopic confirmation of distant metastasis.
+M1d,clinical,unspecified,1634048,Pathological M requires microscopic confirmation of distant metastasis.
+M1d,pathology,7th,1634325,Pathological M requires microscopic confirmation of distant metastasis.
+M1d,pathology,8th,1634526,Pathological M requires microscopic confirmation of distant metastasis.
+M1d,pathology,unspecified,1635373,Pathological M requires microscopic confirmation of distant metastasis.

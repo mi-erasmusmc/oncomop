@@ -8,3 +8,4 @@
 /.quarto/
 **/*.quarto_ipynb
 README.html
+tests/testthat/Rplots.pdf
