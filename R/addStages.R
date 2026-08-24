@@ -54,8 +54,8 @@ addStages <- function(
   # Extract codelist for intersection ----------------------------
   tnm_codelist <- tnm_files_data$tnm_concepts |>
     createTNMCodelist(
-      .edition = "7th",
-      .type = "clinical"
+      .edition = edition,
+      .type = type
     ) 
   
   # outcome_table <- CohortConstructor::copyCohorts(
