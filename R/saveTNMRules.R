@@ -36,59 +36,40 @@ saveTNMRules <- function(
     dir.create(results_path)
   }
 
-  for (f in tnm_files) {
-
+  for (i in seq_along(tnm_files)) {
     data <- read.csv(
-      file.path(path, paste0(f, ".csv"))
+      file.path(path, paste0(tnm_files[i], ".csv"))
     )
+    if (tnm_files[i] == "tnm_stage_mapping") {
+      data <- data |> 
+        dplyr::mutate(
+          site = tolower(.data$site)
+        ) |> 
+        dplyr::mutate(
+          site = dplyr::case_when(
+            .data$site == "urinary bladder" ~ "bladder",
+            .data$site == "skin melanoma" ~ "melanoma",
+            .default = .data$site
+          ),
+          stage_grouping_scope = dplyr::case_when(
+            .data$stage_grouping_scope == "both" ~ "base",
+            .default = .data$stage_grouping_scope
+          ),
+          edition = as.character(.data$edition)
+        ) |> 
+        dplyr::mutate(
+          edition = dplyr::case_when(
+            as.character(.data$edition) == "7" ~ as.character("7th"),
+            as.character(.data$edition) == "8" ~ as.character("8th"),
+            as.character(.data$edition) == "9" ~ as.character("9th"),
+            .default = .data$edition
+          )
+        )
+    }
 
     saveRDS(
       data,
-      file.path(results_path, paste0(f, ".rds"))
+      file.path(results_path, paste0(tnm_files[i], ".rds"))
     )
   }
-}
-
-readStagesRDS <- function(tnm_files) {
-  tnm_files |> 
-    checkmate::assertFileExists() |> 
-    basename() |> 
-    identical(
-      c( "tnm_concepts.rds",
-         "tnm_stage_mapping.rds",
-         "tnm_stage_shortcut_mapping.rds")) |> 
-    checkmate::assertTRUE()
-
-  setNames(
-    lapply(tnm_files, readRDS),
-    basename(tnm_files)
-  )
-}
-
-createTNMCodelist <- function(
-  tnm_concepts,
-  .edition,
-  .type
-) {
-  checkmate::assertDataFrame(tnm_concepts)
-  tnm_stages_concept <- tnm_concepts |>
-    dplyr::filter(
-      .data$classification_version == .edition,
-      .data$type == .type,
-    ) |>
-    dplyr::filter(      
-      !is.na(.data$concept_id)
-    ) 
-  tnm_codelist <- tnm_stages_concept |> 
-    dplyr::pull(
-      concept_id
-    ) |> lapply(
-      FUN = function(x) {
-        return(x)
-      }
-    ) |> setNames(
-      tnm_stages_concept$component_tnm
-    ) |> 
-    omopgenerics::newCodelist()
-  return(tnm_codelist)
 }

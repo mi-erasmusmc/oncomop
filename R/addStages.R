@@ -123,6 +123,75 @@ addStages <- function(
   return(cdm[[name]])
 }
 
+readStagesRDS <- function(tnm_files) {
+  tnm_files |> 
+    checkmate::assertFileExists() |> 
+    basename() |> 
+    identical(
+      c( "tnm_concepts.rds",
+         "tnm_stage_mapping.rds",
+         "tnm_stage_shortcut_mapping.rds")) |> 
+    checkmate::assertTRUE()
+  setNames(
+    lapply(tnm_files, readRDS),
+    basename(tnm_files)
+  )
+}
+
+extractStageRuleset <- function(
+  tnm_stage_mapping,
+  .edition,
+  .cancer,
+  .type
+) {
+  checkmate::assertDataFrame(tnm_stage_mapping)
+  tnm_stage_mapping |> 
+    dplyr::filter(
+      edition == .edition
+    ) |> 
+    dplyr::filter(
+      site == .cancer
+    ) |> 
+    dplyr::filter(
+      stage_grouping_scope == .type
+    ) |>  
+    dplyr::select(
+      rule_id,
+      T,
+      N,
+      M,
+      uicc_stage
+    )
+}
+
+createTNMCodelist <- function(
+  tnm_concepts,
+  .edition,
+  .type
+) {
+  checkmate::assertDataFrame(tnm_concepts)
+  tnm_stages_concept <- tnm_concepts |>
+    dplyr::filter(
+      .data$classification_version == .edition,
+      .data$type == .type,
+    ) |>
+    dplyr::filter(      
+      !is.na(.data$concept_id)
+    ) 
+  tnm_codelist <- tnm_stages_concept |> 
+    dplyr::pull(
+      concept_id
+    ) |> lapply(
+      FUN = function(x) {
+        return(x)
+      }
+    ) |> setNames(
+      tnm_stages_concept$component_tnm
+    ) |> 
+    omopgenerics::newCodelist()
+  return(tnm_codelist)
+}
+
 .addColumnsRules <- function(
   cohort,
   conceptSet,
@@ -136,6 +205,7 @@ addStages <- function(
   name = NULL,
   ruleset
 ) {
+  omopgenerics::validateCohortArgument(cohort)
   cohort |> 
     PatientProfiles::addConceptIntersectDate(
       conceptSet,
@@ -150,6 +220,15 @@ addStages <- function(
     )
   
   # impose rules --------------------------------
+
+}
+
+.mapRules <- function(
+  cohort,
+  ruleset
+) {
+  omopgenerics::validateCohortArgument(cohort)
+  checkmate::assertDataFrame(ruleset)
 
 }
 

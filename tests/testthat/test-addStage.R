@@ -25,7 +25,7 @@ test_that("addStage() insert column with last record", {
       order = "last"
     ) |>
     dplyr::collect() |>
-    dplyr::pull(stages) |>
+    dplyr::pull(cancer_stages) |>
     # Provided list of concepts overlap
     expect_in(
       c(
@@ -35,100 +35,6 @@ test_that("addStage() insert column with last record", {
       "ajcc_uicc_clinical_m1_category_m90_to_90"
       )
     )
-})
-
-test_that("read stages rds", {
-
-  tnm_files <- c(
-    "tnm_concepts",
-    "tnm_stage_mapping",
-    "tnm_stage_shortcut_mapping"
-  )
-
-  tnm_files <- system.file(
-    "tnm_files",
-    package = "oncomop"
-  ) |> 
-    list.files(
-      full.names = TRUE
-    ) |>
-    readStagesRDS() |> 
-    names() |> 
-    expect_equal(
-      c("tnm_concepts.rds", 
-        "tnm_stage_mapping.rds",
-        "tnm_stage_shortcut_mapping.rds"
-      )
-    )
-})
-
-test_that("to form tnmCodelist", {
-
-  tnm_files_data <- system.file(
-    "tnm_files",
-    package = "oncomop"
-  ) |> 
-    list.files(
-      full.names = TRUE
-    ) |>
-    readStagesRDS() 
-
-  expect_no_error({
-    tnm_codelist <- tnm_files_data$tnm_concepts |>
-      createTNMCodelist(
-        .edition = "7th",
-        .type = "clinical"
-      ) 
-    })
-  
-  tnm_codelist |> 
-    expect_length(42)
-  
-})
-
-test_that("General .addColumnsRules", {
-
-  cdm <- TestGenerator::patientsCDM(
-    testName = testName,
-    vocabulary = "v20260227_complete",
-    cdmVersion = "5.4"
-  )
-  cdm <- createCancerCohorts(
-    cdm,
-    path = "cancer_cohorts",
-    name = "cancer_cohorts"
-  )
-
-  tnm_files_data <- system.file(
-    "tnm_files",
-    package = "oncomop"
-  ) |> 
-    list.files(
-      full.names = TRUE
-    ) |>
-    readStagesRDS() 
-
-  tnm_codelist <- tnm_files_data$tnm_concepts |>
-    createTNMCodelist(
-      .edition = "7th",
-      .type = "clinical"
-    ) 
-
-  cdm$cancer_cohorts |> 
-    .addColumnsRules(
-      conceptSet = tnm_codelist,
-      window = list(c(0, 0))
-    ) |> 
-    colnames() |> 
-    expect_equal(
-      c("cohort_definition_id", "subject_id", "cohort_start_date", 
-        "cohort_end_date", "m0", "m1", "m1a", "m1b", "m1c", "m1d", "n0", 
-        "n1", "n1a", "n1b", "n1c", "n1mi", "n2", "n2a", "n2b", "n2c", 
-        "n3", "n3a", "n3b", "n3c", "nx", "t0", "t1", "t1a", "t1b", "t1c", 
-        "t1mi", "t2", "t2a", "t2b", "t2c", "t3", "t3a", "t3b", "t4", 
-        "t4a", "t4b", "t4c", "t4d", "ta", "tis", "tx")
-      )
-
 })
 
 test_that("Stages is added to cancer cohort", {
@@ -182,9 +88,7 @@ test_that("Filter children concept sets after extraction", {
   })
 
 test_that("Adding stages to patients with UICC 7th TNM measurements", {
-
   testName <- "test_patients_staging_uicc7"
-
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
     vocabulary = "v20260227_complete",
@@ -247,9 +151,7 @@ test_that("Adding stages to patients with UICC 7th TNM measurements", {
 })
 
 test_that("Adding stages to patients with UICC 8th TNM measurements", {
-
   testName <- "test_patients_staging_uicc8"
-
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
     vocabulary = "v20260227_complete",
@@ -312,9 +214,7 @@ test_that("Adding stages to patients with UICC 8th TNM measurements", {
 })
 
 test_that("Adding stages to patients from broader test set", {
-
   testName <- "test_patients_staging_general"
-
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
     vocabulary = "v20260227_complete",
@@ -377,9 +277,7 @@ test_that("Adding stages to patients from broader test set", {
 })
 
 test_that("Overlap of TNM codes", {
-
   testName <- "stages_patients_one_patient"
-
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
     vocabulary = "v20260227_complete",
@@ -441,4 +339,164 @@ test_that("Overlap of TNM codes", {
   expect_equal(length(stage_concepts), 99)
   expect_equal(intersect(codelist, stage_concepts), stage_concepts)  # stage_concepts is a subset of codelist
   expect_equal(length(setdiff(codelist, stage_concepts)), 35)        # codelist has additional concepts for NX, Ta, Tis, TX
+})
+
+# Inner core functions -----------------------------
+
+test_that("read stages rds", {
+
+  tnm_files <- c(
+    "tnm_concepts",
+    "tnm_stage_mapping",
+    "tnm_stage_shortcut_mapping"
+  )
+
+  tnm_files <- system.file(
+    "tnm_files",
+    package = "oncomop"
+  ) |> 
+    list.files(
+      full.names = TRUE
+    ) |>
+    readStagesRDS() |> 
+    names() |> 
+    expect_equal(
+      c("tnm_concepts.rds", 
+        "tnm_stage_mapping.rds",
+        "tnm_stage_shortcut_mapping.rds"
+      )
+    )
+})
+
+test_that("to form tnmCodelist", {
+  tnm_files_data <- system.file(
+    "tnm_files",
+    package = "oncomop"
+  ) |> 
+    list.files(
+      full.names = TRUE
+    ) |>
+    readStagesRDS() 
+
+  expect_no_error({
+    tnm_codelist <- tnm_files_data$tnm_concepts |>
+      createTNMCodelist(
+        .edition = "7th",
+        .type = "clinical"
+      ) 
+    })
+  tnm_codelist |> 
+    expect_length(42)
+})
+
+test_that("General .addColumnsRules", {
+  testName <- "stages_patients_one_patient"
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+  cdm <- createCancerCohorts(
+    cdm,
+    path = "cancer_cohorts",
+    name = "cancer_cohorts"
+  )
+
+  tnm_files_data <- system.file(
+    "tnm_files",
+    package = "oncomop"
+  ) |> 
+    list.files(
+      full.names = TRUE
+    ) |>
+    readStagesRDS() 
+
+  tnm_codelist <- tnm_files_data$tnm_concepts |>
+    createTNMCodelist(
+      .edition = "7th",
+      .type = "clinical"
+    ) 
+
+  cdm$cancer_cohorts |> 
+    .addColumnsRules(
+      conceptSet = tnm_codelist,
+      window = list(c(0, 0))
+    ) |> 
+    colnames() |> 
+    expect_equal(
+      c("cohort_definition_id", "subject_id", "cohort_start_date", 
+        "cohort_end_date", "m0", "m1", "m1a", "m1b", "m1c", "m1d", "n0", 
+        "n1", "n1a", "n1b", "n1c", "n1mi", "n2", "n2a", "n2b", "n2c", 
+        "n3", "n3a", "n3b", "n3c", "nx", "t0", "t1", "t1a", "t1b", "t1c", 
+        "t1mi", "t2", "t2a", "t2b", "t2c", "t3", "t3a", "t3b", "t4", 
+        "t4a", "t4b", "t4c", "t4d", "ta", "tis", "tx")
+      )
+
+})
+
+test_that("Extracting and formating rules from RDS data'", {
+
+  tnm_files_data <- system.file(
+    "tnm_files",
+    package = "oncomop"
+  ) |> 
+    list.files(
+      full.names = TRUE
+    ) |>
+    readStagesRDS() 
+  
+  tnm_files_data$tnm_stage_mapping |> 
+    extractStageRuleset(
+      .cancer = "breast",
+      .edition = "8th",
+      .type = "base"
+    ) |> 
+    names() |> 
+    expect_equal(
+      c("rule_id", "T", "N", "M", "uicc_stage")
+    )
+
+})
+test_that("Imposing rules with 'mappingRules()'", {
+
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+  cdm <- createCancerCohorts(
+    cdm,
+    path = "cancer_cohorts",
+    name = "cancer_cohorts"
+  )
+
+  tnm_files_data <- system.file(
+    "tnm_files",
+    package = "oncomop"
+  ) |> 
+    list.files(
+      full.names = TRUE
+    ) |>
+    readStagesRDS() 
+
+  tnm_codelist <- tnm_files_data$tnm_concepts |>
+    createTNMCodelist(
+      .edition = "7th",
+      .type = "clinical"
+    ) 
+  
+  ruleset <- tnm_files_data$tnm_stage_mapping |> 
+    extractStageRuleset(
+      .cancer = "breast",
+      .edition = "8th",
+      .type = "base"
+    ) 
+
+  cdm$cancer_cohorts |> 
+    .addColumnsRules(
+      conceptSet = tnm_codelist,
+      window = list(c(0, 0))
+    ) |> 
+      .mapRules(ruleset)
+
 })
