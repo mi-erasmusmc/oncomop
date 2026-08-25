@@ -58,24 +58,10 @@ addStages <- function(
       .type = type
     ) 
   
-
-  # .addColumn() -------------------------------------------------
+  # .addColumns() ------------------------------------------------
   cohort_intersect_date <- cohort |>
-    PatientProfiles::addConceptIntersectDate(
-      conceptSet = tnm_codelist,
-      indexDate = "cohort_start_date",
-      censorDate = NULL,
-      window = window,
-      targetDate = "event_start_date",
-      order = "last",
-      inObservation = TRUE,
-      nameStyle = "{concept_name}",
-      name = NULL
-    )
-  
- # -- imposeRules()
-  
-  
+    .addColumns() 
+ #  .imposeRules()
   
   prefix <- "ajcc_uicc"
   strataColumnTable <- outcome_table |>
@@ -135,6 +121,36 @@ addStages <- function(
   )
 
   return(cdm[[name]])
+}
+
+.addColumnsRules <- function(
+  cohort,
+  conceptSet,
+  indexDate = "cohort_start_date",
+  censorDate = NULL,
+  window = list(c(0,0)),
+  targetDate = "event_start_date",
+  order = "last",
+  inObservation = TRUE,
+  nameStyle = "{concept_name}",
+  name = NULL,
+  ruleset
+) {
+  cohort |> 
+    PatientProfiles::addConceptIntersectDate(
+      conceptSet,
+      indexDate = "cohort_start_date",
+      censorDate = NULL,
+      window = window,
+      targetDate = "event_start_date",
+      order = "last",
+      inObservation = TRUE,
+      nameStyle = "{concept_name}",
+      name = NULL
+    )
+  
+  # impose rules --------------------------------
+
 }
 
 filterStageConcepts <- function(

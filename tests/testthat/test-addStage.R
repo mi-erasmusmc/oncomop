@@ -37,6 +37,100 @@ test_that("addStage() insert column with last record", {
     )
 })
 
+test_that("read stages rds", {
+
+  tnm_files <- c(
+    "tnm_concepts",
+    "tnm_stage_mapping",
+    "tnm_stage_shortcut_mapping"
+  )
+
+  tnm_files <- system.file(
+    "tnm_files",
+    package = "oncomop"
+  ) |> 
+    list.files(
+      full.names = TRUE
+    ) |>
+    readStagesRDS() |> 
+    names() |> 
+    expect_equal(
+      c("tnm_concepts.rds", 
+        "tnm_stage_mapping.rds",
+        "tnm_stage_shortcut_mapping.rds"
+      )
+    )
+})
+
+test_that("to form tnmCodelist", {
+
+  tnm_files_data <- system.file(
+    "tnm_files",
+    package = "oncomop"
+  ) |> 
+    list.files(
+      full.names = TRUE
+    ) |>
+    readStagesRDS() 
+
+  expect_no_error({
+    tnm_codelist <- tnm_files_data$tnm_concepts |>
+      createTNMCodelist(
+        .edition = "7th",
+        .type = "clinical"
+      ) 
+    })
+  
+  tnm_codelist |> 
+    expect_length(42)
+  
+})
+
+test_that("General .addColumnsRules", {
+
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+  cdm <- createCancerCohorts(
+    cdm,
+    path = "cancer_cohorts",
+    name = "cancer_cohorts"
+  )
+
+  tnm_files_data <- system.file(
+    "tnm_files",
+    package = "oncomop"
+  ) |> 
+    list.files(
+      full.names = TRUE
+    ) |>
+    readStagesRDS() 
+
+  tnm_codelist <- tnm_files_data$tnm_concepts |>
+    createTNMCodelist(
+      .edition = "7th",
+      .type = "clinical"
+    ) 
+
+  cdm$cancer_cohorts |> 
+    .addColumnsRules(
+      conceptSet = tnm_codelist,
+      window = list(c(0, 0))
+    ) |> 
+    colnames() |> 
+    expect_equal(
+      c("cohort_definition_id", "subject_id", "cohort_start_date", 
+        "cohort_end_date", "m0", "m1", "m1a", "m1b", "m1c", "m1d", "n0", 
+        "n1", "n1a", "n1b", "n1c", "n1mi", "n2", "n2a", "n2b", "n2c", 
+        "n3", "n3a", "n3b", "n3c", "nx", "t0", "t1", "t1a", "t1b", "t1c", 
+        "t1mi", "t2", "t2a", "t2b", "t2c", "t3", "t3a", "t3b", "t4", 
+        "t4a", "t4b", "t4c", "t4d", "ta", "tis", "tx")
+      )
+
+})
+
 test_that("Stages is added to cancer cohort", {
   testName <- "stages_patients_one_patient"
   cdm <- TestGenerator::patientsCDM(
