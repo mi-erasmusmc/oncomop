@@ -37,8 +37,8 @@ test_that("saveTNMRules saves expected RDS files", {
     sort() |> 
     expect_equal(
       c("bladder", "breast", "colorectal",
-      "lung", "skin", "oesophagus", 
-      "prostate")
+      "lung", "oesophagus", 
+      "prostate", "skin")
     )
   
   tnm_files_data$tnm_stage_mapping |> 

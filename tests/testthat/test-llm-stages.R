@@ -63,7 +63,7 @@ test_that("default rules multiple patients", {
 
 test_that("default rules single patient", {
   skip_if(is.null(Sys.getenv("OPENAI_API_KEY")))
-  testName <- "default_rules_single_subjects"
+  testName <- "default_rules_single_subject"
   # patientGenerator <- PatientGenerator::patientChat$new(
   #   model = "gpt-5.6-luna"
   # )

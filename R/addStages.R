@@ -30,7 +30,7 @@ addStages <- function(
   cdm,
   cancer,
   window = list(c(0,0)),
-  edition = "eight",
+  edition = "8th",
   type = "base",
   order = "last",
   showTnm = FALSE
@@ -97,7 +97,7 @@ addStages <- function(
   
   if (isFALSE(showTnm)) {
     cancer_stage_cohort |> 
-      select(
+      dplyr::select(
         cohort_definition_id,
         subject_id,
         cohort_start_date,
@@ -210,7 +210,7 @@ createTNMCodelist <- function(
   omopgenerics::validateCohortArgument(cohort)
   checkmate::assertDataFrame(ruleset)
   cohort |>
-    collect() |> 
+    dplyr::collect() |> 
     dplyr::rowwise() |>
     dplyr::select_if(~ !all(is.na(.))) |> 
     dplyr::mutate(
