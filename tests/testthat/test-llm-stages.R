@@ -1,27 +1,90 @@
-test_that("default rules patient", {
+test_that("default rules multiple patients", {
   skip_if(is.null(Sys.getenv("OPENAI_API_KEY")))
-  testName <- "default_rules_patient"
-  patientGenerator <- PatientGenerator::patientChat$new(
-    model = "gpt-5.6-luna"
+  testName <- "default_rules_multiple_subjects"
+  #------------------------------------------------
+  
+  # patientGenerator <- PatientGenerator::patientChat$new(
+  #   model = "gpt-5.6-luna"
+  # )
+  # patientGenerator$prompt({
+  #   "PERSON table:
+  #     - A population of 3 persons over 18 years old.
+  #     - The 3 persons have observation period from 2000 to 2024.
+  #     - The 3 persons are females with gender_concept_id = 8532.  
+  #   CONDITION_OCCURRENCE table:
+  #   The patients from the PERSON table have occurrences of 1 types of cancer recorded during their respective observation periods:
+  #     - All three persons (3 females) have breast cancer with condition_concept_id: 4308306
+  #     - Everyone has condition_type_concept_id 32817
+  #   MEASUREMENT table:
+  #   Cancer stage information is recorded in this table through TNM categories.
+  #   The measurements occurr on the cancer index date (condition_occurrence):
+  #     - The first female person with breast cancer has a measurement record of:
+  #       - T1 (concept ID: 1633883), N0 (concept ID: 1634070) and a M0 (concept ID: 1634757)
+  #     - The second female person with breast cancer has a measurement record of:
+  #       - T1mi (concept ID: 1633949), a N3a (concept ID: 1635496) and a M0 (concept ID: 1634757)
+  #     - The third female person with breast cancer has a measurement record of
+  #       - T4d (concept ID: 1635022), a N1 (concept ID: 1633651) and a M1 (concept ID: 1633974)
+  #   Output requirements:
+  #     - All patients in PERSON have an observation period.
+  #     - All conditions occurrences and measurement records of a patient must have happened during their observation period.
+  #     - Fill out the condition end date 2023-12-31 for everyone."
+  # })
+  # patientGenerator$save(testName)
+
+  #---------------------------------
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
   )
-  patientGenerator$prompt({
-    "PERSON table:
-      - A population of 1 person over 18 years old.
-      - The 1 person have observation period from 2000 to 2024.
-      - The 1 person is females with gender_concept_id = 8532.  
-    CONDITION_OCCURRENCE table:
-    The patients from the PERSON table have occurrences of 7 different types of cancer recorded during their respective observation periods:
-      - Patient 1 (1 female) have breast cancer with condition_concept_id: 4308306
-      - Everyone has condition_type_concept_id 32817
-    MEASUREMENT table:
-    Cancer stage information is recorded in this table through TNM categories.
-      - The 1 female person with breast cancer has a T1 (concept ID: 1633883), a N0 (concept ID: 1634070) and a M0 (concept ID: 1634757)
-    Output requirements:
-      - All patients in PERSON have an observation period.
-      - All conditions occurrences and measurement records of a patient must have happened during their observation period.
-      - Fill out the condition end date 2023-12-31 for everyone."
-  })
-  patientGenerator$save(testName)
+  cdm <- createCancerCohorts(
+    cdm = cdm,
+    path = "cancer_cohorts",
+    name = "cancer_cohorts"
+  )
+  cdm$cancer_cohorts |>
+    collect() |> 
+    nrow() |> 
+    expect_equal(3)
+  cdm$measurement |> 
+    collect() |>  
+    nrow() |> 
+    expect_equal(9)
+  cdm$measurement |> 
+    collect() |> 
+    pull(measurement_concept_id) |> 
+    unique() |> 
+    sort() |> 
+    expect_equal(
+      c(1633651L, 1633883L, 1633949L,
+        1633974L, 1634070L, 1634757L,
+         1635022L, 1635496L))
+})
+
+test_that("default rules single patient", {
+  skip_if(is.null(Sys.getenv("OPENAI_API_KEY")))
+  testName <- "default_rules_single_subjects"
+  # patientGenerator <- PatientGenerator::patientChat$new(
+  #   model = "gpt-5.6-luna"
+  # )
+  # patientGenerator$prompt({
+  #   "PERSON table:
+  #     - A population of 1 person over 18 years old.
+  #     - The 1 person have observation period from 2000 to 2024.
+  #     - The 1 person is females with gender_concept_id = 8532.  
+  #   CONDITION_OCCURRENCE table:
+  #   The patients from the PERSON table have occurrences of 7 different types of cancer recorded during their respective observation periods:
+  #     - Patient 1 (1 female) have breast cancer with condition_concept_id: 4308306
+  #     - Everyone has condition_type_concept_id 32817
+  #   MEASUREMENT table:
+  #   Cancer stage information is recorded in this table through TNM categories.
+  #     - The 1 female person with breast cancer has a T1 (concept ID: 1633883), a N0 (concept ID: 1634070) and a M0 (concept ID: 1634757)
+  #   Output requirements:
+  #     - All patients in PERSON have an observation period.
+  #     - All conditions occurrences and measurement records of a patient must have happened during their observation period.
+  #     - Fill out the condition end date 2023-12-31 for everyone."
+  # })
+  # patientGenerator$save(testName)
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
     vocabulary = "v20260227_complete",
@@ -36,7 +99,6 @@ test_that("default rules patient", {
     collect() |> 
     nrow() |> 
     expect_equal(1)
-  
   cdm$measurement |> 
     collect() |> 
     pull(measurement_concept_id) |> 

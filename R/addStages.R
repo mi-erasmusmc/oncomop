@@ -15,6 +15,8 @@
 #' @param type A choice from "base", "clinical" or "pathological".
 #' @param order A choice from "first" or "last". If more that one code 
 #' intersected, the order defines which code to intersect in the window.
+#' @param intersections If TRUE, the cohort will show the date intersects 
+#' for each matching code. Default FALSE.
 #' @importFrom omopgenerics validateCohortArgument validateCdmArgument assertList newCodelist 
 #' @importFrom checkmate assertChoice assertFileExists assertTRUE assertDataFrame
 #' @importFrom dplyr filter pull rowwise select_if mutate pick select
@@ -30,7 +32,8 @@ addStages <- function(
   window = list(c(0,0)),
   edition = "eight",
   type = "base",
-  order = "last"
+  order = "last",
+  intersections = FALSE
 ) {
   
   # Assert parameters ---------------------------------
@@ -67,19 +70,32 @@ addStages <- function(
     ) 
   
   # .addColumnRules() -------------------------------------
-  cohort |>
+  cancer_stage_cohort <- cohort |>
     .addColumnRules(
       conceptSet = tnm_codelist,
       indexDate = "cohort_start_date",
       censorDate = NULL,
       window = window,
       targetDate = "event_start_date",
-      order = "last",
+      order = order,
       inObservation = TRUE,
       nameStyle = "{concept_name}",
       name = NULL,
       ruleset = ruleset
     ) 
+  
+  if (isFALSE(intersections)) {
+    cancer_stage_cohort |> 
+      select(
+        cohort_definition_id,
+        subject_id,
+        cohort_start_date,
+        cohort_end_date,
+        cancer_stage
+      )
+  } else {
+    return(cancer_stage_cohort)
+  }
 }
 
 readStagesRDS <- function(tnm_files) {
@@ -185,10 +201,11 @@ createTNMCodelist <- function(
   cohort |>
     collect() |> 
     dplyr::rowwise() |>
-    dplyr::select_if(~ !any(is.na(.))) |> 
+    dplyr::select_if(~ !all(is.na(.))) |> 
     dplyr::mutate(
       cancer_stage = {
-        rowStages <- dplyr::pick(tidyselect::any_of(tolower(unique(c(ruleset$T, ruleset$N, ruleset$M)))))
+        rowStages <- dplyr::pick(tidyselect::any_of(tolower(unique(c(ruleset$T, ruleset$N, ruleset$M))))) |> 
+          dplyr::select_if(~ !any(is.na(.)))
         stageCombination <- names(rowStages)
         rowStageT <- stageCombination[names(rowStages) |> stringr::str_detect("t")]
         rowStageN <- stageCombination[names(rowStages) |> stringr::str_detect("n")]
