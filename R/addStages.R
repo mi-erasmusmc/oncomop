@@ -8,14 +8,14 @@
 #' cdm reference object.
 #' @param cdm A cdm reference object.
 #' @param cancer In character, the affected site, a choice of: 
-#' "bladder", "breast", "colorectal","lung", "melanoma", "oesophagus"
+#' "bladder", "breast", "colorectal", "lung", "melanoma", "oesophagus"
 #' and "prostate".
 #' @param window to look up stages codes.
 #' @param edition A choice of "unspecified", "7th" and "8th".
 #' @param type A choice from "base", "clinical" or "pathological".
 #' @param order A choice from "first" or "last". If more that one code 
 #' intersected, the order defines which code to intersect in the window.
-#' @param intersections If TRUE, the cohort will show the date intersects 
+#' @param showTnm If TRUE, the cohort will show the date intersects 
 #' for each matching code. Default FALSE.
 #' @importFrom omopgenerics validateCohortArgument validateCdmArgument assertList newCodelist 
 #' @importFrom checkmate assertChoice assertFileExists assertTRUE assertDataFrame
@@ -33,7 +33,7 @@ addStages <- function(
   edition = "eight",
   type = "base",
   order = "last",
-  intersections = FALSE
+  showTnm = FALSE
 ) {
   
   # Assert parameters ---------------------------------
@@ -63,13 +63,24 @@ addStages <- function(
     readStagesRDS()
 
   # Extract codelist for intersection -----------------
+  # At this point, we can put any codelist for stages, subtypes, progression
   tnm_codelist <- tnm_files_data$tnm_concepts |>
     createTNMCodelist(
       .edition = edition,
       .type = type
+    )
+  
+  # Extract ruleset -----------------------------------
+  ruleset <- tnm_files_data$tnm_stage_mapping |> 
+    extractStageRuleset(
+      .cancer = cancer,
+      .edition = edition,
+      .type = "base"
     ) 
   
-  # .addColumnRules() -------------------------------------
+  # .addColumnRules() ---------------------------------
+  # General function to analyse if it can be reused for 
+  # subtypes and progression
   cancer_stage_cohort <- cohort |>
     .addColumnRules(
       conceptSet = tnm_codelist,
@@ -84,7 +95,7 @@ addStages <- function(
       ruleset = ruleset
     ) 
   
-  if (isFALSE(intersections)) {
+  if (isFALSE(showTnm)) {
     cancer_stage_cohort |> 
       select(
         cohort_definition_id,
