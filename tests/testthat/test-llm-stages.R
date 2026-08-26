@@ -1,3 +1,52 @@
+test_that("default rules patient", {
+  skip_if(is.null(Sys.getenv("OPENAI_API_KEY")))
+  testName <- "default_rules_patient"
+  patientGenerator <- PatientGenerator::patientChat$new(
+    model = "gpt-5.6-luna"
+  )
+  patientGenerator$prompt({
+    "PERSON table:
+      - A population of 1 person over 18 years old.
+      - The 1 person have observation period from 2000 to 2024.
+      - The 1 person is females with gender_concept_id = 8532.  
+    CONDITION_OCCURRENCE table:
+    The patients from the PERSON table have occurrences of 7 different types of cancer recorded during their respective observation periods:
+      - Patient 1 (1 female) have breast cancer with condition_concept_id: 4308306
+      - Everyone has condition_type_concept_id 32817
+    MEASUREMENT table:
+    Cancer stage information is recorded in this table through TNM categories.
+      - The 1 female person with breast cancer has a T1 (concept ID: 1633883), a N0 (concept ID: 1634070) and a M0 (concept ID: 1634757)
+    Output requirements:
+      - All patients in PERSON have an observation period.
+      - All conditions occurrences and measurement records of a patient must have happened during their observation period.
+      - Fill out the condition end date 2023-12-31 for everyone."
+  })
+  patientGenerator$save(testName)
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+  cdm <- createCancerCohorts(
+    cdm = cdm,
+    path = "cancer_cohorts",
+    name = "cancer_cohorts"
+  )
+  cdm$cancer_cohorts |>
+    collect() |> 
+    nrow() |> 
+    expect_equal(1)
+  
+  cdm$measurement |> 
+    collect() |> 
+    pull(measurement_concept_id) |> 
+    sort() |> 
+    expect_equal(
+      c(1633883L, 1634070L, 1634757L)
+    )
+})
+
+
 test_that("Create test patients baseline", {
   skip_if(is.null(Sys.getenv("OPENAI_API_KEY")))
   testName <- "stages_baseline"

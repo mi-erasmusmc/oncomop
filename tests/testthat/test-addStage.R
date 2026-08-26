@@ -390,7 +390,8 @@ test_that("to form tnmCodelist", {
 })
 
 test_that("General .addColumnsRules", {
-  testName <- "stages_patients_one_patient"
+  
+  testName <- "default_rules_patient"
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
     vocabulary = "v20260227_complete",
@@ -413,7 +414,7 @@ test_that("General .addColumnsRules", {
 
   tnm_codelist <- tnm_files_data$tnm_concepts |>
     createTNMCodelist(
-      .edition = "7th",
+      .edition = "8th",
       .type = "clinical"
     ) 
 
@@ -422,20 +423,37 @@ test_that("General .addColumnsRules", {
       conceptSet = tnm_codelist,
       window = list(c(0, 0))
     ) |> 
-    colnames() |> 
+    collect() |> 
+    pull(t1) |> 
     expect_equal(
-      c("cohort_definition_id", "subject_id", "cohort_start_date", 
-        "cohort_end_date", "m0", "m1", "m1a", "m1b", "m1c", "m1d", "n0", 
-        "n1", "n1a", "n1b", "n1c", "n1mi", "n2", "n2a", "n2b", "n2c", 
-        "n3", "n3a", "n3b", "n3c", "nx", "t0", "t1", "t1a", "t1b", "t1c", 
-        "t1mi", "t2", "t2a", "t2b", "t2c", "t3", "t3a", "t3b", "t4", 
-        "t4a", "t4b", "t4c", "t4d", "ta", "tis", "tx")
-      )
-
+      as.Date("2023-01-15")
+    )
+  
+  cdm$cancer_cohorts |> 
+    .addColumnsRules(
+      conceptSet = tnm_codelist,
+      window = list(c(0, 0))
+    ) |> 
+    collect() |> 
+    pull(n0) |> 
+    expect_equal(
+      as.Date("2023-01-15")
+    )
+  
+  cdm$cancer_cohorts |> 
+    .addColumnsRules(
+      conceptSet = tnm_codelist,
+      window = list(c(0, 0))
+    ) |> 
+    collect() |> 
+    pull(m0) |> 
+    expect_equal(
+      as.Date("2023-01-15")
+    )
+  
 })
 
 test_that("Extracting and formating rules from RDS data'", {
-
   tnm_files_data <- system.file(
     "tnm_files",
     package = "oncomop"
@@ -455,10 +473,10 @@ test_that("Extracting and formating rules from RDS data'", {
     expect_equal(
       c("rule_id", "T", "N", "M", "uicc_stage")
     )
-
 })
-test_that("Imposing rules with 'mappingRules()'", {
 
+test_that("Imposing rules with 'mappingRules'", {
+  testName <- "default_rules_patient"
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
     vocabulary = "v20260227_complete",
@@ -469,7 +487,6 @@ test_that("Imposing rules with 'mappingRules()'", {
     path = "cancer_cohorts",
     name = "cancer_cohorts"
   )
-
   tnm_files_data <- system.file(
     "tnm_files",
     package = "oncomop"
@@ -481,10 +498,9 @@ test_that("Imposing rules with 'mappingRules()'", {
 
   tnm_codelist <- tnm_files_data$tnm_concepts |>
     createTNMCodelist(
-      .edition = "7th",
+      .edition = "8th",
       .type = "clinical"
-    ) 
-  
+    )   
   ruleset <- tnm_files_data$tnm_stage_mapping |> 
     extractStageRuleset(
       .cancer = "breast",
@@ -493,7 +509,7 @@ test_that("Imposing rules with 'mappingRules()'", {
     ) 
 
   cdm$cancer_cohorts |> 
-    .addColumnsRules(
+    .addColumnRules(
       conceptSet = tnm_codelist,
       window = list(c(0, 0))
     ) |> 

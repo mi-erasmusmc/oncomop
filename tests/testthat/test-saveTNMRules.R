@@ -37,7 +37,7 @@ test_that("saveTNMRules saves expected RDS files", {
     sort() |> 
     expect_equal(
       c("bladder", "breast", "colorectal",
-      "lung", "melanoma", "oesophagus", 
+      "lung", "skin", "oesophagus", 
       "prostate")
     )
   

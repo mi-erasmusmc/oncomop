@@ -48,7 +48,7 @@ saveTNMRules <- function(
         dplyr::mutate(
           site = dplyr::case_when(
             .data$site == "urinary bladder" ~ "bladder",
-            .data$site == "skin melanoma" ~ "melanoma",
+            .data$site == "skin melanoma" ~ "skin",
             .default = .data$site
           ),
           stage_grouping_scope = dplyr::case_when(
