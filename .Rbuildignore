@@ -3,3 +3,6 @@
 ^oncomop\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+^extras$
+^README\.Rmd$
+^README\.html$

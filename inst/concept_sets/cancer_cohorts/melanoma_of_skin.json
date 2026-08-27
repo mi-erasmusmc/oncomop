@@ -1,0 +1,2531 @@
+{
+  "items": [
+    {
+      "concept": {
+        "CONCEPT_ID": 36403068,
+        "CONCEPT_NAME": "Superficial spreading melanoma in situ (C44._) of eyelid",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8743/2-C44.1",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403039,
+        "CONCEPT_NAME": "Superficial spreading melanoma in situ (C44._) of overlapping lesion of skin",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8743/2-C44.8",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403033,
+        "CONCEPT_NAME": "Superficial spreading melanoma in situ (C44._) of skin of lip, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8743/2-C44.0",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403057,
+        "CONCEPT_NAME": "Superficial spreading melanoma in situ (C44._) of skin of lower limb and hip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8743/2-C44.7",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403001,
+        "CONCEPT_NAME": "Superficial spreading melanoma in situ (C44._) of skin of other and unspecified parts of face",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8743/2-C44.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403069,
+        "CONCEPT_NAME": "Superficial spreading melanoma in situ (C44._) of skin of scalp and neck",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8743/2-C44.4",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403072,
+        "CONCEPT_NAME": "Superficial spreading melanoma in situ (C44._) of skin of trunk",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8743/2-C44.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403003,
+        "CONCEPT_NAME": "Superficial spreading melanoma in situ (C44._) of skin of upper limb and shoulder",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8743/2-C44.6",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403048,
+        "CONCEPT_NAME": "Superficial spreading melanoma in situ (C44._) of skin, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8743/2-C44.9",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 433435,
+        "CONCEPT_NAME": "Carcinoma in situ",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "109355002",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36538697,
+        "CONCEPT_NAME": "Amelanotic melanoma of external ear",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8730/3-C44.2",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4299429,
+        "CONCEPT_NAME": "Malignant melanoma (radial growth phase)",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "402556000",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1059609600000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 3183080,
+        "CONCEPT_NAME": "Malignant melanoma of skin with BRAF V600E sequence variant",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "4700001000004103",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "Nebraska Lexicon",
+        "CONCEPT_CLASS_ID": "Clinical Finding",
+        "VALID_START_DATE": 1516838400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 440059,
+        "CONCEPT_NAME": "Recurrent disease",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "58184002",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 141232,
+        "CONCEPT_NAME": "Malignant melanoma of skin",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "93655004",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4189640,
+        "CONCEPT_NAME": "Neoplasm of hematopoietic cell type",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "414825006",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1107129600000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4185470,
+        "CONCEPT_NAME": "Disorder of hematopoietic morphology",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "414026006",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1107129600000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 432851,
+        "CONCEPT_NAME": "Metastatic malignant neoplasm",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "128462008",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 434584,
+        "CONCEPT_NAME": "Kaposi's sarcoma (clinical)",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "109385007",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4089860,
+        "CONCEPT_NAME": "Malignant melanoma of lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "188030005",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4338760,
+        "CONCEPT_NAME": "Malignant melanoma of eyelid",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "231834005",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4297189,
+        "CONCEPT_NAME": "Malignant melanoma of nail apparatus",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "403927001",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1059609600000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4247336,
+        "CONCEPT_NAME": "Primary malignant neoplasm of middle ear",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "93894000",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4314042,
+        "CONCEPT_NAME": "Sarcoma of soft tissue",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "424952003",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1170201600000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403050,
+        "CONCEPT_NAME": "Acral lentiginous melanoma, in situ (C44._) of skin of lower limb and hip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8744/2-C44.7",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403028,
+        "CONCEPT_NAME": "Acral lentiginous melanoma, in situ (C44._) of skin of trunk",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8744/2-C44.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403071,
+        "CONCEPT_NAME": "Acral lentiginous melanoma, in situ (C44._) of skin of upper limb and shoulder",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8744/2-C44.6",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403078,
+        "CONCEPT_NAME": "Epithelioid and spindle cell melanoma in situ (C44._) of skin of lower limb and hip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8770/2-C44.7",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403129,
+        "CONCEPT_NAME": "Melanoma in situ in giant pigmented nevus of skin of trunk",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8761/2-C44.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403013,
+        "CONCEPT_NAME": "Melanoma in situ in junctional nevus (C44._) of skin of trunk",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8740/2-C44.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403049,
+        "CONCEPT_NAME": "Melanoma in situ, regressing (C44._) of skin of trunk",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8723/2-C44.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 42512381,
+        "CONCEPT_NAME": "Meningeal melanomatosis of skin, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8728/3-C44.9",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36403076,
+        "CONCEPT_NAME": "Superficial spreading melanoma in situ (C44._) of external ear",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8743/2-C44.2",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4299429,
+        "CONCEPT_NAME": "Malignant melanoma (radial growth phase)",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "402556000",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1059609600000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1076447,
+        "CONCEPT_NAME": "Malignant melanoma of face",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "1343617003",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1722470400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 44782590,
+        "CONCEPT_NAME": "Malignant melanoma of buccal mucosa",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "698045009",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1391126400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4153890,
+        "CONCEPT_NAME": "Malignant melanoma of trunk",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "269579005",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4089865,
+        "CONCEPT_NAME": "Malignant melanoma of breast",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "188050009",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4095143,
+        "CONCEPT_NAME": "Malignant melanoma of buttock",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "188051008",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4193580,
+        "CONCEPT_NAME": "Malignant melanoma of chest wall",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "313248004",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4092373,
+        "CONCEPT_NAME": "Malignant melanoma of hip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "188068007",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4092370,
+        "CONCEPT_NAME": "Malignant melanoma of umbilicus",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "188055004",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4092368,
+        "CONCEPT_NAME": "Malignant melanoma of groin",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "188052001",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4092369,
+        "CONCEPT_NAME": "Malignant melanoma of perineum",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "188054000",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4149851,
+        "CONCEPT_NAME": "Malignant melanoma of upper limb",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "269580008",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4150398,
+        "CONCEPT_NAME": "Malignant melanoma of back",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "310498001",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4151263,
+        "CONCEPT_NAME": "Malignant melanoma of lower limb",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "269581007",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4095593,
+        "CONCEPT_NAME": "Malignant melanoma of neck",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "188046002",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": false,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1450691,
+        "CONCEPT_NAME": "Primary malignant melanoma of mucous membrane of larynx",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "586464951000119108",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1725148800000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 4177114,
+        "CONCEPT_NAME": "Malignant tumor of vagina",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "363445000",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1012435200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36517969,
+        "CONCEPT_NAME": "Amelanotic melanoma of mucosa of lip, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8730/3-C00.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36566809,
+        "CONCEPT_NAME": "Amelanotic melanoma of mucosa of lower lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8730/3-C00.4",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36529726,
+        "CONCEPT_NAME": "Amelanotic melanoma of mucosa of upper lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8730/3-C00.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36557338,
+        "CONCEPT_NAME": "Balloon cell melanoma of mucosa of lip, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8722/3-C00.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36560390,
+        "CONCEPT_NAME": "Balloon cell melanoma of mucosa of lower lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8722/3-C00.4",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36560359,
+        "CONCEPT_NAME": "Balloon cell melanoma of mucosa of upper lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8722/3-C00.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36534417,
+        "CONCEPT_NAME": "Desmoplastic melanoma, NOS, of mucosa of lip, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8745/3-C00.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36559380,
+        "CONCEPT_NAME": "Desmoplastic melanoma, NOS, of mucosa of lower lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8745/3-C00.4",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36547900,
+        "CONCEPT_NAME": "Desmoplastic melanoma, NOS, of mucosa of upper lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8745/3-C00.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36543237,
+        "CONCEPT_NAME": "Epithelioid cell melanoma of mucosa of lip, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8771/3-C00.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36526584,
+        "CONCEPT_NAME": "Epithelioid cell melanoma of mucosa of lower lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8771/3-C00.4",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36541943,
+        "CONCEPT_NAME": "Epithelioid cell melanoma of mucosa of upper lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8771/3-C00.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36558456,
+        "CONCEPT_NAME": "Low cumulative sun damage melanoma of mucosa of lip, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8743/3-C00.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36521273,
+        "CONCEPT_NAME": "Low cumulative sun damage melanoma of mucosa of lower lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8743/3-C00.4",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36543559,
+        "CONCEPT_NAME": "Low cumulative sun damage melanoma of mucosa of upper lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8743/3-C00.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36555573,
+        "CONCEPT_NAME": "Malignant melanoma, NOS, of mucosa of lip, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8720/3-C00.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36538820,
+        "CONCEPT_NAME": "Malignant melanoma, NOS, of mucosa of lower lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8720/3-C00.4",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36534476,
+        "CONCEPT_NAME": "Malignant melanoma, NOS, of mucosa of upper lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8720/3-C00.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36533999,
+        "CONCEPT_NAME": "Malignant melanoma, regressing of mucosa of lip, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8723/3-C00.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36541226,
+        "CONCEPT_NAME": "Malignant melanoma, regressing of mucosa of lower lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8723/3-C00.4",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36536217,
+        "CONCEPT_NAME": "Malignant melanoma, regressing of mucosa of upper lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8723/3-C00.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36547612,
+        "CONCEPT_NAME": "Malignant Spitz tumor of mucosa of lip, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8770/3-C00.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36559248,
+        "CONCEPT_NAME": "Malignant Spitz tumor of mucosa of lower lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8770/3-C00.4",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36528489,
+        "CONCEPT_NAME": "Malignant Spitz tumor of mucosa of upper lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8770/3-C00.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36517668,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of anal canal",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C21.1",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36543697,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of anterior surface of epiglottis",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C10.1",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36564025,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of anterior wall of nasopharynx",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C11.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36563744,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of anus, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C21.0",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36518155,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of cervical esophagus",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C15.0",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36529666,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of clitorus",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C51.2",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36523961,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of commissure of lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C00.6",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36543630,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of external lip, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C00.2",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36519703,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of external lower lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C00.1",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36554417,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of external upper lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C00.0",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36538113,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of eyelid",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C44.1",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 751725,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of head, face or neck, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C76.0",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36552884,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of labium majus",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C51.0",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36545393,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of labium minus",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C51.1",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36527588,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of lacrimal gland",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C69.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36541107,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of lateral wall of nasopharynx",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C11.2",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36519350,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of lateral wall of oropharynx",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C10.2",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36542453,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of lip, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C00.9",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36534200,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of mouth, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C06.9",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36532227,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of mucosa of lip, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C00.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36558133,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of mucosa of lower lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C00.4",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36520877,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of mucosa of upper lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C00.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36561100,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of nasal cavity",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C30.0",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36552786,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of nasopharynx, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C11.9",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36552552,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of oropharynx, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C10.9",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36541157,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of overlapping lesion of accessory sinuses",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C31.8",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36545984,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of overlapping lesion of eye and adnexa",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C69.8",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36563508,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of overlapping lesion of lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C00.8",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36527111,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of overlapping lesion of nasopharynx",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C11.8",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36565849,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of overlapping lesion of other and unspecified parts of mouth",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C06.8",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36530893,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of overlapping lesion of skin",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C44.8",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36556608,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of overlapping lesion of tonsil",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C09.8",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36549256,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of overlapping lesion of vulva",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C51.8",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36548721,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of overlapping lesions of oropharynx",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C10.8",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36539250,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of paraurethral gland",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C68.1",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36529203,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of posterior wall of nasopharynx",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C11.1",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36548933,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of posterior wall of oropharynx",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C10.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36558507,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of retromolar area",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C06.2",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36523984,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of skin of lip, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C44.0",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36549916,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of skin of lower limb and hip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C44.7",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36518706,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of skin of other and unspecified parts of face",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C44.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36528491,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of skin of scalp and neck",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C44.4",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36566464,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of skin of trunk",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C44.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36567967,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of skin of upper limb and shoulder",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C44.6",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36564729,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of skin, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C44.9",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36517494,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of superior wall of nasopharynx",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C11.0",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36554824,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of tonsil, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C09.9",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36531693,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of tonsillar fossa",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C09.0",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36528689,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of vallecula",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C10.0",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36528275,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of vestibule of mouth",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C06.1",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36537127,
+        "CONCEPT_NAME": "Mucosal lentiginous melanoma of vulva, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8746/3-C51.9",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36563579,
+        "CONCEPT_NAME": "Nodular melanoma of mucosa of lip, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8721/3-C00.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36563843,
+        "CONCEPT_NAME": "Nodular melanoma of mucosa of lower lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8721/3-C00.4",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36565543,
+        "CONCEPT_NAME": "Nodular melanoma of mucosa of upper lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8721/3-C00.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36559241,
+        "CONCEPT_NAME": "Spindle cell melanoma, NOS, of mucosa of lip, NOS",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8772/3-C00.5",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36566193,
+        "CONCEPT_NAME": "Spindle cell melanoma, NOS, of mucosa of lower lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8772/3-C00.4",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 36521747,
+        "CONCEPT_NAME": "Spindle cell melanoma, NOS, of mucosa of upper lip",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "8772/3-C00.3",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "ICDO3",
+        "CONCEPT_CLASS_ID": "ICDO Condition",
+        "VALID_START_DATE": 1442534400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": false,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 40491439,
+        "CONCEPT_NAME": "Tumor of respiratory system",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "448708002",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1312070400000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    },
+    {
+      "concept": {
+        "CONCEPT_ID": 1075457,
+        "CONCEPT_NAME": "Malignant neoplasm of upper gastrointestinal tract",
+        "STANDARD_CONCEPT": "S",
+        "STANDARD_CONCEPT_CAPTION": "Standard",
+        "INVALID_REASON": "V",
+        "INVALID_REASON_CAPTION": "Valid",
+        "CONCEPT_CODE": "1304123001",
+        "DOMAIN_ID": "Condition",
+        "VOCABULARY_ID": "SNOMED",
+        "CONCEPT_CLASS_ID": "Disorder",
+        "VALID_START_DATE": 1709251200000,
+        "VALID_END_DATE": 4102358400000
+      },
+      "isExcluded": true,
+      "includeDescendants": true,
+      "includeMapped": false
+    }
+  ]
+}
