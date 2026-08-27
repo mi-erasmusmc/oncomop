@@ -4,7 +4,10 @@
 \alias{saveTNMRules}
 \title{Save TNM staging rules to RDS file}
 \usage{
-saveTNMRules(path = here::here("extras"), results_path = here::here("inst"))
+saveTNMRules(
+  path = here::here("extras"),
+  results_path = system.file("tnm_files", package = "oncomop")
+)
 }
 \arguments{
 \item{path}{Character directory where the original .csv files are stored.}

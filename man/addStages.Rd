@@ -2,28 +2,40 @@
 % Please edit documentation in R/addStages.R
 \name{addStages}
 \alias{addStages}
-\title{addCancerStages() information to a cohort}
+\title{\code{addStages()} to a cohort}
 \usage{
 addStages(
   cohort,
   cdm,
   cancer,
-  window = c(0, 0),
-  edition = "eight",
+  window = list(c(0, 0)),
+  edition = "8th",
   type = "base",
-  order = "last"
+  order = "last",
+  showTnm = FALSE
 )
 }
 \arguments{
-\item{cohort}{A cohort table from a cdm reference object.}
+\item{cohort}{A cohort table with cancer patients from a
+cdm reference object.}
 
-\item{cdm}{A cdm reference.}
+\item{cdm}{A cdm reference object.}
 
-\item{stageConcepts}{A concept-set list containing cancer
-stage concepts.}
+\item{cancer}{In character, the affected site, a choice of:
+"bladder", "breast", "colorectal", "lung", "melanoma", "oesophagus"
+and "prostate".}
 
-\item{ruleSet}{A set of rules in list format that
-corresponds to each element of the stageConcepts codelist.}
+\item{window}{to look up stages codes.}
+
+\item{edition}{A choice of "unspecified", "7th" and "8th".}
+
+\item{type}{A choice from "base", "clinical" or "pathological".}
+
+\item{order}{A choice from "first" or "last". If more that one code
+intersected, the order defines which code to intersect in the window.}
+
+\item{showTnm}{If TRUE, the cohort will show the date intersects
+for each matching code. Default FALSE.}
 }
 \value{
 A cohort table containing the identified cancer stages.
