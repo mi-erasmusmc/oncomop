@@ -3,6 +3,7 @@ Title: Methods to Analyze Oncological Data In The OMOP-CDM
 Version: 0.0.0.9001
 Authors@R: c(
     person("Cesar", "Barboza", , "c.barboza@mi-erasmusmc.nl", role = c("aut", "cre")),
+    person("Cristiana", "Di Tullio", email = "c.ditullio@mi-erasmusmc.nl", role = c("aut")),
     person("Anton", "Barchuk", email = "a.barchuk@mi-erasmusmc.nl", role = c("aut"))
     )
 Description: What the package does (one paragraph).
@@ -18,3 +19,4 @@ Imports:
     here
 Config/roxygen2/version: 8.0.0
 RoxygenNote: 7.3.3
+Config/Needs/website: rmarkdown
