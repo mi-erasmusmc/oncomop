@@ -5,11 +5,13 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-"
 )
+
 ```
 
 # oncomop
@@ -17,20 +19,57 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of oncomop is to ...
+A tool to determine stages and subtypes in cancer cohorts using UICC guidelines. The aim is facilite the characterisation of patients using OMOP analytical tools that rely on a ‘dplyr’ pipe-based workflow such as CohortConstructor, PatientProfiles and CohortCharacteristics.   
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+To start install the package from CRAN or remotes:
+```{r, eval=FALSE}
 
-```{r cars}
-summary(cars)
+install.packages("oncomop")
+
+remotes::install_github("ohdsi/oncomop")
+
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
+## Adding a stage or subtype
 
-You can also embed plots, for example:
+A cohort should be created in a CDM reference using tools such CohortConstructor and CDMConnector. From there, oncomop can be used in a pipe to add a column with the cancer stage or subtype for each subject record. 
 
-```{r pressure, echo = FALSE}
-plot(pressure)
+```{r, eval=FALSE}
+
+CohortConstructor::conceptCohort(
+  cdm,
+  conceptSet = 4308306,
+  name = "breast_cancer"
+)
+
+cdm$breast_cancer |> 
+  oncomop::addStages(
+    cdm,
+    cancer,
+    window,
+    edition,
+    type
+    )
+
+cdm$breast_cancer |> 
+  oncomop::addSubtypes(
+    cdm,
+    cancer,
+    window
+    )
+
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub.
+## The rules
+
+Oncomop includes a set of predefined rules based on UICC guidelines to analyze eight different cancer types. In this article you can find a more detailed description or simply call `oncomop::ruleset()` to see the rules data.   
+
+```{r, eval=FALSE}
+
+omcomop::ruleset(
+  cancer = "breast",
+  edition = "9th",
+  type = "clinical"
+  )
+
+```
