@@ -1,6 +1,6 @@
 Package: oncomop
 Title: Methods to Analyze Oncological Data In The OMOP-CDM
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R: c(
     person("Cesar", "Barboza", , "c.barboza@mi-erasmusmc.nl", role = c("aut", "cre")),
     person("Cristiana", "Di Tullio", email = "c.ditullio@mi-erasmusmc.nl", role = c("aut")),
