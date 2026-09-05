@@ -52,19 +52,16 @@ addStages <- function(
       c("base", "clinical", "pathological")
     )
 
-  # Read stages rules data ----------------------------
-  tnm_files_data <- readStagesRDS()
-
   # Extract codelist for intersection -----------------
   # At this point, we can put any codelist for stages, subtypes, progression
-  tnm_codelist <- tnm_files_data$tnm_concepts |>
+  tnm_codelist <- readStagesRDS("concepts") |>
     createTNMCodelist(
       .edition = edition,
       .type = type
     )
 
   # Extract ruleset -----------------------------------
-  ruleset <- tnm_files_data$tnm_stage_mapping |>
+  ruleset <- readStagesRDS("mapping") |>
     extractStageRuleset(
       .cancer = cancer,
       .edition = edition,
