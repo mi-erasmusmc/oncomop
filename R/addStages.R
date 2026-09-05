@@ -12,8 +12,8 @@
 #' and "prostate".
 #' @param window to look up stages codes.
 #' @param edition A choice of "unspecified", "7th" and "8th".
-#' @param type A choice from "base", "clinical" or "pathological".
-#' @param order A choice from "first" or "last". If more that one code
+#' @param type A choice from "base", "clinical" or "pathological" stage rule.
+#' @param order A choice from "first" or "last". If more than one code
 #' intersected, the order defines which code to intersect in the window.
 #' @param showTnm If TRUE, the cohort will show the date intersects
 #' for each matching code. Default FALSE.

@@ -7,28 +7,64 @@
 
 <!-- badges: end -->
 
-The goal of oncomop is to …
+A tool to determine stages and subtypes in cancer cohorts using UICC
+guidelines. The aim is facilite the characterisation of patients using
+OMOP analytical tools that rely on a ‘dplyr’ pipe-based workflow such as
+CohortConstructor, PatientProfiles and CohortCharacteristics.
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+To start install the package from CRAN or remotes:
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+
+install.packages("oncomop")
+
+remotes::install_github("ohdsi/oncomop")
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
+## Adding a stage or subtype
 
-You can also embed plots, for example:
+A cohort should be created in a CDM reference using tools such
+CohortConstructor and CDMConnector. From there, oncomop can be used in a
+pipe to add a column with the cancer stage or subtype for each subject
+record.
 
-![](man/figures/README-pressure-1.png)<!-- -->
+``` r
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub.
+CohortConstructor::conceptCohort(
+  cdm,
+  conceptSet = 4308306,
+  name = "breast_cancer"
+)
+
+cdm$breast_cancer |> 
+  oncomop::addStages(
+    cdm,
+    cancer,
+    window,
+    edition,
+    type
+    )
+
+cdm$breast_cancer |> 
+  oncomop::addSubtypes(
+    cdm,
+    cancer,
+    window
+    )
+```
+
+## The rules
+
+Oncomop includes a set of predefined rules based on UICC guidelines to
+analyze eight different cancer types. In this article you can find a
+more detailed description or simply call `oncomop::ruleset()` to see the
+rules data.
+
+``` r
+
+omcomop::ruleset(
+  cancer = "breast",
+  edition = "9th",
+  type = "clinical"
+  )
+```
