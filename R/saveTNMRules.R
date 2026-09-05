@@ -1,4 +1,4 @@
-#' Save TNM staging rules to RDS file
+#' Save TNM staging rules to an RDS file
 #'
 #' @description
 #' The function reads the `.csv` files containing the TNM rules to derive the summary stage.
@@ -16,7 +16,7 @@
 #' @importFrom here here
 #'
 #' @returns `NULL`, called for its side effects.
-saveTNMRules <- function(
+saveStagesRules <- function(
     path =  here::here("extras"),
     results_path =  system.file(
       "tnm_files",

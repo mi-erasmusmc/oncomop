@@ -1,4 +1,4 @@
-test_that("saveTNMRules saves expected RDS files", {
+test_that("saveStagesRules saves expected RDS files", {
 
   tnm_files <- c(
     "tnm_concepts",
@@ -6,7 +6,7 @@ test_that("saveTNMRules saves expected RDS files", {
   )
 
   # Save rules to RDS files
-  saveTNMRules()
+  saveStagesRules()
 
   # Check files exist
   for (f in tnm_files) {
