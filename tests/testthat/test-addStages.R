@@ -35,20 +35,10 @@ test_that("read stages rds", {
     "tnm_stage_shortcut_mapping"
   )
 
-  tnm_files <- system.file(
-    "tnm_files",
-    package = "oncomop"
-  ) |>
-    list.files(
-      full.names = TRUE
-    ) |>
-    readStagesRDS() |>
+  readStagesRDS() |>
     names() |>
     expect_equal(
-      c("tnm_concepts.rds",
-        "tnm_stage_mapping.rds",
-        "tnm_stage_shortcut_mapping.rds"
-      )
+      tnm_files
     )
 })
 

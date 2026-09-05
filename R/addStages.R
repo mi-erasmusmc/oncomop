@@ -53,14 +53,7 @@ addStages <- function(
     )
 
   # Read stages rules data ----------------------------
-  tnm_files_data <- system.file(
-    "tnm_files",
-    package = "oncomop"
-  ) |>
-    list.files(
-      full.names = TRUE
-    ) |>
-    readStagesRDS()
+  tnm_files_data <- readStagesRDS()
 
   # Extract codelist for intersection -----------------
   # At this point, we can put any codelist for stages, subtypes, progression
@@ -107,43 +100,6 @@ addStages <- function(
   } else {
     return(cancer_stage_cohort)
   }
-}
-
-readStagesRDS <- function(tnm_files) {
-  tnm_files |>
-    checkmate::assertFileExists() |>
-    basename() |>
-    identical(
-      c( "tnm_concepts.rds",
-         "tnm_stage_mapping.rds",
-         "tnm_stage_shortcut_mapping.rds")) |>
-    checkmate::assertTRUE()
-  setNames(
-    lapply(tnm_files, readRDS),
-    basename(tnm_files)
-  )
-}
-
-extractStageRuleset <- function(
-  tnm_stage_mapping,
-  .edition,
-  .cancer,
-  .type
-) {
-  checkmate::assertDataFrame(tnm_stage_mapping)
-  tnm_stage_mapping |>
-    dplyr::filter(
-      edition == .edition
-    ) |>
-    dplyr::filter(
-      site == .cancer
-    ) |>
-    dplyr::filter(
-      stage_grouping_scope == .type
-    ) |>
-    dplyr::select(
-      rule_id, T, N, M, uicc_stage
-    )
 }
 
 createTNMCodelist <- function(
