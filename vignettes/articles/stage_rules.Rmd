@@ -1,5 +1,5 @@
 ---
-title: "stage_rules"
+title: "UICC Stage Rules"
 ---
 
 ```{r, include = FALSE}
@@ -9,47 +9,45 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r eval=FALSE}
-library(oncomop)
-
-tnm_files_data <- system.file(
-  "tnm_files",
-  package = "oncomop"
-  ) |>
-    list.files(
-      full.names = TRUE
-    ) |>
-    oncomop:::readStagesRDS()
+```{r setup, include=FALSE}
+pkgload::load_all(".")
+library(dplyr)
+library(glue)
+library(htmltools)
 
 ```
 
-8th classification 
+```{r, echo=FALSE, results='asis'}
+cancer <- c("bladder", "breast", "colorectal",
+            "lung", "melanoma", "oesophagus",
+            "prostate")
+edition <- "7th"
 
-```{r eval=FALSE}
+for (i in seq_along(cancer)) {
 
-names(tnm_files_data$tnm_stage_mapping)
+  section_title <- glue(
+    "{cancer[i]} {edition} edition"
+  )
 
-tnm_files_data$tnm_stage_mapping$edition |>
-  unique() 
+  cat(sprintf(
+    "<details>
+       <summary>%s</summary>",
+    htmlEscape(section_title)
+  ))
 
-tnm_files_data$tnm_stage_mapping$site |>
-  unique() 
+  table <- stagesRules(
+    edition = edition,
+    cancer = cancer[i],
+    type = "base"
+  ) |>
+    select(-rule_id) |>
+    arrange(uicc_stage) |>
+    visOmopResults::visTable(
+      groupColumn = "uicc_stage"
+    )
 
-tnm_files_data$tnm_stage_mapping |> 
-  dplyr::filter(
-    edition == "8th",
-    site == "breast"
-  ) |> 
-    dplyr::group_by(
-      edition,
-      site,
-      stage_grouping_scope,
-      T,
-      N,
-      M
-    ) |> 
-      dplyr::summarise(
-        n = dplyr::n()
-        ) |> View()
+  print(table)
 
+  cat("</details>\n")
+}
 ```

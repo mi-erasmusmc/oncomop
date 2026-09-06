@@ -23,16 +23,13 @@ saveStagesRules <- function(
       package = "oncomop"
     )
     ) {
-
   tnm_files <- c(
     "tnm_concepts",
     "tnm_mapping"
   )
-
   if (!dir.exists(results_path)) {
     dir.create(results_path)
   }
-
   for (i in seq_along(tnm_files)) {
     data <- read.csv(
       file.path(path, paste0(tnm_files[i], ".csv"))
@@ -63,7 +60,6 @@ saveStagesRules <- function(
           )
         )
     }
-
     saveRDS(
       data,
       file.path(results_path, paste0(tnm_files[i], ".rds"))
