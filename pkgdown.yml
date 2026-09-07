@@ -3,7 +3,7 @@ pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   articles/stage_rules: stage_rules.html
-last_built: 2026-09-05T00:26Z
+last_built: 2026-09-07T23:39Z
 urls:
   reference: https://mi-erasmusmc.github.io/oncomop/reference
   article: https://mi-erasmusmc.github.io/oncomop/articles

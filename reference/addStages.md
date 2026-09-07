@@ -43,11 +43,11 @@ addStages(
 
 - type:
 
-  A choice from "base", "clinical" or "pathological".
+  A choice from "base", "clinical" or "pathological" stage rule.
 
 - order:
 
-  A choice from "first" or "last". If more that one code intersected,
+  A choice from "first" or "last". If more than one code intersected,
   the order defines which code to intersect in the window.
 
 - showTnm:
