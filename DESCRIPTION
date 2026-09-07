@@ -27,5 +27,8 @@ Imports:
     tidyselect
 Config/roxygen2/version: 8.0.0
 RoxygenNote: 7.3.3
-Config/Needs/website: rmarkdown
+Config/Needs/website:
+    rmarkdown,
+    visOmopResults,
+    gt
 URL: https://mi-erasmusmc.github.io/oncomop/

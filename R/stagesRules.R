@@ -88,3 +88,83 @@
 #' @source UICC_7th edition.pdf; UICC_8th edition.pdf corroborated by nhs/*.pdf; uicc/UICC_9th edition.pdf
 #' @keywords internal
 NULL
+
+# ----------------- end of documentation ---------------------------------------
+
+#' `stagesRuleset()` extracts and filters specific set of rules for every cancer 
+#' 
+#' @param edition A choice of "unspecified", "7th" and "8th".
+#' @param cancer In character, the affected site, a choice of:
+#' "bladder", "breast", "colorectal", "lung", "melanoma", "oesophagus"
+#' and "prostate".
+#' @param type A choice from "base", "clinical" or "pathological" stage rule.
+#' @importFrom checkmate assertDataFrame
+#' @importFrom dplyr filter
+#'
+#' @returns `NULL`, called for its side effects.
+stagesRules <- function(
+  edition,
+  cancer,
+  type
+) {
+  edition |>
+    checkmate::assertChoice(
+      c("unspecified", "7th", "8th")
+    )
+  cancer |> 
+    checkmate::assertChoice(
+      c("bladder", "breast", "colorectal",
+       "lung", "melanoma", "oesophagus",
+       "prostate")
+    )
+  type |>
+    checkmate::assertChoice(
+      c("base", "clinical", "pathological")
+    )
+ readStagesRDS("mapping") |>
+    extractStageRuleset(
+      .cancer = cancer,
+      .edition = edition,
+      .type = "base"
+    )   
+}
+
+readStagesRDS <- function(
+    type = "mapping"
+) {
+  checkmate::assertChoice(
+    type,
+    c("concepts", "mapping")
+  )
+  system.file(
+    "tnm_files",
+    package = "oncomop"
+  ) |>
+    list.files(
+      full.names = TRUE,
+      pattern = type
+    ) |> 
+    readRDS()
+}
+
+extractStageRuleset <- function(
+  tnm_stage_mapping,
+  .edition,
+  .cancer,
+  .type
+) {
+  checkmate::assertDataFrame(tnm_stage_mapping)
+  tnm_stage_mapping |>
+    dplyr::filter(
+      edition == .edition
+    ) |>
+    dplyr::filter(
+      site == .cancer
+    ) |>
+    dplyr::filter(
+      stage_grouping_scope == .type
+    ) |>
+    dplyr::select(
+      rule_id, T, N, M, uicc_stage
+    )
+}

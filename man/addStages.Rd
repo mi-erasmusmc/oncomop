@@ -29,9 +29,9 @@ and "prostate".}
 
 \item{edition}{A choice of "unspecified", "7th" and "8th".}
 
-\item{type}{A choice from "base", "clinical" or "pathological".}
+\item{type}{A choice from "base", "clinical" or "pathological" stage rule.}
 
-\item{order}{A choice from "first" or "last". If more that one code
+\item{order}{A choice from "first" or "last". If more than one code
 intersected, the order defines which code to intersect in the window.}
 
 \item{showTnm}{If TRUE, the cohort will show the date intersects

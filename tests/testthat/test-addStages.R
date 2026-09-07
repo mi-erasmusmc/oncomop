@@ -28,42 +28,26 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
 })
 
 test_that("read stages rds", {
-
-  tnm_files <- c(
-    "tnm_concepts",
-    "tnm_stage_mapping",
-    "tnm_stage_shortcut_mapping"
-  )
-
-  tnm_files <- system.file(
-    "tnm_files",
-    package = "oncomop"
-  ) |>
-    list.files(
-      full.names = TRUE
-    ) |>
-    readStagesRDS() |>
+  readStagesRDS("concepts") |>
     names() |>
     expect_equal(
-      c("tnm_concepts.rds",
-        "tnm_stage_mapping.rds",
-        "tnm_stage_shortcut_mapping.rds"
-      )
+      c("component_tnm", "type", "classification_version",
+      "concept_id", "note")
+    )
+  readStagesRDS("mapping") |>
+    names() |>
+    expect_equal(
+      c("rule_id", "staging_system", "edition", 
+        "site", "stage_grouping_scope", "histology", 
+        "T", "N", "M", 
+        "uicc_stage", "source_file", "source_pages", 
+        "source_table", "notes")
     )
 })
 
 test_that("to form tnmCodelist", {
-  tnm_files_data <- system.file(
-    "tnm_files",
-    package = "oncomop"
-  ) |>
-    list.files(
-      full.names = TRUE
-    ) |>
-    readStagesRDS()
-
   expect_no_error({
-    tnm_codelist <- tnm_files_data$tnm_concepts |>
+    tnm_codelist <- readStagesRDS("concepts") |>
       createTNMCodelist(
         .edition = "7th",
         .type = "clinical"
@@ -74,16 +58,7 @@ test_that("to form tnmCodelist", {
 })
 
 test_that("Extracting and formating rules from RDS data'", {
-  tnm_files_data <- system.file(
-    "tnm_files",
-    package = "oncomop"
-  ) |>
-    list.files(
-      full.names = TRUE
-    ) |>
-    readStagesRDS()
-
-  tnm_files_data$tnm_stage_mapping |>
+  readStagesRDS("mapping") |>
     extractStageRuleset(
       .cancer = "breast",
       .edition = "8th",
@@ -107,21 +82,13 @@ test_that("Imposing rules with 'mappingRules' multiple subjects", {
     path = "cancer_cohorts",
     name = "cancer_cohorts"
   )
-  tnm_files_data <- system.file(
-    "tnm_files",
-    package = "oncomop"
-  ) |>
-    list.files(
-      full.names = TRUE
-    ) |>
-    readStagesRDS()
 
-  tnm_codelist <- tnm_files_data$tnm_concepts |>
+  tnm_codelist <- readStagesRDS("concepts") |>
     createTNMCodelist(
       .edition = "8th",
       .type = "clinical"
     )
-  ruleset <- tnm_files_data$tnm_stage_mapping |>
+  ruleset <- readStagesRDS("mapping") |>
     extractStageRuleset(
       .cancer = "breast",
       .edition = "8th",
@@ -151,27 +118,17 @@ test_that("Imposing rules with 'mappingRules' single patient", {
     path = "cancer_cohorts",
     name = "cancer_cohorts"
   )
-  tnm_files_data <- system.file(
-    "tnm_files",
-    package = "oncomop"
-  ) |>
-    list.files(
-      full.names = TRUE
-    ) |>
-    readStagesRDS()
-
-  tnm_codelist <- tnm_files_data$tnm_concepts |>
+  tnm_codelist <- readStagesRDS("concepts") |>
     createTNMCodelist(
       .edition = "8th",
       .type = "clinical"
     )
-  ruleset <- tnm_files_data$tnm_stage_mapping |>
+  ruleset <- readStagesRDS("mapping")|>
     extractStageRuleset(
       .cancer = "breast",
       .edition = "8th",
       .type = "base"
     )
-
   cdm$cancer_cohorts |>
     .addColumnRules(
       conceptSet = tnm_codelist,
@@ -180,11 +137,9 @@ test_that("Imposing rules with 'mappingRules' single patient", {
     ) |>
     dplyr::pull(cancer_stage) |>
     expect_equal("IA")
-
 })
 
 test_that("General .addColumnRules", {
-
   testName <- "default_rules_single_subject"
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
@@ -196,29 +151,17 @@ test_that("General .addColumnRules", {
     path = "cancer_cohorts",
     name = "cancer_cohorts"
   )
-
-  tnm_files_data <- system.file(
-    "tnm_files",
-    package = "oncomop"
-  ) |>
-    list.files(
-      full.names = TRUE
-    ) |>
-    readStagesRDS()
-
-  tnm_codelist <- tnm_files_data$tnm_concepts |>
+  tnm_codelist <- readStagesRDS("concepts") |>
     createTNMCodelist(
       .edition = "8th",
       .type = "clinical"
     )
-
-  ruleset <- tnm_files_data$tnm_stage_mapping |>
+  ruleset <- readStagesRDS("mapping")|>
     extractStageRuleset(
       .cancer = "breast",
       .edition = "8th",
       .type = "base"
     )
-
   cdm$cancer_cohorts |>
     .addColumnRules(
       conceptSet = tnm_codelist,
@@ -230,7 +173,6 @@ test_that("General .addColumnRules", {
     expect_equal(
       as.Date("2023-01-15")
     )
-
   cdm$cancer_cohorts |>
     .addColumnRules(
       conceptSet = tnm_codelist,
@@ -242,7 +184,6 @@ test_that("General .addColumnRules", {
     expect_equal(
       as.Date("2023-01-15")
     )
-
   cdm$cancer_cohorts |>
     .addColumnRules(
       conceptSet = tnm_codelist,
