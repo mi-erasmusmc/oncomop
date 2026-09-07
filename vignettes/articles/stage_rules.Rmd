@@ -18,36 +18,58 @@ library(htmltools)
 ```
 
 ```{r, echo=FALSE, results='asis'}
-cancer <- c("bladder", "breast", "colorectal",
-            "lung", "melanoma", "oesophagus",
+cancer <- c("bladder", "breast",
+            "colorectal", "lung",
+            "melanoma", "oesophagus",
             "prostate")
-edition <- "7th"
+edition <- c("7th", "8th")
+type <- c("base", "clinical", "pathological")
 
-for (i in seq_along(cancer)) {
-
-  section_title <- glue(
-    "{cancer[i]} {edition} edition"
+for (i in seq_along(edition)) {
+  # Edition level 
+  edition_title <- glue(
+    "{edition[i]} edition"
   )
-
   cat(sprintf(
     "<details>
        <summary>%s</summary>",
-    htmlEscape(section_title)
+    htmlEscape(edition_title)
   ))
-
-  table <- stagesRules(
-    edition = edition,
-    cancer = cancer[i],
-    type = "base"
-  ) |>
-    select(-rule_id) |>
-    arrange(uicc_stage) |>
-    visOmopResults::visTable(
-      groupColumn = "uicc_stage"
+  for (j in seq_along(cancer)) {
+    # Cancer level
+    cancer_title <- glue(
+      "{cancer[j]}"
     )
-
-  print(table)
-
+    cat(sprintf(
+      "<details style=\"text-indent: 20px;\">
+         <summary>%s</summary>",
+      htmlEscape(cancer_title)
+    ))
+    for (k in seq_along(type)) {
+      # Cancer level
+      type_title <- glue(
+        "{type[k]}"
+        )
+      cat(sprintf(
+        "<details style=\"text-indent: 40px;\">
+         <summary>%s</summary>",
+         htmlEscape(type_title)
+      ))
+      table <- stagesRules(
+        edition = edition[i],
+        cancer = cancer[j],
+        type = type[k]
+      ) |>
+        select(-rule_id) |>
+        arrange(uicc_stage) |>
+        visOmopResults::visTable(
+          groupColumn = "uicc_stage"
+        )
+      print(table)
+      cat("</details>\n")
+    }
+    cat("</details>\n")
+  }
   cat("</details>\n")
 }
 ```
