@@ -13,7 +13,7 @@ test_that("saveStagesRules saves expected RDS files", {
     expect_true(
       file.exists(
         system.file(
-          "tnm_files",
+          "tnm_data",
           paste0(f, ".rds"),
           package = "oncomop"
         )

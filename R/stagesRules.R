@@ -137,7 +137,7 @@ readStagesRDS <- function(
     c("concepts", "mapping")
   )
   system.file(
-    "tnm_files",
+    "tnm_data",
     package = "oncomop"
   ) |>
     list.files(
