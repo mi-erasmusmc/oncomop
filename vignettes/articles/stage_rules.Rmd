@@ -14,7 +14,7 @@ pkgload::load_all(".")
 library(dplyr)
 library(glue)
 library(htmltools)
-
+stopifnot(requireNamespace("visOmopResults", quietly = TRUE))
 ```
 
 ```{r, echo=FALSE, results='asis'}
