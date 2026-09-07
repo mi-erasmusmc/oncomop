@@ -2,7 +2,7 @@ test_that("default rules multiple patients", {
   skip_if(is.null(Sys.getenv("OPENAI_API_KEY")))
   testName <- "default_rules_multiple_subjects"
   #------------------------------------------------
-  
+
   # patientGenerator <- PatientGenerator::patientChat$new(
   #   model = "gpt-5.6-luna"
   # )
@@ -10,14 +10,14 @@ test_that("default rules multiple patients", {
   #   "PERSON table:
   #     - A population of 3 persons over 18 years old.
   #     - The 3 persons have observation period from 2000 to 2024.
-  #     - The 3 persons are females with gender_concept_id = 8532.  
+  #     - The 3 persons are females with gender_concept_id = 8532.
   #   CONDITION_OCCURRENCE table:
   #   The patients from the PERSON table have occurrences of 1 types of cancer recorded during their respective observation periods:
   #     - All three persons (3 females) have breast cancer with condition_concept_id: 4308306
   #     - Everyone has condition_type_concept_id 32817
   #   MEASUREMENT table:
   #   Cancer stage information is recorded in this table through TNM categories.
-  #   The measurements occurr on the cancer index date (condition_occurrence):
+  #   The measurements occur on the cancer index date (condition_occurrence):
   #     - The first female person with breast cancer has a measurement record of:
   #       - T1 (concept ID: 1633883), N0 (concept ID: 1634070) and a M0 (concept ID: 1634757)
   #     - The second female person with breast cancer has a measurement record of:
@@ -43,18 +43,18 @@ test_that("default rules multiple patients", {
     name = "cancer_cohorts"
   )
   cdm$cancer_cohorts |>
-    collect() |> 
-    nrow() |> 
+    collect() |>
+    nrow() |>
     expect_equal(3)
-  cdm$measurement |> 
-    collect() |>  
-    nrow() |> 
+  cdm$measurement |>
+    collect() |>
+    nrow() |>
     expect_equal(9)
-  cdm$measurement |> 
-    collect() |> 
-    pull(measurement_concept_id) |> 
-    unique() |> 
-    sort() |> 
+  cdm$measurement |>
+    collect() |>
+    pull(measurement_concept_id) |>
+    unique() |>
+    sort() |>
     expect_equal(
       c(1633651L, 1633883L, 1633949L,
         1633974L, 1634070L, 1634757L,
@@ -71,7 +71,7 @@ test_that("default rules single patient", {
   #   "PERSON table:
   #     - A population of 1 person over 18 years old.
   #     - The 1 person have observation period from 2000 to 2024.
-  #     - The 1 person is females with gender_concept_id = 8532.  
+  #     - The 1 person is females with gender_concept_id = 8532.
   #   CONDITION_OCCURRENCE table:
   #   The patients from the PERSON table have occurrences of 7 different types of cancer recorded during their respective observation periods:
   #     - Patient 1 (1 female) have breast cancer with condition_concept_id: 4308306
@@ -96,13 +96,13 @@ test_that("default rules single patient", {
     name = "cancer_cohorts"
   )
   cdm$cancer_cohorts |>
-    collect() |> 
-    nrow() |> 
+    collect() |>
+    nrow() |>
     expect_equal(1)
-  cdm$measurement |> 
-    collect() |> 
-    pull(measurement_concept_id) |> 
-    sort() |> 
+  cdm$measurement |>
+    collect() |>
+    pull(measurement_concept_id) |>
+    sort() |>
     expect_equal(
       c(1633883L, 1634070L, 1634757L)
     )
@@ -120,10 +120,10 @@ test_that("Create test patients baseline", {
   #     - A population of 4 persons all over 18 years old.
   #     - All persons have observation period from 2000 to 2024.
   #     - 2 persons are females with gender_concept_id = 8532.
-  #     - 2 persons are males with gender_concept_id = 8507.  
+  #     - 2 persons are males with gender_concept_id = 8507.
   #   CONDITION_OCCURRENCE table:
   #   The patients from the PERSON table have occurrences of 7 different types of cancer recorded during their respective observation periods:
-  #     - 2 patients have colorectal cancer with condition_concept_id: 40481902    
+  #     - 2 patients have colorectal cancer with condition_concept_id: 40481902
   #     - 1 patients (1 female) have breast cancer with condition_concept_id: 36556994
   #     - 1 patients (1 male) have prostate cancer with condition_concept_id: 4163261
   #     - Everyone has condition_type_concept_id 32817
@@ -170,7 +170,7 @@ test_that("Create test patients baseline", {
 
   # test 2 persons with colorectal cancer
   n_persons_colorectal <- cdm$cancer_cohorts |>
-    PatientProfiles::addCohortName() |> 
+    PatientProfiles::addCohortName() |>
     dplyr::count(cohort_name) |>
     dplyr::filter(cohort_name == "colorectal_cancer") |>
     dplyr::pull(n)
@@ -178,8 +178,8 @@ test_that("Create test patients baseline", {
 
   # test 1 persons in prostate cancer cohort
   n_persons_prostate <- cdm$cancer_cohorts |>
-    PatientProfiles::addCohortName() |> 
-    PatientProfiles::addSex() |> 
+    PatientProfiles::addCohortName() |>
+    PatientProfiles::addSex() |>
     dplyr::count(
       cohort_name,
       sex
@@ -193,8 +193,8 @@ test_that("Create test patients baseline", {
 
   # test 1 persons in prostate cancer cohort
   n_persons_prostate <- cdm$cancer_cohorts |>
-    PatientProfiles::addCohortName() |> 
-     PatientProfiles::addSex() |> 
+    PatientProfiles::addCohortName() |>
+     PatientProfiles::addSex() |>
     dplyr::count(
       cohort_name,
       sex
@@ -206,8 +206,8 @@ test_that("Create test patients baseline", {
 
   # test 1 persons in breast cancer cohort
   n_persons_breast <- cdm$cancer_cohorts |>
-    PatientProfiles::addCohortName() |> 
-     PatientProfiles::addSex() |> 
+    PatientProfiles::addCohortName() |>
+     PatientProfiles::addSex() |>
     dplyr::count(
       cohort_name,
       sex
