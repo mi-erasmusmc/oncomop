@@ -1,6645 +1,8124 @@
 # UICC Stage Rules
 
+## Overview
+
+Internal auxiliary files are used to determine cancer stage.
+
+## Details
+
+The package stores three rule sets derived from UICC guidelines for the
+TNM staging system. The rules stored in these files are differentiated
+by:
+
+- **Cancer site**: bladder, breast, colorectal, lung, oesophageal,
+  prostate, skin
+- **Classification type**: clinical, pathological, base
+- **Classification edition**: 7th, 8th, 9th, unspecified
+
+The internal data is divided in two categories *concepts* and *mapping*
+rules.
+
+## Concepts (tnm_concepts)
+
+Contains information about the individual TNM components and their
+concept IDs, differentiated by type and edition.
+
+There are **393 total concepts** for **44 unique components**:
+
+    #> [1] "TX, T0, Tis, Ta, T1, T1a, T1b, T1c, T1mi, T2, T2a, T2b, T2c, T3, T3a, T3b, T4, T4a, T4b, T4c, T4d, NX, N0, N1, N1a, N1b, N1c, N1mi, N2, N2a, N2b, N2c, N3, N3a, N3b, N3c, M0, M1, M1a, M1b, M1c, M1c1, M1c2, M1d"
+
+These components have different versions according to edition and type.
+
+### By edition
+
+| Edition             | Number of concepts |
+|---------------------|-------------------:|
+| 7th edition         |                131 |
+| 8th edition         |                131 |
+| Unspecified edition |                131 |
+
+### By type
+
+| Type         | Number of concepts |
+|--------------|-------------------:|
+| Base         |                132 |
+| Clinical     |                132 |
+| Pathological |                129 |
+
+> The `M0` component is not valid in the pathological setting for any
+> edition.
+
+## Mapping (tnm_mapping)
+
+Contains the rules used to determine cancer stage based on a combination
+of individual TNM components.
+
+Rules are differentiated by:
+
+| Rule dimension | Values |
+|----|----|
+| Cancer site | Bladder, breast, colorectal, lung, oesophageal, prostate, skin |
+| Classification type | Clinical, pathological, base |
+| Classification edition | 7th, 8th, 9th |
+
+Each rule refers to a specific source page of the UICC guidelines.
+
+The currently available rules support the following concept categories.
+
+| Cancer site | Edition | Classification type | Number of rules |
+|:------------|:--------|:--------------------|----------------:|
+| bladder     | 7th     | base                |             191 |
+| bladder     | 8th     | base                |             179 |
+| bladder     | 9th     | base                |             182 |
+| breast      | 7th     | base                |             348 |
+| breast      | 8th     | base                |             348 |
+| breast      | 9th     | base                |             348 |
+| colorectal  | 7th     | base                |             185 |
+| colorectal  | 8th     | base                |             233 |
+| colorectal  | 9th     | base                |             233 |
+| lung        | 7th     | base                |             153 |
+| lung        | 8th     | base                |             233 |
+| lung        | 9th     | base                |             492 |
+| oesophagus  | 7th     | base                |              46 |
+| oesophagus  | 8th     | clinical            |             124 |
+| oesophagus  | 8th     | pathological        |              61 |
+| oesophagus  | 9th     | clinical            |             124 |
+| oesophagus  | 9th     | pathological        |              61 |
+| prostate    | 7th     | base                |             119 |
+| prostate    | 8th     | clinical            |             120 |
+| prostate    | 9th     | clinical            |             120 |
+| prostate    | 9th     | pathological        |             116 |
+| skin        | 7th     | pathological        |             475 |
+| skin        | 8th     | clinical            |             844 |
+| skin        | 8th     | pathological        |             829 |
+| skin        | 9th     | clinical            |             844 |
+| skin        | 9th     | pathological        |             829 |
+
+Browse the full rule sets below.
+
 7th edition
 
-bladder
+Bladder
 
-base
+Base (191 rules)
 
-| T   | N   | M   |
-|-----|-----|-----|
-| 0a  |     |     |
-| Ta  | N0  | M0  |
-| 0is |     |     |
-| Tis | N0  | M0  |
-| I   |     |     |
-| T1  | N0  | M0  |
-| II  |     |     |
-| T2  | N0  | M0  |
-| T2a | N0  | M0  |
-| T2b | N0  | M0  |
-| III |     |     |
-| T3  | N0  | M0  |
-| T3a | N0  | M0  |
-| T3b | N0  | M0  |
-| T4a | N0  | M0  |
-| IV  |     |     |
-| T4b | N0  | M0  |
-| T1  | N1  | M0  |
-| T2  | N1  | M0  |
-| T2a | N1  | M0  |
-| T2b | N1  | M0  |
-| T3  | N1  | M0  |
-| T3a | N1  | M0  |
-| T3b | N1  | M0  |
-| T4  | N1  | M0  |
-| T4a | N1  | M0  |
-| T4b | N1  | M0  |
-| Ta  | N1  | M0  |
-| Tis | N1  | M0  |
-| T1  | N2  | M0  |
-| T2  | N2  | M0  |
-| T2a | N2  | M0  |
-| T2b | N2  | M0  |
-| T3  | N2  | M0  |
-| T3a | N2  | M0  |
-| T3b | N2  | M0  |
-| T4  | N2  | M0  |
-| T4a | N2  | M0  |
-| T4b | N2  | M0  |
-| Ta  | N2  | M0  |
-| Tis | N2  | M0  |
-| T1  | N3  | M0  |
-| T2  | N3  | M0  |
-| T2a | N3  | M0  |
-| T2b | N3  | M0  |
-| T3  | N3  | M0  |
-| T3a | N3  | M0  |
-| T3b | N3  | M0  |
-| T4  | N3  | M0  |
-| T4a | N3  | M0  |
-| T4b | N3  | M0  |
-| Ta  | N3  | M0  |
-| Tis | N3  | M0  |
-| T1  | N0  | M1  |
-| T2  | N0  | M1  |
-| T2a | N0  | M1  |
-| T2b | N0  | M1  |
-| T3  | N0  | M1  |
-| T3a | N0  | M1  |
-| T3b | N0  | M1  |
-| T4  | N0  | M1  |
-| T4a | N0  | M1  |
-| T4b | N0  | M1  |
-| Ta  | N0  | M1  |
-| Tis | N0  | M1  |
-| T1  | N1  | M1  |
-| T2  | N1  | M1  |
-| T2a | N1  | M1  |
-| T2b | N1  | M1  |
-| T3  | N1  | M1  |
-| T3a | N1  | M1  |
-| T3b | N1  | M1  |
-| T4  | N1  | M1  |
-| T4a | N1  | M1  |
-| T4b | N1  | M1  |
-| Ta  | N1  | M1  |
-| Tis | N1  | M1  |
-| T1  | N2  | M1  |
-| T2  | N2  | M1  |
-| T2a | N2  | M1  |
-| T2b | N2  | M1  |
-| T3  | N2  | M1  |
-| T3a | N2  | M1  |
-| T3b | N2  | M1  |
-| T4  | N2  | M1  |
-| T4a | N2  | M1  |
-| T4b | N2  | M1  |
-| Ta  | N2  | M1  |
-| Tis | N2  | M1  |
-| T1  | N3  | M1  |
-| T2  | N3  | M1  |
-| T2a | N3  | M1  |
-| T2b | N3  | M1  |
-| T3  | N3  | M1  |
-| T3a | N3  | M1  |
-| T3b | N3  | M1  |
-| T4  | N3  | M1  |
-| T4a | N3  | M1  |
-| T4b | N3  | M1  |
-| Ta  | N3  | M1  |
-| Tis | N3  | M1  |
-| T1  | N0  | M1a |
-| T2  | N0  | M1a |
-| T2a | N0  | M1a |
-| T2b | N0  | M1a |
-| T3  | N0  | M1a |
-| T3a | N0  | M1a |
-| T3b | N0  | M1a |
-| T4  | N0  | M1a |
-| T4a | N0  | M1a |
-| T4b | N0  | M1a |
-| Ta  | N0  | M1a |
-| Tis | N0  | M1a |
-| T1  | N1  | M1a |
-| T2  | N1  | M1a |
-| T2a | N1  | M1a |
-| T2b | N1  | M1a |
-| T3  | N1  | M1a |
-| T3a | N1  | M1a |
-| T3b | N1  | M1a |
-| T4  | N1  | M1a |
-| T4a | N1  | M1a |
-| T4b | N1  | M1a |
-| Ta  | N1  | M1a |
-| Tis | N1  | M1a |
-| T1  | N2  | M1a |
-| T2  | N2  | M1a |
-| T2a | N2  | M1a |
-| T2b | N2  | M1a |
-| T3  | N2  | M1a |
-| T3a | N2  | M1a |
-| T3b | N2  | M1a |
-| T4  | N2  | M1a |
-| T4a | N2  | M1a |
-| T4b | N2  | M1a |
-| Ta  | N2  | M1a |
-| Tis | N2  | M1a |
-| T1  | N3  | M1a |
-| T2  | N3  | M1a |
-| T2a | N3  | M1a |
-| T2b | N3  | M1a |
-| T3  | N3  | M1a |
-| T3a | N3  | M1a |
-| T3b | N3  | M1a |
-| T4  | N3  | M1a |
-| T4a | N3  | M1a |
-| T4b | N3  | M1a |
-| Ta  | N3  | M1a |
-| Tis | N3  | M1a |
-| T1  | N0  | M1b |
-| T2  | N0  | M1b |
-| T2a | N0  | M1b |
-| T2b | N0  | M1b |
-| T3  | N0  | M1b |
-| T3a | N0  | M1b |
-| T3b | N0  | M1b |
-| T4  | N0  | M1b |
-| T4a | N0  | M1b |
-| T4b | N0  | M1b |
-| Ta  | N0  | M1b |
-| Tis | N0  | M1b |
-| T1  | N1  | M1b |
-| T2  | N1  | M1b |
-| T2a | N1  | M1b |
-| T2b | N1  | M1b |
-| T3  | N1  | M1b |
-| T3a | N1  | M1b |
-| T3b | N1  | M1b |
-| T4  | N1  | M1b |
-| T4a | N1  | M1b |
-| T4b | N1  | M1b |
-| Ta  | N1  | M1b |
-| Tis | N1  | M1b |
-| T1  | N2  | M1b |
-| T2  | N2  | M1b |
-| T2a | N2  | M1b |
-| T2b | N2  | M1b |
-| T3  | N2  | M1b |
-| T3a | N2  | M1b |
-| T3b | N2  | M1b |
-| T4  | N2  | M1b |
-| T4a | N2  | M1b |
-| T4b | N2  | M1b |
-| Ta  | N2  | M1b |
-| Tis | N2  | M1b |
-| T1  | N3  | M1b |
-| T2  | N3  | M1b |
-| T2a | N3  | M1b |
-| T2b | N3  | M1b |
-| T3  | N3  | M1b |
-| T3a | N3  | M1b |
-| T3b | N3  | M1b |
-| T4  | N3  | M1b |
-| T4a | N3  | M1b |
-| T4b | N3  | M1b |
-| Ta  | N3  | M1b |
-| Tis | N3  | M1b |
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| Ta  | N0  | M0  | 0a         |
+| Tis | N0  | M0  | 0is        |
+| T1  | N0  | M0  | I          |
+| T2  | N0  | M0  | II         |
+| T2a | N0  | M0  | II         |
+| T2b | N0  | M0  | II         |
+| T3  | N0  | M0  | III        |
+| T3a | N0  | M0  | III        |
+| T3b | N0  | M0  | III        |
+| T4a | N0  | M0  | III        |
+| T1  | N0  | M1  | IV         |
+| T1  | N0  | M1a | IV         |
+| T1  | N0  | M1b | IV         |
+| T1  | N1  | M0  | IV         |
+| T1  | N1  | M1  | IV         |
+| T1  | N1  | M1a | IV         |
+| T1  | N1  | M1b | IV         |
+| T1  | N2  | M0  | IV         |
+| T1  | N2  | M1  | IV         |
+| T1  | N2  | M1a | IV         |
+| T1  | N2  | M1b | IV         |
+| T1  | N3  | M0  | IV         |
+| T1  | N3  | M1  | IV         |
+| T1  | N3  | M1a | IV         |
+| T1  | N3  | M1b | IV         |
+| T2  | N0  | M1  | IV         |
+| T2  | N0  | M1a | IV         |
+| T2  | N0  | M1b | IV         |
+| T2  | N1  | M0  | IV         |
+| T2  | N1  | M1  | IV         |
+| T2  | N1  | M1a | IV         |
+| T2  | N1  | M1b | IV         |
+| T2  | N2  | M0  | IV         |
+| T2  | N2  | M1  | IV         |
+| T2  | N2  | M1a | IV         |
+| T2  | N2  | M1b | IV         |
+| T2  | N3  | M0  | IV         |
+| T2  | N3  | M1  | IV         |
+| T2  | N3  | M1a | IV         |
+| T2  | N3  | M1b | IV         |
+| T2a | N0  | M1  | IV         |
+| T2a | N0  | M1a | IV         |
+| T2a | N0  | M1b | IV         |
+| T2a | N1  | M0  | IV         |
+| T2a | N1  | M1  | IV         |
+| T2a | N1  | M1a | IV         |
+| T2a | N1  | M1b | IV         |
+| T2a | N2  | M0  | IV         |
+| T2a | N2  | M1  | IV         |
+| T2a | N2  | M1a | IV         |
+| T2a | N2  | M1b | IV         |
+| T2a | N3  | M0  | IV         |
+| T2a | N3  | M1  | IV         |
+| T2a | N3  | M1a | IV         |
+| T2a | N3  | M1b | IV         |
+| T2b | N0  | M1  | IV         |
+| T2b | N0  | M1a | IV         |
+| T2b | N0  | M1b | IV         |
+| T2b | N1  | M0  | IV         |
+| T2b | N1  | M1  | IV         |
+| T2b | N1  | M1a | IV         |
+| T2b | N1  | M1b | IV         |
+| T2b | N2  | M0  | IV         |
+| T2b | N2  | M1  | IV         |
+| T2b | N2  | M1a | IV         |
+| T2b | N2  | M1b | IV         |
+| T2b | N3  | M0  | IV         |
+| T2b | N3  | M1  | IV         |
+| T2b | N3  | M1a | IV         |
+| T2b | N3  | M1b | IV         |
+| T3  | N0  | M1  | IV         |
+| T3  | N0  | M1a | IV         |
+| T3  | N0  | M1b | IV         |
+| T3  | N1  | M0  | IV         |
+| T3  | N1  | M1  | IV         |
+| T3  | N1  | M1a | IV         |
+| T3  | N1  | M1b | IV         |
+| T3  | N2  | M0  | IV         |
+| T3  | N2  | M1  | IV         |
+| T3  | N2  | M1a | IV         |
+| T3  | N2  | M1b | IV         |
+| T3  | N3  | M0  | IV         |
+| T3  | N3  | M1  | IV         |
+| T3  | N3  | M1a | IV         |
+| T3  | N3  | M1b | IV         |
+| T3a | N0  | M1  | IV         |
+| T3a | N0  | M1a | IV         |
+| T3a | N0  | M1b | IV         |
+| T3a | N1  | M0  | IV         |
+| T3a | N1  | M1  | IV         |
+| T3a | N1  | M1a | IV         |
+| T3a | N1  | M1b | IV         |
+| T3a | N2  | M0  | IV         |
+| T3a | N2  | M1  | IV         |
+| T3a | N2  | M1a | IV         |
+| T3a | N2  | M1b | IV         |
+| T3a | N3  | M0  | IV         |
+| T3a | N3  | M1  | IV         |
+| T3a | N3  | M1a | IV         |
+| T3a | N3  | M1b | IV         |
+| T3b | N0  | M1  | IV         |
+| T3b | N0  | M1a | IV         |
+| T3b | N0  | M1b | IV         |
+| T3b | N1  | M0  | IV         |
+| T3b | N1  | M1  | IV         |
+| T3b | N1  | M1a | IV         |
+| T3b | N1  | M1b | IV         |
+| T3b | N2  | M0  | IV         |
+| T3b | N2  | M1  | IV         |
+| T3b | N2  | M1a | IV         |
+| T3b | N2  | M1b | IV         |
+| T3b | N3  | M0  | IV         |
+| T3b | N3  | M1  | IV         |
+| T3b | N3  | M1a | IV         |
+| T3b | N3  | M1b | IV         |
+| T4  | N0  | M1  | IV         |
+| T4  | N0  | M1a | IV         |
+| T4  | N0  | M1b | IV         |
+| T4  | N1  | M0  | IV         |
+| T4  | N1  | M1  | IV         |
+| T4  | N1  | M1a | IV         |
+| T4  | N1  | M1b | IV         |
+| T4  | N2  | M0  | IV         |
+| T4  | N2  | M1  | IV         |
+| T4  | N2  | M1a | IV         |
+| T4  | N2  | M1b | IV         |
+| T4  | N3  | M0  | IV         |
+| T4  | N3  | M1  | IV         |
+| T4  | N3  | M1a | IV         |
+| T4  | N3  | M1b | IV         |
+| T4a | N0  | M1  | IV         |
+| T4a | N0  | M1a | IV         |
+| T4a | N0  | M1b | IV         |
+| T4a | N1  | M0  | IV         |
+| T4a | N1  | M1  | IV         |
+| T4a | N1  | M1a | IV         |
+| T4a | N1  | M1b | IV         |
+| T4a | N2  | M0  | IV         |
+| T4a | N2  | M1  | IV         |
+| T4a | N2  | M1a | IV         |
+| T4a | N2  | M1b | IV         |
+| T4a | N3  | M0  | IV         |
+| T4a | N3  | M1  | IV         |
+| T4a | N3  | M1a | IV         |
+| T4a | N3  | M1b | IV         |
+| T4b | N0  | M0  | IV         |
+| T4b | N0  | M1  | IV         |
+| T4b | N0  | M1a | IV         |
+| T4b | N0  | M1b | IV         |
+| T4b | N1  | M0  | IV         |
+| T4b | N1  | M1  | IV         |
+| T4b | N1  | M1a | IV         |
+| T4b | N1  | M1b | IV         |
+| T4b | N2  | M0  | IV         |
+| T4b | N2  | M1  | IV         |
+| T4b | N2  | M1a | IV         |
+| T4b | N2  | M1b | IV         |
+| T4b | N3  | M0  | IV         |
+| T4b | N3  | M1  | IV         |
+| T4b | N3  | M1a | IV         |
+| T4b | N3  | M1b | IV         |
+| Ta  | N0  | M1  | IV         |
+| Ta  | N0  | M1a | IV         |
+| Ta  | N0  | M1b | IV         |
+| Ta  | N1  | M0  | IV         |
+| Ta  | N1  | M1  | IV         |
+| Ta  | N1  | M1a | IV         |
+| Ta  | N1  | M1b | IV         |
+| Ta  | N2  | M0  | IV         |
+| Ta  | N2  | M1  | IV         |
+| Ta  | N2  | M1a | IV         |
+| Ta  | N2  | M1b | IV         |
+| Ta  | N3  | M0  | IV         |
+| Ta  | N3  | M1  | IV         |
+| Ta  | N3  | M1a | IV         |
+| Ta  | N3  | M1b | IV         |
+| Tis | N0  | M1  | IV         |
+| Tis | N0  | M1a | IV         |
+| Tis | N0  | M1b | IV         |
+| Tis | N1  | M0  | IV         |
+| Tis | N1  | M1  | IV         |
+| Tis | N1  | M1a | IV         |
+| Tis | N1  | M1b | IV         |
+| Tis | N2  | M0  | IV         |
+| Tis | N2  | M1  | IV         |
+| Tis | N2  | M1a | IV         |
+| Tis | N2  | M1b | IV         |
+| Tis | N3  | M0  | IV         |
+| Tis | N3  | M1  | IV         |
+| Tis | N3  | M1a | IV         |
+| Tis | N3  | M1b | IV         |
 
-clinical
+Breast
 
-| T   | N   | M   |
-|-----|-----|-----|
-| 0a  |     |     |
-| Ta  | N0  | M0  |
-| 0is |     |     |
-| Tis | N0  | M0  |
-| I   |     |     |
-| T1  | N0  | M0  |
-| II  |     |     |
-| T2  | N0  | M0  |
-| T2a | N0  | M0  |
-| T2b | N0  | M0  |
-| III |     |     |
-| T3  | N0  | M0  |
-| T3a | N0  | M0  |
-| T3b | N0  | M0  |
-| T4a | N0  | M0  |
-| IV  |     |     |
-| T4b | N0  | M0  |
-| T1  | N1  | M0  |
-| T2  | N1  | M0  |
-| T2a | N1  | M0  |
-| T2b | N1  | M0  |
-| T3  | N1  | M0  |
-| T3a | N1  | M0  |
-| T3b | N1  | M0  |
-| T4  | N1  | M0  |
-| T4a | N1  | M0  |
-| T4b | N1  | M0  |
-| Ta  | N1  | M0  |
-| Tis | N1  | M0  |
-| T1  | N2  | M0  |
-| T2  | N2  | M0  |
-| T2a | N2  | M0  |
-| T2b | N2  | M0  |
-| T3  | N2  | M0  |
-| T3a | N2  | M0  |
-| T3b | N2  | M0  |
-| T4  | N2  | M0  |
-| T4a | N2  | M0  |
-| T4b | N2  | M0  |
-| Ta  | N2  | M0  |
-| Tis | N2  | M0  |
-| T1  | N3  | M0  |
-| T2  | N3  | M0  |
-| T2a | N3  | M0  |
-| T2b | N3  | M0  |
-| T3  | N3  | M0  |
-| T3a | N3  | M0  |
-| T3b | N3  | M0  |
-| T4  | N3  | M0  |
-| T4a | N3  | M0  |
-| T4b | N3  | M0  |
-| Ta  | N3  | M0  |
-| Tis | N3  | M0  |
-| T1  | N0  | M1  |
-| T2  | N0  | M1  |
-| T2a | N0  | M1  |
-| T2b | N0  | M1  |
-| T3  | N0  | M1  |
-| T3a | N0  | M1  |
-| T3b | N0  | M1  |
-| T4  | N0  | M1  |
-| T4a | N0  | M1  |
-| T4b | N0  | M1  |
-| Ta  | N0  | M1  |
-| Tis | N0  | M1  |
-| T1  | N1  | M1  |
-| T2  | N1  | M1  |
-| T2a | N1  | M1  |
-| T2b | N1  | M1  |
-| T3  | N1  | M1  |
-| T3a | N1  | M1  |
-| T3b | N1  | M1  |
-| T4  | N1  | M1  |
-| T4a | N1  | M1  |
-| T4b | N1  | M1  |
-| Ta  | N1  | M1  |
-| Tis | N1  | M1  |
-| T1  | N2  | M1  |
-| T2  | N2  | M1  |
-| T2a | N2  | M1  |
-| T2b | N2  | M1  |
-| T3  | N2  | M1  |
-| T3a | N2  | M1  |
-| T3b | N2  | M1  |
-| T4  | N2  | M1  |
-| T4a | N2  | M1  |
-| T4b | N2  | M1  |
-| Ta  | N2  | M1  |
-| Tis | N2  | M1  |
-| T1  | N3  | M1  |
-| T2  | N3  | M1  |
-| T2a | N3  | M1  |
-| T2b | N3  | M1  |
-| T3  | N3  | M1  |
-| T3a | N3  | M1  |
-| T3b | N3  | M1  |
-| T4  | N3  | M1  |
-| T4a | N3  | M1  |
-| T4b | N3  | M1  |
-| Ta  | N3  | M1  |
-| Tis | N3  | M1  |
-| T1  | N0  | M1a |
-| T2  | N0  | M1a |
-| T2a | N0  | M1a |
-| T2b | N0  | M1a |
-| T3  | N0  | M1a |
-| T3a | N0  | M1a |
-| T3b | N0  | M1a |
-| T4  | N0  | M1a |
-| T4a | N0  | M1a |
-| T4b | N0  | M1a |
-| Ta  | N0  | M1a |
-| Tis | N0  | M1a |
-| T1  | N1  | M1a |
-| T2  | N1  | M1a |
-| T2a | N1  | M1a |
-| T2b | N1  | M1a |
-| T3  | N1  | M1a |
-| T3a | N1  | M1a |
-| T3b | N1  | M1a |
-| T4  | N1  | M1a |
-| T4a | N1  | M1a |
-| T4b | N1  | M1a |
-| Ta  | N1  | M1a |
-| Tis | N1  | M1a |
-| T1  | N2  | M1a |
-| T2  | N2  | M1a |
-| T2a | N2  | M1a |
-| T2b | N2  | M1a |
-| T3  | N2  | M1a |
-| T3a | N2  | M1a |
-| T3b | N2  | M1a |
-| T4  | N2  | M1a |
-| T4a | N2  | M1a |
-| T4b | N2  | M1a |
-| Ta  | N2  | M1a |
-| Tis | N2  | M1a |
-| T1  | N3  | M1a |
-| T2  | N3  | M1a |
-| T2a | N3  | M1a |
-| T2b | N3  | M1a |
-| T3  | N3  | M1a |
-| T3a | N3  | M1a |
-| T3b | N3  | M1a |
-| T4  | N3  | M1a |
-| T4a | N3  | M1a |
-| T4b | N3  | M1a |
-| Ta  | N3  | M1a |
-| Tis | N3  | M1a |
-| T1  | N0  | M1b |
-| T2  | N0  | M1b |
-| T2a | N0  | M1b |
-| T2b | N0  | M1b |
-| T3  | N0  | M1b |
-| T3a | N0  | M1b |
-| T3b | N0  | M1b |
-| T4  | N0  | M1b |
-| T4a | N0  | M1b |
-| T4b | N0  | M1b |
-| Ta  | N0  | M1b |
-| Tis | N0  | M1b |
-| T1  | N1  | M1b |
-| T2  | N1  | M1b |
-| T2a | N1  | M1b |
-| T2b | N1  | M1b |
-| T3  | N1  | M1b |
-| T3a | N1  | M1b |
-| T3b | N1  | M1b |
-| T4  | N1  | M1b |
-| T4a | N1  | M1b |
-| T4b | N1  | M1b |
-| Ta  | N1  | M1b |
-| Tis | N1  | M1b |
-| T1  | N2  | M1b |
-| T2  | N2  | M1b |
-| T2a | N2  | M1b |
-| T2b | N2  | M1b |
-| T3  | N2  | M1b |
-| T3a | N2  | M1b |
-| T3b | N2  | M1b |
-| T4  | N2  | M1b |
-| T4a | N2  | M1b |
-| T4b | N2  | M1b |
-| Ta  | N2  | M1b |
-| Tis | N2  | M1b |
-| T1  | N3  | M1b |
-| T2  | N3  | M1b |
-| T2a | N3  | M1b |
-| T2b | N3  | M1b |
-| T3  | N3  | M1b |
-| T3a | N3  | M1b |
-| T3b | N3  | M1b |
-| T4  | N3  | M1b |
-| T4a | N3  | M1b |
-| T4b | N3  | M1b |
-| Ta  | N3  | M1b |
-| Tis | N3  | M1b |
+Base (348 rules)
 
-pathological
+| T    | N    | M   | uicc_stage |
+|:-----|:-----|:----|:-----------|
+| Tis  | N0   | M0  | 0          |
+| T1   | N0   | M0  | IA         |
+| T1a  | N0   | M0  | IA         |
+| T1b  | N0   | M0  | IA         |
+| T1c  | N0   | M0  | IA         |
+| T1mi | N0   | M0  | IA         |
+| T0   | N1mi | M0  | IB         |
+| T1   | N1mi | M0  | IB         |
+| T1a  | N1mi | M0  | IB         |
+| T1b  | N1mi | M0  | IB         |
+| T1c  | N1mi | M0  | IB         |
+| T1mi | N1mi | M0  | IB         |
+| T0   | N1   | M0  | IIA        |
+| T0   | N1a  | M0  | IIA        |
+| T0   | N1b  | M0  | IIA        |
+| T0   | N1c  | M0  | IIA        |
+| T1   | N1   | M0  | IIA        |
+| T1   | N1a  | M0  | IIA        |
+| T1   | N1b  | M0  | IIA        |
+| T1   | N1c  | M0  | IIA        |
+| T1a  | N1   | M0  | IIA        |
+| T1a  | N1a  | M0  | IIA        |
+| T1a  | N1b  | M0  | IIA        |
+| T1a  | N1c  | M0  | IIA        |
+| T1b  | N1   | M0  | IIA        |
+| T1b  | N1a  | M0  | IIA        |
+| T1b  | N1b  | M0  | IIA        |
+| T1b  | N1c  | M0  | IIA        |
+| T1c  | N1   | M0  | IIA        |
+| T1c  | N1a  | M0  | IIA        |
+| T1c  | N1b  | M0  | IIA        |
+| T1c  | N1c  | M0  | IIA        |
+| T1mi | N1   | M0  | IIA        |
+| T1mi | N1a  | M0  | IIA        |
+| T1mi | N1b  | M0  | IIA        |
+| T1mi | N1c  | M0  | IIA        |
+| T2   | N0   | M0  | IIA        |
+| T2   | N1   | M0  | IIB        |
+| T2   | N1a  | M0  | IIB        |
+| T2   | N1b  | M0  | IIB        |
+| T2   | N1c  | M0  | IIB        |
+| T3   | N0   | M0  | IIB        |
+| T0   | N2   | M0  | IIIA       |
+| T0   | N2a  | M0  | IIIA       |
+| T0   | N2b  | M0  | IIIA       |
+| T1   | N2   | M0  | IIIA       |
+| T1   | N2a  | M0  | IIIA       |
+| T1   | N2b  | M0  | IIIA       |
+| T1a  | N2   | M0  | IIIA       |
+| T1a  | N2a  | M0  | IIIA       |
+| T1a  | N2b  | M0  | IIIA       |
+| T1b  | N2   | M0  | IIIA       |
+| T1b  | N2a  | M0  | IIIA       |
+| T1b  | N2b  | M0  | IIIA       |
+| T1c  | N2   | M0  | IIIA       |
+| T1c  | N2a  | M0  | IIIA       |
+| T1c  | N2b  | M0  | IIIA       |
+| T1mi | N2   | M0  | IIIA       |
+| T1mi | N2a  | M0  | IIIA       |
+| T1mi | N2b  | M0  | IIIA       |
+| T2   | N2   | M0  | IIIA       |
+| T2   | N2a  | M0  | IIIA       |
+| T2   | N2b  | M0  | IIIA       |
+| T3   | N1   | M0  | IIIA       |
+| T3   | N1a  | M0  | IIIA       |
+| T3   | N1b  | M0  | IIIA       |
+| T3   | N1c  | M0  | IIIA       |
+| T3   | N2   | M0  | IIIA       |
+| T3   | N2a  | M0  | IIIA       |
+| T3   | N2b  | M0  | IIIA       |
+| T4   | N0   | M0  | IIIB       |
+| T4   | N1   | M0  | IIIB       |
+| T4   | N1a  | M0  | IIIB       |
+| T4   | N1b  | M0  | IIIB       |
+| T4   | N1c  | M0  | IIIB       |
+| T4   | N2   | M0  | IIIB       |
+| T4   | N2a  | M0  | IIIB       |
+| T4   | N2b  | M0  | IIIB       |
+| T4a  | N0   | M0  | IIIB       |
+| T4a  | N1   | M0  | IIIB       |
+| T4a  | N1a  | M0  | IIIB       |
+| T4a  | N1b  | M0  | IIIB       |
+| T4a  | N1c  | M0  | IIIB       |
+| T4a  | N2   | M0  | IIIB       |
+| T4a  | N2a  | M0  | IIIB       |
+| T4a  | N2b  | M0  | IIIB       |
+| T4b  | N0   | M0  | IIIB       |
+| T4b  | N1   | M0  | IIIB       |
+| T4b  | N1a  | M0  | IIIB       |
+| T4b  | N1b  | M0  | IIIB       |
+| T4b  | N1c  | M0  | IIIB       |
+| T4b  | N2   | M0  | IIIB       |
+| T4b  | N2a  | M0  | IIIB       |
+| T4b  | N2b  | M0  | IIIB       |
+| T4c  | N0   | M0  | IIIB       |
+| T4c  | N1   | M0  | IIIB       |
+| T4c  | N1a  | M0  | IIIB       |
+| T4c  | N1b  | M0  | IIIB       |
+| T4c  | N1c  | M0  | IIIB       |
+| T4c  | N2   | M0  | IIIB       |
+| T4c  | N2a  | M0  | IIIB       |
+| T4c  | N2b  | M0  | IIIB       |
+| T4d  | N0   | M0  | IIIB       |
+| T4d  | N1   | M0  | IIIB       |
+| T4d  | N1a  | M0  | IIIB       |
+| T4d  | N1b  | M0  | IIIB       |
+| T4d  | N1c  | M0  | IIIB       |
+| T4d  | N2   | M0  | IIIB       |
+| T4d  | N2a  | M0  | IIIB       |
+| T4d  | N2b  | M0  | IIIB       |
+| T0   | N3   | M0  | IIIC       |
+| T0   | N3a  | M0  | IIIC       |
+| T0   | N3b  | M0  | IIIC       |
+| T0   | N3c  | M0  | IIIC       |
+| T1   | N3   | M0  | IIIC       |
+| T1   | N3a  | M0  | IIIC       |
+| T1   | N3b  | M0  | IIIC       |
+| T1   | N3c  | M0  | IIIC       |
+| T1a  | N3   | M0  | IIIC       |
+| T1a  | N3a  | M0  | IIIC       |
+| T1a  | N3b  | M0  | IIIC       |
+| T1a  | N3c  | M0  | IIIC       |
+| T1b  | N3   | M0  | IIIC       |
+| T1b  | N3a  | M0  | IIIC       |
+| T1b  | N3b  | M0  | IIIC       |
+| T1b  | N3c  | M0  | IIIC       |
+| T1c  | N3   | M0  | IIIC       |
+| T1c  | N3a  | M0  | IIIC       |
+| T1c  | N3b  | M0  | IIIC       |
+| T1c  | N3c  | M0  | IIIC       |
+| T1mi | N3   | M0  | IIIC       |
+| T1mi | N3a  | M0  | IIIC       |
+| T1mi | N3b  | M0  | IIIC       |
+| T1mi | N3c  | M0  | IIIC       |
+| T2   | N3   | M0  | IIIC       |
+| T2   | N3a  | M0  | IIIC       |
+| T2   | N3b  | M0  | IIIC       |
+| T2   | N3c  | M0  | IIIC       |
+| T3   | N3   | M0  | IIIC       |
+| T3   | N3a  | M0  | IIIC       |
+| T3   | N3b  | M0  | IIIC       |
+| T3   | N3c  | M0  | IIIC       |
+| T4   | N3   | M0  | IIIC       |
+| T4   | N3a  | M0  | IIIC       |
+| T4   | N3b  | M0  | IIIC       |
+| T4   | N3c  | M0  | IIIC       |
+| T4a  | N3   | M0  | IIIC       |
+| T4a  | N3a  | M0  | IIIC       |
+| T4a  | N3b  | M0  | IIIC       |
+| T4a  | N3c  | M0  | IIIC       |
+| T4b  | N3   | M0  | IIIC       |
+| T4b  | N3a  | M0  | IIIC       |
+| T4b  | N3b  | M0  | IIIC       |
+| T4b  | N3c  | M0  | IIIC       |
+| T4c  | N3   | M0  | IIIC       |
+| T4c  | N3a  | M0  | IIIC       |
+| T4c  | N3b  | M0  | IIIC       |
+| T4c  | N3c  | M0  | IIIC       |
+| T4d  | N3   | M0  | IIIC       |
+| T4d  | N3a  | M0  | IIIC       |
+| T4d  | N3b  | M0  | IIIC       |
+| T4d  | N3c  | M0  | IIIC       |
+| Tis  | N3   | M0  | IIIC       |
+| Tis  | N3a  | M0  | IIIC       |
+| Tis  | N3b  | M0  | IIIC       |
+| Tis  | N3c  | M0  | IIIC       |
+| T0   | N0   | M1  | IV         |
+| T0   | N1   | M1  | IV         |
+| T0   | N1a  | M1  | IV         |
+| T0   | N1b  | M1  | IV         |
+| T0   | N1c  | M1  | IV         |
+| T0   | N1mi | M1  | IV         |
+| T0   | N2   | M1  | IV         |
+| T0   | N2a  | M1  | IV         |
+| T0   | N2b  | M1  | IV         |
+| T0   | N3   | M1  | IV         |
+| T0   | N3a  | M1  | IV         |
+| T0   | N3b  | M1  | IV         |
+| T0   | N3c  | M1  | IV         |
+| T1   | N0   | M1  | IV         |
+| T1   | N1   | M1  | IV         |
+| T1   | N1a  | M1  | IV         |
+| T1   | N1b  | M1  | IV         |
+| T1   | N1c  | M1  | IV         |
+| T1   | N1mi | M1  | IV         |
+| T1   | N2   | M1  | IV         |
+| T1   | N2a  | M1  | IV         |
+| T1   | N2b  | M1  | IV         |
+| T1   | N3   | M1  | IV         |
+| T1   | N3a  | M1  | IV         |
+| T1   | N3b  | M1  | IV         |
+| T1   | N3c  | M1  | IV         |
+| T1a  | N0   | M1  | IV         |
+| T1a  | N1   | M1  | IV         |
+| T1a  | N1a  | M1  | IV         |
+| T1a  | N1b  | M1  | IV         |
+| T1a  | N1c  | M1  | IV         |
+| T1a  | N1mi | M1  | IV         |
+| T1a  | N2   | M1  | IV         |
+| T1a  | N2a  | M1  | IV         |
+| T1a  | N2b  | M1  | IV         |
+| T1a  | N3   | M1  | IV         |
+| T1a  | N3a  | M1  | IV         |
+| T1a  | N3b  | M1  | IV         |
+| T1a  | N3c  | M1  | IV         |
+| T1b  | N0   | M1  | IV         |
+| T1b  | N1   | M1  | IV         |
+| T1b  | N1a  | M1  | IV         |
+| T1b  | N1b  | M1  | IV         |
+| T1b  | N1c  | M1  | IV         |
+| T1b  | N1mi | M1  | IV         |
+| T1b  | N2   | M1  | IV         |
+| T1b  | N2a  | M1  | IV         |
+| T1b  | N2b  | M1  | IV         |
+| T1b  | N3   | M1  | IV         |
+| T1b  | N3a  | M1  | IV         |
+| T1b  | N3b  | M1  | IV         |
+| T1b  | N3c  | M1  | IV         |
+| T1c  | N0   | M1  | IV         |
+| T1c  | N1   | M1  | IV         |
+| T1c  | N1a  | M1  | IV         |
+| T1c  | N1b  | M1  | IV         |
+| T1c  | N1c  | M1  | IV         |
+| T1c  | N1mi | M1  | IV         |
+| T1c  | N2   | M1  | IV         |
+| T1c  | N2a  | M1  | IV         |
+| T1c  | N2b  | M1  | IV         |
+| T1c  | N3   | M1  | IV         |
+| T1c  | N3a  | M1  | IV         |
+| T1c  | N3b  | M1  | IV         |
+| T1c  | N3c  | M1  | IV         |
+| T1mi | N0   | M1  | IV         |
+| T1mi | N1   | M1  | IV         |
+| T1mi | N1a  | M1  | IV         |
+| T1mi | N1b  | M1  | IV         |
+| T1mi | N1c  | M1  | IV         |
+| T1mi | N1mi | M1  | IV         |
+| T1mi | N2   | M1  | IV         |
+| T1mi | N2a  | M1  | IV         |
+| T1mi | N2b  | M1  | IV         |
+| T1mi | N3   | M1  | IV         |
+| T1mi | N3a  | M1  | IV         |
+| T1mi | N3b  | M1  | IV         |
+| T1mi | N3c  | M1  | IV         |
+| T2   | N0   | M1  | IV         |
+| T2   | N1   | M1  | IV         |
+| T2   | N1a  | M1  | IV         |
+| T2   | N1b  | M1  | IV         |
+| T2   | N1c  | M1  | IV         |
+| T2   | N1mi | M1  | IV         |
+| T2   | N2   | M1  | IV         |
+| T2   | N2a  | M1  | IV         |
+| T2   | N2b  | M1  | IV         |
+| T2   | N3   | M1  | IV         |
+| T2   | N3a  | M1  | IV         |
+| T2   | N3b  | M1  | IV         |
+| T2   | N3c  | M1  | IV         |
+| T3   | N0   | M1  | IV         |
+| T3   | N1   | M1  | IV         |
+| T3   | N1a  | M1  | IV         |
+| T3   | N1b  | M1  | IV         |
+| T3   | N1c  | M1  | IV         |
+| T3   | N1mi | M1  | IV         |
+| T3   | N2   | M1  | IV         |
+| T3   | N2a  | M1  | IV         |
+| T3   | N2b  | M1  | IV         |
+| T3   | N3   | M1  | IV         |
+| T3   | N3a  | M1  | IV         |
+| T3   | N3b  | M1  | IV         |
+| T3   | N3c  | M1  | IV         |
+| T4   | N0   | M1  | IV         |
+| T4   | N1   | M1  | IV         |
+| T4   | N1a  | M1  | IV         |
+| T4   | N1b  | M1  | IV         |
+| T4   | N1c  | M1  | IV         |
+| T4   | N1mi | M1  | IV         |
+| T4   | N2   | M1  | IV         |
+| T4   | N2a  | M1  | IV         |
+| T4   | N2b  | M1  | IV         |
+| T4   | N3   | M1  | IV         |
+| T4   | N3a  | M1  | IV         |
+| T4   | N3b  | M1  | IV         |
+| T4   | N3c  | M1  | IV         |
+| T4a  | N0   | M1  | IV         |
+| T4a  | N1   | M1  | IV         |
+| T4a  | N1a  | M1  | IV         |
+| T4a  | N1b  | M1  | IV         |
+| T4a  | N1c  | M1  | IV         |
+| T4a  | N1mi | M1  | IV         |
+| T4a  | N2   | M1  | IV         |
+| T4a  | N2a  | M1  | IV         |
+| T4a  | N2b  | M1  | IV         |
+| T4a  | N3   | M1  | IV         |
+| T4a  | N3a  | M1  | IV         |
+| T4a  | N3b  | M1  | IV         |
+| T4a  | N3c  | M1  | IV         |
+| T4b  | N0   | M1  | IV         |
+| T4b  | N1   | M1  | IV         |
+| T4b  | N1a  | M1  | IV         |
+| T4b  | N1b  | M1  | IV         |
+| T4b  | N1c  | M1  | IV         |
+| T4b  | N1mi | M1  | IV         |
+| T4b  | N2   | M1  | IV         |
+| T4b  | N2a  | M1  | IV         |
+| T4b  | N2b  | M1  | IV         |
+| T4b  | N3   | M1  | IV         |
+| T4b  | N3a  | M1  | IV         |
+| T4b  | N3b  | M1  | IV         |
+| T4b  | N3c  | M1  | IV         |
+| T4c  | N0   | M1  | IV         |
+| T4c  | N1   | M1  | IV         |
+| T4c  | N1a  | M1  | IV         |
+| T4c  | N1b  | M1  | IV         |
+| T4c  | N1c  | M1  | IV         |
+| T4c  | N1mi | M1  | IV         |
+| T4c  | N2   | M1  | IV         |
+| T4c  | N2a  | M1  | IV         |
+| T4c  | N2b  | M1  | IV         |
+| T4c  | N3   | M1  | IV         |
+| T4c  | N3a  | M1  | IV         |
+| T4c  | N3b  | M1  | IV         |
+| T4c  | N3c  | M1  | IV         |
+| T4d  | N0   | M1  | IV         |
+| T4d  | N1   | M1  | IV         |
+| T4d  | N1a  | M1  | IV         |
+| T4d  | N1b  | M1  | IV         |
+| T4d  | N1c  | M1  | IV         |
+| T4d  | N1mi | M1  | IV         |
+| T4d  | N2   | M1  | IV         |
+| T4d  | N2a  | M1  | IV         |
+| T4d  | N2b  | M1  | IV         |
+| T4d  | N3   | M1  | IV         |
+| T4d  | N3a  | M1  | IV         |
+| T4d  | N3b  | M1  | IV         |
+| T4d  | N3c  | M1  | IV         |
+| Tis  | N0   | M1  | IV         |
+| Tis  | N1   | M1  | IV         |
+| Tis  | N1a  | M1  | IV         |
+| Tis  | N1b  | M1  | IV         |
+| Tis  | N1c  | M1  | IV         |
+| Tis  | N1mi | M1  | IV         |
+| Tis  | N2   | M1  | IV         |
+| Tis  | N2a  | M1  | IV         |
+| Tis  | N2b  | M1  | IV         |
+| Tis  | N3   | M1  | IV         |
+| Tis  | N3a  | M1  | IV         |
+| Tis  | N3b  | M1  | IV         |
+| Tis  | N3c  | M1  | IV         |
 
-| T   | N   | M   |
-|-----|-----|-----|
-| 0a  |     |     |
-| Ta  | N0  | M0  |
-| 0is |     |     |
-| Tis | N0  | M0  |
-| I   |     |     |
-| T1  | N0  | M0  |
-| II  |     |     |
-| T2  | N0  | M0  |
-| T2a | N0  | M0  |
-| T2b | N0  | M0  |
-| III |     |     |
-| T3  | N0  | M0  |
-| T3a | N0  | M0  |
-| T3b | N0  | M0  |
-| T4a | N0  | M0  |
-| IV  |     |     |
-| T4b | N0  | M0  |
-| T1  | N1  | M0  |
-| T2  | N1  | M0  |
-| T2a | N1  | M0  |
-| T2b | N1  | M0  |
-| T3  | N1  | M0  |
-| T3a | N1  | M0  |
-| T3b | N1  | M0  |
-| T4  | N1  | M0  |
-| T4a | N1  | M0  |
-| T4b | N1  | M0  |
-| Ta  | N1  | M0  |
-| Tis | N1  | M0  |
-| T1  | N2  | M0  |
-| T2  | N2  | M0  |
-| T2a | N2  | M0  |
-| T2b | N2  | M0  |
-| T3  | N2  | M0  |
-| T3a | N2  | M0  |
-| T3b | N2  | M0  |
-| T4  | N2  | M0  |
-| T4a | N2  | M0  |
-| T4b | N2  | M0  |
-| Ta  | N2  | M0  |
-| Tis | N2  | M0  |
-| T1  | N3  | M0  |
-| T2  | N3  | M0  |
-| T2a | N3  | M0  |
-| T2b | N3  | M0  |
-| T3  | N3  | M0  |
-| T3a | N3  | M0  |
-| T3b | N3  | M0  |
-| T4  | N3  | M0  |
-| T4a | N3  | M0  |
-| T4b | N3  | M0  |
-| Ta  | N3  | M0  |
-| Tis | N3  | M0  |
-| T1  | N0  | M1  |
-| T2  | N0  | M1  |
-| T2a | N0  | M1  |
-| T2b | N0  | M1  |
-| T3  | N0  | M1  |
-| T3a | N0  | M1  |
-| T3b | N0  | M1  |
-| T4  | N0  | M1  |
-| T4a | N0  | M1  |
-| T4b | N0  | M1  |
-| Ta  | N0  | M1  |
-| Tis | N0  | M1  |
-| T1  | N1  | M1  |
-| T2  | N1  | M1  |
-| T2a | N1  | M1  |
-| T2b | N1  | M1  |
-| T3  | N1  | M1  |
-| T3a | N1  | M1  |
-| T3b | N1  | M1  |
-| T4  | N1  | M1  |
-| T4a | N1  | M1  |
-| T4b | N1  | M1  |
-| Ta  | N1  | M1  |
-| Tis | N1  | M1  |
-| T1  | N2  | M1  |
-| T2  | N2  | M1  |
-| T2a | N2  | M1  |
-| T2b | N2  | M1  |
-| T3  | N2  | M1  |
-| T3a | N2  | M1  |
-| T3b | N2  | M1  |
-| T4  | N2  | M1  |
-| T4a | N2  | M1  |
-| T4b | N2  | M1  |
-| Ta  | N2  | M1  |
-| Tis | N2  | M1  |
-| T1  | N3  | M1  |
-| T2  | N3  | M1  |
-| T2a | N3  | M1  |
-| T2b | N3  | M1  |
-| T3  | N3  | M1  |
-| T3a | N3  | M1  |
-| T3b | N3  | M1  |
-| T4  | N3  | M1  |
-| T4a | N3  | M1  |
-| T4b | N3  | M1  |
-| Ta  | N3  | M1  |
-| Tis | N3  | M1  |
-| T1  | N0  | M1a |
-| T2  | N0  | M1a |
-| T2a | N0  | M1a |
-| T2b | N0  | M1a |
-| T3  | N0  | M1a |
-| T3a | N0  | M1a |
-| T3b | N0  | M1a |
-| T4  | N0  | M1a |
-| T4a | N0  | M1a |
-| T4b | N0  | M1a |
-| Ta  | N0  | M1a |
-| Tis | N0  | M1a |
-| T1  | N1  | M1a |
-| T2  | N1  | M1a |
-| T2a | N1  | M1a |
-| T2b | N1  | M1a |
-| T3  | N1  | M1a |
-| T3a | N1  | M1a |
-| T3b | N1  | M1a |
-| T4  | N1  | M1a |
-| T4a | N1  | M1a |
-| T4b | N1  | M1a |
-| Ta  | N1  | M1a |
-| Tis | N1  | M1a |
-| T1  | N2  | M1a |
-| T2  | N2  | M1a |
-| T2a | N2  | M1a |
-| T2b | N2  | M1a |
-| T3  | N2  | M1a |
-| T3a | N2  | M1a |
-| T3b | N2  | M1a |
-| T4  | N2  | M1a |
-| T4a | N2  | M1a |
-| T4b | N2  | M1a |
-| Ta  | N2  | M1a |
-| Tis | N2  | M1a |
-| T1  | N3  | M1a |
-| T2  | N3  | M1a |
-| T2a | N3  | M1a |
-| T2b | N3  | M1a |
-| T3  | N3  | M1a |
-| T3a | N3  | M1a |
-| T3b | N3  | M1a |
-| T4  | N3  | M1a |
-| T4a | N3  | M1a |
-| T4b | N3  | M1a |
-| Ta  | N3  | M1a |
-| Tis | N3  | M1a |
-| T1  | N0  | M1b |
-| T2  | N0  | M1b |
-| T2a | N0  | M1b |
-| T2b | N0  | M1b |
-| T3  | N0  | M1b |
-| T3a | N0  | M1b |
-| T3b | N0  | M1b |
-| T4  | N0  | M1b |
-| T4a | N0  | M1b |
-| T4b | N0  | M1b |
-| Ta  | N0  | M1b |
-| Tis | N0  | M1b |
-| T1  | N1  | M1b |
-| T2  | N1  | M1b |
-| T2a | N1  | M1b |
-| T2b | N1  | M1b |
-| T3  | N1  | M1b |
-| T3a | N1  | M1b |
-| T3b | N1  | M1b |
-| T4  | N1  | M1b |
-| T4a | N1  | M1b |
-| T4b | N1  | M1b |
-| Ta  | N1  | M1b |
-| Tis | N1  | M1b |
-| T1  | N2  | M1b |
-| T2  | N2  | M1b |
-| T2a | N2  | M1b |
-| T2b | N2  | M1b |
-| T3  | N2  | M1b |
-| T3a | N2  | M1b |
-| T3b | N2  | M1b |
-| T4  | N2  | M1b |
-| T4a | N2  | M1b |
-| T4b | N2  | M1b |
-| Ta  | N2  | M1b |
-| Tis | N2  | M1b |
-| T1  | N3  | M1b |
-| T2  | N3  | M1b |
-| T2a | N3  | M1b |
-| T2b | N3  | M1b |
-| T3  | N3  | M1b |
-| T3a | N3  | M1b |
-| T3b | N3  | M1b |
-| T4  | N3  | M1b |
-| T4a | N3  | M1b |
-| T4b | N3  | M1b |
-| Ta  | N3  | M1b |
-| Tis | N3  | M1b |
+Colorectal
 
-breast
+Base (185 rules)
 
-base
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| Tis | N0  | M0  | 0          |
+| T1  | N0  | M0  | I          |
+| T2  | N0  | M0  | I          |
+| T3  | N0  | M0  | IIA        |
+| T4a | N0  | M0  | IIB        |
+| T4b | N0  | M0  | IIC        |
+| T1  | N2  | M0  | III        |
+| T2  | N2  | M0  | III        |
+| T3  | N2  | M0  | III        |
+| T4a | N2  | M0  | III        |
+| T1  | N1  | M0  | IIIA       |
+| T1  | N1a | M0  | IIIA       |
+| T1  | N1b | M0  | IIIA       |
+| T1  | N1c | M0  | IIIA       |
+| T1  | N2a | M0  | IIIA       |
+| T2  | N1  | M0  | IIIA       |
+| T2  | N1a | M0  | IIIA       |
+| T2  | N1b | M0  | IIIA       |
+| T2  | N1c | M0  | IIIA       |
+| T1  | N2b | M0  | IIIB       |
+| T2  | N2a | M0  | IIIB       |
+| T2  | N2b | M0  | IIIB       |
+| T3  | N1  | M0  | IIIB       |
+| T3  | N1a | M0  | IIIB       |
+| T3  | N1b | M0  | IIIB       |
+| T3  | N1c | M0  | IIIB       |
+| T3  | N2a | M0  | IIIB       |
+| T4a | N1  | M0  | IIIB       |
+| T4a | N1a | M0  | IIIB       |
+| T4a | N1b | M0  | IIIB       |
+| T4a | N1c | M0  | IIIB       |
+| T3  | N2b | M0  | IIIC       |
+| T4a | N2a | M0  | IIIC       |
+| T4a | N2b | M0  | IIIC       |
+| T4b | N1  | M0  | IIIC       |
+| T4b | N1a | M0  | IIIC       |
+| T4b | N1b | M0  | IIIC       |
+| T4b | N1c | M0  | IIIC       |
+| T4b | N2  | M0  | IIIC       |
+| T4b | N2a | M0  | IIIC       |
+| T4b | N2b | M0  | IIIC       |
+| T1  | N0  | M1  | IV         |
+| T1  | N1  | M1  | IV         |
+| T1  | N1a | M1  | IV         |
+| T1  | N1b | M1  | IV         |
+| T1  | N1c | M1  | IV         |
+| T1  | N2  | M1  | IV         |
+| T1  | N2a | M1  | IV         |
+| T1  | N2b | M1  | IV         |
+| T2  | N0  | M1  | IV         |
+| T2  | N1  | M1  | IV         |
+| T2  | N1a | M1  | IV         |
+| T2  | N1b | M1  | IV         |
+| T2  | N1c | M1  | IV         |
+| T2  | N2  | M1  | IV         |
+| T2  | N2a | M1  | IV         |
+| T2  | N2b | M1  | IV         |
+| T3  | N0  | M1  | IV         |
+| T3  | N1  | M1  | IV         |
+| T3  | N1a | M1  | IV         |
+| T3  | N1b | M1  | IV         |
+| T3  | N1c | M1  | IV         |
+| T3  | N2  | M1  | IV         |
+| T3  | N2a | M1  | IV         |
+| T3  | N2b | M1  | IV         |
+| T4a | N0  | M1  | IV         |
+| T4a | N1  | M1  | IV         |
+| T4a | N1a | M1  | IV         |
+| T4a | N1b | M1  | IV         |
+| T4a | N1c | M1  | IV         |
+| T4a | N2  | M1  | IV         |
+| T4a | N2a | M1  | IV         |
+| T4a | N2b | M1  | IV         |
+| T4b | N0  | M1  | IV         |
+| T4b | N1  | M1  | IV         |
+| T4b | N1a | M1  | IV         |
+| T4b | N1b | M1  | IV         |
+| T4b | N1c | M1  | IV         |
+| T4b | N2  | M1  | IV         |
+| T4b | N2a | M1  | IV         |
+| T4b | N2b | M1  | IV         |
+| Tis | N0  | M1  | IV         |
+| Tis | N1  | M1  | IV         |
+| Tis | N1a | M1  | IV         |
+| Tis | N1b | M1  | IV         |
+| Tis | N1c | M1  | IV         |
+| Tis | N2  | M1  | IV         |
+| Tis | N2a | M1  | IV         |
+| Tis | N2b | M1  | IV         |
+| T1  | N0  | M1a | IVA        |
+| T1  | N1  | M1a | IVA        |
+| T1  | N1a | M1a | IVA        |
+| T1  | N1b | M1a | IVA        |
+| T1  | N1c | M1a | IVA        |
+| T1  | N2  | M1a | IVA        |
+| T1  | N2a | M1a | IVA        |
+| T1  | N2b | M1a | IVA        |
+| T2  | N0  | M1a | IVA        |
+| T2  | N1  | M1a | IVA        |
+| T2  | N1a | M1a | IVA        |
+| T2  | N1b | M1a | IVA        |
+| T2  | N1c | M1a | IVA        |
+| T2  | N2  | M1a | IVA        |
+| T2  | N2a | M1a | IVA        |
+| T2  | N2b | M1a | IVA        |
+| T3  | N0  | M1a | IVA        |
+| T3  | N1  | M1a | IVA        |
+| T3  | N1a | M1a | IVA        |
+| T3  | N1b | M1a | IVA        |
+| T3  | N1c | M1a | IVA        |
+| T3  | N2  | M1a | IVA        |
+| T3  | N2a | M1a | IVA        |
+| T3  | N2b | M1a | IVA        |
+| T4a | N0  | M1a | IVA        |
+| T4a | N1  | M1a | IVA        |
+| T4a | N1a | M1a | IVA        |
+| T4a | N1b | M1a | IVA        |
+| T4a | N1c | M1a | IVA        |
+| T4a | N2  | M1a | IVA        |
+| T4a | N2a | M1a | IVA        |
+| T4a | N2b | M1a | IVA        |
+| T4b | N0  | M1a | IVA        |
+| T4b | N1  | M1a | IVA        |
+| T4b | N1a | M1a | IVA        |
+| T4b | N1b | M1a | IVA        |
+| T4b | N1c | M1a | IVA        |
+| T4b | N2  | M1a | IVA        |
+| T4b | N2a | M1a | IVA        |
+| T4b | N2b | M1a | IVA        |
+| Tis | N0  | M1a | IVA        |
+| Tis | N1  | M1a | IVA        |
+| Tis | N1a | M1a | IVA        |
+| Tis | N1b | M1a | IVA        |
+| Tis | N1c | M1a | IVA        |
+| Tis | N2  | M1a | IVA        |
+| Tis | N2a | M1a | IVA        |
+| Tis | N2b | M1a | IVA        |
+| T1  | N0  | M1b | IVB        |
+| T1  | N1  | M1b | IVB        |
+| T1  | N1a | M1b | IVB        |
+| T1  | N1b | M1b | IVB        |
+| T1  | N1c | M1b | IVB        |
+| T1  | N2  | M1b | IVB        |
+| T1  | N2a | M1b | IVB        |
+| T1  | N2b | M1b | IVB        |
+| T2  | N0  | M1b | IVB        |
+| T2  | N1  | M1b | IVB        |
+| T2  | N1a | M1b | IVB        |
+| T2  | N1b | M1b | IVB        |
+| T2  | N1c | M1b | IVB        |
+| T2  | N2  | M1b | IVB        |
+| T2  | N2a | M1b | IVB        |
+| T2  | N2b | M1b | IVB        |
+| T3  | N0  | M1b | IVB        |
+| T3  | N1  | M1b | IVB        |
+| T3  | N1a | M1b | IVB        |
+| T3  | N1b | M1b | IVB        |
+| T3  | N1c | M1b | IVB        |
+| T3  | N2  | M1b | IVB        |
+| T3  | N2a | M1b | IVB        |
+| T3  | N2b | M1b | IVB        |
+| T4a | N0  | M1b | IVB        |
+| T4a | N1  | M1b | IVB        |
+| T4a | N1a | M1b | IVB        |
+| T4a | N1b | M1b | IVB        |
+| T4a | N1c | M1b | IVB        |
+| T4a | N2  | M1b | IVB        |
+| T4a | N2a | M1b | IVB        |
+| T4a | N2b | M1b | IVB        |
+| T4b | N0  | M1b | IVB        |
+| T4b | N1  | M1b | IVB        |
+| T4b | N1a | M1b | IVB        |
+| T4b | N1b | M1b | IVB        |
+| T4b | N1c | M1b | IVB        |
+| T4b | N2  | M1b | IVB        |
+| T4b | N2a | M1b | IVB        |
+| T4b | N2b | M1b | IVB        |
+| Tis | N0  | M1b | IVB        |
+| Tis | N1  | M1b | IVB        |
+| Tis | N1a | M1b | IVB        |
+| Tis | N1b | M1b | IVB        |
+| Tis | N1c | M1b | IVB        |
+| Tis | N2  | M1b | IVB        |
+| Tis | N2a | M1b | IVB        |
+| Tis | N2b | M1b | IVB        |
 
-| T    | N    | M   |
-|------|------|-----|
-| 0    |      |     |
-| Tis  | N0   | M0  |
-| IA   |      |     |
-| T1   | N0   | M0  |
-| T1a  | N0   | M0  |
-| T1b  | N0   | M0  |
-| T1c  | N0   | M0  |
-| T1mi | N0   | M0  |
-| IB   |      |     |
-| T0   | N1mi | M0  |
-| T1   | N1mi | M0  |
-| T1a  | N1mi | M0  |
-| T1b  | N1mi | M0  |
-| T1c  | N1mi | M0  |
-| T1mi | N1mi | M0  |
-| IIA  |      |     |
-| T2   | N0   | M0  |
-| T0   | N1   | M0  |
-| T1   | N1   | M0  |
-| T1a  | N1   | M0  |
-| T1b  | N1   | M0  |
-| T1c  | N1   | M0  |
-| T1mi | N1   | M0  |
-| T0   | N1a  | M0  |
-| T1   | N1a  | M0  |
-| T1a  | N1a  | M0  |
-| T1b  | N1a  | M0  |
-| T1c  | N1a  | M0  |
-| T1mi | N1a  | M0  |
-| T0   | N1b  | M0  |
-| T1   | N1b  | M0  |
-| T1a  | N1b  | M0  |
-| T1b  | N1b  | M0  |
-| T1c  | N1b  | M0  |
-| T1mi | N1b  | M0  |
-| T0   | N1c  | M0  |
-| T1   | N1c  | M0  |
-| T1a  | N1c  | M0  |
-| T1b  | N1c  | M0  |
-| T1c  | N1c  | M0  |
-| T1mi | N1c  | M0  |
-| IIB  |      |     |
-| T3   | N0   | M0  |
-| T2   | N1   | M0  |
-|      | N1a  | M0  |
-|      | N1b  | M0  |
-|      | N1c  | M0  |
-| IIIA |      |     |
-| T3   | N1   | M0  |
-|      | N1a  | M0  |
-|      | N1b  | M0  |
-|      | N1c  | M0  |
-| T0   | N2   | M0  |
-| T1   | N2   | M0  |
-| T1a  | N2   | M0  |
-| T1b  | N2   | M0  |
-| T1c  | N2   | M0  |
-| T1mi | N2   | M0  |
-| T2   | N2   | M0  |
-| T3   | N2   | M0  |
-| T0   | N2a  | M0  |
-| T1   | N2a  | M0  |
-| T1a  | N2a  | M0  |
-| T1b  | N2a  | M0  |
-| T1c  | N2a  | M0  |
-| T1mi | N2a  | M0  |
-| T2   | N2a  | M0  |
-| T3   | N2a  | M0  |
-| T0   | N2b  | M0  |
-| T1   | N2b  | M0  |
-| T1a  | N2b  | M0  |
-| T1b  | N2b  | M0  |
-| T1c  | N2b  | M0  |
-| T1mi | N2b  | M0  |
-| T2   | N2b  | M0  |
-| T3   | N2b  | M0  |
-| IIIB |      |     |
-| T4   | N0   | M0  |
-| T4a  | N0   | M0  |
-| T4b  | N0   | M0  |
-| T4c  | N0   | M0  |
-| T4d  | N0   | M0  |
-| T4   | N1   | M0  |
-| T4a  | N1   | M0  |
-| T4b  | N1   | M0  |
-| T4c  | N1   | M0  |
-| T4d  | N1   | M0  |
-| T4   | N1a  | M0  |
-| T4a  | N1a  | M0  |
-| T4b  | N1a  | M0  |
-| T4c  | N1a  | M0  |
-| T4d  | N1a  | M0  |
-| T4   | N1b  | M0  |
-| T4a  | N1b  | M0  |
-| T4b  | N1b  | M0  |
-| T4c  | N1b  | M0  |
-| T4d  | N1b  | M0  |
-| T4   | N1c  | M0  |
-| T4a  | N1c  | M0  |
-| T4b  | N1c  | M0  |
-| T4c  | N1c  | M0  |
-| T4d  | N1c  | M0  |
-| T4   | N2   | M0  |
-| T4a  | N2   | M0  |
-| T4b  | N2   | M0  |
-| T4c  | N2   | M0  |
-| T4d  | N2   | M0  |
-| T4   | N2a  | M0  |
-| T4a  | N2a  | M0  |
-| T4b  | N2a  | M0  |
-| T4c  | N2a  | M0  |
-| T4d  | N2a  | M0  |
-| T4   | N2b  | M0  |
-| T4a  | N2b  | M0  |
-| T4b  | N2b  | M0  |
-| T4c  | N2b  | M0  |
-| T4d  | N2b  | M0  |
-| IIIC |      |     |
-| T0   | N3   | M0  |
-| T1   | N3   | M0  |
-| T1a  | N3   | M0  |
-| T1b  | N3   | M0  |
-| T1c  | N3   | M0  |
-| T1mi | N3   | M0  |
-| T2   | N3   | M0  |
-| T3   | N3   | M0  |
-| T4   | N3   | M0  |
-| T4a  | N3   | M0  |
-| T4b  | N3   | M0  |
-| T4c  | N3   | M0  |
-| T4d  | N3   | M0  |
-| Tis  | N3   | M0  |
-| T0   | N3a  | M0  |
-| T1   | N3a  | M0  |
-| T1a  | N3a  | M0  |
-| T1b  | N3a  | M0  |
-| T1c  | N3a  | M0  |
-| T1mi | N3a  | M0  |
-| T2   | N3a  | M0  |
-| T3   | N3a  | M0  |
-| T4   | N3a  | M0  |
-| T4a  | N3a  | M0  |
-| T4b  | N3a  | M0  |
-| T4c  | N3a  | M0  |
-| T4d  | N3a  | M0  |
-| Tis  | N3a  | M0  |
-| T0   | N3b  | M0  |
-| T1   | N3b  | M0  |
-| T1a  | N3b  | M0  |
-| T1b  | N3b  | M0  |
-| T1c  | N3b  | M0  |
-| T1mi | N3b  | M0  |
-| T2   | N3b  | M0  |
-| T3   | N3b  | M0  |
-| T4   | N3b  | M0  |
-| T4a  | N3b  | M0  |
-| T4b  | N3b  | M0  |
-| T4c  | N3b  | M0  |
-| T4d  | N3b  | M0  |
-| Tis  | N3b  | M0  |
-| T0   | N3c  | M0  |
-| T1   | N3c  | M0  |
-| T1a  | N3c  | M0  |
-| T1b  | N3c  | M0  |
-| T1c  | N3c  | M0  |
-| T1mi | N3c  | M0  |
-| T2   | N3c  | M0  |
-| T3   | N3c  | M0  |
-| T4   | N3c  | M0  |
-| T4a  | N3c  | M0  |
-| T4b  | N3c  | M0  |
-| T4c  | N3c  | M0  |
-| T4d  | N3c  | M0  |
-| Tis  | N3c  | M0  |
-| IV   |      |     |
-| T0   | N0   | M1  |
-| T1   | N0   | M1  |
-| T1a  | N0   | M1  |
-| T1b  | N0   | M1  |
-| T1c  | N0   | M1  |
-| T1mi | N0   | M1  |
-| T2   | N0   | M1  |
-| T3   | N0   | M1  |
-| T4   | N0   | M1  |
-| T4a  | N0   | M1  |
-| T4b  | N0   | M1  |
-| T4c  | N0   | M1  |
-| T4d  | N0   | M1  |
-| Tis  | N0   | M1  |
-| T0   | N1   | M1  |
-| T1   | N1   | M1  |
-| T1a  | N1   | M1  |
-| T1b  | N1   | M1  |
-| T1c  | N1   | M1  |
-| T1mi | N1   | M1  |
-| T2   | N1   | M1  |
-| T3   | N1   | M1  |
-| T4   | N1   | M1  |
-| T4a  | N1   | M1  |
-| T4b  | N1   | M1  |
-| T4c  | N1   | M1  |
-| T4d  | N1   | M1  |
-| Tis  | N1   | M1  |
-| T0   | N1a  | M1  |
-| T1   | N1a  | M1  |
-| T1a  | N1a  | M1  |
-| T1b  | N1a  | M1  |
-| T1c  | N1a  | M1  |
-| T1mi | N1a  | M1  |
-| T2   | N1a  | M1  |
-| T3   | N1a  | M1  |
-| T4   | N1a  | M1  |
-| T4a  | N1a  | M1  |
-| T4b  | N1a  | M1  |
-| T4c  | N1a  | M1  |
-| T4d  | N1a  | M1  |
-| Tis  | N1a  | M1  |
-| T0   | N1b  | M1  |
-| T1   | N1b  | M1  |
-| T1a  | N1b  | M1  |
-| T1b  | N1b  | M1  |
-| T1c  | N1b  | M1  |
-| T1mi | N1b  | M1  |
-| T2   | N1b  | M1  |
-| T3   | N1b  | M1  |
-| T4   | N1b  | M1  |
-| T4a  | N1b  | M1  |
-| T4b  | N1b  | M1  |
-| T4c  | N1b  | M1  |
-| T4d  | N1b  | M1  |
-| Tis  | N1b  | M1  |
-| T0   | N1c  | M1  |
-| T1   | N1c  | M1  |
-| T1a  | N1c  | M1  |
-| T1b  | N1c  | M1  |
-| T1c  | N1c  | M1  |
-| T1mi | N1c  | M1  |
-| T2   | N1c  | M1  |
-| T3   | N1c  | M1  |
-| T4   | N1c  | M1  |
-| T4a  | N1c  | M1  |
-| T4b  | N1c  | M1  |
-| T4c  | N1c  | M1  |
-| T4d  | N1c  | M1  |
-| Tis  | N1c  | M1  |
-| T0   | N1mi | M1  |
-| T1   | N1mi | M1  |
-| T1a  | N1mi | M1  |
-| T1b  | N1mi | M1  |
-| T1c  | N1mi | M1  |
-| T1mi | N1mi | M1  |
-| T2   | N1mi | M1  |
-| T3   | N1mi | M1  |
-| T4   | N1mi | M1  |
-| T4a  | N1mi | M1  |
-| T4b  | N1mi | M1  |
-| T4c  | N1mi | M1  |
-| T4d  | N1mi | M1  |
-| Tis  | N1mi | M1  |
-| T0   | N2   | M1  |
-| T1   | N2   | M1  |
-| T1a  | N2   | M1  |
-| T1b  | N2   | M1  |
-| T1c  | N2   | M1  |
-| T1mi | N2   | M1  |
-| T2   | N2   | M1  |
-| T3   | N2   | M1  |
-| T4   | N2   | M1  |
-| T4a  | N2   | M1  |
-| T4b  | N2   | M1  |
-| T4c  | N2   | M1  |
-| T4d  | N2   | M1  |
-| Tis  | N2   | M1  |
-| T0   | N2a  | M1  |
-| T1   | N2a  | M1  |
-| T1a  | N2a  | M1  |
-| T1b  | N2a  | M1  |
-| T1c  | N2a  | M1  |
-| T1mi | N2a  | M1  |
-| T2   | N2a  | M1  |
-| T3   | N2a  | M1  |
-| T4   | N2a  | M1  |
-| T4a  | N2a  | M1  |
-| T4b  | N2a  | M1  |
-| T4c  | N2a  | M1  |
-| T4d  | N2a  | M1  |
-| Tis  | N2a  | M1  |
-| T0   | N2b  | M1  |
-| T1   | N2b  | M1  |
-| T1a  | N2b  | M1  |
-| T1b  | N2b  | M1  |
-| T1c  | N2b  | M1  |
-| T1mi | N2b  | M1  |
-| T2   | N2b  | M1  |
-| T3   | N2b  | M1  |
-| T4   | N2b  | M1  |
-| T4a  | N2b  | M1  |
-| T4b  | N2b  | M1  |
-| T4c  | N2b  | M1  |
-| T4d  | N2b  | M1  |
-| Tis  | N2b  | M1  |
-| T0   | N3   | M1  |
-| T1   | N3   | M1  |
-| T1a  | N3   | M1  |
-| T1b  | N3   | M1  |
-| T1c  | N3   | M1  |
-| T1mi | N3   | M1  |
-| T2   | N3   | M1  |
-| T3   | N3   | M1  |
-| T4   | N3   | M1  |
-| T4a  | N3   | M1  |
-| T4b  | N3   | M1  |
-| T4c  | N3   | M1  |
-| T4d  | N3   | M1  |
-| Tis  | N3   | M1  |
-| T0   | N3a  | M1  |
-| T1   | N3a  | M1  |
-| T1a  | N3a  | M1  |
-| T1b  | N3a  | M1  |
-| T1c  | N3a  | M1  |
-| T1mi | N3a  | M1  |
-| T2   | N3a  | M1  |
-| T3   | N3a  | M1  |
-| T4   | N3a  | M1  |
-| T4a  | N3a  | M1  |
-| T4b  | N3a  | M1  |
-| T4c  | N3a  | M1  |
-| T4d  | N3a  | M1  |
-| Tis  | N3a  | M1  |
-| T0   | N3b  | M1  |
-| T1   | N3b  | M1  |
-| T1a  | N3b  | M1  |
-| T1b  | N3b  | M1  |
-| T1c  | N3b  | M1  |
-| T1mi | N3b  | M1  |
-| T2   | N3b  | M1  |
-| T3   | N3b  | M1  |
-| T4   | N3b  | M1  |
-| T4a  | N3b  | M1  |
-| T4b  | N3b  | M1  |
-| T4c  | N3b  | M1  |
-| T4d  | N3b  | M1  |
-| Tis  | N3b  | M1  |
-| T0   | N3c  | M1  |
-| T1   | N3c  | M1  |
-| T1a  | N3c  | M1  |
-| T1b  | N3c  | M1  |
-| T1c  | N3c  | M1  |
-| T1mi | N3c  | M1  |
-| T2   | N3c  | M1  |
-| T3   | N3c  | M1  |
-| T4   | N3c  | M1  |
-| T4a  | N3c  | M1  |
-| T4b  | N3c  | M1  |
-| T4c  | N3c  | M1  |
-| T4d  | N3c  | M1  |
-| Tis  | N3c  | M1  |
+Lung
 
-clinical
+Base (153 rules)
 
-| T    | N    | M   |
-|------|------|-----|
-| 0    |      |     |
-| Tis  | N0   | M0  |
-| IA   |      |     |
-| T1   | N0   | M0  |
-| T1a  | N0   | M0  |
-| T1b  | N0   | M0  |
-| T1c  | N0   | M0  |
-| T1mi | N0   | M0  |
-| IB   |      |     |
-| T0   | N1mi | M0  |
-| T1   | N1mi | M0  |
-| T1a  | N1mi | M0  |
-| T1b  | N1mi | M0  |
-| T1c  | N1mi | M0  |
-| T1mi | N1mi | M0  |
-| IIA  |      |     |
-| T2   | N0   | M0  |
-| T0   | N1   | M0  |
-| T1   | N1   | M0  |
-| T1a  | N1   | M0  |
-| T1b  | N1   | M0  |
-| T1c  | N1   | M0  |
-| T1mi | N1   | M0  |
-| T0   | N1a  | M0  |
-| T1   | N1a  | M0  |
-| T1a  | N1a  | M0  |
-| T1b  | N1a  | M0  |
-| T1c  | N1a  | M0  |
-| T1mi | N1a  | M0  |
-| T0   | N1b  | M0  |
-| T1   | N1b  | M0  |
-| T1a  | N1b  | M0  |
-| T1b  | N1b  | M0  |
-| T1c  | N1b  | M0  |
-| T1mi | N1b  | M0  |
-| T0   | N1c  | M0  |
-| T1   | N1c  | M0  |
-| T1a  | N1c  | M0  |
-| T1b  | N1c  | M0  |
-| T1c  | N1c  | M0  |
-| T1mi | N1c  | M0  |
-| IIB  |      |     |
-| T3   | N0   | M0  |
-| T2   | N1   | M0  |
-|      | N1a  | M0  |
-|      | N1b  | M0  |
-|      | N1c  | M0  |
-| IIIA |      |     |
-| T3   | N1   | M0  |
-|      | N1a  | M0  |
-|      | N1b  | M0  |
-|      | N1c  | M0  |
-| T0   | N2   | M0  |
-| T1   | N2   | M0  |
-| T1a  | N2   | M0  |
-| T1b  | N2   | M0  |
-| T1c  | N2   | M0  |
-| T1mi | N2   | M0  |
-| T2   | N2   | M0  |
-| T3   | N2   | M0  |
-| T0   | N2a  | M0  |
-| T1   | N2a  | M0  |
-| T1a  | N2a  | M0  |
-| T1b  | N2a  | M0  |
-| T1c  | N2a  | M0  |
-| T1mi | N2a  | M0  |
-| T2   | N2a  | M0  |
-| T3   | N2a  | M0  |
-| T0   | N2b  | M0  |
-| T1   | N2b  | M0  |
-| T1a  | N2b  | M0  |
-| T1b  | N2b  | M0  |
-| T1c  | N2b  | M0  |
-| T1mi | N2b  | M0  |
-| T2   | N2b  | M0  |
-| T3   | N2b  | M0  |
-| IIIB |      |     |
-| T4   | N0   | M0  |
-| T4a  | N0   | M0  |
-| T4b  | N0   | M0  |
-| T4c  | N0   | M0  |
-| T4d  | N0   | M0  |
-| T4   | N1   | M0  |
-| T4a  | N1   | M0  |
-| T4b  | N1   | M0  |
-| T4c  | N1   | M0  |
-| T4d  | N1   | M0  |
-| T4   | N1a  | M0  |
-| T4a  | N1a  | M0  |
-| T4b  | N1a  | M0  |
-| T4c  | N1a  | M0  |
-| T4d  | N1a  | M0  |
-| T4   | N1b  | M0  |
-| T4a  | N1b  | M0  |
-| T4b  | N1b  | M0  |
-| T4c  | N1b  | M0  |
-| T4d  | N1b  | M0  |
-| T4   | N1c  | M0  |
-| T4a  | N1c  | M0  |
-| T4b  | N1c  | M0  |
-| T4c  | N1c  | M0  |
-| T4d  | N1c  | M0  |
-| T4   | N2   | M0  |
-| T4a  | N2   | M0  |
-| T4b  | N2   | M0  |
-| T4c  | N2   | M0  |
-| T4d  | N2   | M0  |
-| T4   | N2a  | M0  |
-| T4a  | N2a  | M0  |
-| T4b  | N2a  | M0  |
-| T4c  | N2a  | M0  |
-| T4d  | N2a  | M0  |
-| T4   | N2b  | M0  |
-| T4a  | N2b  | M0  |
-| T4b  | N2b  | M0  |
-| T4c  | N2b  | M0  |
-| T4d  | N2b  | M0  |
-| IIIC |      |     |
-| T0   | N3   | M0  |
-| T1   | N3   | M0  |
-| T1a  | N3   | M0  |
-| T1b  | N3   | M0  |
-| T1c  | N3   | M0  |
-| T1mi | N3   | M0  |
-| T2   | N3   | M0  |
-| T3   | N3   | M0  |
-| T4   | N3   | M0  |
-| T4a  | N3   | M0  |
-| T4b  | N3   | M0  |
-| T4c  | N3   | M0  |
-| T4d  | N3   | M0  |
-| Tis  | N3   | M0  |
-| T0   | N3a  | M0  |
-| T1   | N3a  | M0  |
-| T1a  | N3a  | M0  |
-| T1b  | N3a  | M0  |
-| T1c  | N3a  | M0  |
-| T1mi | N3a  | M0  |
-| T2   | N3a  | M0  |
-| T3   | N3a  | M0  |
-| T4   | N3a  | M0  |
-| T4a  | N3a  | M0  |
-| T4b  | N3a  | M0  |
-| T4c  | N3a  | M0  |
-| T4d  | N3a  | M0  |
-| Tis  | N3a  | M0  |
-| T0   | N3b  | M0  |
-| T1   | N3b  | M0  |
-| T1a  | N3b  | M0  |
-| T1b  | N3b  | M0  |
-| T1c  | N3b  | M0  |
-| T1mi | N3b  | M0  |
-| T2   | N3b  | M0  |
-| T3   | N3b  | M0  |
-| T4   | N3b  | M0  |
-| T4a  | N3b  | M0  |
-| T4b  | N3b  | M0  |
-| T4c  | N3b  | M0  |
-| T4d  | N3b  | M0  |
-| Tis  | N3b  | M0  |
-| T0   | N3c  | M0  |
-| T1   | N3c  | M0  |
-| T1a  | N3c  | M0  |
-| T1b  | N3c  | M0  |
-| T1c  | N3c  | M0  |
-| T1mi | N3c  | M0  |
-| T2   | N3c  | M0  |
-| T3   | N3c  | M0  |
-| T4   | N3c  | M0  |
-| T4a  | N3c  | M0  |
-| T4b  | N3c  | M0  |
-| T4c  | N3c  | M0  |
-| T4d  | N3c  | M0  |
-| Tis  | N3c  | M0  |
-| IV   |      |     |
-| T0   | N0   | M1  |
-| T1   | N0   | M1  |
-| T1a  | N0   | M1  |
-| T1b  | N0   | M1  |
-| T1c  | N0   | M1  |
-| T1mi | N0   | M1  |
-| T2   | N0   | M1  |
-| T3   | N0   | M1  |
-| T4   | N0   | M1  |
-| T4a  | N0   | M1  |
-| T4b  | N0   | M1  |
-| T4c  | N0   | M1  |
-| T4d  | N0   | M1  |
-| Tis  | N0   | M1  |
-| T0   | N1   | M1  |
-| T1   | N1   | M1  |
-| T1a  | N1   | M1  |
-| T1b  | N1   | M1  |
-| T1c  | N1   | M1  |
-| T1mi | N1   | M1  |
-| T2   | N1   | M1  |
-| T3   | N1   | M1  |
-| T4   | N1   | M1  |
-| T4a  | N1   | M1  |
-| T4b  | N1   | M1  |
-| T4c  | N1   | M1  |
-| T4d  | N1   | M1  |
-| Tis  | N1   | M1  |
-| T0   | N1a  | M1  |
-| T1   | N1a  | M1  |
-| T1a  | N1a  | M1  |
-| T1b  | N1a  | M1  |
-| T1c  | N1a  | M1  |
-| T1mi | N1a  | M1  |
-| T2   | N1a  | M1  |
-| T3   | N1a  | M1  |
-| T4   | N1a  | M1  |
-| T4a  | N1a  | M1  |
-| T4b  | N1a  | M1  |
-| T4c  | N1a  | M1  |
-| T4d  | N1a  | M1  |
-| Tis  | N1a  | M1  |
-| T0   | N1b  | M1  |
-| T1   | N1b  | M1  |
-| T1a  | N1b  | M1  |
-| T1b  | N1b  | M1  |
-| T1c  | N1b  | M1  |
-| T1mi | N1b  | M1  |
-| T2   | N1b  | M1  |
-| T3   | N1b  | M1  |
-| T4   | N1b  | M1  |
-| T4a  | N1b  | M1  |
-| T4b  | N1b  | M1  |
-| T4c  | N1b  | M1  |
-| T4d  | N1b  | M1  |
-| Tis  | N1b  | M1  |
-| T0   | N1c  | M1  |
-| T1   | N1c  | M1  |
-| T1a  | N1c  | M1  |
-| T1b  | N1c  | M1  |
-| T1c  | N1c  | M1  |
-| T1mi | N1c  | M1  |
-| T2   | N1c  | M1  |
-| T3   | N1c  | M1  |
-| T4   | N1c  | M1  |
-| T4a  | N1c  | M1  |
-| T4b  | N1c  | M1  |
-| T4c  | N1c  | M1  |
-| T4d  | N1c  | M1  |
-| Tis  | N1c  | M1  |
-| T0   | N1mi | M1  |
-| T1   | N1mi | M1  |
-| T1a  | N1mi | M1  |
-| T1b  | N1mi | M1  |
-| T1c  | N1mi | M1  |
-| T1mi | N1mi | M1  |
-| T2   | N1mi | M1  |
-| T3   | N1mi | M1  |
-| T4   | N1mi | M1  |
-| T4a  | N1mi | M1  |
-| T4b  | N1mi | M1  |
-| T4c  | N1mi | M1  |
-| T4d  | N1mi | M1  |
-| Tis  | N1mi | M1  |
-| T0   | N2   | M1  |
-| T1   | N2   | M1  |
-| T1a  | N2   | M1  |
-| T1b  | N2   | M1  |
-| T1c  | N2   | M1  |
-| T1mi | N2   | M1  |
-| T2   | N2   | M1  |
-| T3   | N2   | M1  |
-| T4   | N2   | M1  |
-| T4a  | N2   | M1  |
-| T4b  | N2   | M1  |
-| T4c  | N2   | M1  |
-| T4d  | N2   | M1  |
-| Tis  | N2   | M1  |
-| T0   | N2a  | M1  |
-| T1   | N2a  | M1  |
-| T1a  | N2a  | M1  |
-| T1b  | N2a  | M1  |
-| T1c  | N2a  | M1  |
-| T1mi | N2a  | M1  |
-| T2   | N2a  | M1  |
-| T3   | N2a  | M1  |
-| T4   | N2a  | M1  |
-| T4a  | N2a  | M1  |
-| T4b  | N2a  | M1  |
-| T4c  | N2a  | M1  |
-| T4d  | N2a  | M1  |
-| Tis  | N2a  | M1  |
-| T0   | N2b  | M1  |
-| T1   | N2b  | M1  |
-| T1a  | N2b  | M1  |
-| T1b  | N2b  | M1  |
-| T1c  | N2b  | M1  |
-| T1mi | N2b  | M1  |
-| T2   | N2b  | M1  |
-| T3   | N2b  | M1  |
-| T4   | N2b  | M1  |
-| T4a  | N2b  | M1  |
-| T4b  | N2b  | M1  |
-| T4c  | N2b  | M1  |
-| T4d  | N2b  | M1  |
-| Tis  | N2b  | M1  |
-| T0   | N3   | M1  |
-| T1   | N3   | M1  |
-| T1a  | N3   | M1  |
-| T1b  | N3   | M1  |
-| T1c  | N3   | M1  |
-| T1mi | N3   | M1  |
-| T2   | N3   | M1  |
-| T3   | N3   | M1  |
-| T4   | N3   | M1  |
-| T4a  | N3   | M1  |
-| T4b  | N3   | M1  |
-| T4c  | N3   | M1  |
-| T4d  | N3   | M1  |
-| Tis  | N3   | M1  |
-| T0   | N3a  | M1  |
-| T1   | N3a  | M1  |
-| T1a  | N3a  | M1  |
-| T1b  | N3a  | M1  |
-| T1c  | N3a  | M1  |
-| T1mi | N3a  | M1  |
-| T2   | N3a  | M1  |
-| T3   | N3a  | M1  |
-| T4   | N3a  | M1  |
-| T4a  | N3a  | M1  |
-| T4b  | N3a  | M1  |
-| T4c  | N3a  | M1  |
-| T4d  | N3a  | M1  |
-| Tis  | N3a  | M1  |
-| T0   | N3b  | M1  |
-| T1   | N3b  | M1  |
-| T1a  | N3b  | M1  |
-| T1b  | N3b  | M1  |
-| T1c  | N3b  | M1  |
-| T1mi | N3b  | M1  |
-| T2   | N3b  | M1  |
-| T3   | N3b  | M1  |
-| T4   | N3b  | M1  |
-| T4a  | N3b  | M1  |
-| T4b  | N3b  | M1  |
-| T4c  | N3b  | M1  |
-| T4d  | N3b  | M1  |
-| Tis  | N3b  | M1  |
-| T0   | N3c  | M1  |
-| T1   | N3c  | M1  |
-| T1a  | N3c  | M1  |
-| T1b  | N3c  | M1  |
-| T1c  | N3c  | M1  |
-| T1mi | N3c  | M1  |
-| T2   | N3c  | M1  |
-| T3   | N3c  | M1  |
-| T4   | N3c  | M1  |
-| T4a  | N3c  | M1  |
-| T4b  | N3c  | M1  |
-| T4c  | N3c  | M1  |
-| T4d  | N3c  | M1  |
-| Tis  | N3c  | M1  |
+| T   | N   | M   | uicc_stage       |
+|:----|:----|:----|:-----------------|
+| Tis | N0  | M0  | 0                |
+| T1  | N0  | M0  | IA               |
+| T1a | N0  | M0  | IA               |
+| T1b | N0  | M0  | IA               |
+| T2a | N0  | M0  | IB               |
+| T1  | N1  | M0  | IIA              |
+| T1a | N1  | M0  | IIA              |
+| T1b | N1  | M0  | IIA              |
+| T2a | N1  | M0  | IIA              |
+| T2b | N0  | M0  | IIA              |
+| T2b | N1  | M0  | IIB              |
+| T3  | N0  | M0  | IIB              |
+| T1  | N2  | M0  | IIIA             |
+| T1a | N2  | M0  | IIIA             |
+| T1b | N2  | M0  | IIIA             |
+| T2  | N2  | M0  | IIIA             |
+| T2a | N2  | M0  | IIIA             |
+| T2b | N2  | M0  | IIIA             |
+| T3  | N1  | M0  | IIIA             |
+| T4  | N0  | M0  | IIIA             |
+| T4  | N1  | M0  | IIIA             |
+| T1  | N3  | M0  | IIIB             |
+| T1a | N3  | M0  | IIIB             |
+| T1b | N3  | M0  | IIIB             |
+| T2  | N3  | M0  | IIIB             |
+| T2a | N3  | M0  | IIIB             |
+| T2b | N3  | M0  | IIIB             |
+| T3  | N3  | M0  | IIIB             |
+| T4  | N2  | M0  | IIIB             |
+| T4  | N3  | M0  | IIIB             |
+| TX  | N3  | M0  | IIIB             |
+| Tis | N3  | M0  | IIIB             |
+| T1  | N0  | M1  | IV               |
+| T1  | N0  | M1a | IV               |
+| T1  | N0  | M1b | IV               |
+| T1  | N1  | M1  | IV               |
+| T1  | N1  | M1a | IV               |
+| T1  | N1  | M1b | IV               |
+| T1  | N2  | M1  | IV               |
+| T1  | N2  | M1a | IV               |
+| T1  | N2  | M1b | IV               |
+| T1  | N3  | M1  | IV               |
+| T1  | N3  | M1a | IV               |
+| T1  | N3  | M1b | IV               |
+| T1a | N0  | M1  | IV               |
+| T1a | N0  | M1a | IV               |
+| T1a | N0  | M1b | IV               |
+| T1a | N1  | M1  | IV               |
+| T1a | N1  | M1a | IV               |
+| T1a | N1  | M1b | IV               |
+| T1a | N2  | M1  | IV               |
+| T1a | N2  | M1a | IV               |
+| T1a | N2  | M1b | IV               |
+| T1a | N3  | M1  | IV               |
+| T1a | N3  | M1a | IV               |
+| T1a | N3  | M1b | IV               |
+| T1b | N0  | M1  | IV               |
+| T1b | N0  | M1a | IV               |
+| T1b | N0  | M1b | IV               |
+| T1b | N1  | M1  | IV               |
+| T1b | N1  | M1a | IV               |
+| T1b | N1  | M1b | IV               |
+| T1b | N2  | M1  | IV               |
+| T1b | N2  | M1a | IV               |
+| T1b | N2  | M1b | IV               |
+| T1b | N3  | M1  | IV               |
+| T1b | N3  | M1a | IV               |
+| T1b | N3  | M1b | IV               |
+| T2  | N0  | M1  | IV               |
+| T2  | N0  | M1a | IV               |
+| T2  | N0  | M1b | IV               |
+| T2  | N1  | M1  | IV               |
+| T2  | N1  | M1a | IV               |
+| T2  | N1  | M1b | IV               |
+| T2  | N2  | M1  | IV               |
+| T2  | N2  | M1a | IV               |
+| T2  | N2  | M1b | IV               |
+| T2  | N3  | M1  | IV               |
+| T2  | N3  | M1a | IV               |
+| T2  | N3  | M1b | IV               |
+| T2a | N0  | M1  | IV               |
+| T2a | N0  | M1a | IV               |
+| T2a | N0  | M1b | IV               |
+| T2a | N1  | M1  | IV               |
+| T2a | N1  | M1a | IV               |
+| T2a | N1  | M1b | IV               |
+| T2a | N2  | M1  | IV               |
+| T2a | N2  | M1a | IV               |
+| T2a | N2  | M1b | IV               |
+| T2a | N3  | M1  | IV               |
+| T2a | N3  | M1a | IV               |
+| T2a | N3  | M1b | IV               |
+| T2b | N0  | M1  | IV               |
+| T2b | N0  | M1a | IV               |
+| T2b | N0  | M1b | IV               |
+| T2b | N1  | M1  | IV               |
+| T2b | N1  | M1a | IV               |
+| T2b | N1  | M1b | IV               |
+| T2b | N2  | M1  | IV               |
+| T2b | N2  | M1a | IV               |
+| T2b | N2  | M1b | IV               |
+| T2b | N3  | M1  | IV               |
+| T2b | N3  | M1a | IV               |
+| T2b | N3  | M1b | IV               |
+| T3  | N0  | M1  | IV               |
+| T3  | N0  | M1a | IV               |
+| T3  | N0  | M1b | IV               |
+| T3  | N1  | M1  | IV               |
+| T3  | N1  | M1a | IV               |
+| T3  | N1  | M1b | IV               |
+| T3  | N2  | M1  | IV               |
+| T3  | N2  | M1a | IV               |
+| T3  | N2  | M1b | IV               |
+| T3  | N3  | M1  | IV               |
+| T3  | N3  | M1a | IV               |
+| T3  | N3  | M1b | IV               |
+| T4  | N0  | M1  | IV               |
+| T4  | N0  | M1a | IV               |
+| T4  | N0  | M1b | IV               |
+| T4  | N1  | M1  | IV               |
+| T4  | N1  | M1a | IV               |
+| T4  | N1  | M1b | IV               |
+| T4  | N2  | M1  | IV               |
+| T4  | N2  | M1a | IV               |
+| T4  | N2  | M1b | IV               |
+| T4  | N3  | M1  | IV               |
+| T4  | N3  | M1a | IV               |
+| T4  | N3  | M1b | IV               |
+| TX  | N0  | M1  | IV               |
+| TX  | N0  | M1a | IV               |
+| TX  | N0  | M1b | IV               |
+| TX  | N1  | M1  | IV               |
+| TX  | N1  | M1a | IV               |
+| TX  | N1  | M1b | IV               |
+| TX  | N2  | M1  | IV               |
+| TX  | N2  | M1a | IV               |
+| TX  | N2  | M1b | IV               |
+| TX  | N3  | M1  | IV               |
+| TX  | N3  | M1a | IV               |
+| TX  | N3  | M1b | IV               |
+| Tis | N0  | M1  | IV               |
+| Tis | N0  | M1a | IV               |
+| Tis | N0  | M1b | IV               |
+| Tis | N1  | M1  | IV               |
+| Tis | N1  | M1a | IV               |
+| Tis | N1  | M1b | IV               |
+| Tis | N2  | M1  | IV               |
+| Tis | N2  | M1a | IV               |
+| Tis | N2  | M1b | IV               |
+| Tis | N3  | M1  | IV               |
+| Tis | N3  | M1a | IV               |
+| Tis | N3  | M1b | IV               |
+| TX  | N0  | M0  | Occult carcinoma |
 
-pathological
+Oesophagus
 
-| T    | N    | M   |
-|------|------|-----|
-| 0    |      |     |
-| Tis  | N0   | M0  |
-| IA   |      |     |
-| T1   | N0   | M0  |
-| T1a  | N0   | M0  |
-| T1b  | N0   | M0  |
-| T1c  | N0   | M0  |
-| T1mi | N0   | M0  |
-| IB   |      |     |
-| T0   | N1mi | M0  |
-| T1   | N1mi | M0  |
-| T1a  | N1mi | M0  |
-| T1b  | N1mi | M0  |
-| T1c  | N1mi | M0  |
-| T1mi | N1mi | M0  |
-| IIA  |      |     |
-| T2   | N0   | M0  |
-| T0   | N1   | M0  |
-| T1   | N1   | M0  |
-| T1a  | N1   | M0  |
-| T1b  | N1   | M0  |
-| T1c  | N1   | M0  |
-| T1mi | N1   | M0  |
-| T0   | N1a  | M0  |
-| T1   | N1a  | M0  |
-| T1a  | N1a  | M0  |
-| T1b  | N1a  | M0  |
-| T1c  | N1a  | M0  |
-| T1mi | N1a  | M0  |
-| T0   | N1b  | M0  |
-| T1   | N1b  | M0  |
-| T1a  | N1b  | M0  |
-| T1b  | N1b  | M0  |
-| T1c  | N1b  | M0  |
-| T1mi | N1b  | M0  |
-| T0   | N1c  | M0  |
-| T1   | N1c  | M0  |
-| T1a  | N1c  | M0  |
-| T1b  | N1c  | M0  |
-| T1c  | N1c  | M0  |
-| T1mi | N1c  | M0  |
-| IIB  |      |     |
-| T3   | N0   | M0  |
-| T2   | N1   | M0  |
-|      | N1a  | M0  |
-|      | N1b  | M0  |
-|      | N1c  | M0  |
-| IIIA |      |     |
-| T3   | N1   | M0  |
-|      | N1a  | M0  |
-|      | N1b  | M0  |
-|      | N1c  | M0  |
-| T0   | N2   | M0  |
-| T1   | N2   | M0  |
-| T1a  | N2   | M0  |
-| T1b  | N2   | M0  |
-| T1c  | N2   | M0  |
-| T1mi | N2   | M0  |
-| T2   | N2   | M0  |
-| T3   | N2   | M0  |
-| T0   | N2a  | M0  |
-| T1   | N2a  | M0  |
-| T1a  | N2a  | M0  |
-| T1b  | N2a  | M0  |
-| T1c  | N2a  | M0  |
-| T1mi | N2a  | M0  |
-| T2   | N2a  | M0  |
-| T3   | N2a  | M0  |
-| T0   | N2b  | M0  |
-| T1   | N2b  | M0  |
-| T1a  | N2b  | M0  |
-| T1b  | N2b  | M0  |
-| T1c  | N2b  | M0  |
-| T1mi | N2b  | M0  |
-| T2   | N2b  | M0  |
-| T3   | N2b  | M0  |
-| IIIB |      |     |
-| T4   | N0   | M0  |
-| T4a  | N0   | M0  |
-| T4b  | N0   | M0  |
-| T4c  | N0   | M0  |
-| T4d  | N0   | M0  |
-| T4   | N1   | M0  |
-| T4a  | N1   | M0  |
-| T4b  | N1   | M0  |
-| T4c  | N1   | M0  |
-| T4d  | N1   | M0  |
-| T4   | N1a  | M0  |
-| T4a  | N1a  | M0  |
-| T4b  | N1a  | M0  |
-| T4c  | N1a  | M0  |
-| T4d  | N1a  | M0  |
-| T4   | N1b  | M0  |
-| T4a  | N1b  | M0  |
-| T4b  | N1b  | M0  |
-| T4c  | N1b  | M0  |
-| T4d  | N1b  | M0  |
-| T4   | N1c  | M0  |
-| T4a  | N1c  | M0  |
-| T4b  | N1c  | M0  |
-| T4c  | N1c  | M0  |
-| T4d  | N1c  | M0  |
-| T4   | N2   | M0  |
-| T4a  | N2   | M0  |
-| T4b  | N2   | M0  |
-| T4c  | N2   | M0  |
-| T4d  | N2   | M0  |
-| T4   | N2a  | M0  |
-| T4a  | N2a  | M0  |
-| T4b  | N2a  | M0  |
-| T4c  | N2a  | M0  |
-| T4d  | N2a  | M0  |
-| T4   | N2b  | M0  |
-| T4a  | N2b  | M0  |
-| T4b  | N2b  | M0  |
-| T4c  | N2b  | M0  |
-| T4d  | N2b  | M0  |
-| IIIC |      |     |
-| T0   | N3   | M0  |
-| T1   | N3   | M0  |
-| T1a  | N3   | M0  |
-| T1b  | N3   | M0  |
-| T1c  | N3   | M0  |
-| T1mi | N3   | M0  |
-| T2   | N3   | M0  |
-| T3   | N3   | M0  |
-| T4   | N3   | M0  |
-| T4a  | N3   | M0  |
-| T4b  | N3   | M0  |
-| T4c  | N3   | M0  |
-| T4d  | N3   | M0  |
-| Tis  | N3   | M0  |
-| T0   | N3a  | M0  |
-| T1   | N3a  | M0  |
-| T1a  | N3a  | M0  |
-| T1b  | N3a  | M0  |
-| T1c  | N3a  | M0  |
-| T1mi | N3a  | M0  |
-| T2   | N3a  | M0  |
-| T3   | N3a  | M0  |
-| T4   | N3a  | M0  |
-| T4a  | N3a  | M0  |
-| T4b  | N3a  | M0  |
-| T4c  | N3a  | M0  |
-| T4d  | N3a  | M0  |
-| Tis  | N3a  | M0  |
-| T0   | N3b  | M0  |
-| T1   | N3b  | M0  |
-| T1a  | N3b  | M0  |
-| T1b  | N3b  | M0  |
-| T1c  | N3b  | M0  |
-| T1mi | N3b  | M0  |
-| T2   | N3b  | M0  |
-| T3   | N3b  | M0  |
-| T4   | N3b  | M0  |
-| T4a  | N3b  | M0  |
-| T4b  | N3b  | M0  |
-| T4c  | N3b  | M0  |
-| T4d  | N3b  | M0  |
-| Tis  | N3b  | M0  |
-| T0   | N3c  | M0  |
-| T1   | N3c  | M0  |
-| T1a  | N3c  | M0  |
-| T1b  | N3c  | M0  |
-| T1c  | N3c  | M0  |
-| T1mi | N3c  | M0  |
-| T2   | N3c  | M0  |
-| T3   | N3c  | M0  |
-| T4   | N3c  | M0  |
-| T4a  | N3c  | M0  |
-| T4b  | N3c  | M0  |
-| T4c  | N3c  | M0  |
-| T4d  | N3c  | M0  |
-| Tis  | N3c  | M0  |
-| IV   |      |     |
-| T0   | N0   | M1  |
-| T1   | N0   | M1  |
-| T1a  | N0   | M1  |
-| T1b  | N0   | M1  |
-| T1c  | N0   | M1  |
-| T1mi | N0   | M1  |
-| T2   | N0   | M1  |
-| T3   | N0   | M1  |
-| T4   | N0   | M1  |
-| T4a  | N0   | M1  |
-| T4b  | N0   | M1  |
-| T4c  | N0   | M1  |
-| T4d  | N0   | M1  |
-| Tis  | N0   | M1  |
-| T0   | N1   | M1  |
-| T1   | N1   | M1  |
-| T1a  | N1   | M1  |
-| T1b  | N1   | M1  |
-| T1c  | N1   | M1  |
-| T1mi | N1   | M1  |
-| T2   | N1   | M1  |
-| T3   | N1   | M1  |
-| T4   | N1   | M1  |
-| T4a  | N1   | M1  |
-| T4b  | N1   | M1  |
-| T4c  | N1   | M1  |
-| T4d  | N1   | M1  |
-| Tis  | N1   | M1  |
-| T0   | N1a  | M1  |
-| T1   | N1a  | M1  |
-| T1a  | N1a  | M1  |
-| T1b  | N1a  | M1  |
-| T1c  | N1a  | M1  |
-| T1mi | N1a  | M1  |
-| T2   | N1a  | M1  |
-| T3   | N1a  | M1  |
-| T4   | N1a  | M1  |
-| T4a  | N1a  | M1  |
-| T4b  | N1a  | M1  |
-| T4c  | N1a  | M1  |
-| T4d  | N1a  | M1  |
-| Tis  | N1a  | M1  |
-| T0   | N1b  | M1  |
-| T1   | N1b  | M1  |
-| T1a  | N1b  | M1  |
-| T1b  | N1b  | M1  |
-| T1c  | N1b  | M1  |
-| T1mi | N1b  | M1  |
-| T2   | N1b  | M1  |
-| T3   | N1b  | M1  |
-| T4   | N1b  | M1  |
-| T4a  | N1b  | M1  |
-| T4b  | N1b  | M1  |
-| T4c  | N1b  | M1  |
-| T4d  | N1b  | M1  |
-| Tis  | N1b  | M1  |
-| T0   | N1c  | M1  |
-| T1   | N1c  | M1  |
-| T1a  | N1c  | M1  |
-| T1b  | N1c  | M1  |
-| T1c  | N1c  | M1  |
-| T1mi | N1c  | M1  |
-| T2   | N1c  | M1  |
-| T3   | N1c  | M1  |
-| T4   | N1c  | M1  |
-| T4a  | N1c  | M1  |
-| T4b  | N1c  | M1  |
-| T4c  | N1c  | M1  |
-| T4d  | N1c  | M1  |
-| Tis  | N1c  | M1  |
-| T0   | N1mi | M1  |
-| T1   | N1mi | M1  |
-| T1a  | N1mi | M1  |
-| T1b  | N1mi | M1  |
-| T1c  | N1mi | M1  |
-| T1mi | N1mi | M1  |
-| T2   | N1mi | M1  |
-| T3   | N1mi | M1  |
-| T4   | N1mi | M1  |
-| T4a  | N1mi | M1  |
-| T4b  | N1mi | M1  |
-| T4c  | N1mi | M1  |
-| T4d  | N1mi | M1  |
-| Tis  | N1mi | M1  |
-| T0   | N2   | M1  |
-| T1   | N2   | M1  |
-| T1a  | N2   | M1  |
-| T1b  | N2   | M1  |
-| T1c  | N2   | M1  |
-| T1mi | N2   | M1  |
-| T2   | N2   | M1  |
-| T3   | N2   | M1  |
-| T4   | N2   | M1  |
-| T4a  | N2   | M1  |
-| T4b  | N2   | M1  |
-| T4c  | N2   | M1  |
-| T4d  | N2   | M1  |
-| Tis  | N2   | M1  |
-| T0   | N2a  | M1  |
-| T1   | N2a  | M1  |
-| T1a  | N2a  | M1  |
-| T1b  | N2a  | M1  |
-| T1c  | N2a  | M1  |
-| T1mi | N2a  | M1  |
-| T2   | N2a  | M1  |
-| T3   | N2a  | M1  |
-| T4   | N2a  | M1  |
-| T4a  | N2a  | M1  |
-| T4b  | N2a  | M1  |
-| T4c  | N2a  | M1  |
-| T4d  | N2a  | M1  |
-| Tis  | N2a  | M1  |
-| T0   | N2b  | M1  |
-| T1   | N2b  | M1  |
-| T1a  | N2b  | M1  |
-| T1b  | N2b  | M1  |
-| T1c  | N2b  | M1  |
-| T1mi | N2b  | M1  |
-| T2   | N2b  | M1  |
-| T3   | N2b  | M1  |
-| T4   | N2b  | M1  |
-| T4a  | N2b  | M1  |
-| T4b  | N2b  | M1  |
-| T4c  | N2b  | M1  |
-| T4d  | N2b  | M1  |
-| Tis  | N2b  | M1  |
-| T0   | N3   | M1  |
-| T1   | N3   | M1  |
-| T1a  | N3   | M1  |
-| T1b  | N3   | M1  |
-| T1c  | N3   | M1  |
-| T1mi | N3   | M1  |
-| T2   | N3   | M1  |
-| T3   | N3   | M1  |
-| T4   | N3   | M1  |
-| T4a  | N3   | M1  |
-| T4b  | N3   | M1  |
-| T4c  | N3   | M1  |
-| T4d  | N3   | M1  |
-| Tis  | N3   | M1  |
-| T0   | N3a  | M1  |
-| T1   | N3a  | M1  |
-| T1a  | N3a  | M1  |
-| T1b  | N3a  | M1  |
-| T1c  | N3a  | M1  |
-| T1mi | N3a  | M1  |
-| T2   | N3a  | M1  |
-| T3   | N3a  | M1  |
-| T4   | N3a  | M1  |
-| T4a  | N3a  | M1  |
-| T4b  | N3a  | M1  |
-| T4c  | N3a  | M1  |
-| T4d  | N3a  | M1  |
-| Tis  | N3a  | M1  |
-| T0   | N3b  | M1  |
-| T1   | N3b  | M1  |
-| T1a  | N3b  | M1  |
-| T1b  | N3b  | M1  |
-| T1c  | N3b  | M1  |
-| T1mi | N3b  | M1  |
-| T2   | N3b  | M1  |
-| T3   | N3b  | M1  |
-| T4   | N3b  | M1  |
-| T4a  | N3b  | M1  |
-| T4b  | N3b  | M1  |
-| T4c  | N3b  | M1  |
-| T4d  | N3b  | M1  |
-| Tis  | N3b  | M1  |
-| T0   | N3c  | M1  |
-| T1   | N3c  | M1  |
-| T1a  | N3c  | M1  |
-| T1b  | N3c  | M1  |
-| T1c  | N3c  | M1  |
-| T1mi | N3c  | M1  |
-| T2   | N3c  | M1  |
-| T3   | N3c  | M1  |
-| T4   | N3c  | M1  |
-| T4a  | N3c  | M1  |
-| T4b  | N3c  | M1  |
-| T4c  | N3c  | M1  |
-| T4d  | N3c  | M1  |
-| Tis  | N3c  | M1  |
+Base (46 rules)
 
-colorectal
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| Tis | N0  | M0  | 0          |
+| T1  | N0  | M0  | IA         |
+| T2  | N0  | M0  | IB         |
+| T3  | N0  | M0  | IIA        |
+| T1  | N1  | M0  | IIB        |
+| T2  | N1  | M0  | IIB        |
+| T1  | N2  | M0  | IIIA       |
+| T2  | N2  | M0  | IIIA       |
+| T3  | N1  | M0  | IIIA       |
+| T4a | N0  | M0  | IIIA       |
+| T3  | N2  | M0  | IIIB       |
+| T1  | N3  | M0  | IIIC       |
+| T2  | N3  | M0  | IIIC       |
+| T3  | N3  | M0  | IIIC       |
+| T4a | N1  | M0  | IIIC       |
+| T4a | N2  | M0  | IIIC       |
+| T4a | N3  | M0  | IIIC       |
+| T4b | N0  | M0  | IIIC       |
+| T4b | N1  | M0  | IIIC       |
+| T4b | N2  | M0  | IIIC       |
+| T4b | N3  | M0  | IIIC       |
+| Tis | N3  | M0  | IIIC       |
+| T1  | N0  | M1  | IV         |
+| T1  | N1  | M1  | IV         |
+| T1  | N2  | M1  | IV         |
+| T1  | N3  | M1  | IV         |
+| T2  | N0  | M1  | IV         |
+| T2  | N1  | M1  | IV         |
+| T2  | N2  | M1  | IV         |
+| T2  | N3  | M1  | IV         |
+| T3  | N0  | M1  | IV         |
+| T3  | N1  | M1  | IV         |
+| T3  | N2  | M1  | IV         |
+| T3  | N3  | M1  | IV         |
+| T4a | N0  | M1  | IV         |
+| T4a | N1  | M1  | IV         |
+| T4a | N2  | M1  | IV         |
+| T4a | N3  | M1  | IV         |
+| T4b | N0  | M1  | IV         |
+| T4b | N1  | M1  | IV         |
+| T4b | N2  | M1  | IV         |
+| T4b | N3  | M1  | IV         |
+| Tis | N0  | M1  | IV         |
+| Tis | N1  | M1  | IV         |
+| Tis | N2  | M1  | IV         |
+| Tis | N3  | M1  | IV         |
 
-base
+Prostate
 
-| T    | N   | M   |
-|------|-----|-----|
-| 0    |     |     |
-| Tis  | N0  | M0  |
-| I    |     |     |
-| T1   | N0  | M0  |
-| T2   | N0  | M0  |
-| IIA  |     |     |
-| T3   | N0  | M0  |
-| IIB  |     |     |
-| T4a  | N0  | M0  |
-| IIC  |     |     |
-| T4b  | N0  | M0  |
-| III  |     |     |
-| T1   | N2  | M0  |
-| T2   | N2  | M0  |
-| T3   | N2  | M0  |
-| T4a  | N2  | M0  |
-| IIIA |     |     |
-| T1   | N1  | M0  |
-| T2   | N1  | M0  |
-| T1   | N1a | M0  |
-| T2   | N1a | M0  |
-| T1   | N1b | M0  |
-| T2   | N1b | M0  |
-| T1   | N1c | M0  |
-| T2   | N1c | M0  |
-| T1   | N2a | M0  |
-| IIIB |     |     |
-| T3   | N1  | M0  |
-| T4a  | N1  | M0  |
-| T3   | N1a | M0  |
-| T4a  | N1a | M0  |
-| T3   | N1b | M0  |
-| T4a  | N1b | M0  |
-| T3   | N1c | M0  |
-| T4a  | N1c | M0  |
-| T2   | N2a | M0  |
-| T3   | N2a | M0  |
-| T1   | N2b | M0  |
-| T2   | N2b | M0  |
-| IIIC |     |     |
-| T4b  | N1  | M0  |
-|      | N1a | M0  |
-|      | N1b | M0  |
-|      | N1c | M0  |
-|      | N2  | M0  |
-| T4a  | N2a | M0  |
-| T4b  | N2a | M0  |
-| T3   | N2b | M0  |
-| T4a  | N2b | M0  |
-| T4b  | N2b | M0  |
-| IV   |     |     |
-| T1   | N0  | M1  |
-| T2   | N0  | M1  |
-| T3   | N0  | M1  |
-| T4a  | N0  | M1  |
-| T4b  | N0  | M1  |
-| Tis  | N0  | M1  |
-| T1   | N1  | M1  |
-| T2   | N1  | M1  |
-| T3   | N1  | M1  |
-| T4a  | N1  | M1  |
-| T4b  | N1  | M1  |
-| Tis  | N1  | M1  |
-| T1   | N1a | M1  |
-| T2   | N1a | M1  |
-| T3   | N1a | M1  |
-| T4a  | N1a | M1  |
-| T4b  | N1a | M1  |
-| Tis  | N1a | M1  |
-| T1   | N1b | M1  |
-| T2   | N1b | M1  |
-| T3   | N1b | M1  |
-| T4a  | N1b | M1  |
-| T4b  | N1b | M1  |
-| Tis  | N1b | M1  |
-| T1   | N1c | M1  |
-| T2   | N1c | M1  |
-| T3   | N1c | M1  |
-| T4a  | N1c | M1  |
-| T4b  | N1c | M1  |
-| Tis  | N1c | M1  |
-| T1   | N2  | M1  |
-| T2   | N2  | M1  |
-| T3   | N2  | M1  |
-| T4a  | N2  | M1  |
-| T4b  | N2  | M1  |
-| Tis  | N2  | M1  |
-| T1   | N2a | M1  |
-| T2   | N2a | M1  |
-| T3   | N2a | M1  |
-| T4a  | N2a | M1  |
-| T4b  | N2a | M1  |
-| Tis  | N2a | M1  |
-| T1   | N2b | M1  |
-| T2   | N2b | M1  |
-| T3   | N2b | M1  |
-| T4a  | N2b | M1  |
-| T4b  | N2b | M1  |
-| Tis  | N2b | M1  |
-| IVA  |     |     |
-| T1   | N0  | M1a |
-| T2   | N0  | M1a |
-| T3   | N0  | M1a |
-| T4a  | N0  | M1a |
-| T4b  | N0  | M1a |
-| Tis  | N0  | M1a |
-| T1   | N1  | M1a |
-| T2   | N1  | M1a |
-| T3   | N1  | M1a |
-| T4a  | N1  | M1a |
-| T4b  | N1  | M1a |
-| Tis  | N1  | M1a |
-| T1   | N1a | M1a |
-| T2   | N1a | M1a |
-| T3   | N1a | M1a |
-| T4a  | N1a | M1a |
-| T4b  | N1a | M1a |
-| Tis  | N1a | M1a |
-| T1   | N1b | M1a |
-| T2   | N1b | M1a |
-| T3   | N1b | M1a |
-| T4a  | N1b | M1a |
-| T4b  | N1b | M1a |
-| Tis  | N1b | M1a |
-| T1   | N1c | M1a |
-| T2   | N1c | M1a |
-| T3   | N1c | M1a |
-| T4a  | N1c | M1a |
-| T4b  | N1c | M1a |
-| Tis  | N1c | M1a |
-| T1   | N2  | M1a |
-| T2   | N2  | M1a |
-| T3   | N2  | M1a |
-| T4a  | N2  | M1a |
-| T4b  | N2  | M1a |
-| Tis  | N2  | M1a |
-| T1   | N2a | M1a |
-| T2   | N2a | M1a |
-| T3   | N2a | M1a |
-| T4a  | N2a | M1a |
-| T4b  | N2a | M1a |
-| Tis  | N2a | M1a |
-| T1   | N2b | M1a |
-| T2   | N2b | M1a |
-| T3   | N2b | M1a |
-| T4a  | N2b | M1a |
-| T4b  | N2b | M1a |
-| Tis  | N2b | M1a |
-| IVB  |     |     |
-| T1   | N0  | M1b |
-| T2   | N0  | M1b |
-| T3   | N0  | M1b |
-| T4a  | N0  | M1b |
-| T4b  | N0  | M1b |
-| Tis  | N0  | M1b |
-| T1   | N1  | M1b |
-| T2   | N1  | M1b |
-| T3   | N1  | M1b |
-| T4a  | N1  | M1b |
-| T4b  | N1  | M1b |
-| Tis  | N1  | M1b |
-| T1   | N1a | M1b |
-| T2   | N1a | M1b |
-| T3   | N1a | M1b |
-| T4a  | N1a | M1b |
-| T4b  | N1a | M1b |
-| Tis  | N1a | M1b |
-| T1   | N1b | M1b |
-| T2   | N1b | M1b |
-| T3   | N1b | M1b |
-| T4a  | N1b | M1b |
-| T4b  | N1b | M1b |
-| Tis  | N1b | M1b |
-| T1   | N1c | M1b |
-| T2   | N1c | M1b |
-| T3   | N1c | M1b |
-| T4a  | N1c | M1b |
-| T4b  | N1c | M1b |
-| Tis  | N1c | M1b |
-| T1   | N2  | M1b |
-| T2   | N2  | M1b |
-| T3   | N2  | M1b |
-| T4a  | N2  | M1b |
-| T4b  | N2  | M1b |
-| Tis  | N2  | M1b |
-| T1   | N2a | M1b |
-| T2   | N2a | M1b |
-| T3   | N2a | M1b |
-| T4a  | N2a | M1b |
-| T4b  | N2a | M1b |
-| Tis  | N2a | M1b |
-| T1   | N2b | M1b |
-| T2   | N2b | M1b |
-| T3   | N2b | M1b |
-| T4a  | N2b | M1b |
-| T4b  | N2b | M1b |
-| Tis  | N2b | M1b |
+Base (119 rules)
 
-clinical
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| T1  | N0  | M0  | I          |
+| T1a | N0  | M0  | I          |
+| T1b | N0  | M0  | I          |
+| T1c | N0  | M0  | I          |
+| T2a | N0  | M0  | I          |
+| T2b | N0  | M0  | II         |
+| T2c | N0  | M0  | II         |
+| T3  | N0  | M0  | III        |
+| T3a | N0  | M0  | III        |
+| T3b | N0  | M0  | III        |
+| T1  | N0  | M1  | IV         |
+| T1  | N0  | M1a | IV         |
+| T1  | N0  | M1b | IV         |
+| T1  | N0  | M1c | IV         |
+| T1  | N1  | M0  | IV         |
+| T1  | N1  | M1  | IV         |
+| T1  | N1  | M1a | IV         |
+| T1  | N1  | M1b | IV         |
+| T1  | N1  | M1c | IV         |
+| T1a | N0  | M1  | IV         |
+| T1a | N0  | M1a | IV         |
+| T1a | N0  | M1b | IV         |
+| T1a | N0  | M1c | IV         |
+| T1a | N1  | M0  | IV         |
+| T1a | N1  | M1  | IV         |
+| T1a | N1  | M1a | IV         |
+| T1a | N1  | M1b | IV         |
+| T1a | N1  | M1c | IV         |
+| T1b | N0  | M1  | IV         |
+| T1b | N0  | M1a | IV         |
+| T1b | N0  | M1b | IV         |
+| T1b | N0  | M1c | IV         |
+| T1b | N1  | M0  | IV         |
+| T1b | N1  | M1  | IV         |
+| T1b | N1  | M1a | IV         |
+| T1b | N1  | M1b | IV         |
+| T1b | N1  | M1c | IV         |
+| T1c | N0  | M1  | IV         |
+| T1c | N0  | M1a | IV         |
+| T1c | N0  | M1b | IV         |
+| T1c | N0  | M1c | IV         |
+| T1c | N1  | M0  | IV         |
+| T1c | N1  | M1  | IV         |
+| T1c | N1  | M1a | IV         |
+| T1c | N1  | M1b | IV         |
+| T1c | N1  | M1c | IV         |
+| T2  | N0  | M1  | IV         |
+| T2  | N0  | M1a | IV         |
+| T2  | N0  | M1b | IV         |
+| T2  | N0  | M1c | IV         |
+| T2  | N1  | M0  | IV         |
+| T2  | N1  | M1  | IV         |
+| T2  | N1  | M1a | IV         |
+| T2  | N1  | M1b | IV         |
+| T2  | N1  | M1c | IV         |
+| T2a | N0  | M1  | IV         |
+| T2a | N0  | M1a | IV         |
+| T2a | N0  | M1b | IV         |
+| T2a | N0  | M1c | IV         |
+| T2a | N1  | M0  | IV         |
+| T2a | N1  | M1  | IV         |
+| T2a | N1  | M1a | IV         |
+| T2a | N1  | M1b | IV         |
+| T2a | N1  | M1c | IV         |
+| T2b | N0  | M1  | IV         |
+| T2b | N0  | M1a | IV         |
+| T2b | N0  | M1b | IV         |
+| T2b | N0  | M1c | IV         |
+| T2b | N1  | M0  | IV         |
+| T2b | N1  | M1  | IV         |
+| T2b | N1  | M1a | IV         |
+| T2b | N1  | M1b | IV         |
+| T2b | N1  | M1c | IV         |
+| T2c | N0  | M1  | IV         |
+| T2c | N0  | M1a | IV         |
+| T2c | N0  | M1b | IV         |
+| T2c | N0  | M1c | IV         |
+| T2c | N1  | M0  | IV         |
+| T2c | N1  | M1  | IV         |
+| T2c | N1  | M1a | IV         |
+| T2c | N1  | M1b | IV         |
+| T2c | N1  | M1c | IV         |
+| T3  | N0  | M1  | IV         |
+| T3  | N0  | M1a | IV         |
+| T3  | N0  | M1b | IV         |
+| T3  | N0  | M1c | IV         |
+| T3  | N1  | M0  | IV         |
+| T3  | N1  | M1  | IV         |
+| T3  | N1  | M1a | IV         |
+| T3  | N1  | M1b | IV         |
+| T3  | N1  | M1c | IV         |
+| T3a | N0  | M1  | IV         |
+| T3a | N0  | M1a | IV         |
+| T3a | N0  | M1b | IV         |
+| T3a | N0  | M1c | IV         |
+| T3a | N1  | M0  | IV         |
+| T3a | N1  | M1  | IV         |
+| T3a | N1  | M1a | IV         |
+| T3a | N1  | M1b | IV         |
+| T3a | N1  | M1c | IV         |
+| T3b | N0  | M1  | IV         |
+| T3b | N0  | M1a | IV         |
+| T3b | N0  | M1b | IV         |
+| T3b | N0  | M1c | IV         |
+| T3b | N1  | M0  | IV         |
+| T3b | N1  | M1  | IV         |
+| T3b | N1  | M1a | IV         |
+| T3b | N1  | M1b | IV         |
+| T3b | N1  | M1c | IV         |
+| T4  | N0  | M0  | IV         |
+| T4  | N0  | M1  | IV         |
+| T4  | N0  | M1a | IV         |
+| T4  | N0  | M1b | IV         |
+| T4  | N0  | M1c | IV         |
+| T4  | N1  | M0  | IV         |
+| T4  | N1  | M1  | IV         |
+| T4  | N1  | M1a | IV         |
+| T4  | N1  | M1b | IV         |
+| T4  | N1  | M1c | IV         |
 
-| T    | N   | M   |
-|------|-----|-----|
-| 0    |     |     |
-| Tis  | N0  | M0  |
-| I    |     |     |
-| T1   | N0  | M0  |
-| T2   | N0  | M0  |
-| IIA  |     |     |
-| T3   | N0  | M0  |
-| IIB  |     |     |
-| T4a  | N0  | M0  |
-| IIC  |     |     |
-| T4b  | N0  | M0  |
-| III  |     |     |
-| T1   | N2  | M0  |
-| T2   | N2  | M0  |
-| T3   | N2  | M0  |
-| T4a  | N2  | M0  |
-| IIIA |     |     |
-| T1   | N1  | M0  |
-| T2   | N1  | M0  |
-| T1   | N1a | M0  |
-| T2   | N1a | M0  |
-| T1   | N1b | M0  |
-| T2   | N1b | M0  |
-| T1   | N1c | M0  |
-| T2   | N1c | M0  |
-| T1   | N2a | M0  |
-| IIIB |     |     |
-| T3   | N1  | M0  |
-| T4a  | N1  | M0  |
-| T3   | N1a | M0  |
-| T4a  | N1a | M0  |
-| T3   | N1b | M0  |
-| T4a  | N1b | M0  |
-| T3   | N1c | M0  |
-| T4a  | N1c | M0  |
-| T2   | N2a | M0  |
-| T3   | N2a | M0  |
-| T1   | N2b | M0  |
-| T2   | N2b | M0  |
-| IIIC |     |     |
-| T4b  | N1  | M0  |
-|      | N1a | M0  |
-|      | N1b | M0  |
-|      | N1c | M0  |
-|      | N2  | M0  |
-| T4a  | N2a | M0  |
-| T4b  | N2a | M0  |
-| T3   | N2b | M0  |
-| T4a  | N2b | M0  |
-| T4b  | N2b | M0  |
-| IV   |     |     |
-| T1   | N0  | M1  |
-| T2   | N0  | M1  |
-| T3   | N0  | M1  |
-| T4a  | N0  | M1  |
-| T4b  | N0  | M1  |
-| Tis  | N0  | M1  |
-| T1   | N1  | M1  |
-| T2   | N1  | M1  |
-| T3   | N1  | M1  |
-| T4a  | N1  | M1  |
-| T4b  | N1  | M1  |
-| Tis  | N1  | M1  |
-| T1   | N1a | M1  |
-| T2   | N1a | M1  |
-| T3   | N1a | M1  |
-| T4a  | N1a | M1  |
-| T4b  | N1a | M1  |
-| Tis  | N1a | M1  |
-| T1   | N1b | M1  |
-| T2   | N1b | M1  |
-| T3   | N1b | M1  |
-| T4a  | N1b | M1  |
-| T4b  | N1b | M1  |
-| Tis  | N1b | M1  |
-| T1   | N1c | M1  |
-| T2   | N1c | M1  |
-| T3   | N1c | M1  |
-| T4a  | N1c | M1  |
-| T4b  | N1c | M1  |
-| Tis  | N1c | M1  |
-| T1   | N2  | M1  |
-| T2   | N2  | M1  |
-| T3   | N2  | M1  |
-| T4a  | N2  | M1  |
-| T4b  | N2  | M1  |
-| Tis  | N2  | M1  |
-| T1   | N2a | M1  |
-| T2   | N2a | M1  |
-| T3   | N2a | M1  |
-| T4a  | N2a | M1  |
-| T4b  | N2a | M1  |
-| Tis  | N2a | M1  |
-| T1   | N2b | M1  |
-| T2   | N2b | M1  |
-| T3   | N2b | M1  |
-| T4a  | N2b | M1  |
-| T4b  | N2b | M1  |
-| Tis  | N2b | M1  |
-| IVA  |     |     |
-| T1   | N0  | M1a |
-| T2   | N0  | M1a |
-| T3   | N0  | M1a |
-| T4a  | N0  | M1a |
-| T4b  | N0  | M1a |
-| Tis  | N0  | M1a |
-| T1   | N1  | M1a |
-| T2   | N1  | M1a |
-| T3   | N1  | M1a |
-| T4a  | N1  | M1a |
-| T4b  | N1  | M1a |
-| Tis  | N1  | M1a |
-| T1   | N1a | M1a |
-| T2   | N1a | M1a |
-| T3   | N1a | M1a |
-| T4a  | N1a | M1a |
-| T4b  | N1a | M1a |
-| Tis  | N1a | M1a |
-| T1   | N1b | M1a |
-| T2   | N1b | M1a |
-| T3   | N1b | M1a |
-| T4a  | N1b | M1a |
-| T4b  | N1b | M1a |
-| Tis  | N1b | M1a |
-| T1   | N1c | M1a |
-| T2   | N1c | M1a |
-| T3   | N1c | M1a |
-| T4a  | N1c | M1a |
-| T4b  | N1c | M1a |
-| Tis  | N1c | M1a |
-| T1   | N2  | M1a |
-| T2   | N2  | M1a |
-| T3   | N2  | M1a |
-| T4a  | N2  | M1a |
-| T4b  | N2  | M1a |
-| Tis  | N2  | M1a |
-| T1   | N2a | M1a |
-| T2   | N2a | M1a |
-| T3   | N2a | M1a |
-| T4a  | N2a | M1a |
-| T4b  | N2a | M1a |
-| Tis  | N2a | M1a |
-| T1   | N2b | M1a |
-| T2   | N2b | M1a |
-| T3   | N2b | M1a |
-| T4a  | N2b | M1a |
-| T4b  | N2b | M1a |
-| Tis  | N2b | M1a |
-| IVB  |     |     |
-| T1   | N0  | M1b |
-| T2   | N0  | M1b |
-| T3   | N0  | M1b |
-| T4a  | N0  | M1b |
-| T4b  | N0  | M1b |
-| Tis  | N0  | M1b |
-| T1   | N1  | M1b |
-| T2   | N1  | M1b |
-| T3   | N1  | M1b |
-| T4a  | N1  | M1b |
-| T4b  | N1  | M1b |
-| Tis  | N1  | M1b |
-| T1   | N1a | M1b |
-| T2   | N1a | M1b |
-| T3   | N1a | M1b |
-| T4a  | N1a | M1b |
-| T4b  | N1a | M1b |
-| Tis  | N1a | M1b |
-| T1   | N1b | M1b |
-| T2   | N1b | M1b |
-| T3   | N1b | M1b |
-| T4a  | N1b | M1b |
-| T4b  | N1b | M1b |
-| Tis  | N1b | M1b |
-| T1   | N1c | M1b |
-| T2   | N1c | M1b |
-| T3   | N1c | M1b |
-| T4a  | N1c | M1b |
-| T4b  | N1c | M1b |
-| Tis  | N1c | M1b |
-| T1   | N2  | M1b |
-| T2   | N2  | M1b |
-| T3   | N2  | M1b |
-| T4a  | N2  | M1b |
-| T4b  | N2  | M1b |
-| Tis  | N2  | M1b |
-| T1   | N2a | M1b |
-| T2   | N2a | M1b |
-| T3   | N2a | M1b |
-| T4a  | N2a | M1b |
-| T4b  | N2a | M1b |
-| Tis  | N2a | M1b |
-| T1   | N2b | M1b |
-| T2   | N2b | M1b |
-| T3   | N2b | M1b |
-| T4a  | N2b | M1b |
-| T4b  | N2b | M1b |
-| Tis  | N2b | M1b |
+Skin
 
-pathological
+Pathological (475 rules)
 
-| T    | N   | M   |
-|------|-----|-----|
-| 0    |     |     |
-| Tis  | N0  | M0  |
-| I    |     |     |
-| T1   | N0  | M0  |
-| T2   | N0  | M0  |
-| IIA  |     |     |
-| T3   | N0  | M0  |
-| IIB  |     |     |
-| T4a  | N0  | M0  |
-| IIC  |     |     |
-| T4b  | N0  | M0  |
-| III  |     |     |
-| T1   | N2  | M0  |
-| T2   | N2  | M0  |
-| T3   | N2  | M0  |
-| T4a  | N2  | M0  |
-| IIIA |     |     |
-| T1   | N1  | M0  |
-| T2   | N1  | M0  |
-| T1   | N1a | M0  |
-| T2   | N1a | M0  |
-| T1   | N1b | M0  |
-| T2   | N1b | M0  |
-| T1   | N1c | M0  |
-| T2   | N1c | M0  |
-| T1   | N2a | M0  |
-| IIIB |     |     |
-| T3   | N1  | M0  |
-| T4a  | N1  | M0  |
-| T3   | N1a | M0  |
-| T4a  | N1a | M0  |
-| T3   | N1b | M0  |
-| T4a  | N1b | M0  |
-| T3   | N1c | M0  |
-| T4a  | N1c | M0  |
-| T2   | N2a | M0  |
-| T3   | N2a | M0  |
-| T1   | N2b | M0  |
-| T2   | N2b | M0  |
-| IIIC |     |     |
-| T4b  | N1  | M0  |
-|      | N1a | M0  |
-|      | N1b | M0  |
-|      | N1c | M0  |
-|      | N2  | M0  |
-| T4a  | N2a | M0  |
-| T4b  | N2a | M0  |
-| T3   | N2b | M0  |
-| T4a  | N2b | M0  |
-| T4b  | N2b | M0  |
-| IV   |     |     |
-| T1   | N0  | M1  |
-| T2   | N0  | M1  |
-| T3   | N0  | M1  |
-| T4a  | N0  | M1  |
-| T4b  | N0  | M1  |
-| Tis  | N0  | M1  |
-| T1   | N1  | M1  |
-| T2   | N1  | M1  |
-| T3   | N1  | M1  |
-| T4a  | N1  | M1  |
-| T4b  | N1  | M1  |
-| Tis  | N1  | M1  |
-| T1   | N1a | M1  |
-| T2   | N1a | M1  |
-| T3   | N1a | M1  |
-| T4a  | N1a | M1  |
-| T4b  | N1a | M1  |
-| Tis  | N1a | M1  |
-| T1   | N1b | M1  |
-| T2   | N1b | M1  |
-| T3   | N1b | M1  |
-| T4a  | N1b | M1  |
-| T4b  | N1b | M1  |
-| Tis  | N1b | M1  |
-| T1   | N1c | M1  |
-| T2   | N1c | M1  |
-| T3   | N1c | M1  |
-| T4a  | N1c | M1  |
-| T4b  | N1c | M1  |
-| Tis  | N1c | M1  |
-| T1   | N2  | M1  |
-| T2   | N2  | M1  |
-| T3   | N2  | M1  |
-| T4a  | N2  | M1  |
-| T4b  | N2  | M1  |
-| Tis  | N2  | M1  |
-| T1   | N2a | M1  |
-| T2   | N2a | M1  |
-| T3   | N2a | M1  |
-| T4a  | N2a | M1  |
-| T4b  | N2a | M1  |
-| Tis  | N2a | M1  |
-| T1   | N2b | M1  |
-| T2   | N2b | M1  |
-| T3   | N2b | M1  |
-| T4a  | N2b | M1  |
-| T4b  | N2b | M1  |
-| Tis  | N2b | M1  |
-| IVA  |     |     |
-| T1   | N0  | M1a |
-| T2   | N0  | M1a |
-| T3   | N0  | M1a |
-| T4a  | N0  | M1a |
-| T4b  | N0  | M1a |
-| Tis  | N0  | M1a |
-| T1   | N1  | M1a |
-| T2   | N1  | M1a |
-| T3   | N1  | M1a |
-| T4a  | N1  | M1a |
-| T4b  | N1  | M1a |
-| Tis  | N1  | M1a |
-| T1   | N1a | M1a |
-| T2   | N1a | M1a |
-| T3   | N1a | M1a |
-| T4a  | N1a | M1a |
-| T4b  | N1a | M1a |
-| Tis  | N1a | M1a |
-| T1   | N1b | M1a |
-| T2   | N1b | M1a |
-| T3   | N1b | M1a |
-| T4a  | N1b | M1a |
-| T4b  | N1b | M1a |
-| Tis  | N1b | M1a |
-| T1   | N1c | M1a |
-| T2   | N1c | M1a |
-| T3   | N1c | M1a |
-| T4a  | N1c | M1a |
-| T4b  | N1c | M1a |
-| Tis  | N1c | M1a |
-| T1   | N2  | M1a |
-| T2   | N2  | M1a |
-| T3   | N2  | M1a |
-| T4a  | N2  | M1a |
-| T4b  | N2  | M1a |
-| Tis  | N2  | M1a |
-| T1   | N2a | M1a |
-| T2   | N2a | M1a |
-| T3   | N2a | M1a |
-| T4a  | N2a | M1a |
-| T4b  | N2a | M1a |
-| Tis  | N2a | M1a |
-| T1   | N2b | M1a |
-| T2   | N2b | M1a |
-| T3   | N2b | M1a |
-| T4a  | N2b | M1a |
-| T4b  | N2b | M1a |
-| Tis  | N2b | M1a |
-| IVB  |     |     |
-| T1   | N0  | M1b |
-| T2   | N0  | M1b |
-| T3   | N0  | M1b |
-| T4a  | N0  | M1b |
-| T4b  | N0  | M1b |
-| Tis  | N0  | M1b |
-| T1   | N1  | M1b |
-| T2   | N1  | M1b |
-| T3   | N1  | M1b |
-| T4a  | N1  | M1b |
-| T4b  | N1  | M1b |
-| Tis  | N1  | M1b |
-| T1   | N1a | M1b |
-| T2   | N1a | M1b |
-| T3   | N1a | M1b |
-| T4a  | N1a | M1b |
-| T4b  | N1a | M1b |
-| Tis  | N1a | M1b |
-| T1   | N1b | M1b |
-| T2   | N1b | M1b |
-| T3   | N1b | M1b |
-| T4a  | N1b | M1b |
-| T4b  | N1b | M1b |
-| Tis  | N1b | M1b |
-| T1   | N1c | M1b |
-| T2   | N1c | M1b |
-| T3   | N1c | M1b |
-| T4a  | N1c | M1b |
-| T4b  | N1c | M1b |
-| Tis  | N1c | M1b |
-| T1   | N2  | M1b |
-| T2   | N2  | M1b |
-| T3   | N2  | M1b |
-| T4a  | N2  | M1b |
-| T4b  | N2  | M1b |
-| Tis  | N2  | M1b |
-| T1   | N2a | M1b |
-| T2   | N2a | M1b |
-| T3   | N2a | M1b |
-| T4a  | N2a | M1b |
-| T4b  | N2a | M1b |
-| Tis  | N2a | M1b |
-| T1   | N2b | M1b |
-| T2   | N2b | M1b |
-| T3   | N2b | M1b |
-| T4a  | N2b | M1b |
-| T4b  | N2b | M1b |
-| Tis  | N2b | M1b |
-
-lung
-
-base
-
-| T                | N   | M   |
-|------------------|-----|-----|
-| 0                |     |     |
-| Tis              | N0  | M0  |
-| IA               |     |     |
-| T1               | N0  | M0  |
-| T1a              | N0  | M0  |
-| T1b              | N0  | M0  |
-| IB               |     |     |
-| T2a              | N0  | M0  |
-| IIA              |     |     |
-| T2b              | N0  | M0  |
-| T1               | N1  | M0  |
-| T1a              | N1  | M0  |
-| T1b              | N1  | M0  |
-| T2a              | N1  | M0  |
-| IIB              |     |     |
-| T3               | N0  | M0  |
-| T2b              | N1  | M0  |
-| IIIA             |     |     |
-| T4               | N0  | M0  |
-| T3               | N1  | M0  |
-| T4               | N1  | M0  |
-| T1               | N2  | M0  |
-| T1a              | N2  | M0  |
-| T1b              | N2  | M0  |
-| T2               | N2  | M0  |
-| T2a              | N2  | M0  |
-| T2b              | N2  | M0  |
-| IIIB             |     |     |
-| T4               | N2  | M0  |
-| T1               | N3  | M0  |
-| T1a              | N3  | M0  |
-| T1b              | N3  | M0  |
-| T2               | N3  | M0  |
-| T2a              | N3  | M0  |
-| T2b              | N3  | M0  |
-| T3               | N3  | M0  |
-| T4               | N3  | M0  |
-| Tis              | N3  | M0  |
-| TX               | N3  | M0  |
-| IV               |     |     |
-| T1               | N0  | M1  |
-| T1a              | N0  | M1  |
-| T1b              | N0  | M1  |
-| T2               | N0  | M1  |
-| T2a              | N0  | M1  |
-| T2b              | N0  | M1  |
-| T3               | N0  | M1  |
-| T4               | N0  | M1  |
-| Tis              | N0  | M1  |
-| TX               | N0  | M1  |
-| T1               | N1  | M1  |
-| T1a              | N1  | M1  |
-| T1b              | N1  | M1  |
-| T2               | N1  | M1  |
-| T2a              | N1  | M1  |
-| T2b              | N1  | M1  |
-| T3               | N1  | M1  |
-| T4               | N1  | M1  |
-| Tis              | N1  | M1  |
-| TX               | N1  | M1  |
-| T1               | N2  | M1  |
-| T1a              | N2  | M1  |
-| T1b              | N2  | M1  |
-| T2               | N2  | M1  |
-| T2a              | N2  | M1  |
-| T2b              | N2  | M1  |
-| T3               | N2  | M1  |
-| T4               | N2  | M1  |
-| Tis              | N2  | M1  |
-| TX               | N2  | M1  |
-| T1               | N3  | M1  |
-| T1a              | N3  | M1  |
-| T1b              | N3  | M1  |
-| T2               | N3  | M1  |
-| T2a              | N3  | M1  |
-| T2b              | N3  | M1  |
-| T3               | N3  | M1  |
-| T4               | N3  | M1  |
-| Tis              | N3  | M1  |
-| TX               | N3  | M1  |
-| T1               | N0  | M1a |
-| T1a              | N0  | M1a |
-| T1b              | N0  | M1a |
-| T2               | N0  | M1a |
-| T2a              | N0  | M1a |
-| T2b              | N0  | M1a |
-| T3               | N0  | M1a |
-| T4               | N0  | M1a |
-| Tis              | N0  | M1a |
-| TX               | N0  | M1a |
-| T1               | N1  | M1a |
-| T1a              | N1  | M1a |
-| T1b              | N1  | M1a |
-| T2               | N1  | M1a |
-| T2a              | N1  | M1a |
-| T2b              | N1  | M1a |
-| T3               | N1  | M1a |
-| T4               | N1  | M1a |
-| Tis              | N1  | M1a |
-| TX               | N1  | M1a |
-| T1               | N2  | M1a |
-| T1a              | N2  | M1a |
-| T1b              | N2  | M1a |
-| T2               | N2  | M1a |
-| T2a              | N2  | M1a |
-| T2b              | N2  | M1a |
-| T3               | N2  | M1a |
-| T4               | N2  | M1a |
-| Tis              | N2  | M1a |
-| TX               | N2  | M1a |
-| T1               | N3  | M1a |
-| T1a              | N3  | M1a |
-| T1b              | N3  | M1a |
-| T2               | N3  | M1a |
-| T2a              | N3  | M1a |
-| T2b              | N3  | M1a |
-| T3               | N3  | M1a |
-| T4               | N3  | M1a |
-| Tis              | N3  | M1a |
-| TX               | N3  | M1a |
-| T1               | N0  | M1b |
-| T1a              | N0  | M1b |
-| T1b              | N0  | M1b |
-| T2               | N0  | M1b |
-| T2a              | N0  | M1b |
-| T2b              | N0  | M1b |
-| T3               | N0  | M1b |
-| T4               | N0  | M1b |
-| Tis              | N0  | M1b |
-| TX               | N0  | M1b |
-| T1               | N1  | M1b |
-| T1a              | N1  | M1b |
-| T1b              | N1  | M1b |
-| T2               | N1  | M1b |
-| T2a              | N1  | M1b |
-| T2b              | N1  | M1b |
-| T3               | N1  | M1b |
-| T4               | N1  | M1b |
-| Tis              | N1  | M1b |
-| TX               | N1  | M1b |
-| T1               | N2  | M1b |
-| T1a              | N2  | M1b |
-| T1b              | N2  | M1b |
-| T2               | N2  | M1b |
-| T2a              | N2  | M1b |
-| T2b              | N2  | M1b |
-| T3               | N2  | M1b |
-| T4               | N2  | M1b |
-| Tis              | N2  | M1b |
-| TX               | N2  | M1b |
-| T1               | N3  | M1b |
-| T1a              | N3  | M1b |
-| T1b              | N3  | M1b |
-| T2               | N3  | M1b |
-| T2a              | N3  | M1b |
-| T2b              | N3  | M1b |
-| T3               | N3  | M1b |
-| T4               | N3  | M1b |
-| Tis              | N3  | M1b |
-| TX               | N3  | M1b |
-| Occult carcinoma |     |     |
-| TX               | N0  | M0  |
-
-clinical
-
-| T                | N   | M   |
-|------------------|-----|-----|
-| 0                |     |     |
-| Tis              | N0  | M0  |
-| IA               |     |     |
-| T1               | N0  | M0  |
-| T1a              | N0  | M0  |
-| T1b              | N0  | M0  |
-| IB               |     |     |
-| T2a              | N0  | M0  |
-| IIA              |     |     |
-| T2b              | N0  | M0  |
-| T1               | N1  | M0  |
-| T1a              | N1  | M0  |
-| T1b              | N1  | M0  |
-| T2a              | N1  | M0  |
-| IIB              |     |     |
-| T3               | N0  | M0  |
-| T2b              | N1  | M0  |
-| IIIA             |     |     |
-| T4               | N0  | M0  |
-| T3               | N1  | M0  |
-| T4               | N1  | M0  |
-| T1               | N2  | M0  |
-| T1a              | N2  | M0  |
-| T1b              | N2  | M0  |
-| T2               | N2  | M0  |
-| T2a              | N2  | M0  |
-| T2b              | N2  | M0  |
-| IIIB             |     |     |
-| T4               | N2  | M0  |
-| T1               | N3  | M0  |
-| T1a              | N3  | M0  |
-| T1b              | N3  | M0  |
-| T2               | N3  | M0  |
-| T2a              | N3  | M0  |
-| T2b              | N3  | M0  |
-| T3               | N3  | M0  |
-| T4               | N3  | M0  |
-| Tis              | N3  | M0  |
-| TX               | N3  | M0  |
-| IV               |     |     |
-| T1               | N0  | M1  |
-| T1a              | N0  | M1  |
-| T1b              | N0  | M1  |
-| T2               | N0  | M1  |
-| T2a              | N0  | M1  |
-| T2b              | N0  | M1  |
-| T3               | N0  | M1  |
-| T4               | N0  | M1  |
-| Tis              | N0  | M1  |
-| TX               | N0  | M1  |
-| T1               | N1  | M1  |
-| T1a              | N1  | M1  |
-| T1b              | N1  | M1  |
-| T2               | N1  | M1  |
-| T2a              | N1  | M1  |
-| T2b              | N1  | M1  |
-| T3               | N1  | M1  |
-| T4               | N1  | M1  |
-| Tis              | N1  | M1  |
-| TX               | N1  | M1  |
-| T1               | N2  | M1  |
-| T1a              | N2  | M1  |
-| T1b              | N2  | M1  |
-| T2               | N2  | M1  |
-| T2a              | N2  | M1  |
-| T2b              | N2  | M1  |
-| T3               | N2  | M1  |
-| T4               | N2  | M1  |
-| Tis              | N2  | M1  |
-| TX               | N2  | M1  |
-| T1               | N3  | M1  |
-| T1a              | N3  | M1  |
-| T1b              | N3  | M1  |
-| T2               | N3  | M1  |
-| T2a              | N3  | M1  |
-| T2b              | N3  | M1  |
-| T3               | N3  | M1  |
-| T4               | N3  | M1  |
-| Tis              | N3  | M1  |
-| TX               | N3  | M1  |
-| T1               | N0  | M1a |
-| T1a              | N0  | M1a |
-| T1b              | N0  | M1a |
-| T2               | N0  | M1a |
-| T2a              | N0  | M1a |
-| T2b              | N0  | M1a |
-| T3               | N0  | M1a |
-| T4               | N0  | M1a |
-| Tis              | N0  | M1a |
-| TX               | N0  | M1a |
-| T1               | N1  | M1a |
-| T1a              | N1  | M1a |
-| T1b              | N1  | M1a |
-| T2               | N1  | M1a |
-| T2a              | N1  | M1a |
-| T2b              | N1  | M1a |
-| T3               | N1  | M1a |
-| T4               | N1  | M1a |
-| Tis              | N1  | M1a |
-| TX               | N1  | M1a |
-| T1               | N2  | M1a |
-| T1a              | N2  | M1a |
-| T1b              | N2  | M1a |
-| T2               | N2  | M1a |
-| T2a              | N2  | M1a |
-| T2b              | N2  | M1a |
-| T3               | N2  | M1a |
-| T4               | N2  | M1a |
-| Tis              | N2  | M1a |
-| TX               | N2  | M1a |
-| T1               | N3  | M1a |
-| T1a              | N3  | M1a |
-| T1b              | N3  | M1a |
-| T2               | N3  | M1a |
-| T2a              | N3  | M1a |
-| T2b              | N3  | M1a |
-| T3               | N3  | M1a |
-| T4               | N3  | M1a |
-| Tis              | N3  | M1a |
-| TX               | N3  | M1a |
-| T1               | N0  | M1b |
-| T1a              | N0  | M1b |
-| T1b              | N0  | M1b |
-| T2               | N0  | M1b |
-| T2a              | N0  | M1b |
-| T2b              | N0  | M1b |
-| T3               | N0  | M1b |
-| T4               | N0  | M1b |
-| Tis              | N0  | M1b |
-| TX               | N0  | M1b |
-| T1               | N1  | M1b |
-| T1a              | N1  | M1b |
-| T1b              | N1  | M1b |
-| T2               | N1  | M1b |
-| T2a              | N1  | M1b |
-| T2b              | N1  | M1b |
-| T3               | N1  | M1b |
-| T4               | N1  | M1b |
-| Tis              | N1  | M1b |
-| TX               | N1  | M1b |
-| T1               | N2  | M1b |
-| T1a              | N2  | M1b |
-| T1b              | N2  | M1b |
-| T2               | N2  | M1b |
-| T2a              | N2  | M1b |
-| T2b              | N2  | M1b |
-| T3               | N2  | M1b |
-| T4               | N2  | M1b |
-| Tis              | N2  | M1b |
-| TX               | N2  | M1b |
-| T1               | N3  | M1b |
-| T1a              | N3  | M1b |
-| T1b              | N3  | M1b |
-| T2               | N3  | M1b |
-| T2a              | N3  | M1b |
-| T2b              | N3  | M1b |
-| T3               | N3  | M1b |
-| T4               | N3  | M1b |
-| Tis              | N3  | M1b |
-| TX               | N3  | M1b |
-| Occult carcinoma |     |     |
-| TX               | N0  | M0  |
-
-pathological
-
-| T                | N   | M   |
-|------------------|-----|-----|
-| 0                |     |     |
-| Tis              | N0  | M0  |
-| IA               |     |     |
-| T1               | N0  | M0  |
-| T1a              | N0  | M0  |
-| T1b              | N0  | M0  |
-| IB               |     |     |
-| T2a              | N0  | M0  |
-| IIA              |     |     |
-| T2b              | N0  | M0  |
-| T1               | N1  | M0  |
-| T1a              | N1  | M0  |
-| T1b              | N1  | M0  |
-| T2a              | N1  | M0  |
-| IIB              |     |     |
-| T3               | N0  | M0  |
-| T2b              | N1  | M0  |
-| IIIA             |     |     |
-| T4               | N0  | M0  |
-| T3               | N1  | M0  |
-| T4               | N1  | M0  |
-| T1               | N2  | M0  |
-| T1a              | N2  | M0  |
-| T1b              | N2  | M0  |
-| T2               | N2  | M0  |
-| T2a              | N2  | M0  |
-| T2b              | N2  | M0  |
-| IIIB             |     |     |
-| T4               | N2  | M0  |
-| T1               | N3  | M0  |
-| T1a              | N3  | M0  |
-| T1b              | N3  | M0  |
-| T2               | N3  | M0  |
-| T2a              | N3  | M0  |
-| T2b              | N3  | M0  |
-| T3               | N3  | M0  |
-| T4               | N3  | M0  |
-| Tis              | N3  | M0  |
-| TX               | N3  | M0  |
-| IV               |     |     |
-| T1               | N0  | M1  |
-| T1a              | N0  | M1  |
-| T1b              | N0  | M1  |
-| T2               | N0  | M1  |
-| T2a              | N0  | M1  |
-| T2b              | N0  | M1  |
-| T3               | N0  | M1  |
-| T4               | N0  | M1  |
-| Tis              | N0  | M1  |
-| TX               | N0  | M1  |
-| T1               | N1  | M1  |
-| T1a              | N1  | M1  |
-| T1b              | N1  | M1  |
-| T2               | N1  | M1  |
-| T2a              | N1  | M1  |
-| T2b              | N1  | M1  |
-| T3               | N1  | M1  |
-| T4               | N1  | M1  |
-| Tis              | N1  | M1  |
-| TX               | N1  | M1  |
-| T1               | N2  | M1  |
-| T1a              | N2  | M1  |
-| T1b              | N2  | M1  |
-| T2               | N2  | M1  |
-| T2a              | N2  | M1  |
-| T2b              | N2  | M1  |
-| T3               | N2  | M1  |
-| T4               | N2  | M1  |
-| Tis              | N2  | M1  |
-| TX               | N2  | M1  |
-| T1               | N3  | M1  |
-| T1a              | N3  | M1  |
-| T1b              | N3  | M1  |
-| T2               | N3  | M1  |
-| T2a              | N3  | M1  |
-| T2b              | N3  | M1  |
-| T3               | N3  | M1  |
-| T4               | N3  | M1  |
-| Tis              | N3  | M1  |
-| TX               | N3  | M1  |
-| T1               | N0  | M1a |
-| T1a              | N0  | M1a |
-| T1b              | N0  | M1a |
-| T2               | N0  | M1a |
-| T2a              | N0  | M1a |
-| T2b              | N0  | M1a |
-| T3               | N0  | M1a |
-| T4               | N0  | M1a |
-| Tis              | N0  | M1a |
-| TX               | N0  | M1a |
-| T1               | N1  | M1a |
-| T1a              | N1  | M1a |
-| T1b              | N1  | M1a |
-| T2               | N1  | M1a |
-| T2a              | N1  | M1a |
-| T2b              | N1  | M1a |
-| T3               | N1  | M1a |
-| T4               | N1  | M1a |
-| Tis              | N1  | M1a |
-| TX               | N1  | M1a |
-| T1               | N2  | M1a |
-| T1a              | N2  | M1a |
-| T1b              | N2  | M1a |
-| T2               | N2  | M1a |
-| T2a              | N2  | M1a |
-| T2b              | N2  | M1a |
-| T3               | N2  | M1a |
-| T4               | N2  | M1a |
-| Tis              | N2  | M1a |
-| TX               | N2  | M1a |
-| T1               | N3  | M1a |
-| T1a              | N3  | M1a |
-| T1b              | N3  | M1a |
-| T2               | N3  | M1a |
-| T2a              | N3  | M1a |
-| T2b              | N3  | M1a |
-| T3               | N3  | M1a |
-| T4               | N3  | M1a |
-| Tis              | N3  | M1a |
-| TX               | N3  | M1a |
-| T1               | N0  | M1b |
-| T1a              | N0  | M1b |
-| T1b              | N0  | M1b |
-| T2               | N0  | M1b |
-| T2a              | N0  | M1b |
-| T2b              | N0  | M1b |
-| T3               | N0  | M1b |
-| T4               | N0  | M1b |
-| Tis              | N0  | M1b |
-| TX               | N0  | M1b |
-| T1               | N1  | M1b |
-| T1a              | N1  | M1b |
-| T1b              | N1  | M1b |
-| T2               | N1  | M1b |
-| T2a              | N1  | M1b |
-| T2b              | N1  | M1b |
-| T3               | N1  | M1b |
-| T4               | N1  | M1b |
-| Tis              | N1  | M1b |
-| TX               | N1  | M1b |
-| T1               | N2  | M1b |
-| T1a              | N2  | M1b |
-| T1b              | N2  | M1b |
-| T2               | N2  | M1b |
-| T2a              | N2  | M1b |
-| T2b              | N2  | M1b |
-| T3               | N2  | M1b |
-| T4               | N2  | M1b |
-| Tis              | N2  | M1b |
-| TX               | N2  | M1b |
-| T1               | N3  | M1b |
-| T1a              | N3  | M1b |
-| T1b              | N3  | M1b |
-| T2               | N3  | M1b |
-| T2a              | N3  | M1b |
-| T2b              | N3  | M1b |
-| T3               | N3  | M1b |
-| T4               | N3  | M1b |
-| Tis              | N3  | M1b |
-| TX               | N3  | M1b |
-| Occult carcinoma |     |     |
-| TX               | N0  | M0  |
-
-melanoma
-
-base
-
-|                   |
-|-------------------|
-| Table has no data |
-
-clinical
-
-|                   |
-|-------------------|
-| Table has no data |
-
-pathological
-
-|                   |
-|-------------------|
-| Table has no data |
-
-oesophagus
-
-base
-
-| T    | N   | M   |
-|------|-----|-----|
-| 0    |     |     |
-| Tis  | N0  | M0  |
-| IA   |     |     |
-| T1   | N0  | M0  |
-| IB   |     |     |
-| T2   | N0  | M0  |
-| IIA  |     |     |
-| T3   | N0  | M0  |
-| IIB  |     |     |
-| T1   | N1  | M0  |
-| T2   | N1  | M0  |
-| IIIA |     |     |
-| T4a  | N0  | M0  |
-| T3   | N1  | M0  |
-| T1   | N2  | M0  |
-| T2   | N2  | M0  |
-| IIIB |     |     |
-| T3   | N2  | M0  |
-| IIIC |     |     |
-| T4b  | N0  | M0  |
-| T4a  | N1  | M0  |
-| T4b  | N1  | M0  |
-| T4a  | N2  | M0  |
-| T4b  | N2  | M0  |
-| T1   | N3  | M0  |
-| T2   | N3  | M0  |
-| T3   | N3  | M0  |
-| T4a  | N3  | M0  |
-| T4b  | N3  | M0  |
-| Tis  | N3  | M0  |
-| IV   |     |     |
-| T1   | N0  | M1  |
-| T2   | N0  | M1  |
-| T3   | N0  | M1  |
-| T4a  | N0  | M1  |
-| T4b  | N0  | M1  |
-| Tis  | N0  | M1  |
-| T1   | N1  | M1  |
-| T2   | N1  | M1  |
-| T3   | N1  | M1  |
-| T4a  | N1  | M1  |
-| T4b  | N1  | M1  |
-| Tis  | N1  | M1  |
-| T1   | N2  | M1  |
-| T2   | N2  | M1  |
-| T3   | N2  | M1  |
-| T4a  | N2  | M1  |
-| T4b  | N2  | M1  |
-| Tis  | N2  | M1  |
-| T1   | N3  | M1  |
-| T2   | N3  | M1  |
-| T3   | N3  | M1  |
-| T4a  | N3  | M1  |
-| T4b  | N3  | M1  |
-| Tis  | N3  | M1  |
-
-clinical
-
-| T    | N   | M   |
-|------|-----|-----|
-| 0    |     |     |
-| Tis  | N0  | M0  |
-| IA   |     |     |
-| T1   | N0  | M0  |
-| IB   |     |     |
-| T2   | N0  | M0  |
-| IIA  |     |     |
-| T3   | N0  | M0  |
-| IIB  |     |     |
-| T1   | N1  | M0  |
-| T2   | N1  | M0  |
-| IIIA |     |     |
-| T4a  | N0  | M0  |
-| T3   | N1  | M0  |
-| T1   | N2  | M0  |
-| T2   | N2  | M0  |
-| IIIB |     |     |
-| T3   | N2  | M0  |
-| IIIC |     |     |
-| T4b  | N0  | M0  |
-| T4a  | N1  | M0  |
-| T4b  | N1  | M0  |
-| T4a  | N2  | M0  |
-| T4b  | N2  | M0  |
-| T1   | N3  | M0  |
-| T2   | N3  | M0  |
-| T3   | N3  | M0  |
-| T4a  | N3  | M0  |
-| T4b  | N3  | M0  |
-| Tis  | N3  | M0  |
-| IV   |     |     |
-| T1   | N0  | M1  |
-| T2   | N0  | M1  |
-| T3   | N0  | M1  |
-| T4a  | N0  | M1  |
-| T4b  | N0  | M1  |
-| Tis  | N0  | M1  |
-| T1   | N1  | M1  |
-| T2   | N1  | M1  |
-| T3   | N1  | M1  |
-| T4a  | N1  | M1  |
-| T4b  | N1  | M1  |
-| Tis  | N1  | M1  |
-| T1   | N2  | M1  |
-| T2   | N2  | M1  |
-| T3   | N2  | M1  |
-| T4a  | N2  | M1  |
-| T4b  | N2  | M1  |
-| Tis  | N2  | M1  |
-| T1   | N3  | M1  |
-| T2   | N3  | M1  |
-| T3   | N3  | M1  |
-| T4a  | N3  | M1  |
-| T4b  | N3  | M1  |
-| Tis  | N3  | M1  |
-
-pathological
-
-| T    | N   | M   |
-|------|-----|-----|
-| 0    |     |     |
-| Tis  | N0  | M0  |
-| IA   |     |     |
-| T1   | N0  | M0  |
-| IB   |     |     |
-| T2   | N0  | M0  |
-| IIA  |     |     |
-| T3   | N0  | M0  |
-| IIB  |     |     |
-| T1   | N1  | M0  |
-| T2   | N1  | M0  |
-| IIIA |     |     |
-| T4a  | N0  | M0  |
-| T3   | N1  | M0  |
-| T1   | N2  | M0  |
-| T2   | N2  | M0  |
-| IIIB |     |     |
-| T3   | N2  | M0  |
-| IIIC |     |     |
-| T4b  | N0  | M0  |
-| T4a  | N1  | M0  |
-| T4b  | N1  | M0  |
-| T4a  | N2  | M0  |
-| T4b  | N2  | M0  |
-| T1   | N3  | M0  |
-| T2   | N3  | M0  |
-| T3   | N3  | M0  |
-| T4a  | N3  | M0  |
-| T4b  | N3  | M0  |
-| Tis  | N3  | M0  |
-| IV   |     |     |
-| T1   | N0  | M1  |
-| T2   | N0  | M1  |
-| T3   | N0  | M1  |
-| T4a  | N0  | M1  |
-| T4b  | N0  | M1  |
-| Tis  | N0  | M1  |
-| T1   | N1  | M1  |
-| T2   | N1  | M1  |
-| T3   | N1  | M1  |
-| T4a  | N1  | M1  |
-| T4b  | N1  | M1  |
-| Tis  | N1  | M1  |
-| T1   | N2  | M1  |
-| T2   | N2  | M1  |
-| T3   | N2  | M1  |
-| T4a  | N2  | M1  |
-| T4b  | N2  | M1  |
-| Tis  | N2  | M1  |
-| T1   | N3  | M1  |
-| T2   | N3  | M1  |
-| T3   | N3  | M1  |
-| T4a  | N3  | M1  |
-| T4b  | N3  | M1  |
-| Tis  | N3  | M1  |
-
-prostate
-
-base
-
-| T   | N   | M   |
-|-----|-----|-----|
-| I   |     |     |
-| T1  | N0  | M0  |
-| T1a | N0  | M0  |
-| T1b | N0  | M0  |
-| T1c | N0  | M0  |
-| T2a | N0  | M0  |
-| II  |     |     |
-| T2b | N0  | M0  |
-| T2c | N0  | M0  |
-| III |     |     |
-| T3  | N0  | M0  |
-| T3a | N0  | M0  |
-| T3b | N0  | M0  |
-| IV  |     |     |
-| T4  | N0  | M0  |
-| T1  | N1  | M0  |
-| T1a | N1  | M0  |
-| T1b | N1  | M0  |
-| T1c | N1  | M0  |
-| T2  | N1  | M0  |
-| T2a | N1  | M0  |
-| T2b | N1  | M0  |
-| T2c | N1  | M0  |
-| T3  | N1  | M0  |
-| T3a | N1  | M0  |
-| T3b | N1  | M0  |
-| T4  | N1  | M0  |
-| T1  | N0  | M1  |
-| T1a | N0  | M1  |
-| T1b | N0  | M1  |
-| T1c | N0  | M1  |
-| T2  | N0  | M1  |
-| T2a | N0  | M1  |
-| T2b | N0  | M1  |
-| T2c | N0  | M1  |
-| T3  | N0  | M1  |
-| T3a | N0  | M1  |
-| T3b | N0  | M1  |
-| T4  | N0  | M1  |
-| T1  | N1  | M1  |
-| T1a | N1  | M1  |
-| T1b | N1  | M1  |
-| T1c | N1  | M1  |
-| T2  | N1  | M1  |
-| T2a | N1  | M1  |
-| T2b | N1  | M1  |
-| T2c | N1  | M1  |
-| T3  | N1  | M1  |
-| T3a | N1  | M1  |
-| T3b | N1  | M1  |
-| T4  | N1  | M1  |
-| T1  | N0  | M1a |
-| T1a | N0  | M1a |
-| T1b | N0  | M1a |
-| T1c | N0  | M1a |
-| T2  | N0  | M1a |
-| T2a | N0  | M1a |
-| T2b | N0  | M1a |
-| T2c | N0  | M1a |
-| T3  | N0  | M1a |
-| T3a | N0  | M1a |
-| T3b | N0  | M1a |
-| T4  | N0  | M1a |
-| T1  | N1  | M1a |
-| T1a | N1  | M1a |
-| T1b | N1  | M1a |
-| T1c | N1  | M1a |
-| T2  | N1  | M1a |
-| T2a | N1  | M1a |
-| T2b | N1  | M1a |
-| T2c | N1  | M1a |
-| T3  | N1  | M1a |
-| T3a | N1  | M1a |
-| T3b | N1  | M1a |
-| T4  | N1  | M1a |
-| T1  | N0  | M1b |
-| T1a | N0  | M1b |
-| T1b | N0  | M1b |
-| T1c | N0  | M1b |
-| T2  | N0  | M1b |
-| T2a | N0  | M1b |
-| T2b | N0  | M1b |
-| T2c | N0  | M1b |
-| T3  | N0  | M1b |
-| T3a | N0  | M1b |
-| T3b | N0  | M1b |
-| T4  | N0  | M1b |
-| T1  | N1  | M1b |
-| T1a | N1  | M1b |
-| T1b | N1  | M1b |
-| T1c | N1  | M1b |
-| T2  | N1  | M1b |
-| T2a | N1  | M1b |
-| T2b | N1  | M1b |
-| T2c | N1  | M1b |
-| T3  | N1  | M1b |
-| T3a | N1  | M1b |
-| T3b | N1  | M1b |
-| T4  | N1  | M1b |
-| T1  | N0  | M1c |
-| T1a | N0  | M1c |
-| T1b | N0  | M1c |
-| T1c | N0  | M1c |
-| T2  | N0  | M1c |
-| T2a | N0  | M1c |
-| T2b | N0  | M1c |
-| T2c | N0  | M1c |
-| T3  | N0  | M1c |
-| T3a | N0  | M1c |
-| T3b | N0  | M1c |
-| T4  | N0  | M1c |
-| T1  | N1  | M1c |
-| T1a | N1  | M1c |
-| T1b | N1  | M1c |
-| T1c | N1  | M1c |
-| T2  | N1  | M1c |
-| T2a | N1  | M1c |
-| T2b | N1  | M1c |
-| T2c | N1  | M1c |
-| T3  | N1  | M1c |
-| T3a | N1  | M1c |
-| T3b | N1  | M1c |
-| T4  | N1  | M1c |
-
-clinical
-
-| T   | N   | M   |
-|-----|-----|-----|
-| I   |     |     |
-| T1  | N0  | M0  |
-| T1a | N0  | M0  |
-| T1b | N0  | M0  |
-| T1c | N0  | M0  |
-| T2a | N0  | M0  |
-| II  |     |     |
-| T2b | N0  | M0  |
-| T2c | N0  | M0  |
-| III |     |     |
-| T3  | N0  | M0  |
-| T3a | N0  | M0  |
-| T3b | N0  | M0  |
-| IV  |     |     |
-| T4  | N0  | M0  |
-| T1  | N1  | M0  |
-| T1a | N1  | M0  |
-| T1b | N1  | M0  |
-| T1c | N1  | M0  |
-| T2  | N1  | M0  |
-| T2a | N1  | M0  |
-| T2b | N1  | M0  |
-| T2c | N1  | M0  |
-| T3  | N1  | M0  |
-| T3a | N1  | M0  |
-| T3b | N1  | M0  |
-| T4  | N1  | M0  |
-| T1  | N0  | M1  |
-| T1a | N0  | M1  |
-| T1b | N0  | M1  |
-| T1c | N0  | M1  |
-| T2  | N0  | M1  |
-| T2a | N0  | M1  |
-| T2b | N0  | M1  |
-| T2c | N0  | M1  |
-| T3  | N0  | M1  |
-| T3a | N0  | M1  |
-| T3b | N0  | M1  |
-| T4  | N0  | M1  |
-| T1  | N1  | M1  |
-| T1a | N1  | M1  |
-| T1b | N1  | M1  |
-| T1c | N1  | M1  |
-| T2  | N1  | M1  |
-| T2a | N1  | M1  |
-| T2b | N1  | M1  |
-| T2c | N1  | M1  |
-| T3  | N1  | M1  |
-| T3a | N1  | M1  |
-| T3b | N1  | M1  |
-| T4  | N1  | M1  |
-| T1  | N0  | M1a |
-| T1a | N0  | M1a |
-| T1b | N0  | M1a |
-| T1c | N0  | M1a |
-| T2  | N0  | M1a |
-| T2a | N0  | M1a |
-| T2b | N0  | M1a |
-| T2c | N0  | M1a |
-| T3  | N0  | M1a |
-| T3a | N0  | M1a |
-| T3b | N0  | M1a |
-| T4  | N0  | M1a |
-| T1  | N1  | M1a |
-| T1a | N1  | M1a |
-| T1b | N1  | M1a |
-| T1c | N1  | M1a |
-| T2  | N1  | M1a |
-| T2a | N1  | M1a |
-| T2b | N1  | M1a |
-| T2c | N1  | M1a |
-| T3  | N1  | M1a |
-| T3a | N1  | M1a |
-| T3b | N1  | M1a |
-| T4  | N1  | M1a |
-| T1  | N0  | M1b |
-| T1a | N0  | M1b |
-| T1b | N0  | M1b |
-| T1c | N0  | M1b |
-| T2  | N0  | M1b |
-| T2a | N0  | M1b |
-| T2b | N0  | M1b |
-| T2c | N0  | M1b |
-| T3  | N0  | M1b |
-| T3a | N0  | M1b |
-| T3b | N0  | M1b |
-| T4  | N0  | M1b |
-| T1  | N1  | M1b |
-| T1a | N1  | M1b |
-| T1b | N1  | M1b |
-| T1c | N1  | M1b |
-| T2  | N1  | M1b |
-| T2a | N1  | M1b |
-| T2b | N1  | M1b |
-| T2c | N1  | M1b |
-| T3  | N1  | M1b |
-| T3a | N1  | M1b |
-| T3b | N1  | M1b |
-| T4  | N1  | M1b |
-| T1  | N0  | M1c |
-| T1a | N0  | M1c |
-| T1b | N0  | M1c |
-| T1c | N0  | M1c |
-| T2  | N0  | M1c |
-| T2a | N0  | M1c |
-| T2b | N0  | M1c |
-| T2c | N0  | M1c |
-| T3  | N0  | M1c |
-| T3a | N0  | M1c |
-| T3b | N0  | M1c |
-| T4  | N0  | M1c |
-| T1  | N1  | M1c |
-| T1a | N1  | M1c |
-| T1b | N1  | M1c |
-| T1c | N1  | M1c |
-| T2  | N1  | M1c |
-| T2a | N1  | M1c |
-| T2b | N1  | M1c |
-| T2c | N1  | M1c |
-| T3  | N1  | M1c |
-| T3a | N1  | M1c |
-| T3b | N1  | M1c |
-| T4  | N1  | M1c |
-
-pathological
-
-| T   | N   | M   |
-|-----|-----|-----|
-| I   |     |     |
-| T1  | N0  | M0  |
-| T1a | N0  | M0  |
-| T1b | N0  | M0  |
-| T1c | N0  | M0  |
-| T2a | N0  | M0  |
-| II  |     |     |
-| T2b | N0  | M0  |
-| T2c | N0  | M0  |
-| III |     |     |
-| T3  | N0  | M0  |
-| T3a | N0  | M0  |
-| T3b | N0  | M0  |
-| IV  |     |     |
-| T4  | N0  | M0  |
-| T1  | N1  | M0  |
-| T1a | N1  | M0  |
-| T1b | N1  | M0  |
-| T1c | N1  | M0  |
-| T2  | N1  | M0  |
-| T2a | N1  | M0  |
-| T2b | N1  | M0  |
-| T2c | N1  | M0  |
-| T3  | N1  | M0  |
-| T3a | N1  | M0  |
-| T3b | N1  | M0  |
-| T4  | N1  | M0  |
-| T1  | N0  | M1  |
-| T1a | N0  | M1  |
-| T1b | N0  | M1  |
-| T1c | N0  | M1  |
-| T2  | N0  | M1  |
-| T2a | N0  | M1  |
-| T2b | N0  | M1  |
-| T2c | N0  | M1  |
-| T3  | N0  | M1  |
-| T3a | N0  | M1  |
-| T3b | N0  | M1  |
-| T4  | N0  | M1  |
-| T1  | N1  | M1  |
-| T1a | N1  | M1  |
-| T1b | N1  | M1  |
-| T1c | N1  | M1  |
-| T2  | N1  | M1  |
-| T2a | N1  | M1  |
-| T2b | N1  | M1  |
-| T2c | N1  | M1  |
-| T3  | N1  | M1  |
-| T3a | N1  | M1  |
-| T3b | N1  | M1  |
-| T4  | N1  | M1  |
-| T1  | N0  | M1a |
-| T1a | N0  | M1a |
-| T1b | N0  | M1a |
-| T1c | N0  | M1a |
-| T2  | N0  | M1a |
-| T2a | N0  | M1a |
-| T2b | N0  | M1a |
-| T2c | N0  | M1a |
-| T3  | N0  | M1a |
-| T3a | N0  | M1a |
-| T3b | N0  | M1a |
-| T4  | N0  | M1a |
-| T1  | N1  | M1a |
-| T1a | N1  | M1a |
-| T1b | N1  | M1a |
-| T1c | N1  | M1a |
-| T2  | N1  | M1a |
-| T2a | N1  | M1a |
-| T2b | N1  | M1a |
-| T2c | N1  | M1a |
-| T3  | N1  | M1a |
-| T3a | N1  | M1a |
-| T3b | N1  | M1a |
-| T4  | N1  | M1a |
-| T1  | N0  | M1b |
-| T1a | N0  | M1b |
-| T1b | N0  | M1b |
-| T1c | N0  | M1b |
-| T2  | N0  | M1b |
-| T2a | N0  | M1b |
-| T2b | N0  | M1b |
-| T2c | N0  | M1b |
-| T3  | N0  | M1b |
-| T3a | N0  | M1b |
-| T3b | N0  | M1b |
-| T4  | N0  | M1b |
-| T1  | N1  | M1b |
-| T1a | N1  | M1b |
-| T1b | N1  | M1b |
-| T1c | N1  | M1b |
-| T2  | N1  | M1b |
-| T2a | N1  | M1b |
-| T2b | N1  | M1b |
-| T2c | N1  | M1b |
-| T3  | N1  | M1b |
-| T3a | N1  | M1b |
-| T3b | N1  | M1b |
-| T4  | N1  | M1b |
-| T1  | N0  | M1c |
-| T1a | N0  | M1c |
-| T1b | N0  | M1c |
-| T1c | N0  | M1c |
-| T2  | N0  | M1c |
-| T2a | N0  | M1c |
-| T2b | N0  | M1c |
-| T2c | N0  | M1c |
-| T3  | N0  | M1c |
-| T3a | N0  | M1c |
-| T3b | N0  | M1c |
-| T4  | N0  | M1c |
-| T1  | N1  | M1c |
-| T1a | N1  | M1c |
-| T1b | N1  | M1c |
-| T1c | N1  | M1c |
-| T2  | N1  | M1c |
-| T2a | N1  | M1c |
-| T2b | N1  | M1c |
-| T2c | N1  | M1c |
-| T3  | N1  | M1c |
-| T3a | N1  | M1c |
-| T3b | N1  | M1c |
-| T4  | N1  | M1c |
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| Tis | N0  | M0  | 0          |
+| T1  | N0  | M0  | I          |
+| T1a | N0  | M0  | IA         |
+| T1b | N0  | M0  | IB         |
+| T2a | N0  | M0  | IB         |
+| T2b | N0  | M0  | IIA        |
+| T3a | N0  | M0  | IIA        |
+| T3b | N0  | M0  | IIB        |
+| T4a | N0  | M0  | IIB        |
+| T4b | N0  | M0  | IIC        |
+| T1  | N1  | M0  | III        |
+| T1  | N2  | M0  | III        |
+| T1a | N1  | M0  | III        |
+| T1a | N2  | M0  | III        |
+| T1b | N1  | M0  | III        |
+| T1b | N2  | M0  | III        |
+| T2a | N1  | M0  | III        |
+| T2a | N2  | M0  | III        |
+| T2b | N1  | M0  | III        |
+| T2b | N2  | M0  | III        |
+| T3a | N1  | M0  | III        |
+| T3a | N2  | M0  | III        |
+| T3b | N1  | M0  | III        |
+| T3b | N2  | M0  | III        |
+| T4a | N1  | M0  | III        |
+| T4a | N2  | M0  | III        |
+| T4b | N1  | M0  | III        |
+| T4b | N2  | M0  | III        |
+| T1a | N1a | M0  | IIIA       |
+| T1a | N2a | M0  | IIIA       |
+| T2a | N1a | M0  | IIIA       |
+| T2a | N2a | M0  | IIIA       |
+| T3a | N1a | M0  | IIIA       |
+| T3a | N2a | M0  | IIIA       |
+| T4a | N1a | M0  | IIIA       |
+| T4a | N2a | M0  | IIIA       |
+| T1a | N1b | M0  | IIIB       |
+| T1a | N2b | M0  | IIIB       |
+| T1a | N2c | M0  | IIIB       |
+| T1b | N1a | M0  | IIIB       |
+| T1b | N2a | M0  | IIIB       |
+| T1b | N2c | M0  | IIIB       |
+| T2a | N1b | M0  | IIIB       |
+| T2a | N2b | M0  | IIIB       |
+| T2a | N2c | M0  | IIIB       |
+| T2b | N1a | M0  | IIIB       |
+| T2b | N2a | M0  | IIIB       |
+| T2b | N2c | M0  | IIIB       |
+| T3a | N1b | M0  | IIIB       |
+| T3a | N2b | M0  | IIIB       |
+| T3a | N2c | M0  | IIIB       |
+| T3b | N1a | M0  | IIIB       |
+| T3b | N2a | M0  | IIIB       |
+| T3b | N2c | M0  | IIIB       |
+| T4a | N1b | M0  | IIIB       |
+| T4a | N2b | M0  | IIIB       |
+| T4a | N2c | M0  | IIIB       |
+| T4b | N1a | M0  | IIIB       |
+| T4b | N2a | M0  | IIIB       |
+| T4b | N2c | M0  | IIIB       |
+| T0  | N3  | M0  | IIIC       |
+| T1  | N3  | M0  | IIIC       |
+| T1a | N3  | M0  | IIIC       |
+| T1b | N1b | M0  | IIIC       |
+| T1b | N2b | M0  | IIIC       |
+| T1b | N3  | M0  | IIIC       |
+| T2a | N3  | M0  | IIIC       |
+| T2b | N1b | M0  | IIIC       |
+| T2b | N2b | M0  | IIIC       |
+| T2b | N3  | M0  | IIIC       |
+| T3a | N3  | M0  | IIIC       |
+| T3b | N1b | M0  | IIIC       |
+| T3b | N2b | M0  | IIIC       |
+| T3b | N3  | M0  | IIIC       |
+| T4a | N3  | M0  | IIIC       |
+| T4b | N1b | M0  | IIIC       |
+| T4b | N2b | M0  | IIIC       |
+| T4b | N3  | M0  | IIIC       |
+| Tis | N3  | M0  | IIIC       |
+| T0  | N0  | M1  | IV         |
+| T0  | N0  | M1a | IV         |
+| T0  | N0  | M1b | IV         |
+| T0  | N0  | M1c | IV         |
+| T0  | N1  | M1  | IV         |
+| T0  | N1  | M1a | IV         |
+| T0  | N1  | M1b | IV         |
+| T0  | N1  | M1c | IV         |
+| T0  | N1a | M1  | IV         |
+| T0  | N1a | M1a | IV         |
+| T0  | N1a | M1b | IV         |
+| T0  | N1a | M1c | IV         |
+| T0  | N1b | M1  | IV         |
+| T0  | N1b | M1a | IV         |
+| T0  | N1b | M1b | IV         |
+| T0  | N1b | M1c | IV         |
+| T0  | N2  | M1  | IV         |
+| T0  | N2  | M1a | IV         |
+| T0  | N2  | M1b | IV         |
+| T0  | N2  | M1c | IV         |
+| T0  | N2a | M1  | IV         |
+| T0  | N2a | M1a | IV         |
+| T0  | N2a | M1b | IV         |
+| T0  | N2a | M1c | IV         |
+| T0  | N2b | M1  | IV         |
+| T0  | N2b | M1a | IV         |
+| T0  | N2b | M1b | IV         |
+| T0  | N2b | M1c | IV         |
+| T0  | N2c | M1  | IV         |
+| T0  | N2c | M1a | IV         |
+| T0  | N2c | M1b | IV         |
+| T0  | N2c | M1c | IV         |
+| T0  | N3  | M1  | IV         |
+| T0  | N3  | M1a | IV         |
+| T0  | N3  | M1b | IV         |
+| T0  | N3  | M1c | IV         |
+| T1  | N0  | M1  | IV         |
+| T1  | N0  | M1a | IV         |
+| T1  | N0  | M1b | IV         |
+| T1  | N0  | M1c | IV         |
+| T1  | N1  | M1  | IV         |
+| T1  | N1  | M1a | IV         |
+| T1  | N1  | M1b | IV         |
+| T1  | N1  | M1c | IV         |
+| T1  | N1a | M1  | IV         |
+| T1  | N1a | M1a | IV         |
+| T1  | N1a | M1b | IV         |
+| T1  | N1a | M1c | IV         |
+| T1  | N1b | M1  | IV         |
+| T1  | N1b | M1a | IV         |
+| T1  | N1b | M1b | IV         |
+| T1  | N1b | M1c | IV         |
+| T1  | N2  | M1  | IV         |
+| T1  | N2  | M1a | IV         |
+| T1  | N2  | M1b | IV         |
+| T1  | N2  | M1c | IV         |
+| T1  | N2a | M1  | IV         |
+| T1  | N2a | M1a | IV         |
+| T1  | N2a | M1b | IV         |
+| T1  | N2a | M1c | IV         |
+| T1  | N2b | M1  | IV         |
+| T1  | N2b | M1a | IV         |
+| T1  | N2b | M1b | IV         |
+| T1  | N2b | M1c | IV         |
+| T1  | N2c | M1  | IV         |
+| T1  | N2c | M1a | IV         |
+| T1  | N2c | M1b | IV         |
+| T1  | N2c | M1c | IV         |
+| T1  | N3  | M1  | IV         |
+| T1  | N3  | M1a | IV         |
+| T1  | N3  | M1b | IV         |
+| T1  | N3  | M1c | IV         |
+| T1a | N0  | M1  | IV         |
+| T1a | N0  | M1a | IV         |
+| T1a | N0  | M1b | IV         |
+| T1a | N0  | M1c | IV         |
+| T1a | N1  | M1  | IV         |
+| T1a | N1  | M1a | IV         |
+| T1a | N1  | M1b | IV         |
+| T1a | N1  | M1c | IV         |
+| T1a | N1a | M1  | IV         |
+| T1a | N1a | M1a | IV         |
+| T1a | N1a | M1b | IV         |
+| T1a | N1a | M1c | IV         |
+| T1a | N1b | M1  | IV         |
+| T1a | N1b | M1a | IV         |
+| T1a | N1b | M1b | IV         |
+| T1a | N1b | M1c | IV         |
+| T1a | N2  | M1  | IV         |
+| T1a | N2  | M1a | IV         |
+| T1a | N2  | M1b | IV         |
+| T1a | N2  | M1c | IV         |
+| T1a | N2a | M1  | IV         |
+| T1a | N2a | M1a | IV         |
+| T1a | N2a | M1b | IV         |
+| T1a | N2a | M1c | IV         |
+| T1a | N2b | M1  | IV         |
+| T1a | N2b | M1a | IV         |
+| T1a | N2b | M1b | IV         |
+| T1a | N2b | M1c | IV         |
+| T1a | N2c | M1  | IV         |
+| T1a | N2c | M1a | IV         |
+| T1a | N2c | M1b | IV         |
+| T1a | N2c | M1c | IV         |
+| T1a | N3  | M1  | IV         |
+| T1a | N3  | M1a | IV         |
+| T1a | N3  | M1b | IV         |
+| T1a | N3  | M1c | IV         |
+| T1b | N0  | M1  | IV         |
+| T1b | N0  | M1a | IV         |
+| T1b | N0  | M1b | IV         |
+| T1b | N0  | M1c | IV         |
+| T1b | N1  | M1  | IV         |
+| T1b | N1  | M1a | IV         |
+| T1b | N1  | M1b | IV         |
+| T1b | N1  | M1c | IV         |
+| T1b | N1a | M1  | IV         |
+| T1b | N1a | M1a | IV         |
+| T1b | N1a | M1b | IV         |
+| T1b | N1a | M1c | IV         |
+| T1b | N1b | M1  | IV         |
+| T1b | N1b | M1a | IV         |
+| T1b | N1b | M1b | IV         |
+| T1b | N1b | M1c | IV         |
+| T1b | N2  | M1  | IV         |
+| T1b | N2  | M1a | IV         |
+| T1b | N2  | M1b | IV         |
+| T1b | N2  | M1c | IV         |
+| T1b | N2a | M1  | IV         |
+| T1b | N2a | M1a | IV         |
+| T1b | N2a | M1b | IV         |
+| T1b | N2a | M1c | IV         |
+| T1b | N2b | M1  | IV         |
+| T1b | N2b | M1a | IV         |
+| T1b | N2b | M1b | IV         |
+| T1b | N2b | M1c | IV         |
+| T1b | N2c | M1  | IV         |
+| T1b | N2c | M1a | IV         |
+| T1b | N2c | M1b | IV         |
+| T1b | N2c | M1c | IV         |
+| T1b | N3  | M1  | IV         |
+| T1b | N3  | M1a | IV         |
+| T1b | N3  | M1b | IV         |
+| T1b | N3  | M1c | IV         |
+| T2a | N0  | M1  | IV         |
+| T2a | N0  | M1a | IV         |
+| T2a | N0  | M1b | IV         |
+| T2a | N0  | M1c | IV         |
+| T2a | N1  | M1  | IV         |
+| T2a | N1  | M1a | IV         |
+| T2a | N1  | M1b | IV         |
+| T2a | N1  | M1c | IV         |
+| T2a | N1a | M1  | IV         |
+| T2a | N1a | M1a | IV         |
+| T2a | N1a | M1b | IV         |
+| T2a | N1a | M1c | IV         |
+| T2a | N1b | M1  | IV         |
+| T2a | N1b | M1a | IV         |
+| T2a | N1b | M1b | IV         |
+| T2a | N1b | M1c | IV         |
+| T2a | N2  | M1  | IV         |
+| T2a | N2  | M1a | IV         |
+| T2a | N2  | M1b | IV         |
+| T2a | N2  | M1c | IV         |
+| T2a | N2a | M1  | IV         |
+| T2a | N2a | M1a | IV         |
+| T2a | N2a | M1b | IV         |
+| T2a | N2a | M1c | IV         |
+| T2a | N2b | M1  | IV         |
+| T2a | N2b | M1a | IV         |
+| T2a | N2b | M1b | IV         |
+| T2a | N2b | M1c | IV         |
+| T2a | N2c | M1  | IV         |
+| T2a | N2c | M1a | IV         |
+| T2a | N2c | M1b | IV         |
+| T2a | N2c | M1c | IV         |
+| T2a | N3  | M1  | IV         |
+| T2a | N3  | M1a | IV         |
+| T2a | N3  | M1b | IV         |
+| T2a | N3  | M1c | IV         |
+| T2b | N0  | M1  | IV         |
+| T2b | N0  | M1a | IV         |
+| T2b | N0  | M1b | IV         |
+| T2b | N0  | M1c | IV         |
+| T2b | N1  | M1  | IV         |
+| T2b | N1  | M1a | IV         |
+| T2b | N1  | M1b | IV         |
+| T2b | N1  | M1c | IV         |
+| T2b | N1a | M1  | IV         |
+| T2b | N1a | M1a | IV         |
+| T2b | N1a | M1b | IV         |
+| T2b | N1a | M1c | IV         |
+| T2b | N1b | M1  | IV         |
+| T2b | N1b | M1a | IV         |
+| T2b | N1b | M1b | IV         |
+| T2b | N1b | M1c | IV         |
+| T2b | N2  | M1  | IV         |
+| T2b | N2  | M1a | IV         |
+| T2b | N2  | M1b | IV         |
+| T2b | N2  | M1c | IV         |
+| T2b | N2a | M1  | IV         |
+| T2b | N2a | M1a | IV         |
+| T2b | N2a | M1b | IV         |
+| T2b | N2a | M1c | IV         |
+| T2b | N2b | M1  | IV         |
+| T2b | N2b | M1a | IV         |
+| T2b | N2b | M1b | IV         |
+| T2b | N2b | M1c | IV         |
+| T2b | N2c | M1  | IV         |
+| T2b | N2c | M1a | IV         |
+| T2b | N2c | M1b | IV         |
+| T2b | N2c | M1c | IV         |
+| T2b | N3  | M1  | IV         |
+| T2b | N3  | M1a | IV         |
+| T2b | N3  | M1b | IV         |
+| T2b | N3  | M1c | IV         |
+| T3a | N0  | M1  | IV         |
+| T3a | N0  | M1a | IV         |
+| T3a | N0  | M1b | IV         |
+| T3a | N0  | M1c | IV         |
+| T3a | N1  | M1  | IV         |
+| T3a | N1  | M1a | IV         |
+| T3a | N1  | M1b | IV         |
+| T3a | N1  | M1c | IV         |
+| T3a | N1a | M1  | IV         |
+| T3a | N1a | M1a | IV         |
+| T3a | N1a | M1b | IV         |
+| T3a | N1a | M1c | IV         |
+| T3a | N1b | M1  | IV         |
+| T3a | N1b | M1a | IV         |
+| T3a | N1b | M1b | IV         |
+| T3a | N1b | M1c | IV         |
+| T3a | N2  | M1  | IV         |
+| T3a | N2  | M1a | IV         |
+| T3a | N2  | M1b | IV         |
+| T3a | N2  | M1c | IV         |
+| T3a | N2a | M1  | IV         |
+| T3a | N2a | M1a | IV         |
+| T3a | N2a | M1b | IV         |
+| T3a | N2a | M1c | IV         |
+| T3a | N2b | M1  | IV         |
+| T3a | N2b | M1a | IV         |
+| T3a | N2b | M1b | IV         |
+| T3a | N2b | M1c | IV         |
+| T3a | N2c | M1  | IV         |
+| T3a | N2c | M1a | IV         |
+| T3a | N2c | M1b | IV         |
+| T3a | N2c | M1c | IV         |
+| T3a | N3  | M1  | IV         |
+| T3a | N3  | M1a | IV         |
+| T3a | N3  | M1b | IV         |
+| T3a | N3  | M1c | IV         |
+| T3b | N0  | M1  | IV         |
+| T3b | N0  | M1a | IV         |
+| T3b | N0  | M1b | IV         |
+| T3b | N0  | M1c | IV         |
+| T3b | N1  | M1  | IV         |
+| T3b | N1  | M1a | IV         |
+| T3b | N1  | M1b | IV         |
+| T3b | N1  | M1c | IV         |
+| T3b | N1a | M1  | IV         |
+| T3b | N1a | M1a | IV         |
+| T3b | N1a | M1b | IV         |
+| T3b | N1a | M1c | IV         |
+| T3b | N1b | M1  | IV         |
+| T3b | N1b | M1a | IV         |
+| T3b | N1b | M1b | IV         |
+| T3b | N1b | M1c | IV         |
+| T3b | N2  | M1  | IV         |
+| T3b | N2  | M1a | IV         |
+| T3b | N2  | M1b | IV         |
+| T3b | N2  | M1c | IV         |
+| T3b | N2a | M1  | IV         |
+| T3b | N2a | M1a | IV         |
+| T3b | N2a | M1b | IV         |
+| T3b | N2a | M1c | IV         |
+| T3b | N2b | M1  | IV         |
+| T3b | N2b | M1a | IV         |
+| T3b | N2b | M1b | IV         |
+| T3b | N2b | M1c | IV         |
+| T3b | N2c | M1  | IV         |
+| T3b | N2c | M1a | IV         |
+| T3b | N2c | M1b | IV         |
+| T3b | N2c | M1c | IV         |
+| T3b | N3  | M1  | IV         |
+| T3b | N3  | M1a | IV         |
+| T3b | N3  | M1b | IV         |
+| T3b | N3  | M1c | IV         |
+| T4a | N0  | M1  | IV         |
+| T4a | N0  | M1a | IV         |
+| T4a | N0  | M1b | IV         |
+| T4a | N0  | M1c | IV         |
+| T4a | N1  | M1  | IV         |
+| T4a | N1  | M1a | IV         |
+| T4a | N1  | M1b | IV         |
+| T4a | N1  | M1c | IV         |
+| T4a | N1a | M1  | IV         |
+| T4a | N1a | M1a | IV         |
+| T4a | N1a | M1b | IV         |
+| T4a | N1a | M1c | IV         |
+| T4a | N1b | M1  | IV         |
+| T4a | N1b | M1a | IV         |
+| T4a | N1b | M1b | IV         |
+| T4a | N1b | M1c | IV         |
+| T4a | N2  | M1  | IV         |
+| T4a | N2  | M1a | IV         |
+| T4a | N2  | M1b | IV         |
+| T4a | N2  | M1c | IV         |
+| T4a | N2a | M1  | IV         |
+| T4a | N2a | M1a | IV         |
+| T4a | N2a | M1b | IV         |
+| T4a | N2a | M1c | IV         |
+| T4a | N2b | M1  | IV         |
+| T4a | N2b | M1a | IV         |
+| T4a | N2b | M1b | IV         |
+| T4a | N2b | M1c | IV         |
+| T4a | N2c | M1  | IV         |
+| T4a | N2c | M1a | IV         |
+| T4a | N2c | M1b | IV         |
+| T4a | N2c | M1c | IV         |
+| T4a | N3  | M1  | IV         |
+| T4a | N3  | M1a | IV         |
+| T4a | N3  | M1b | IV         |
+| T4a | N3  | M1c | IV         |
+| T4b | N0  | M1  | IV         |
+| T4b | N0  | M1a | IV         |
+| T4b | N0  | M1b | IV         |
+| T4b | N0  | M1c | IV         |
+| T4b | N1  | M1  | IV         |
+| T4b | N1  | M1a | IV         |
+| T4b | N1  | M1b | IV         |
+| T4b | N1  | M1c | IV         |
+| T4b | N1a | M1  | IV         |
+| T4b | N1a | M1a | IV         |
+| T4b | N1a | M1b | IV         |
+| T4b | N1a | M1c | IV         |
+| T4b | N1b | M1  | IV         |
+| T4b | N1b | M1a | IV         |
+| T4b | N1b | M1b | IV         |
+| T4b | N1b | M1c | IV         |
+| T4b | N2  | M1  | IV         |
+| T4b | N2  | M1a | IV         |
+| T4b | N2  | M1b | IV         |
+| T4b | N2  | M1c | IV         |
+| T4b | N2a | M1  | IV         |
+| T4b | N2a | M1a | IV         |
+| T4b | N2a | M1b | IV         |
+| T4b | N2a | M1c | IV         |
+| T4b | N2b | M1  | IV         |
+| T4b | N2b | M1a | IV         |
+| T4b | N2b | M1b | IV         |
+| T4b | N2b | M1c | IV         |
+| T4b | N2c | M1  | IV         |
+| T4b | N2c | M1a | IV         |
+| T4b | N2c | M1b | IV         |
+| T4b | N2c | M1c | IV         |
+| T4b | N3  | M1  | IV         |
+| T4b | N3  | M1a | IV         |
+| T4b | N3  | M1b | IV         |
+| T4b | N3  | M1c | IV         |
+| Tis | N0  | M1  | IV         |
+| Tis | N0  | M1a | IV         |
+| Tis | N0  | M1b | IV         |
+| Tis | N0  | M1c | IV         |
+| Tis | N1  | M1  | IV         |
+| Tis | N1  | M1a | IV         |
+| Tis | N1  | M1b | IV         |
+| Tis | N1  | M1c | IV         |
+| Tis | N1a | M1  | IV         |
+| Tis | N1a | M1a | IV         |
+| Tis | N1a | M1b | IV         |
+| Tis | N1a | M1c | IV         |
+| Tis | N1b | M1  | IV         |
+| Tis | N1b | M1a | IV         |
+| Tis | N1b | M1b | IV         |
+| Tis | N1b | M1c | IV         |
+| Tis | N2  | M1  | IV         |
+| Tis | N2  | M1a | IV         |
+| Tis | N2  | M1b | IV         |
+| Tis | N2  | M1c | IV         |
+| Tis | N2a | M1  | IV         |
+| Tis | N2a | M1a | IV         |
+| Tis | N2a | M1b | IV         |
+| Tis | N2a | M1c | IV         |
+| Tis | N2b | M1  | IV         |
+| Tis | N2b | M1a | IV         |
+| Tis | N2b | M1b | IV         |
+| Tis | N2b | M1c | IV         |
+| Tis | N2c | M1  | IV         |
+| Tis | N2c | M1a | IV         |
+| Tis | N2c | M1b | IV         |
+| Tis | N2c | M1c | IV         |
+| Tis | N3  | M1  | IV         |
+| Tis | N3  | M1a | IV         |
+| Tis | N3  | M1b | IV         |
+| Tis | N3  | M1c | IV         |
 
 8th edition
 
-bladder
+Bladder
 
-base
+Base (179 rules)
 
-| T    | N   | M   |
-|------|-----|-----|
-| 0a   |     |     |
-| Ta   | N0  | M0  |
-| 0is  |     |     |
-| Tis  | N0  | M0  |
-| I    |     |     |
-| T1   | N0  | M0  |
-| II   |     |     |
-| T2   | N0  | M0  |
-| T2a  | N0  | M0  |
-| T2b  | N0  | M0  |
-| IIIA |     |     |
-| T3   | N0  | M0  |
-| T3a  | N0  | M0  |
-| T3b  | N0  | M0  |
-| T4a  | N0  | M0  |
-| T1   | N1  | M0  |
-| T2   | N1  | M0  |
-| T2a  | N1  | M0  |
-| T2b  | N1  | M0  |
-| T3   | N1  | M0  |
-| T3a  | N1  | M0  |
-| T3b  | N1  | M0  |
-| T4a  | N1  | M0  |
-| IIIB |     |     |
-| T1   | N2  | M0  |
-| T2   | N2  | M0  |
-| T2a  | N2  | M0  |
-| T2b  | N2  | M0  |
-| T3   | N2  | M0  |
-| T3a  | N2  | M0  |
-| T3b  | N2  | M0  |
-| T4a  | N2  | M0  |
-| T1   | N3  | M0  |
-| T2   | N3  | M0  |
-| T2a  | N3  | M0  |
-| T2b  | N3  | M0  |
-| T3   | N3  | M0  |
-| T3a  | N3  | M0  |
-| T3b  | N3  | M0  |
-| T4a  | N3  | M0  |
-| IV   |     |     |
-| T1   | N0  | M1  |
-| T2   | N0  | M1  |
-| T2a  | N0  | M1  |
-| T2b  | N0  | M1  |
-| T3   | N0  | M1  |
-| T3a  | N0  | M1  |
-| T3b  | N0  | M1  |
-| T4   | N0  | M1  |
-| T4a  | N0  | M1  |
-| T4b  | N0  | M1  |
-| Ta   | N0  | M1  |
-| Tis  | N0  | M1  |
-| T1   | N1  | M1  |
-| T2   | N1  | M1  |
-| T2a  | N1  | M1  |
-| T2b  | N1  | M1  |
-| T3   | N1  | M1  |
-| T3a  | N1  | M1  |
-| T3b  | N1  | M1  |
-| T4   | N1  | M1  |
-| T4a  | N1  | M1  |
-| T4b  | N1  | M1  |
-| Ta   | N1  | M1  |
-| Tis  | N1  | M1  |
-| T1   | N2  | M1  |
-| T2   | N2  | M1  |
-| T2a  | N2  | M1  |
-| T2b  | N2  | M1  |
-| T3   | N2  | M1  |
-| T3a  | N2  | M1  |
-| T3b  | N2  | M1  |
-| T4   | N2  | M1  |
-| T4a  | N2  | M1  |
-| T4b  | N2  | M1  |
-| Ta   | N2  | M1  |
-| Tis  | N2  | M1  |
-| T1   | N3  | M1  |
-| T2   | N3  | M1  |
-| T2a  | N3  | M1  |
-| T2b  | N3  | M1  |
-| T3   | N3  | M1  |
-| T3a  | N3  | M1  |
-| T3b  | N3  | M1  |
-| T4   | N3  | M1  |
-| T4a  | N3  | M1  |
-| T4b  | N3  | M1  |
-| Ta   | N3  | M1  |
-| Tis  | N3  | M1  |
-| IVA  |     |     |
-| T4b  | N0  | M0  |
-| T1   | N0  | M1a |
-| T2   | N0  | M1a |
-| T2a  | N0  | M1a |
-| T2b  | N0  | M1a |
-| T3   | N0  | M1a |
-| T3a  | N0  | M1a |
-| T3b  | N0  | M1a |
-| T4   | N0  | M1a |
-| T4a  | N0  | M1a |
-| T4b  | N0  | M1a |
-| Ta   | N0  | M1a |
-| Tis  | N0  | M1a |
-| T1   | N1  | M1a |
-| T2   | N1  | M1a |
-| T2a  | N1  | M1a |
-| T2b  | N1  | M1a |
-| T3   | N1  | M1a |
-| T3a  | N1  | M1a |
-| T3b  | N1  | M1a |
-| T4   | N1  | M1a |
-| T4a  | N1  | M1a |
-| T4b  | N1  | M1a |
-| Ta   | N1  | M1a |
-| Tis  | N1  | M1a |
-| T1   | N2  | M1a |
-| T2   | N2  | M1a |
-| T2a  | N2  | M1a |
-| T2b  | N2  | M1a |
-| T3   | N2  | M1a |
-| T3a  | N2  | M1a |
-| T3b  | N2  | M1a |
-| T4   | N2  | M1a |
-| T4a  | N2  | M1a |
-| T4b  | N2  | M1a |
-| Ta   | N2  | M1a |
-| Tis  | N2  | M1a |
-| T1   | N3  | M1a |
-| T2   | N3  | M1a |
-| T2a  | N3  | M1a |
-| T2b  | N3  | M1a |
-| T3   | N3  | M1a |
-| T3a  | N3  | M1a |
-| T3b  | N3  | M1a |
-| T4   | N3  | M1a |
-| T4a  | N3  | M1a |
-| T4b  | N3  | M1a |
-| Ta   | N3  | M1a |
-| Tis  | N3  | M1a |
-| IVB  |     |     |
-| T1   | N0  | M1b |
-| T2   | N0  | M1b |
-| T2a  | N0  | M1b |
-| T2b  | N0  | M1b |
-| T3   | N0  | M1b |
-| T3a  | N0  | M1b |
-| T3b  | N0  | M1b |
-| T4   | N0  | M1b |
-| T4a  | N0  | M1b |
-| T4b  | N0  | M1b |
-| Ta   | N0  | M1b |
-| Tis  | N0  | M1b |
-| T1   | N1  | M1b |
-| T2   | N1  | M1b |
-| T2a  | N1  | M1b |
-| T2b  | N1  | M1b |
-| T3   | N1  | M1b |
-| T3a  | N1  | M1b |
-| T3b  | N1  | M1b |
-| T4   | N1  | M1b |
-| T4a  | N1  | M1b |
-| T4b  | N1  | M1b |
-| Ta   | N1  | M1b |
-| Tis  | N1  | M1b |
-| T1   | N2  | M1b |
-| T2   | N2  | M1b |
-| T2a  | N2  | M1b |
-| T2b  | N2  | M1b |
-| T3   | N2  | M1b |
-| T3a  | N2  | M1b |
-| T3b  | N2  | M1b |
-| T4   | N2  | M1b |
-| T4a  | N2  | M1b |
-| T4b  | N2  | M1b |
-| Ta   | N2  | M1b |
-| Tis  | N2  | M1b |
-| T1   | N3  | M1b |
-| T2   | N3  | M1b |
-| T2a  | N3  | M1b |
-| T2b  | N3  | M1b |
-| T3   | N3  | M1b |
-| T3a  | N3  | M1b |
-| T3b  | N3  | M1b |
-| T4   | N3  | M1b |
-| T4a  | N3  | M1b |
-| T4b  | N3  | M1b |
-| Ta   | N3  | M1b |
-| Tis  | N3  | M1b |
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| Ta  | N0  | M0  | 0a         |
+| Tis | N0  | M0  | 0is        |
+| T1  | N0  | M0  | I          |
+| T2  | N0  | M0  | II         |
+| T2a | N0  | M0  | II         |
+| T2b | N0  | M0  | II         |
+| T1  | N1  | M0  | IIIA       |
+| T2  | N1  | M0  | IIIA       |
+| T2a | N1  | M0  | IIIA       |
+| T2b | N1  | M0  | IIIA       |
+| T3  | N0  | M0  | IIIA       |
+| T3  | N1  | M0  | IIIA       |
+| T3a | N0  | M0  | IIIA       |
+| T3a | N1  | M0  | IIIA       |
+| T3b | N0  | M0  | IIIA       |
+| T3b | N1  | M0  | IIIA       |
+| T4a | N0  | M0  | IIIA       |
+| T4a | N1  | M0  | IIIA       |
+| T1  | N2  | M0  | IIIB       |
+| T1  | N3  | M0  | IIIB       |
+| T2  | N2  | M0  | IIIB       |
+| T2  | N3  | M0  | IIIB       |
+| T2a | N2  | M0  | IIIB       |
+| T2a | N3  | M0  | IIIB       |
+| T2b | N2  | M0  | IIIB       |
+| T2b | N3  | M0  | IIIB       |
+| T3  | N2  | M0  | IIIB       |
+| T3  | N3  | M0  | IIIB       |
+| T3a | N2  | M0  | IIIB       |
+| T3a | N3  | M0  | IIIB       |
+| T3b | N2  | M0  | IIIB       |
+| T3b | N3  | M0  | IIIB       |
+| T4a | N2  | M0  | IIIB       |
+| T4a | N3  | M0  | IIIB       |
+| T1  | N0  | M1  | IV         |
+| T1  | N1  | M1  | IV         |
+| T1  | N2  | M1  | IV         |
+| T1  | N3  | M1  | IV         |
+| T2  | N0  | M1  | IV         |
+| T2  | N1  | M1  | IV         |
+| T2  | N2  | M1  | IV         |
+| T2  | N3  | M1  | IV         |
+| T2a | N0  | M1  | IV         |
+| T2a | N1  | M1  | IV         |
+| T2a | N2  | M1  | IV         |
+| T2a | N3  | M1  | IV         |
+| T2b | N0  | M1  | IV         |
+| T2b | N1  | M1  | IV         |
+| T2b | N2  | M1  | IV         |
+| T2b | N3  | M1  | IV         |
+| T3  | N0  | M1  | IV         |
+| T3  | N1  | M1  | IV         |
+| T3  | N2  | M1  | IV         |
+| T3  | N3  | M1  | IV         |
+| T3a | N0  | M1  | IV         |
+| T3a | N1  | M1  | IV         |
+| T3a | N2  | M1  | IV         |
+| T3a | N3  | M1  | IV         |
+| T3b | N0  | M1  | IV         |
+| T3b | N1  | M1  | IV         |
+| T3b | N2  | M1  | IV         |
+| T3b | N3  | M1  | IV         |
+| T4  | N0  | M1  | IV         |
+| T4  | N1  | M1  | IV         |
+| T4  | N2  | M1  | IV         |
+| T4  | N3  | M1  | IV         |
+| T4a | N0  | M1  | IV         |
+| T4a | N1  | M1  | IV         |
+| T4a | N2  | M1  | IV         |
+| T4a | N3  | M1  | IV         |
+| T4b | N0  | M1  | IV         |
+| T4b | N1  | M1  | IV         |
+| T4b | N2  | M1  | IV         |
+| T4b | N3  | M1  | IV         |
+| Ta  | N0  | M1  | IV         |
+| Ta  | N1  | M1  | IV         |
+| Ta  | N2  | M1  | IV         |
+| Ta  | N3  | M1  | IV         |
+| Tis | N0  | M1  | IV         |
+| Tis | N1  | M1  | IV         |
+| Tis | N2  | M1  | IV         |
+| Tis | N3  | M1  | IV         |
+| T1  | N0  | M1a | IVA        |
+| T1  | N1  | M1a | IVA        |
+| T1  | N2  | M1a | IVA        |
+| T1  | N3  | M1a | IVA        |
+| T2  | N0  | M1a | IVA        |
+| T2  | N1  | M1a | IVA        |
+| T2  | N2  | M1a | IVA        |
+| T2  | N3  | M1a | IVA        |
+| T2a | N0  | M1a | IVA        |
+| T2a | N1  | M1a | IVA        |
+| T2a | N2  | M1a | IVA        |
+| T2a | N3  | M1a | IVA        |
+| T2b | N0  | M1a | IVA        |
+| T2b | N1  | M1a | IVA        |
+| T2b | N2  | M1a | IVA        |
+| T2b | N3  | M1a | IVA        |
+| T3  | N0  | M1a | IVA        |
+| T3  | N1  | M1a | IVA        |
+| T3  | N2  | M1a | IVA        |
+| T3  | N3  | M1a | IVA        |
+| T3a | N0  | M1a | IVA        |
+| T3a | N1  | M1a | IVA        |
+| T3a | N2  | M1a | IVA        |
+| T3a | N3  | M1a | IVA        |
+| T3b | N0  | M1a | IVA        |
+| T3b | N1  | M1a | IVA        |
+| T3b | N2  | M1a | IVA        |
+| T3b | N3  | M1a | IVA        |
+| T4  | N0  | M1a | IVA        |
+| T4  | N1  | M1a | IVA        |
+| T4  | N2  | M1a | IVA        |
+| T4  | N3  | M1a | IVA        |
+| T4a | N0  | M1a | IVA        |
+| T4a | N1  | M1a | IVA        |
+| T4a | N2  | M1a | IVA        |
+| T4a | N3  | M1a | IVA        |
+| T4b | N0  | M0  | IVA        |
+| T4b | N0  | M1a | IVA        |
+| T4b | N1  | M1a | IVA        |
+| T4b | N2  | M1a | IVA        |
+| T4b | N3  | M1a | IVA        |
+| Ta  | N0  | M1a | IVA        |
+| Ta  | N1  | M1a | IVA        |
+| Ta  | N2  | M1a | IVA        |
+| Ta  | N3  | M1a | IVA        |
+| Tis | N0  | M1a | IVA        |
+| Tis | N1  | M1a | IVA        |
+| Tis | N2  | M1a | IVA        |
+| Tis | N3  | M1a | IVA        |
+| T1  | N0  | M1b | IVB        |
+| T1  | N1  | M1b | IVB        |
+| T1  | N2  | M1b | IVB        |
+| T1  | N3  | M1b | IVB        |
+| T2  | N0  | M1b | IVB        |
+| T2  | N1  | M1b | IVB        |
+| T2  | N2  | M1b | IVB        |
+| T2  | N3  | M1b | IVB        |
+| T2a | N0  | M1b | IVB        |
+| T2a | N1  | M1b | IVB        |
+| T2a | N2  | M1b | IVB        |
+| T2a | N3  | M1b | IVB        |
+| T2b | N0  | M1b | IVB        |
+| T2b | N1  | M1b | IVB        |
+| T2b | N2  | M1b | IVB        |
+| T2b | N3  | M1b | IVB        |
+| T3  | N0  | M1b | IVB        |
+| T3  | N1  | M1b | IVB        |
+| T3  | N2  | M1b | IVB        |
+| T3  | N3  | M1b | IVB        |
+| T3a | N0  | M1b | IVB        |
+| T3a | N1  | M1b | IVB        |
+| T3a | N2  | M1b | IVB        |
+| T3a | N3  | M1b | IVB        |
+| T3b | N0  | M1b | IVB        |
+| T3b | N1  | M1b | IVB        |
+| T3b | N2  | M1b | IVB        |
+| T3b | N3  | M1b | IVB        |
+| T4  | N0  | M1b | IVB        |
+| T4  | N1  | M1b | IVB        |
+| T4  | N2  | M1b | IVB        |
+| T4  | N3  | M1b | IVB        |
+| T4a | N0  | M1b | IVB        |
+| T4a | N1  | M1b | IVB        |
+| T4a | N2  | M1b | IVB        |
+| T4a | N3  | M1b | IVB        |
+| T4b | N0  | M1b | IVB        |
+| T4b | N1  | M1b | IVB        |
+| T4b | N2  | M1b | IVB        |
+| T4b | N3  | M1b | IVB        |
+| Ta  | N0  | M1b | IVB        |
+| Ta  | N1  | M1b | IVB        |
+| Ta  | N2  | M1b | IVB        |
+| Ta  | N3  | M1b | IVB        |
+| Tis | N0  | M1b | IVB        |
+| Tis | N1  | M1b | IVB        |
+| Tis | N2  | M1b | IVB        |
+| Tis | N3  | M1b | IVB        |
 
-clinical
+Breast
 
-| T    | N   | M   |
-|------|-----|-----|
-| 0a   |     |     |
-| Ta   | N0  | M0  |
-| 0is  |     |     |
-| Tis  | N0  | M0  |
-| I    |     |     |
-| T1   | N0  | M0  |
-| II   |     |     |
-| T2   | N0  | M0  |
-| T2a  | N0  | M0  |
-| T2b  | N0  | M0  |
-| IIIA |     |     |
-| T3   | N0  | M0  |
-| T3a  | N0  | M0  |
-| T3b  | N0  | M0  |
-| T4a  | N0  | M0  |
-| T1   | N1  | M0  |
-| T2   | N1  | M0  |
-| T2a  | N1  | M0  |
-| T2b  | N1  | M0  |
-| T3   | N1  | M0  |
-| T3a  | N1  | M0  |
-| T3b  | N1  | M0  |
-| T4a  | N1  | M0  |
-| IIIB |     |     |
-| T1   | N2  | M0  |
-| T2   | N2  | M0  |
-| T2a  | N2  | M0  |
-| T2b  | N2  | M0  |
-| T3   | N2  | M0  |
-| T3a  | N2  | M0  |
-| T3b  | N2  | M0  |
-| T4a  | N2  | M0  |
-| T1   | N3  | M0  |
-| T2   | N3  | M0  |
-| T2a  | N3  | M0  |
-| T2b  | N3  | M0  |
-| T3   | N3  | M0  |
-| T3a  | N3  | M0  |
-| T3b  | N3  | M0  |
-| T4a  | N3  | M0  |
-| IV   |     |     |
-| T1   | N0  | M1  |
-| T2   | N0  | M1  |
-| T2a  | N0  | M1  |
-| T2b  | N0  | M1  |
-| T3   | N0  | M1  |
-| T3a  | N0  | M1  |
-| T3b  | N0  | M1  |
-| T4   | N0  | M1  |
-| T4a  | N0  | M1  |
-| T4b  | N0  | M1  |
-| Ta   | N0  | M1  |
-| Tis  | N0  | M1  |
-| T1   | N1  | M1  |
-| T2   | N1  | M1  |
-| T2a  | N1  | M1  |
-| T2b  | N1  | M1  |
-| T3   | N1  | M1  |
-| T3a  | N1  | M1  |
-| T3b  | N1  | M1  |
-| T4   | N1  | M1  |
-| T4a  | N1  | M1  |
-| T4b  | N1  | M1  |
-| Ta   | N1  | M1  |
-| Tis  | N1  | M1  |
-| T1   | N2  | M1  |
-| T2   | N2  | M1  |
-| T2a  | N2  | M1  |
-| T2b  | N2  | M1  |
-| T3   | N2  | M1  |
-| T3a  | N2  | M1  |
-| T3b  | N2  | M1  |
-| T4   | N2  | M1  |
-| T4a  | N2  | M1  |
-| T4b  | N2  | M1  |
-| Ta   | N2  | M1  |
-| Tis  | N2  | M1  |
-| T1   | N3  | M1  |
-| T2   | N3  | M1  |
-| T2a  | N3  | M1  |
-| T2b  | N3  | M1  |
-| T3   | N3  | M1  |
-| T3a  | N3  | M1  |
-| T3b  | N3  | M1  |
-| T4   | N3  | M1  |
-| T4a  | N3  | M1  |
-| T4b  | N3  | M1  |
-| Ta   | N3  | M1  |
-| Tis  | N3  | M1  |
-| IVA  |     |     |
-| T4b  | N0  | M0  |
-| T1   | N0  | M1a |
-| T2   | N0  | M1a |
-| T2a  | N0  | M1a |
-| T2b  | N0  | M1a |
-| T3   | N0  | M1a |
-| T3a  | N0  | M1a |
-| T3b  | N0  | M1a |
-| T4   | N0  | M1a |
-| T4a  | N0  | M1a |
-| T4b  | N0  | M1a |
-| Ta   | N0  | M1a |
-| Tis  | N0  | M1a |
-| T1   | N1  | M1a |
-| T2   | N1  | M1a |
-| T2a  | N1  | M1a |
-| T2b  | N1  | M1a |
-| T3   | N1  | M1a |
-| T3a  | N1  | M1a |
-| T3b  | N1  | M1a |
-| T4   | N1  | M1a |
-| T4a  | N1  | M1a |
-| T4b  | N1  | M1a |
-| Ta   | N1  | M1a |
-| Tis  | N1  | M1a |
-| T1   | N2  | M1a |
-| T2   | N2  | M1a |
-| T2a  | N2  | M1a |
-| T2b  | N2  | M1a |
-| T3   | N2  | M1a |
-| T3a  | N2  | M1a |
-| T3b  | N2  | M1a |
-| T4   | N2  | M1a |
-| T4a  | N2  | M1a |
-| T4b  | N2  | M1a |
-| Ta   | N2  | M1a |
-| Tis  | N2  | M1a |
-| T1   | N3  | M1a |
-| T2   | N3  | M1a |
-| T2a  | N3  | M1a |
-| T2b  | N3  | M1a |
-| T3   | N3  | M1a |
-| T3a  | N3  | M1a |
-| T3b  | N3  | M1a |
-| T4   | N3  | M1a |
-| T4a  | N3  | M1a |
-| T4b  | N3  | M1a |
-| Ta   | N3  | M1a |
-| Tis  | N3  | M1a |
-| IVB  |     |     |
-| T1   | N0  | M1b |
-| T2   | N0  | M1b |
-| T2a  | N0  | M1b |
-| T2b  | N0  | M1b |
-| T3   | N0  | M1b |
-| T3a  | N0  | M1b |
-| T3b  | N0  | M1b |
-| T4   | N0  | M1b |
-| T4a  | N0  | M1b |
-| T4b  | N0  | M1b |
-| Ta   | N0  | M1b |
-| Tis  | N0  | M1b |
-| T1   | N1  | M1b |
-| T2   | N1  | M1b |
-| T2a  | N1  | M1b |
-| T2b  | N1  | M1b |
-| T3   | N1  | M1b |
-| T3a  | N1  | M1b |
-| T3b  | N1  | M1b |
-| T4   | N1  | M1b |
-| T4a  | N1  | M1b |
-| T4b  | N1  | M1b |
-| Ta   | N1  | M1b |
-| Tis  | N1  | M1b |
-| T1   | N2  | M1b |
-| T2   | N2  | M1b |
-| T2a  | N2  | M1b |
-| T2b  | N2  | M1b |
-| T3   | N2  | M1b |
-| T3a  | N2  | M1b |
-| T3b  | N2  | M1b |
-| T4   | N2  | M1b |
-| T4a  | N2  | M1b |
-| T4b  | N2  | M1b |
-| Ta   | N2  | M1b |
-| Tis  | N2  | M1b |
-| T1   | N3  | M1b |
-| T2   | N3  | M1b |
-| T2a  | N3  | M1b |
-| T2b  | N3  | M1b |
-| T3   | N3  | M1b |
-| T3a  | N3  | M1b |
-| T3b  | N3  | M1b |
-| T4   | N3  | M1b |
-| T4a  | N3  | M1b |
-| T4b  | N3  | M1b |
-| Ta   | N3  | M1b |
-| Tis  | N3  | M1b |
+Base (348 rules)
 
-pathological
+| T    | N    | M   | uicc_stage |
+|:-----|:-----|:----|:-----------|
+| Tis  | N0   | M0  | 0          |
+| T1   | N0   | M0  | IA         |
+| T1a  | N0   | M0  | IA         |
+| T1b  | N0   | M0  | IA         |
+| T1c  | N0   | M0  | IA         |
+| T1mi | N0   | M0  | IA         |
+| T0   | N1mi | M0  | IB         |
+| T1   | N1mi | M0  | IB         |
+| T1a  | N1mi | M0  | IB         |
+| T1b  | N1mi | M0  | IB         |
+| T1c  | N1mi | M0  | IB         |
+| T1mi | N1mi | M0  | IB         |
+| T0   | N1   | M0  | IIA        |
+| T0   | N1a  | M0  | IIA        |
+| T0   | N1b  | M0  | IIA        |
+| T0   | N1c  | M0  | IIA        |
+| T1   | N1   | M0  | IIA        |
+| T1   | N1a  | M0  | IIA        |
+| T1   | N1b  | M0  | IIA        |
+| T1   | N1c  | M0  | IIA        |
+| T1a  | N1   | M0  | IIA        |
+| T1a  | N1a  | M0  | IIA        |
+| T1a  | N1b  | M0  | IIA        |
+| T1a  | N1c  | M0  | IIA        |
+| T1b  | N1   | M0  | IIA        |
+| T1b  | N1a  | M0  | IIA        |
+| T1b  | N1b  | M0  | IIA        |
+| T1b  | N1c  | M0  | IIA        |
+| T1c  | N1   | M0  | IIA        |
+| T1c  | N1a  | M0  | IIA        |
+| T1c  | N1b  | M0  | IIA        |
+| T1c  | N1c  | M0  | IIA        |
+| T1mi | N1   | M0  | IIA        |
+| T1mi | N1a  | M0  | IIA        |
+| T1mi | N1b  | M0  | IIA        |
+| T1mi | N1c  | M0  | IIA        |
+| T2   | N0   | M0  | IIA        |
+| T2   | N1   | M0  | IIB        |
+| T2   | N1a  | M0  | IIB        |
+| T2   | N1b  | M0  | IIB        |
+| T2   | N1c  | M0  | IIB        |
+| T3   | N0   | M0  | IIB        |
+| T0   | N2   | M0  | IIIA       |
+| T0   | N2a  | M0  | IIIA       |
+| T0   | N2b  | M0  | IIIA       |
+| T1   | N2   | M0  | IIIA       |
+| T1   | N2a  | M0  | IIIA       |
+| T1   | N2b  | M0  | IIIA       |
+| T1a  | N2   | M0  | IIIA       |
+| T1a  | N2a  | M0  | IIIA       |
+| T1a  | N2b  | M0  | IIIA       |
+| T1b  | N2   | M0  | IIIA       |
+| T1b  | N2a  | M0  | IIIA       |
+| T1b  | N2b  | M0  | IIIA       |
+| T1c  | N2   | M0  | IIIA       |
+| T1c  | N2a  | M0  | IIIA       |
+| T1c  | N2b  | M0  | IIIA       |
+| T1mi | N2   | M0  | IIIA       |
+| T1mi | N2a  | M0  | IIIA       |
+| T1mi | N2b  | M0  | IIIA       |
+| T2   | N2   | M0  | IIIA       |
+| T2   | N2a  | M0  | IIIA       |
+| T2   | N2b  | M0  | IIIA       |
+| T3   | N1   | M0  | IIIA       |
+| T3   | N1a  | M0  | IIIA       |
+| T3   | N1b  | M0  | IIIA       |
+| T3   | N1c  | M0  | IIIA       |
+| T3   | N2   | M0  | IIIA       |
+| T3   | N2a  | M0  | IIIA       |
+| T3   | N2b  | M0  | IIIA       |
+| T4   | N0   | M0  | IIIB       |
+| T4   | N1   | M0  | IIIB       |
+| T4   | N1a  | M0  | IIIB       |
+| T4   | N1b  | M0  | IIIB       |
+| T4   | N1c  | M0  | IIIB       |
+| T4   | N2   | M0  | IIIB       |
+| T4   | N2a  | M0  | IIIB       |
+| T4   | N2b  | M0  | IIIB       |
+| T4a  | N0   | M0  | IIIB       |
+| T4a  | N1   | M0  | IIIB       |
+| T4a  | N1a  | M0  | IIIB       |
+| T4a  | N1b  | M0  | IIIB       |
+| T4a  | N1c  | M0  | IIIB       |
+| T4a  | N2   | M0  | IIIB       |
+| T4a  | N2a  | M0  | IIIB       |
+| T4a  | N2b  | M0  | IIIB       |
+| T4b  | N0   | M0  | IIIB       |
+| T4b  | N1   | M0  | IIIB       |
+| T4b  | N1a  | M0  | IIIB       |
+| T4b  | N1b  | M0  | IIIB       |
+| T4b  | N1c  | M0  | IIIB       |
+| T4b  | N2   | M0  | IIIB       |
+| T4b  | N2a  | M0  | IIIB       |
+| T4b  | N2b  | M0  | IIIB       |
+| T4c  | N0   | M0  | IIIB       |
+| T4c  | N1   | M0  | IIIB       |
+| T4c  | N1a  | M0  | IIIB       |
+| T4c  | N1b  | M0  | IIIB       |
+| T4c  | N1c  | M0  | IIIB       |
+| T4c  | N2   | M0  | IIIB       |
+| T4c  | N2a  | M0  | IIIB       |
+| T4c  | N2b  | M0  | IIIB       |
+| T4d  | N0   | M0  | IIIB       |
+| T4d  | N1   | M0  | IIIB       |
+| T4d  | N1a  | M0  | IIIB       |
+| T4d  | N1b  | M0  | IIIB       |
+| T4d  | N1c  | M0  | IIIB       |
+| T4d  | N2   | M0  | IIIB       |
+| T4d  | N2a  | M0  | IIIB       |
+| T4d  | N2b  | M0  | IIIB       |
+| T0   | N3   | M0  | IIIC       |
+| T0   | N3a  | M0  | IIIC       |
+| T0   | N3b  | M0  | IIIC       |
+| T0   | N3c  | M0  | IIIC       |
+| T1   | N3   | M0  | IIIC       |
+| T1   | N3a  | M0  | IIIC       |
+| T1   | N3b  | M0  | IIIC       |
+| T1   | N3c  | M0  | IIIC       |
+| T1a  | N3   | M0  | IIIC       |
+| T1a  | N3a  | M0  | IIIC       |
+| T1a  | N3b  | M0  | IIIC       |
+| T1a  | N3c  | M0  | IIIC       |
+| T1b  | N3   | M0  | IIIC       |
+| T1b  | N3a  | M0  | IIIC       |
+| T1b  | N3b  | M0  | IIIC       |
+| T1b  | N3c  | M0  | IIIC       |
+| T1c  | N3   | M0  | IIIC       |
+| T1c  | N3a  | M0  | IIIC       |
+| T1c  | N3b  | M0  | IIIC       |
+| T1c  | N3c  | M0  | IIIC       |
+| T1mi | N3   | M0  | IIIC       |
+| T1mi | N3a  | M0  | IIIC       |
+| T1mi | N3b  | M0  | IIIC       |
+| T1mi | N3c  | M0  | IIIC       |
+| T2   | N3   | M0  | IIIC       |
+| T2   | N3a  | M0  | IIIC       |
+| T2   | N3b  | M0  | IIIC       |
+| T2   | N3c  | M0  | IIIC       |
+| T3   | N3   | M0  | IIIC       |
+| T3   | N3a  | M0  | IIIC       |
+| T3   | N3b  | M0  | IIIC       |
+| T3   | N3c  | M0  | IIIC       |
+| T4   | N3   | M0  | IIIC       |
+| T4   | N3a  | M0  | IIIC       |
+| T4   | N3b  | M0  | IIIC       |
+| T4   | N3c  | M0  | IIIC       |
+| T4a  | N3   | M0  | IIIC       |
+| T4a  | N3a  | M0  | IIIC       |
+| T4a  | N3b  | M0  | IIIC       |
+| T4a  | N3c  | M0  | IIIC       |
+| T4b  | N3   | M0  | IIIC       |
+| T4b  | N3a  | M0  | IIIC       |
+| T4b  | N3b  | M0  | IIIC       |
+| T4b  | N3c  | M0  | IIIC       |
+| T4c  | N3   | M0  | IIIC       |
+| T4c  | N3a  | M0  | IIIC       |
+| T4c  | N3b  | M0  | IIIC       |
+| T4c  | N3c  | M0  | IIIC       |
+| T4d  | N3   | M0  | IIIC       |
+| T4d  | N3a  | M0  | IIIC       |
+| T4d  | N3b  | M0  | IIIC       |
+| T4d  | N3c  | M0  | IIIC       |
+| Tis  | N3   | M0  | IIIC       |
+| Tis  | N3a  | M0  | IIIC       |
+| Tis  | N3b  | M0  | IIIC       |
+| Tis  | N3c  | M0  | IIIC       |
+| T0   | N0   | M1  | IV         |
+| T0   | N1   | M1  | IV         |
+| T0   | N1a  | M1  | IV         |
+| T0   | N1b  | M1  | IV         |
+| T0   | N1c  | M1  | IV         |
+| T0   | N1mi | M1  | IV         |
+| T0   | N2   | M1  | IV         |
+| T0   | N2a  | M1  | IV         |
+| T0   | N2b  | M1  | IV         |
+| T0   | N3   | M1  | IV         |
+| T0   | N3a  | M1  | IV         |
+| T0   | N3b  | M1  | IV         |
+| T0   | N3c  | M1  | IV         |
+| T1   | N0   | M1  | IV         |
+| T1   | N1   | M1  | IV         |
+| T1   | N1a  | M1  | IV         |
+| T1   | N1b  | M1  | IV         |
+| T1   | N1c  | M1  | IV         |
+| T1   | N1mi | M1  | IV         |
+| T1   | N2   | M1  | IV         |
+| T1   | N2a  | M1  | IV         |
+| T1   | N2b  | M1  | IV         |
+| T1   | N3   | M1  | IV         |
+| T1   | N3a  | M1  | IV         |
+| T1   | N3b  | M1  | IV         |
+| T1   | N3c  | M1  | IV         |
+| T1a  | N0   | M1  | IV         |
+| T1a  | N1   | M1  | IV         |
+| T1a  | N1a  | M1  | IV         |
+| T1a  | N1b  | M1  | IV         |
+| T1a  | N1c  | M1  | IV         |
+| T1a  | N1mi | M1  | IV         |
+| T1a  | N2   | M1  | IV         |
+| T1a  | N2a  | M1  | IV         |
+| T1a  | N2b  | M1  | IV         |
+| T1a  | N3   | M1  | IV         |
+| T1a  | N3a  | M1  | IV         |
+| T1a  | N3b  | M1  | IV         |
+| T1a  | N3c  | M1  | IV         |
+| T1b  | N0   | M1  | IV         |
+| T1b  | N1   | M1  | IV         |
+| T1b  | N1a  | M1  | IV         |
+| T1b  | N1b  | M1  | IV         |
+| T1b  | N1c  | M1  | IV         |
+| T1b  | N1mi | M1  | IV         |
+| T1b  | N2   | M1  | IV         |
+| T1b  | N2a  | M1  | IV         |
+| T1b  | N2b  | M1  | IV         |
+| T1b  | N3   | M1  | IV         |
+| T1b  | N3a  | M1  | IV         |
+| T1b  | N3b  | M1  | IV         |
+| T1b  | N3c  | M1  | IV         |
+| T1c  | N0   | M1  | IV         |
+| T1c  | N1   | M1  | IV         |
+| T1c  | N1a  | M1  | IV         |
+| T1c  | N1b  | M1  | IV         |
+| T1c  | N1c  | M1  | IV         |
+| T1c  | N1mi | M1  | IV         |
+| T1c  | N2   | M1  | IV         |
+| T1c  | N2a  | M1  | IV         |
+| T1c  | N2b  | M1  | IV         |
+| T1c  | N3   | M1  | IV         |
+| T1c  | N3a  | M1  | IV         |
+| T1c  | N3b  | M1  | IV         |
+| T1c  | N3c  | M1  | IV         |
+| T1mi | N0   | M1  | IV         |
+| T1mi | N1   | M1  | IV         |
+| T1mi | N1a  | M1  | IV         |
+| T1mi | N1b  | M1  | IV         |
+| T1mi | N1c  | M1  | IV         |
+| T1mi | N1mi | M1  | IV         |
+| T1mi | N2   | M1  | IV         |
+| T1mi | N2a  | M1  | IV         |
+| T1mi | N2b  | M1  | IV         |
+| T1mi | N3   | M1  | IV         |
+| T1mi | N3a  | M1  | IV         |
+| T1mi | N3b  | M1  | IV         |
+| T1mi | N3c  | M1  | IV         |
+| T2   | N0   | M1  | IV         |
+| T2   | N1   | M1  | IV         |
+| T2   | N1a  | M1  | IV         |
+| T2   | N1b  | M1  | IV         |
+| T2   | N1c  | M1  | IV         |
+| T2   | N1mi | M1  | IV         |
+| T2   | N2   | M1  | IV         |
+| T2   | N2a  | M1  | IV         |
+| T2   | N2b  | M1  | IV         |
+| T2   | N3   | M1  | IV         |
+| T2   | N3a  | M1  | IV         |
+| T2   | N3b  | M1  | IV         |
+| T2   | N3c  | M1  | IV         |
+| T3   | N0   | M1  | IV         |
+| T3   | N1   | M1  | IV         |
+| T3   | N1a  | M1  | IV         |
+| T3   | N1b  | M1  | IV         |
+| T3   | N1c  | M1  | IV         |
+| T3   | N1mi | M1  | IV         |
+| T3   | N2   | M1  | IV         |
+| T3   | N2a  | M1  | IV         |
+| T3   | N2b  | M1  | IV         |
+| T3   | N3   | M1  | IV         |
+| T3   | N3a  | M1  | IV         |
+| T3   | N3b  | M1  | IV         |
+| T3   | N3c  | M1  | IV         |
+| T4   | N0   | M1  | IV         |
+| T4   | N1   | M1  | IV         |
+| T4   | N1a  | M1  | IV         |
+| T4   | N1b  | M1  | IV         |
+| T4   | N1c  | M1  | IV         |
+| T4   | N1mi | M1  | IV         |
+| T4   | N2   | M1  | IV         |
+| T4   | N2a  | M1  | IV         |
+| T4   | N2b  | M1  | IV         |
+| T4   | N3   | M1  | IV         |
+| T4   | N3a  | M1  | IV         |
+| T4   | N3b  | M1  | IV         |
+| T4   | N3c  | M1  | IV         |
+| T4a  | N0   | M1  | IV         |
+| T4a  | N1   | M1  | IV         |
+| T4a  | N1a  | M1  | IV         |
+| T4a  | N1b  | M1  | IV         |
+| T4a  | N1c  | M1  | IV         |
+| T4a  | N1mi | M1  | IV         |
+| T4a  | N2   | M1  | IV         |
+| T4a  | N2a  | M1  | IV         |
+| T4a  | N2b  | M1  | IV         |
+| T4a  | N3   | M1  | IV         |
+| T4a  | N3a  | M1  | IV         |
+| T4a  | N3b  | M1  | IV         |
+| T4a  | N3c  | M1  | IV         |
+| T4b  | N0   | M1  | IV         |
+| T4b  | N1   | M1  | IV         |
+| T4b  | N1a  | M1  | IV         |
+| T4b  | N1b  | M1  | IV         |
+| T4b  | N1c  | M1  | IV         |
+| T4b  | N1mi | M1  | IV         |
+| T4b  | N2   | M1  | IV         |
+| T4b  | N2a  | M1  | IV         |
+| T4b  | N2b  | M1  | IV         |
+| T4b  | N3   | M1  | IV         |
+| T4b  | N3a  | M1  | IV         |
+| T4b  | N3b  | M1  | IV         |
+| T4b  | N3c  | M1  | IV         |
+| T4c  | N0   | M1  | IV         |
+| T4c  | N1   | M1  | IV         |
+| T4c  | N1a  | M1  | IV         |
+| T4c  | N1b  | M1  | IV         |
+| T4c  | N1c  | M1  | IV         |
+| T4c  | N1mi | M1  | IV         |
+| T4c  | N2   | M1  | IV         |
+| T4c  | N2a  | M1  | IV         |
+| T4c  | N2b  | M1  | IV         |
+| T4c  | N3   | M1  | IV         |
+| T4c  | N3a  | M1  | IV         |
+| T4c  | N3b  | M1  | IV         |
+| T4c  | N3c  | M1  | IV         |
+| T4d  | N0   | M1  | IV         |
+| T4d  | N1   | M1  | IV         |
+| T4d  | N1a  | M1  | IV         |
+| T4d  | N1b  | M1  | IV         |
+| T4d  | N1c  | M1  | IV         |
+| T4d  | N1mi | M1  | IV         |
+| T4d  | N2   | M1  | IV         |
+| T4d  | N2a  | M1  | IV         |
+| T4d  | N2b  | M1  | IV         |
+| T4d  | N3   | M1  | IV         |
+| T4d  | N3a  | M1  | IV         |
+| T4d  | N3b  | M1  | IV         |
+| T4d  | N3c  | M1  | IV         |
+| Tis  | N0   | M1  | IV         |
+| Tis  | N1   | M1  | IV         |
+| Tis  | N1a  | M1  | IV         |
+| Tis  | N1b  | M1  | IV         |
+| Tis  | N1c  | M1  | IV         |
+| Tis  | N1mi | M1  | IV         |
+| Tis  | N2   | M1  | IV         |
+| Tis  | N2a  | M1  | IV         |
+| Tis  | N2b  | M1  | IV         |
+| Tis  | N3   | M1  | IV         |
+| Tis  | N3a  | M1  | IV         |
+| Tis  | N3b  | M1  | IV         |
+| Tis  | N3c  | M1  | IV         |
 
-| T    | N   | M   |
-|------|-----|-----|
-| 0a   |     |     |
-| Ta   | N0  | M0  |
-| 0is  |     |     |
-| Tis  | N0  | M0  |
-| I    |     |     |
-| T1   | N0  | M0  |
-| II   |     |     |
-| T2   | N0  | M0  |
-| T2a  | N0  | M0  |
-| T2b  | N0  | M0  |
-| IIIA |     |     |
-| T3   | N0  | M0  |
-| T3a  | N0  | M0  |
-| T3b  | N0  | M0  |
-| T4a  | N0  | M0  |
-| T1   | N1  | M0  |
-| T2   | N1  | M0  |
-| T2a  | N1  | M0  |
-| T2b  | N1  | M0  |
-| T3   | N1  | M0  |
-| T3a  | N1  | M0  |
-| T3b  | N1  | M0  |
-| T4a  | N1  | M0  |
-| IIIB |     |     |
-| T1   | N2  | M0  |
-| T2   | N2  | M0  |
-| T2a  | N2  | M0  |
-| T2b  | N2  | M0  |
-| T3   | N2  | M0  |
-| T3a  | N2  | M0  |
-| T3b  | N2  | M0  |
-| T4a  | N2  | M0  |
-| T1   | N3  | M0  |
-| T2   | N3  | M0  |
-| T2a  | N3  | M0  |
-| T2b  | N3  | M0  |
-| T3   | N3  | M0  |
-| T3a  | N3  | M0  |
-| T3b  | N3  | M0  |
-| T4a  | N3  | M0  |
-| IV   |     |     |
-| T1   | N0  | M1  |
-| T2   | N0  | M1  |
-| T2a  | N0  | M1  |
-| T2b  | N0  | M1  |
-| T3   | N0  | M1  |
-| T3a  | N0  | M1  |
-| T3b  | N0  | M1  |
-| T4   | N0  | M1  |
-| T4a  | N0  | M1  |
-| T4b  | N0  | M1  |
-| Ta   | N0  | M1  |
-| Tis  | N0  | M1  |
-| T1   | N1  | M1  |
-| T2   | N1  | M1  |
-| T2a  | N1  | M1  |
-| T2b  | N1  | M1  |
-| T3   | N1  | M1  |
-| T3a  | N1  | M1  |
-| T3b  | N1  | M1  |
-| T4   | N1  | M1  |
-| T4a  | N1  | M1  |
-| T4b  | N1  | M1  |
-| Ta   | N1  | M1  |
-| Tis  | N1  | M1  |
-| T1   | N2  | M1  |
-| T2   | N2  | M1  |
-| T2a  | N2  | M1  |
-| T2b  | N2  | M1  |
-| T3   | N2  | M1  |
-| T3a  | N2  | M1  |
-| T3b  | N2  | M1  |
-| T4   | N2  | M1  |
-| T4a  | N2  | M1  |
-| T4b  | N2  | M1  |
-| Ta   | N2  | M1  |
-| Tis  | N2  | M1  |
-| T1   | N3  | M1  |
-| T2   | N3  | M1  |
-| T2a  | N3  | M1  |
-| T2b  | N3  | M1  |
-| T3   | N3  | M1  |
-| T3a  | N3  | M1  |
-| T3b  | N3  | M1  |
-| T4   | N3  | M1  |
-| T4a  | N3  | M1  |
-| T4b  | N3  | M1  |
-| Ta   | N3  | M1  |
-| Tis  | N3  | M1  |
-| IVA  |     |     |
-| T4b  | N0  | M0  |
-| T1   | N0  | M1a |
-| T2   | N0  | M1a |
-| T2a  | N0  | M1a |
-| T2b  | N0  | M1a |
-| T3   | N0  | M1a |
-| T3a  | N0  | M1a |
-| T3b  | N0  | M1a |
-| T4   | N0  | M1a |
-| T4a  | N0  | M1a |
-| T4b  | N0  | M1a |
-| Ta   | N0  | M1a |
-| Tis  | N0  | M1a |
-| T1   | N1  | M1a |
-| T2   | N1  | M1a |
-| T2a  | N1  | M1a |
-| T2b  | N1  | M1a |
-| T3   | N1  | M1a |
-| T3a  | N1  | M1a |
-| T3b  | N1  | M1a |
-| T4   | N1  | M1a |
-| T4a  | N1  | M1a |
-| T4b  | N1  | M1a |
-| Ta   | N1  | M1a |
-| Tis  | N1  | M1a |
-| T1   | N2  | M1a |
-| T2   | N2  | M1a |
-| T2a  | N2  | M1a |
-| T2b  | N2  | M1a |
-| T3   | N2  | M1a |
-| T3a  | N2  | M1a |
-| T3b  | N2  | M1a |
-| T4   | N2  | M1a |
-| T4a  | N2  | M1a |
-| T4b  | N2  | M1a |
-| Ta   | N2  | M1a |
-| Tis  | N2  | M1a |
-| T1   | N3  | M1a |
-| T2   | N3  | M1a |
-| T2a  | N3  | M1a |
-| T2b  | N3  | M1a |
-| T3   | N3  | M1a |
-| T3a  | N3  | M1a |
-| T3b  | N3  | M1a |
-| T4   | N3  | M1a |
-| T4a  | N3  | M1a |
-| T4b  | N3  | M1a |
-| Ta   | N3  | M1a |
-| Tis  | N3  | M1a |
-| IVB  |     |     |
-| T1   | N0  | M1b |
-| T2   | N0  | M1b |
-| T2a  | N0  | M1b |
-| T2b  | N0  | M1b |
-| T3   | N0  | M1b |
-| T3a  | N0  | M1b |
-| T3b  | N0  | M1b |
-| T4   | N0  | M1b |
-| T4a  | N0  | M1b |
-| T4b  | N0  | M1b |
-| Ta   | N0  | M1b |
-| Tis  | N0  | M1b |
-| T1   | N1  | M1b |
-| T2   | N1  | M1b |
-| T2a  | N1  | M1b |
-| T2b  | N1  | M1b |
-| T3   | N1  | M1b |
-| T3a  | N1  | M1b |
-| T3b  | N1  | M1b |
-| T4   | N1  | M1b |
-| T4a  | N1  | M1b |
-| T4b  | N1  | M1b |
-| Ta   | N1  | M1b |
-| Tis  | N1  | M1b |
-| T1   | N2  | M1b |
-| T2   | N2  | M1b |
-| T2a  | N2  | M1b |
-| T2b  | N2  | M1b |
-| T3   | N2  | M1b |
-| T3a  | N2  | M1b |
-| T3b  | N2  | M1b |
-| T4   | N2  | M1b |
-| T4a  | N2  | M1b |
-| T4b  | N2  | M1b |
-| Ta   | N2  | M1b |
-| Tis  | N2  | M1b |
-| T1   | N3  | M1b |
-| T2   | N3  | M1b |
-| T2a  | N3  | M1b |
-| T2b  | N3  | M1b |
-| T3   | N3  | M1b |
-| T3a  | N3  | M1b |
-| T3b  | N3  | M1b |
-| T4   | N3  | M1b |
-| T4a  | N3  | M1b |
-| T4b  | N3  | M1b |
-| Ta   | N3  | M1b |
-| Tis  | N3  | M1b |
+Colorectal
 
-breast
+Base (233 rules)
 
-base
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| Tis | N0  | M0  | 0          |
+| T1  | N0  | M0  | I          |
+| T2  | N0  | M0  | I          |
+| T3  | N0  | M0  | IIA        |
+| T4a | N0  | M0  | IIB        |
+| T4b | N0  | M0  | IIC        |
+| T1  | N2  | M0  | III        |
+| T2  | N2  | M0  | III        |
+| T3  | N2  | M0  | III        |
+| T4a | N2  | M0  | III        |
+| T1  | N1  | M0  | IIIA       |
+| T1  | N1a | M0  | IIIA       |
+| T1  | N1b | M0  | IIIA       |
+| T1  | N1c | M0  | IIIA       |
+| T1  | N2a | M0  | IIIA       |
+| T2  | N1  | M0  | IIIA       |
+| T2  | N1a | M0  | IIIA       |
+| T2  | N1b | M0  | IIIA       |
+| T2  | N1c | M0  | IIIA       |
+| T1  | N2b | M0  | IIIB       |
+| T2  | N2a | M0  | IIIB       |
+| T2  | N2b | M0  | IIIB       |
+| T3  | N1  | M0  | IIIB       |
+| T3  | N1a | M0  | IIIB       |
+| T3  | N1b | M0  | IIIB       |
+| T3  | N1c | M0  | IIIB       |
+| T3  | N2a | M0  | IIIB       |
+| T4a | N1  | M0  | IIIB       |
+| T4a | N1a | M0  | IIIB       |
+| T4a | N1b | M0  | IIIB       |
+| T4a | N1c | M0  | IIIB       |
+| T3  | N2b | M0  | IIIC       |
+| T4a | N2a | M0  | IIIC       |
+| T4a | N2b | M0  | IIIC       |
+| T4b | N1  | M0  | IIIC       |
+| T4b | N1a | M0  | IIIC       |
+| T4b | N1b | M0  | IIIC       |
+| T4b | N1c | M0  | IIIC       |
+| T4b | N2  | M0  | IIIC       |
+| T4b | N2a | M0  | IIIC       |
+| T4b | N2b | M0  | IIIC       |
+| T1  | N0  | M1  | IV         |
+| T1  | N1  | M1  | IV         |
+| T1  | N1a | M1  | IV         |
+| T1  | N1b | M1  | IV         |
+| T1  | N1c | M1  | IV         |
+| T1  | N2  | M1  | IV         |
+| T1  | N2a | M1  | IV         |
+| T1  | N2b | M1  | IV         |
+| T2  | N0  | M1  | IV         |
+| T2  | N1  | M1  | IV         |
+| T2  | N1a | M1  | IV         |
+| T2  | N1b | M1  | IV         |
+| T2  | N1c | M1  | IV         |
+| T2  | N2  | M1  | IV         |
+| T2  | N2a | M1  | IV         |
+| T2  | N2b | M1  | IV         |
+| T3  | N0  | M1  | IV         |
+| T3  | N1  | M1  | IV         |
+| T3  | N1a | M1  | IV         |
+| T3  | N1b | M1  | IV         |
+| T3  | N1c | M1  | IV         |
+| T3  | N2  | M1  | IV         |
+| T3  | N2a | M1  | IV         |
+| T3  | N2b | M1  | IV         |
+| T4a | N0  | M1  | IV         |
+| T4a | N1  | M1  | IV         |
+| T4a | N1a | M1  | IV         |
+| T4a | N1b | M1  | IV         |
+| T4a | N1c | M1  | IV         |
+| T4a | N2  | M1  | IV         |
+| T4a | N2a | M1  | IV         |
+| T4a | N2b | M1  | IV         |
+| T4b | N0  | M1  | IV         |
+| T4b | N1  | M1  | IV         |
+| T4b | N1a | M1  | IV         |
+| T4b | N1b | M1  | IV         |
+| T4b | N1c | M1  | IV         |
+| T4b | N2  | M1  | IV         |
+| T4b | N2a | M1  | IV         |
+| T4b | N2b | M1  | IV         |
+| Tis | N0  | M1  | IV         |
+| Tis | N1  | M1  | IV         |
+| Tis | N1a | M1  | IV         |
+| Tis | N1b | M1  | IV         |
+| Tis | N1c | M1  | IV         |
+| Tis | N2  | M1  | IV         |
+| Tis | N2a | M1  | IV         |
+| Tis | N2b | M1  | IV         |
+| T1  | N0  | M1a | IVA        |
+| T1  | N1  | M1a | IVA        |
+| T1  | N1a | M1a | IVA        |
+| T1  | N1b | M1a | IVA        |
+| T1  | N1c | M1a | IVA        |
+| T1  | N2  | M1a | IVA        |
+| T1  | N2a | M1a | IVA        |
+| T1  | N2b | M1a | IVA        |
+| T2  | N0  | M1a | IVA        |
+| T2  | N1  | M1a | IVA        |
+| T2  | N1a | M1a | IVA        |
+| T2  | N1b | M1a | IVA        |
+| T2  | N1c | M1a | IVA        |
+| T2  | N2  | M1a | IVA        |
+| T2  | N2a | M1a | IVA        |
+| T2  | N2b | M1a | IVA        |
+| T3  | N0  | M1a | IVA        |
+| T3  | N1  | M1a | IVA        |
+| T3  | N1a | M1a | IVA        |
+| T3  | N1b | M1a | IVA        |
+| T3  | N1c | M1a | IVA        |
+| T3  | N2  | M1a | IVA        |
+| T3  | N2a | M1a | IVA        |
+| T3  | N2b | M1a | IVA        |
+| T4a | N0  | M1a | IVA        |
+| T4a | N1  | M1a | IVA        |
+| T4a | N1a | M1a | IVA        |
+| T4a | N1b | M1a | IVA        |
+| T4a | N1c | M1a | IVA        |
+| T4a | N2  | M1a | IVA        |
+| T4a | N2a | M1a | IVA        |
+| T4a | N2b | M1a | IVA        |
+| T4b | N0  | M1a | IVA        |
+| T4b | N1  | M1a | IVA        |
+| T4b | N1a | M1a | IVA        |
+| T4b | N1b | M1a | IVA        |
+| T4b | N1c | M1a | IVA        |
+| T4b | N2  | M1a | IVA        |
+| T4b | N2a | M1a | IVA        |
+| T4b | N2b | M1a | IVA        |
+| Tis | N0  | M1a | IVA        |
+| Tis | N1  | M1a | IVA        |
+| Tis | N1a | M1a | IVA        |
+| Tis | N1b | M1a | IVA        |
+| Tis | N1c | M1a | IVA        |
+| Tis | N2  | M1a | IVA        |
+| Tis | N2a | M1a | IVA        |
+| Tis | N2b | M1a | IVA        |
+| T1  | N0  | M1b | IVB        |
+| T1  | N1  | M1b | IVB        |
+| T1  | N1a | M1b | IVB        |
+| T1  | N1b | M1b | IVB        |
+| T1  | N1c | M1b | IVB        |
+| T1  | N2  | M1b | IVB        |
+| T1  | N2a | M1b | IVB        |
+| T1  | N2b | M1b | IVB        |
+| T2  | N0  | M1b | IVB        |
+| T2  | N1  | M1b | IVB        |
+| T2  | N1a | M1b | IVB        |
+| T2  | N1b | M1b | IVB        |
+| T2  | N1c | M1b | IVB        |
+| T2  | N2  | M1b | IVB        |
+| T2  | N2a | M1b | IVB        |
+| T2  | N2b | M1b | IVB        |
+| T3  | N0  | M1b | IVB        |
+| T3  | N1  | M1b | IVB        |
+| T3  | N1a | M1b | IVB        |
+| T3  | N1b | M1b | IVB        |
+| T3  | N1c | M1b | IVB        |
+| T3  | N2  | M1b | IVB        |
+| T3  | N2a | M1b | IVB        |
+| T3  | N2b | M1b | IVB        |
+| T4a | N0  | M1b | IVB        |
+| T4a | N1  | M1b | IVB        |
+| T4a | N1a | M1b | IVB        |
+| T4a | N1b | M1b | IVB        |
+| T4a | N1c | M1b | IVB        |
+| T4a | N2  | M1b | IVB        |
+| T4a | N2a | M1b | IVB        |
+| T4a | N2b | M1b | IVB        |
+| T4b | N0  | M1b | IVB        |
+| T4b | N1  | M1b | IVB        |
+| T4b | N1a | M1b | IVB        |
+| T4b | N1b | M1b | IVB        |
+| T4b | N1c | M1b | IVB        |
+| T4b | N2  | M1b | IVB        |
+| T4b | N2a | M1b | IVB        |
+| T4b | N2b | M1b | IVB        |
+| Tis | N0  | M1b | IVB        |
+| Tis | N1  | M1b | IVB        |
+| Tis | N1a | M1b | IVB        |
+| Tis | N1b | M1b | IVB        |
+| Tis | N1c | M1b | IVB        |
+| Tis | N2  | M1b | IVB        |
+| Tis | N2a | M1b | IVB        |
+| Tis | N2b | M1b | IVB        |
+| T1  | N0  | M1c | IVC        |
+| T1  | N1  | M1c | IVC        |
+| T1  | N1a | M1c | IVC        |
+| T1  | N1b | M1c | IVC        |
+| T1  | N1c | M1c | IVC        |
+| T1  | N2  | M1c | IVC        |
+| T1  | N2a | M1c | IVC        |
+| T1  | N2b | M1c | IVC        |
+| T2  | N0  | M1c | IVC        |
+| T2  | N1  | M1c | IVC        |
+| T2  | N1a | M1c | IVC        |
+| T2  | N1b | M1c | IVC        |
+| T2  | N1c | M1c | IVC        |
+| T2  | N2  | M1c | IVC        |
+| T2  | N2a | M1c | IVC        |
+| T2  | N2b | M1c | IVC        |
+| T3  | N0  | M1c | IVC        |
+| T3  | N1  | M1c | IVC        |
+| T3  | N1a | M1c | IVC        |
+| T3  | N1b | M1c | IVC        |
+| T3  | N1c | M1c | IVC        |
+| T3  | N2  | M1c | IVC        |
+| T3  | N2a | M1c | IVC        |
+| T3  | N2b | M1c | IVC        |
+| T4a | N0  | M1c | IVC        |
+| T4a | N1  | M1c | IVC        |
+| T4a | N1a | M1c | IVC        |
+| T4a | N1b | M1c | IVC        |
+| T4a | N1c | M1c | IVC        |
+| T4a | N2  | M1c | IVC        |
+| T4a | N2a | M1c | IVC        |
+| T4a | N2b | M1c | IVC        |
+| T4b | N0  | M1c | IVC        |
+| T4b | N1  | M1c | IVC        |
+| T4b | N1a | M1c | IVC        |
+| T4b | N1b | M1c | IVC        |
+| T4b | N1c | M1c | IVC        |
+| T4b | N2  | M1c | IVC        |
+| T4b | N2a | M1c | IVC        |
+| T4b | N2b | M1c | IVC        |
+| Tis | N0  | M1c | IVC        |
+| Tis | N1  | M1c | IVC        |
+| Tis | N1a | M1c | IVC        |
+| Tis | N1b | M1c | IVC        |
+| Tis | N1c | M1c | IVC        |
+| Tis | N2  | M1c | IVC        |
+| Tis | N2a | M1c | IVC        |
+| Tis | N2b | M1c | IVC        |
 
-| T    | N    | M   |
-|------|------|-----|
-| 0    |      |     |
-| Tis  | N0   | M0  |
-| IA   |      |     |
-| T1   | N0   | M0  |
-| T1a  | N0   | M0  |
-| T1b  | N0   | M0  |
-| T1c  | N0   | M0  |
-| T1mi | N0   | M0  |
-| IB   |      |     |
-| T0   | N1mi | M0  |
-| T1   | N1mi | M0  |
-| T1a  | N1mi | M0  |
-| T1b  | N1mi | M0  |
-| T1c  | N1mi | M0  |
-| T1mi | N1mi | M0  |
-| IIA  |      |     |
-| T2   | N0   | M0  |
-| T0   | N1   | M0  |
-| T1   | N1   | M0  |
-| T1a  | N1   | M0  |
-| T1b  | N1   | M0  |
-| T1c  | N1   | M0  |
-| T1mi | N1   | M0  |
-| T0   | N1a  | M0  |
-| T1   | N1a  | M0  |
-| T1a  | N1a  | M0  |
-| T1b  | N1a  | M0  |
-| T1c  | N1a  | M0  |
-| T1mi | N1a  | M0  |
-| T0   | N1b  | M0  |
-| T1   | N1b  | M0  |
-| T1a  | N1b  | M0  |
-| T1b  | N1b  | M0  |
-| T1c  | N1b  | M0  |
-| T1mi | N1b  | M0  |
-| T0   | N1c  | M0  |
-| T1   | N1c  | M0  |
-| T1a  | N1c  | M0  |
-| T1b  | N1c  | M0  |
-| T1c  | N1c  | M0  |
-| T1mi | N1c  | M0  |
-| IIB  |      |     |
-| T3   | N0   | M0  |
-| T2   | N1   | M0  |
-|      | N1a  | M0  |
-|      | N1b  | M0  |
-|      | N1c  | M0  |
-| IIIA |      |     |
-| T3   | N1   | M0  |
-|      | N1a  | M0  |
-|      | N1b  | M0  |
-|      | N1c  | M0  |
-| T0   | N2   | M0  |
-| T1   | N2   | M0  |
-| T1a  | N2   | M0  |
-| T1b  | N2   | M0  |
-| T1c  | N2   | M0  |
-| T1mi | N2   | M0  |
-| T2   | N2   | M0  |
-| T3   | N2   | M0  |
-| T0   | N2a  | M0  |
-| T1   | N2a  | M0  |
-| T1a  | N2a  | M0  |
-| T1b  | N2a  | M0  |
-| T1c  | N2a  | M0  |
-| T1mi | N2a  | M0  |
-| T2   | N2a  | M0  |
-| T3   | N2a  | M0  |
-| T0   | N2b  | M0  |
-| T1   | N2b  | M0  |
-| T1a  | N2b  | M0  |
-| T1b  | N2b  | M0  |
-| T1c  | N2b  | M0  |
-| T1mi | N2b  | M0  |
-| T2   | N2b  | M0  |
-| T3   | N2b  | M0  |
-| IIIB |      |     |
-| T4   | N0   | M0  |
-| T4a  | N0   | M0  |
-| T4b  | N0   | M0  |
-| T4c  | N0   | M0  |
-| T4d  | N0   | M0  |
-| T4   | N1   | M0  |
-| T4a  | N1   | M0  |
-| T4b  | N1   | M0  |
-| T4c  | N1   | M0  |
-| T4d  | N1   | M0  |
-| T4   | N1a  | M0  |
-| T4a  | N1a  | M0  |
-| T4b  | N1a  | M0  |
-| T4c  | N1a  | M0  |
-| T4d  | N1a  | M0  |
-| T4   | N1b  | M0  |
-| T4a  | N1b  | M0  |
-| T4b  | N1b  | M0  |
-| T4c  | N1b  | M0  |
-| T4d  | N1b  | M0  |
-| T4   | N1c  | M0  |
-| T4a  | N1c  | M0  |
-| T4b  | N1c  | M0  |
-| T4c  | N1c  | M0  |
-| T4d  | N1c  | M0  |
-| T4   | N2   | M0  |
-| T4a  | N2   | M0  |
-| T4b  | N2   | M0  |
-| T4c  | N2   | M0  |
-| T4d  | N2   | M0  |
-| T4   | N2a  | M0  |
-| T4a  | N2a  | M0  |
-| T4b  | N2a  | M0  |
-| T4c  | N2a  | M0  |
-| T4d  | N2a  | M0  |
-| T4   | N2b  | M0  |
-| T4a  | N2b  | M0  |
-| T4b  | N2b  | M0  |
-| T4c  | N2b  | M0  |
-| T4d  | N2b  | M0  |
-| IIIC |      |     |
-| T0   | N3   | M0  |
-| T1   | N3   | M0  |
-| T1a  | N3   | M0  |
-| T1b  | N3   | M0  |
-| T1c  | N3   | M0  |
-| T1mi | N3   | M0  |
-| T2   | N3   | M0  |
-| T3   | N3   | M0  |
-| T4   | N3   | M0  |
-| T4a  | N3   | M0  |
-| T4b  | N3   | M0  |
-| T4c  | N3   | M0  |
-| T4d  | N3   | M0  |
-| Tis  | N3   | M0  |
-| T0   | N3a  | M0  |
-| T1   | N3a  | M0  |
-| T1a  | N3a  | M0  |
-| T1b  | N3a  | M0  |
-| T1c  | N3a  | M0  |
-| T1mi | N3a  | M0  |
-| T2   | N3a  | M0  |
-| T3   | N3a  | M0  |
-| T4   | N3a  | M0  |
-| T4a  | N3a  | M0  |
-| T4b  | N3a  | M0  |
-| T4c  | N3a  | M0  |
-| T4d  | N3a  | M0  |
-| Tis  | N3a  | M0  |
-| T0   | N3b  | M0  |
-| T1   | N3b  | M0  |
-| T1a  | N3b  | M0  |
-| T1b  | N3b  | M0  |
-| T1c  | N3b  | M0  |
-| T1mi | N3b  | M0  |
-| T2   | N3b  | M0  |
-| T3   | N3b  | M0  |
-| T4   | N3b  | M0  |
-| T4a  | N3b  | M0  |
-| T4b  | N3b  | M0  |
-| T4c  | N3b  | M0  |
-| T4d  | N3b  | M0  |
-| Tis  | N3b  | M0  |
-| T0   | N3c  | M0  |
-| T1   | N3c  | M0  |
-| T1a  | N3c  | M0  |
-| T1b  | N3c  | M0  |
-| T1c  | N3c  | M0  |
-| T1mi | N3c  | M0  |
-| T2   | N3c  | M0  |
-| T3   | N3c  | M0  |
-| T4   | N3c  | M0  |
-| T4a  | N3c  | M0  |
-| T4b  | N3c  | M0  |
-| T4c  | N3c  | M0  |
-| T4d  | N3c  | M0  |
-| Tis  | N3c  | M0  |
-| IV   |      |     |
-| T0   | N0   | M1  |
-| T1   | N0   | M1  |
-| T1a  | N0   | M1  |
-| T1b  | N0   | M1  |
-| T1c  | N0   | M1  |
-| T1mi | N0   | M1  |
-| T2   | N0   | M1  |
-| T3   | N0   | M1  |
-| T4   | N0   | M1  |
-| T4a  | N0   | M1  |
-| T4b  | N0   | M1  |
-| T4c  | N0   | M1  |
-| T4d  | N0   | M1  |
-| Tis  | N0   | M1  |
-| T0   | N1   | M1  |
-| T1   | N1   | M1  |
-| T1a  | N1   | M1  |
-| T1b  | N1   | M1  |
-| T1c  | N1   | M1  |
-| T1mi | N1   | M1  |
-| T2   | N1   | M1  |
-| T3   | N1   | M1  |
-| T4   | N1   | M1  |
-| T4a  | N1   | M1  |
-| T4b  | N1   | M1  |
-| T4c  | N1   | M1  |
-| T4d  | N1   | M1  |
-| Tis  | N1   | M1  |
-| T0   | N1a  | M1  |
-| T1   | N1a  | M1  |
-| T1a  | N1a  | M1  |
-| T1b  | N1a  | M1  |
-| T1c  | N1a  | M1  |
-| T1mi | N1a  | M1  |
-| T2   | N1a  | M1  |
-| T3   | N1a  | M1  |
-| T4   | N1a  | M1  |
-| T4a  | N1a  | M1  |
-| T4b  | N1a  | M1  |
-| T4c  | N1a  | M1  |
-| T4d  | N1a  | M1  |
-| Tis  | N1a  | M1  |
-| T0   | N1b  | M1  |
-| T1   | N1b  | M1  |
-| T1a  | N1b  | M1  |
-| T1b  | N1b  | M1  |
-| T1c  | N1b  | M1  |
-| T1mi | N1b  | M1  |
-| T2   | N1b  | M1  |
-| T3   | N1b  | M1  |
-| T4   | N1b  | M1  |
-| T4a  | N1b  | M1  |
-| T4b  | N1b  | M1  |
-| T4c  | N1b  | M1  |
-| T4d  | N1b  | M1  |
-| Tis  | N1b  | M1  |
-| T0   | N1c  | M1  |
-| T1   | N1c  | M1  |
-| T1a  | N1c  | M1  |
-| T1b  | N1c  | M1  |
-| T1c  | N1c  | M1  |
-| T1mi | N1c  | M1  |
-| T2   | N1c  | M1  |
-| T3   | N1c  | M1  |
-| T4   | N1c  | M1  |
-| T4a  | N1c  | M1  |
-| T4b  | N1c  | M1  |
-| T4c  | N1c  | M1  |
-| T4d  | N1c  | M1  |
-| Tis  | N1c  | M1  |
-| T0   | N1mi | M1  |
-| T1   | N1mi | M1  |
-| T1a  | N1mi | M1  |
-| T1b  | N1mi | M1  |
-| T1c  | N1mi | M1  |
-| T1mi | N1mi | M1  |
-| T2   | N1mi | M1  |
-| T3   | N1mi | M1  |
-| T4   | N1mi | M1  |
-| T4a  | N1mi | M1  |
-| T4b  | N1mi | M1  |
-| T4c  | N1mi | M1  |
-| T4d  | N1mi | M1  |
-| Tis  | N1mi | M1  |
-| T0   | N2   | M1  |
-| T1   | N2   | M1  |
-| T1a  | N2   | M1  |
-| T1b  | N2   | M1  |
-| T1c  | N2   | M1  |
-| T1mi | N2   | M1  |
-| T2   | N2   | M1  |
-| T3   | N2   | M1  |
-| T4   | N2   | M1  |
-| T4a  | N2   | M1  |
-| T4b  | N2   | M1  |
-| T4c  | N2   | M1  |
-| T4d  | N2   | M1  |
-| Tis  | N2   | M1  |
-| T0   | N2a  | M1  |
-| T1   | N2a  | M1  |
-| T1a  | N2a  | M1  |
-| T1b  | N2a  | M1  |
-| T1c  | N2a  | M1  |
-| T1mi | N2a  | M1  |
-| T2   | N2a  | M1  |
-| T3   | N2a  | M1  |
-| T4   | N2a  | M1  |
-| T4a  | N2a  | M1  |
-| T4b  | N2a  | M1  |
-| T4c  | N2a  | M1  |
-| T4d  | N2a  | M1  |
-| Tis  | N2a  | M1  |
-| T0   | N2b  | M1  |
-| T1   | N2b  | M1  |
-| T1a  | N2b  | M1  |
-| T1b  | N2b  | M1  |
-| T1c  | N2b  | M1  |
-| T1mi | N2b  | M1  |
-| T2   | N2b  | M1  |
-| T3   | N2b  | M1  |
-| T4   | N2b  | M1  |
-| T4a  | N2b  | M1  |
-| T4b  | N2b  | M1  |
-| T4c  | N2b  | M1  |
-| T4d  | N2b  | M1  |
-| Tis  | N2b  | M1  |
-| T0   | N3   | M1  |
-| T1   | N3   | M1  |
-| T1a  | N3   | M1  |
-| T1b  | N3   | M1  |
-| T1c  | N3   | M1  |
-| T1mi | N3   | M1  |
-| T2   | N3   | M1  |
-| T3   | N3   | M1  |
-| T4   | N3   | M1  |
-| T4a  | N3   | M1  |
-| T4b  | N3   | M1  |
-| T4c  | N3   | M1  |
-| T4d  | N3   | M1  |
-| Tis  | N3   | M1  |
-| T0   | N3a  | M1  |
-| T1   | N3a  | M1  |
-| T1a  | N3a  | M1  |
-| T1b  | N3a  | M1  |
-| T1c  | N3a  | M1  |
-| T1mi | N3a  | M1  |
-| T2   | N3a  | M1  |
-| T3   | N3a  | M1  |
-| T4   | N3a  | M1  |
-| T4a  | N3a  | M1  |
-| T4b  | N3a  | M1  |
-| T4c  | N3a  | M1  |
-| T4d  | N3a  | M1  |
-| Tis  | N3a  | M1  |
-| T0   | N3b  | M1  |
-| T1   | N3b  | M1  |
-| T1a  | N3b  | M1  |
-| T1b  | N3b  | M1  |
-| T1c  | N3b  | M1  |
-| T1mi | N3b  | M1  |
-| T2   | N3b  | M1  |
-| T3   | N3b  | M1  |
-| T4   | N3b  | M1  |
-| T4a  | N3b  | M1  |
-| T4b  | N3b  | M1  |
-| T4c  | N3b  | M1  |
-| T4d  | N3b  | M1  |
-| Tis  | N3b  | M1  |
-| T0   | N3c  | M1  |
-| T1   | N3c  | M1  |
-| T1a  | N3c  | M1  |
-| T1b  | N3c  | M1  |
-| T1c  | N3c  | M1  |
-| T1mi | N3c  | M1  |
-| T2   | N3c  | M1  |
-| T3   | N3c  | M1  |
-| T4   | N3c  | M1  |
-| T4a  | N3c  | M1  |
-| T4b  | N3c  | M1  |
-| T4c  | N3c  | M1  |
-| T4d  | N3c  | M1  |
-| Tis  | N3c  | M1  |
+Lung
 
-clinical
+Base (233 rules)
 
-| T    | N    | M   |
-|------|------|-----|
-| 0    |      |     |
-| Tis  | N0   | M0  |
-| IA   |      |     |
-| T1   | N0   | M0  |
-| T1a  | N0   | M0  |
-| T1b  | N0   | M0  |
-| T1c  | N0   | M0  |
-| T1mi | N0   | M0  |
-| IB   |      |     |
-| T0   | N1mi | M0  |
-| T1   | N1mi | M0  |
-| T1a  | N1mi | M0  |
-| T1b  | N1mi | M0  |
-| T1c  | N1mi | M0  |
-| T1mi | N1mi | M0  |
-| IIA  |      |     |
-| T2   | N0   | M0  |
-| T0   | N1   | M0  |
-| T1   | N1   | M0  |
-| T1a  | N1   | M0  |
-| T1b  | N1   | M0  |
-| T1c  | N1   | M0  |
-| T1mi | N1   | M0  |
-| T0   | N1a  | M0  |
-| T1   | N1a  | M0  |
-| T1a  | N1a  | M0  |
-| T1b  | N1a  | M0  |
-| T1c  | N1a  | M0  |
-| T1mi | N1a  | M0  |
-| T0   | N1b  | M0  |
-| T1   | N1b  | M0  |
-| T1a  | N1b  | M0  |
-| T1b  | N1b  | M0  |
-| T1c  | N1b  | M0  |
-| T1mi | N1b  | M0  |
-| T0   | N1c  | M0  |
-| T1   | N1c  | M0  |
-| T1a  | N1c  | M0  |
-| T1b  | N1c  | M0  |
-| T1c  | N1c  | M0  |
-| T1mi | N1c  | M0  |
-| IIB  |      |     |
-| T3   | N0   | M0  |
-| T2   | N1   | M0  |
-|      | N1a  | M0  |
-|      | N1b  | M0  |
-|      | N1c  | M0  |
-| IIIA |      |     |
-| T3   | N1   | M0  |
-|      | N1a  | M0  |
-|      | N1b  | M0  |
-|      | N1c  | M0  |
-| T0   | N2   | M0  |
-| T1   | N2   | M0  |
-| T1a  | N2   | M0  |
-| T1b  | N2   | M0  |
-| T1c  | N2   | M0  |
-| T1mi | N2   | M0  |
-| T2   | N2   | M0  |
-| T3   | N2   | M0  |
-| T0   | N2a  | M0  |
-| T1   | N2a  | M0  |
-| T1a  | N2a  | M0  |
-| T1b  | N2a  | M0  |
-| T1c  | N2a  | M0  |
-| T1mi | N2a  | M0  |
-| T2   | N2a  | M0  |
-| T3   | N2a  | M0  |
-| T0   | N2b  | M0  |
-| T1   | N2b  | M0  |
-| T1a  | N2b  | M0  |
-| T1b  | N2b  | M0  |
-| T1c  | N2b  | M0  |
-| T1mi | N2b  | M0  |
-| T2   | N2b  | M0  |
-| T3   | N2b  | M0  |
-| IIIB |      |     |
-| T4   | N0   | M0  |
-| T4a  | N0   | M0  |
-| T4b  | N0   | M0  |
-| T4c  | N0   | M0  |
-| T4d  | N0   | M0  |
-| T4   | N1   | M0  |
-| T4a  | N1   | M0  |
-| T4b  | N1   | M0  |
-| T4c  | N1   | M0  |
-| T4d  | N1   | M0  |
-| T4   | N1a  | M0  |
-| T4a  | N1a  | M0  |
-| T4b  | N1a  | M0  |
-| T4c  | N1a  | M0  |
-| T4d  | N1a  | M0  |
-| T4   | N1b  | M0  |
-| T4a  | N1b  | M0  |
-| T4b  | N1b  | M0  |
-| T4c  | N1b  | M0  |
-| T4d  | N1b  | M0  |
-| T4   | N1c  | M0  |
-| T4a  | N1c  | M0  |
-| T4b  | N1c  | M0  |
-| T4c  | N1c  | M0  |
-| T4d  | N1c  | M0  |
-| T4   | N2   | M0  |
-| T4a  | N2   | M0  |
-| T4b  | N2   | M0  |
-| T4c  | N2   | M0  |
-| T4d  | N2   | M0  |
-| T4   | N2a  | M0  |
-| T4a  | N2a  | M0  |
-| T4b  | N2a  | M0  |
-| T4c  | N2a  | M0  |
-| T4d  | N2a  | M0  |
-| T4   | N2b  | M0  |
-| T4a  | N2b  | M0  |
-| T4b  | N2b  | M0  |
-| T4c  | N2b  | M0  |
-| T4d  | N2b  | M0  |
-| IIIC |      |     |
-| T0   | N3   | M0  |
-| T1   | N3   | M0  |
-| T1a  | N3   | M0  |
-| T1b  | N3   | M0  |
-| T1c  | N3   | M0  |
-| T1mi | N3   | M0  |
-| T2   | N3   | M0  |
-| T3   | N3   | M0  |
-| T4   | N3   | M0  |
-| T4a  | N3   | M0  |
-| T4b  | N3   | M0  |
-| T4c  | N3   | M0  |
-| T4d  | N3   | M0  |
-| Tis  | N3   | M0  |
-| T0   | N3a  | M0  |
-| T1   | N3a  | M0  |
-| T1a  | N3a  | M0  |
-| T1b  | N3a  | M0  |
-| T1c  | N3a  | M0  |
-| T1mi | N3a  | M0  |
-| T2   | N3a  | M0  |
-| T3   | N3a  | M0  |
-| T4   | N3a  | M0  |
-| T4a  | N3a  | M0  |
-| T4b  | N3a  | M0  |
-| T4c  | N3a  | M0  |
-| T4d  | N3a  | M0  |
-| Tis  | N3a  | M0  |
-| T0   | N3b  | M0  |
-| T1   | N3b  | M0  |
-| T1a  | N3b  | M0  |
-| T1b  | N3b  | M0  |
-| T1c  | N3b  | M0  |
-| T1mi | N3b  | M0  |
-| T2   | N3b  | M0  |
-| T3   | N3b  | M0  |
-| T4   | N3b  | M0  |
-| T4a  | N3b  | M0  |
-| T4b  | N3b  | M0  |
-| T4c  | N3b  | M0  |
-| T4d  | N3b  | M0  |
-| Tis  | N3b  | M0  |
-| T0   | N3c  | M0  |
-| T1   | N3c  | M0  |
-| T1a  | N3c  | M0  |
-| T1b  | N3c  | M0  |
-| T1c  | N3c  | M0  |
-| T1mi | N3c  | M0  |
-| T2   | N3c  | M0  |
-| T3   | N3c  | M0  |
-| T4   | N3c  | M0  |
-| T4a  | N3c  | M0  |
-| T4b  | N3c  | M0  |
-| T4c  | N3c  | M0  |
-| T4d  | N3c  | M0  |
-| Tis  | N3c  | M0  |
-| IV   |      |     |
-| T0   | N0   | M1  |
-| T1   | N0   | M1  |
-| T1a  | N0   | M1  |
-| T1b  | N0   | M1  |
-| T1c  | N0   | M1  |
-| T1mi | N0   | M1  |
-| T2   | N0   | M1  |
-| T3   | N0   | M1  |
-| T4   | N0   | M1  |
-| T4a  | N0   | M1  |
-| T4b  | N0   | M1  |
-| T4c  | N0   | M1  |
-| T4d  | N0   | M1  |
-| Tis  | N0   | M1  |
-| T0   | N1   | M1  |
-| T1   | N1   | M1  |
-| T1a  | N1   | M1  |
-| T1b  | N1   | M1  |
-| T1c  | N1   | M1  |
-| T1mi | N1   | M1  |
-| T2   | N1   | M1  |
-| T3   | N1   | M1  |
-| T4   | N1   | M1  |
-| T4a  | N1   | M1  |
-| T4b  | N1   | M1  |
-| T4c  | N1   | M1  |
-| T4d  | N1   | M1  |
-| Tis  | N1   | M1  |
-| T0   | N1a  | M1  |
-| T1   | N1a  | M1  |
-| T1a  | N1a  | M1  |
-| T1b  | N1a  | M1  |
-| T1c  | N1a  | M1  |
-| T1mi | N1a  | M1  |
-| T2   | N1a  | M1  |
-| T3   | N1a  | M1  |
-| T4   | N1a  | M1  |
-| T4a  | N1a  | M1  |
-| T4b  | N1a  | M1  |
-| T4c  | N1a  | M1  |
-| T4d  | N1a  | M1  |
-| Tis  | N1a  | M1  |
-| T0   | N1b  | M1  |
-| T1   | N1b  | M1  |
-| T1a  | N1b  | M1  |
-| T1b  | N1b  | M1  |
-| T1c  | N1b  | M1  |
-| T1mi | N1b  | M1  |
-| T2   | N1b  | M1  |
-| T3   | N1b  | M1  |
-| T4   | N1b  | M1  |
-| T4a  | N1b  | M1  |
-| T4b  | N1b  | M1  |
-| T4c  | N1b  | M1  |
-| T4d  | N1b  | M1  |
-| Tis  | N1b  | M1  |
-| T0   | N1c  | M1  |
-| T1   | N1c  | M1  |
-| T1a  | N1c  | M1  |
-| T1b  | N1c  | M1  |
-| T1c  | N1c  | M1  |
-| T1mi | N1c  | M1  |
-| T2   | N1c  | M1  |
-| T3   | N1c  | M1  |
-| T4   | N1c  | M1  |
-| T4a  | N1c  | M1  |
-| T4b  | N1c  | M1  |
-| T4c  | N1c  | M1  |
-| T4d  | N1c  | M1  |
-| Tis  | N1c  | M1  |
-| T0   | N1mi | M1  |
-| T1   | N1mi | M1  |
-| T1a  | N1mi | M1  |
-| T1b  | N1mi | M1  |
-| T1c  | N1mi | M1  |
-| T1mi | N1mi | M1  |
-| T2   | N1mi | M1  |
-| T3   | N1mi | M1  |
-| T4   | N1mi | M1  |
-| T4a  | N1mi | M1  |
-| T4b  | N1mi | M1  |
-| T4c  | N1mi | M1  |
-| T4d  | N1mi | M1  |
-| Tis  | N1mi | M1  |
-| T0   | N2   | M1  |
-| T1   | N2   | M1  |
-| T1a  | N2   | M1  |
-| T1b  | N2   | M1  |
-| T1c  | N2   | M1  |
-| T1mi | N2   | M1  |
-| T2   | N2   | M1  |
-| T3   | N2   | M1  |
-| T4   | N2   | M1  |
-| T4a  | N2   | M1  |
-| T4b  | N2   | M1  |
-| T4c  | N2   | M1  |
-| T4d  | N2   | M1  |
-| Tis  | N2   | M1  |
-| T0   | N2a  | M1  |
-| T1   | N2a  | M1  |
-| T1a  | N2a  | M1  |
-| T1b  | N2a  | M1  |
-| T1c  | N2a  | M1  |
-| T1mi | N2a  | M1  |
-| T2   | N2a  | M1  |
-| T3   | N2a  | M1  |
-| T4   | N2a  | M1  |
-| T4a  | N2a  | M1  |
-| T4b  | N2a  | M1  |
-| T4c  | N2a  | M1  |
-| T4d  | N2a  | M1  |
-| Tis  | N2a  | M1  |
-| T0   | N2b  | M1  |
-| T1   | N2b  | M1  |
-| T1a  | N2b  | M1  |
-| T1b  | N2b  | M1  |
-| T1c  | N2b  | M1  |
-| T1mi | N2b  | M1  |
-| T2   | N2b  | M1  |
-| T3   | N2b  | M1  |
-| T4   | N2b  | M1  |
-| T4a  | N2b  | M1  |
-| T4b  | N2b  | M1  |
-| T4c  | N2b  | M1  |
-| T4d  | N2b  | M1  |
-| Tis  | N2b  | M1  |
-| T0   | N3   | M1  |
-| T1   | N3   | M1  |
-| T1a  | N3   | M1  |
-| T1b  | N3   | M1  |
-| T1c  | N3   | M1  |
-| T1mi | N3   | M1  |
-| T2   | N3   | M1  |
-| T3   | N3   | M1  |
-| T4   | N3   | M1  |
-| T4a  | N3   | M1  |
-| T4b  | N3   | M1  |
-| T4c  | N3   | M1  |
-| T4d  | N3   | M1  |
-| Tis  | N3   | M1  |
-| T0   | N3a  | M1  |
-| T1   | N3a  | M1  |
-| T1a  | N3a  | M1  |
-| T1b  | N3a  | M1  |
-| T1c  | N3a  | M1  |
-| T1mi | N3a  | M1  |
-| T2   | N3a  | M1  |
-| T3   | N3a  | M1  |
-| T4   | N3a  | M1  |
-| T4a  | N3a  | M1  |
-| T4b  | N3a  | M1  |
-| T4c  | N3a  | M1  |
-| T4d  | N3a  | M1  |
-| Tis  | N3a  | M1  |
-| T0   | N3b  | M1  |
-| T1   | N3b  | M1  |
-| T1a  | N3b  | M1  |
-| T1b  | N3b  | M1  |
-| T1c  | N3b  | M1  |
-| T1mi | N3b  | M1  |
-| T2   | N3b  | M1  |
-| T3   | N3b  | M1  |
-| T4   | N3b  | M1  |
-| T4a  | N3b  | M1  |
-| T4b  | N3b  | M1  |
-| T4c  | N3b  | M1  |
-| T4d  | N3b  | M1  |
-| Tis  | N3b  | M1  |
-| T0   | N3c  | M1  |
-| T1   | N3c  | M1  |
-| T1a  | N3c  | M1  |
-| T1b  | N3c  | M1  |
-| T1c  | N3c  | M1  |
-| T1mi | N3c  | M1  |
-| T2   | N3c  | M1  |
-| T3   | N3c  | M1  |
-| T4   | N3c  | M1  |
-| T4a  | N3c  | M1  |
-| T4b  | N3c  | M1  |
-| T4c  | N3c  | M1  |
-| T4d  | N3c  | M1  |
-| Tis  | N3c  | M1  |
+| T    | N   | M   | uicc_stage       |
+|:-----|:----|:----|:-----------------|
+| Tis  | N0  | M0  | 0                |
+| T1   | N0  | M0  | IA               |
+| T1a  | N0  | M0  | IA1              |
+| T1mi | N0  | M0  | IA1              |
+| T1b  | N0  | M0  | IA2              |
+| T1c  | N0  | M0  | IA3              |
+| T2a  | N0  | M0  | IB               |
+| T2b  | N0  | M0  | IIA              |
+| T1   | N1  | M0  | IIB              |
+| T1a  | N1  | M0  | IIB              |
+| T1b  | N1  | M0  | IIB              |
+| T1c  | N1  | M0  | IIB              |
+| T1mi | N1  | M0  | IIB              |
+| T2   | N1  | M0  | IIB              |
+| T2a  | N1  | M0  | IIB              |
+| T2b  | N1  | M0  | IIB              |
+| T3   | N0  | M0  | IIB              |
+| T1   | N2  | M0  | IIIA             |
+| T1a  | N2  | M0  | IIIA             |
+| T1b  | N2  | M0  | IIIA             |
+| T1c  | N2  | M0  | IIIA             |
+| T1mi | N2  | M0  | IIIA             |
+| T2   | N2  | M0  | IIIA             |
+| T2a  | N2  | M0  | IIIA             |
+| T2b  | N2  | M0  | IIIA             |
+| T3   | N1  | M0  | IIIA             |
+| T4   | N0  | M0  | IIIA             |
+| T4   | N1  | M0  | IIIA             |
+| T1   | N3  | M0  | IIIB             |
+| T1a  | N3  | M0  | IIIB             |
+| T1b  | N3  | M0  | IIIB             |
+| T1c  | N3  | M0  | IIIB             |
+| T1mi | N3  | M0  | IIIB             |
+| T2   | N3  | M0  | IIIB             |
+| T2a  | N3  | M0  | IIIB             |
+| T2b  | N3  | M0  | IIIB             |
+| T3   | N2  | M0  | IIIB             |
+| T4   | N2  | M0  | IIIB             |
+| T3   | N3  | M0  | IIIC             |
+| T4   | N3  | M0  | IIIC             |
+| T1   | N0  | M1  | IV               |
+| T1   | N1  | M1  | IV               |
+| T1   | N2  | M1  | IV               |
+| T1   | N3  | M1  | IV               |
+| T1a  | N0  | M1  | IV               |
+| T1a  | N1  | M1  | IV               |
+| T1a  | N2  | M1  | IV               |
+| T1a  | N3  | M1  | IV               |
+| T1b  | N0  | M1  | IV               |
+| T1b  | N1  | M1  | IV               |
+| T1b  | N2  | M1  | IV               |
+| T1b  | N3  | M1  | IV               |
+| T1c  | N0  | M1  | IV               |
+| T1c  | N1  | M1  | IV               |
+| T1c  | N2  | M1  | IV               |
+| T1c  | N3  | M1  | IV               |
+| T1mi | N0  | M1  | IV               |
+| T1mi | N1  | M1  | IV               |
+| T1mi | N2  | M1  | IV               |
+| T1mi | N3  | M1  | IV               |
+| T2   | N0  | M1  | IV               |
+| T2   | N1  | M1  | IV               |
+| T2   | N2  | M1  | IV               |
+| T2   | N3  | M1  | IV               |
+| T2a  | N0  | M1  | IV               |
+| T2a  | N1  | M1  | IV               |
+| T2a  | N2  | M1  | IV               |
+| T2a  | N3  | M1  | IV               |
+| T2b  | N0  | M1  | IV               |
+| T2b  | N1  | M1  | IV               |
+| T2b  | N2  | M1  | IV               |
+| T2b  | N3  | M1  | IV               |
+| T3   | N0  | M1  | IV               |
+| T3   | N1  | M1  | IV               |
+| T3   | N2  | M1  | IV               |
+| T3   | N3  | M1  | IV               |
+| T4   | N0  | M1  | IV               |
+| T4   | N1  | M1  | IV               |
+| T4   | N2  | M1  | IV               |
+| T4   | N3  | M1  | IV               |
+| TX   | N0  | M1  | IV               |
+| TX   | N1  | M1  | IV               |
+| TX   | N2  | M1  | IV               |
+| TX   | N3  | M1  | IV               |
+| Tis  | N0  | M1  | IV               |
+| Tis  | N1  | M1  | IV               |
+| Tis  | N2  | M1  | IV               |
+| Tis  | N3  | M1  | IV               |
+| T1   | N0  | M1a | IVA              |
+| T1   | N0  | M1b | IVA              |
+| T1   | N1  | M1a | IVA              |
+| T1   | N1  | M1b | IVA              |
+| T1   | N2  | M1a | IVA              |
+| T1   | N2  | M1b | IVA              |
+| T1   | N3  | M1a | IVA              |
+| T1   | N3  | M1b | IVA              |
+| T1a  | N0  | M1a | IVA              |
+| T1a  | N0  | M1b | IVA              |
+| T1a  | N1  | M1a | IVA              |
+| T1a  | N1  | M1b | IVA              |
+| T1a  | N2  | M1a | IVA              |
+| T1a  | N2  | M1b | IVA              |
+| T1a  | N3  | M1a | IVA              |
+| T1a  | N3  | M1b | IVA              |
+| T1b  | N0  | M1a | IVA              |
+| T1b  | N0  | M1b | IVA              |
+| T1b  | N1  | M1a | IVA              |
+| T1b  | N1  | M1b | IVA              |
+| T1b  | N2  | M1a | IVA              |
+| T1b  | N2  | M1b | IVA              |
+| T1b  | N3  | M1a | IVA              |
+| T1b  | N3  | M1b | IVA              |
+| T1c  | N0  | M1a | IVA              |
+| T1c  | N0  | M1b | IVA              |
+| T1c  | N1  | M1a | IVA              |
+| T1c  | N1  | M1b | IVA              |
+| T1c  | N2  | M1a | IVA              |
+| T1c  | N2  | M1b | IVA              |
+| T1c  | N3  | M1a | IVA              |
+| T1c  | N3  | M1b | IVA              |
+| T1mi | N0  | M1a | IVA              |
+| T1mi | N0  | M1b | IVA              |
+| T1mi | N1  | M1a | IVA              |
+| T1mi | N1  | M1b | IVA              |
+| T1mi | N2  | M1a | IVA              |
+| T1mi | N2  | M1b | IVA              |
+| T1mi | N3  | M1a | IVA              |
+| T1mi | N3  | M1b | IVA              |
+| T2   | N0  | M1a | IVA              |
+| T2   | N0  | M1b | IVA              |
+| T2   | N1  | M1a | IVA              |
+| T2   | N1  | M1b | IVA              |
+| T2   | N2  | M1a | IVA              |
+| T2   | N2  | M1b | IVA              |
+| T2   | N3  | M1a | IVA              |
+| T2   | N3  | M1b | IVA              |
+| T2a  | N0  | M1a | IVA              |
+| T2a  | N0  | M1b | IVA              |
+| T2a  | N1  | M1a | IVA              |
+| T2a  | N1  | M1b | IVA              |
+| T2a  | N2  | M1a | IVA              |
+| T2a  | N2  | M1b | IVA              |
+| T2a  | N3  | M1a | IVA              |
+| T2a  | N3  | M1b | IVA              |
+| T2b  | N0  | M1a | IVA              |
+| T2b  | N0  | M1b | IVA              |
+| T2b  | N1  | M1a | IVA              |
+| T2b  | N1  | M1b | IVA              |
+| T2b  | N2  | M1a | IVA              |
+| T2b  | N2  | M1b | IVA              |
+| T2b  | N3  | M1a | IVA              |
+| T2b  | N3  | M1b | IVA              |
+| T3   | N0  | M1a | IVA              |
+| T3   | N0  | M1b | IVA              |
+| T3   | N1  | M1a | IVA              |
+| T3   | N1  | M1b | IVA              |
+| T3   | N2  | M1a | IVA              |
+| T3   | N2  | M1b | IVA              |
+| T3   | N3  | M1a | IVA              |
+| T3   | N3  | M1b | IVA              |
+| T4   | N0  | M1a | IVA              |
+| T4   | N0  | M1b | IVA              |
+| T4   | N1  | M1a | IVA              |
+| T4   | N1  | M1b | IVA              |
+| T4   | N2  | M1a | IVA              |
+| T4   | N2  | M1b | IVA              |
+| T4   | N3  | M1a | IVA              |
+| T4   | N3  | M1b | IVA              |
+| TX   | N0  | M1a | IVA              |
+| TX   | N0  | M1b | IVA              |
+| TX   | N1  | M1a | IVA              |
+| TX   | N1  | M1b | IVA              |
+| TX   | N2  | M1a | IVA              |
+| TX   | N2  | M1b | IVA              |
+| TX   | N3  | M1a | IVA              |
+| TX   | N3  | M1b | IVA              |
+| Tis  | N0  | M1a | IVA              |
+| Tis  | N0  | M1b | IVA              |
+| Tis  | N1  | M1a | IVA              |
+| Tis  | N1  | M1b | IVA              |
+| Tis  | N2  | M1a | IVA              |
+| Tis  | N2  | M1b | IVA              |
+| Tis  | N3  | M1a | IVA              |
+| Tis  | N3  | M1b | IVA              |
+| T1   | N0  | M1c | IVB              |
+| T1   | N1  | M1c | IVB              |
+| T1   | N2  | M1c | IVB              |
+| T1   | N3  | M1c | IVB              |
+| T1a  | N0  | M1c | IVB              |
+| T1a  | N1  | M1c | IVB              |
+| T1a  | N2  | M1c | IVB              |
+| T1a  | N3  | M1c | IVB              |
+| T1b  | N0  | M1c | IVB              |
+| T1b  | N1  | M1c | IVB              |
+| T1b  | N2  | M1c | IVB              |
+| T1b  | N3  | M1c | IVB              |
+| T1c  | N0  | M1c | IVB              |
+| T1c  | N1  | M1c | IVB              |
+| T1c  | N2  | M1c | IVB              |
+| T1c  | N3  | M1c | IVB              |
+| T1mi | N0  | M1c | IVB              |
+| T1mi | N1  | M1c | IVB              |
+| T1mi | N2  | M1c | IVB              |
+| T1mi | N3  | M1c | IVB              |
+| T2   | N0  | M1c | IVB              |
+| T2   | N1  | M1c | IVB              |
+| T2   | N2  | M1c | IVB              |
+| T2   | N3  | M1c | IVB              |
+| T2a  | N0  | M1c | IVB              |
+| T2a  | N1  | M1c | IVB              |
+| T2a  | N2  | M1c | IVB              |
+| T2a  | N3  | M1c | IVB              |
+| T2b  | N0  | M1c | IVB              |
+| T2b  | N1  | M1c | IVB              |
+| T2b  | N2  | M1c | IVB              |
+| T2b  | N3  | M1c | IVB              |
+| T3   | N0  | M1c | IVB              |
+| T3   | N1  | M1c | IVB              |
+| T3   | N2  | M1c | IVB              |
+| T3   | N3  | M1c | IVB              |
+| T4   | N0  | M1c | IVB              |
+| T4   | N1  | M1c | IVB              |
+| T4   | N2  | M1c | IVB              |
+| T4   | N3  | M1c | IVB              |
+| TX   | N0  | M1c | IVB              |
+| TX   | N1  | M1c | IVB              |
+| TX   | N2  | M1c | IVB              |
+| TX   | N3  | M1c | IVB              |
+| Tis  | N0  | M1c | IVB              |
+| Tis  | N1  | M1c | IVB              |
+| Tis  | N2  | M1c | IVB              |
+| Tis  | N3  | M1c | IVB              |
+| TX   | N0  | M0  | Occult carcinoma |
 
-pathological
+Oesophagus
 
-| T    | N    | M   |
-|------|------|-----|
-| 0    |      |     |
-| Tis  | N0   | M0  |
-| IA   |      |     |
-| T1   | N0   | M0  |
-| T1a  | N0   | M0  |
-| T1b  | N0   | M0  |
-| T1c  | N0   | M0  |
-| T1mi | N0   | M0  |
-| IB   |      |     |
-| T0   | N1mi | M0  |
-| T1   | N1mi | M0  |
-| T1a  | N1mi | M0  |
-| T1b  | N1mi | M0  |
-| T1c  | N1mi | M0  |
-| T1mi | N1mi | M0  |
-| IIA  |      |     |
-| T2   | N0   | M0  |
-| T0   | N1   | M0  |
-| T1   | N1   | M0  |
-| T1a  | N1   | M0  |
-| T1b  | N1   | M0  |
-| T1c  | N1   | M0  |
-| T1mi | N1   | M0  |
-| T0   | N1a  | M0  |
-| T1   | N1a  | M0  |
-| T1a  | N1a  | M0  |
-| T1b  | N1a  | M0  |
-| T1c  | N1a  | M0  |
-| T1mi | N1a  | M0  |
-| T0   | N1b  | M0  |
-| T1   | N1b  | M0  |
-| T1a  | N1b  | M0  |
-| T1b  | N1b  | M0  |
-| T1c  | N1b  | M0  |
-| T1mi | N1b  | M0  |
-| T0   | N1c  | M0  |
-| T1   | N1c  | M0  |
-| T1a  | N1c  | M0  |
-| T1b  | N1c  | M0  |
-| T1c  | N1c  | M0  |
-| T1mi | N1c  | M0  |
-| IIB  |      |     |
-| T3   | N0   | M0  |
-| T2   | N1   | M0  |
-|      | N1a  | M0  |
-|      | N1b  | M0  |
-|      | N1c  | M0  |
-| IIIA |      |     |
-| T3   | N1   | M0  |
-|      | N1a  | M0  |
-|      | N1b  | M0  |
-|      | N1c  | M0  |
-| T0   | N2   | M0  |
-| T1   | N2   | M0  |
-| T1a  | N2   | M0  |
-| T1b  | N2   | M0  |
-| T1c  | N2   | M0  |
-| T1mi | N2   | M0  |
-| T2   | N2   | M0  |
-| T3   | N2   | M0  |
-| T0   | N2a  | M0  |
-| T1   | N2a  | M0  |
-| T1a  | N2a  | M0  |
-| T1b  | N2a  | M0  |
-| T1c  | N2a  | M0  |
-| T1mi | N2a  | M0  |
-| T2   | N2a  | M0  |
-| T3   | N2a  | M0  |
-| T0   | N2b  | M0  |
-| T1   | N2b  | M0  |
-| T1a  | N2b  | M0  |
-| T1b  | N2b  | M0  |
-| T1c  | N2b  | M0  |
-| T1mi | N2b  | M0  |
-| T2   | N2b  | M0  |
-| T3   | N2b  | M0  |
-| IIIB |      |     |
-| T4   | N0   | M0  |
-| T4a  | N0   | M0  |
-| T4b  | N0   | M0  |
-| T4c  | N0   | M0  |
-| T4d  | N0   | M0  |
-| T4   | N1   | M0  |
-| T4a  | N1   | M0  |
-| T4b  | N1   | M0  |
-| T4c  | N1   | M0  |
-| T4d  | N1   | M0  |
-| T4   | N1a  | M0  |
-| T4a  | N1a  | M0  |
-| T4b  | N1a  | M0  |
-| T4c  | N1a  | M0  |
-| T4d  | N1a  | M0  |
-| T4   | N1b  | M0  |
-| T4a  | N1b  | M0  |
-| T4b  | N1b  | M0  |
-| T4c  | N1b  | M0  |
-| T4d  | N1b  | M0  |
-| T4   | N1c  | M0  |
-| T4a  | N1c  | M0  |
-| T4b  | N1c  | M0  |
-| T4c  | N1c  | M0  |
-| T4d  | N1c  | M0  |
-| T4   | N2   | M0  |
-| T4a  | N2   | M0  |
-| T4b  | N2   | M0  |
-| T4c  | N2   | M0  |
-| T4d  | N2   | M0  |
-| T4   | N2a  | M0  |
-| T4a  | N2a  | M0  |
-| T4b  | N2a  | M0  |
-| T4c  | N2a  | M0  |
-| T4d  | N2a  | M0  |
-| T4   | N2b  | M0  |
-| T4a  | N2b  | M0  |
-| T4b  | N2b  | M0  |
-| T4c  | N2b  | M0  |
-| T4d  | N2b  | M0  |
-| IIIC |      |     |
-| T0   | N3   | M0  |
-| T1   | N3   | M0  |
-| T1a  | N3   | M0  |
-| T1b  | N3   | M0  |
-| T1c  | N3   | M0  |
-| T1mi | N3   | M0  |
-| T2   | N3   | M0  |
-| T3   | N3   | M0  |
-| T4   | N3   | M0  |
-| T4a  | N3   | M0  |
-| T4b  | N3   | M0  |
-| T4c  | N3   | M0  |
-| T4d  | N3   | M0  |
-| Tis  | N3   | M0  |
-| T0   | N3a  | M0  |
-| T1   | N3a  | M0  |
-| T1a  | N3a  | M0  |
-| T1b  | N3a  | M0  |
-| T1c  | N3a  | M0  |
-| T1mi | N3a  | M0  |
-| T2   | N3a  | M0  |
-| T3   | N3a  | M0  |
-| T4   | N3a  | M0  |
-| T4a  | N3a  | M0  |
-| T4b  | N3a  | M0  |
-| T4c  | N3a  | M0  |
-| T4d  | N3a  | M0  |
-| Tis  | N3a  | M0  |
-| T0   | N3b  | M0  |
-| T1   | N3b  | M0  |
-| T1a  | N3b  | M0  |
-| T1b  | N3b  | M0  |
-| T1c  | N3b  | M0  |
-| T1mi | N3b  | M0  |
-| T2   | N3b  | M0  |
-| T3   | N3b  | M0  |
-| T4   | N3b  | M0  |
-| T4a  | N3b  | M0  |
-| T4b  | N3b  | M0  |
-| T4c  | N3b  | M0  |
-| T4d  | N3b  | M0  |
-| Tis  | N3b  | M0  |
-| T0   | N3c  | M0  |
-| T1   | N3c  | M0  |
-| T1a  | N3c  | M0  |
-| T1b  | N3c  | M0  |
-| T1c  | N3c  | M0  |
-| T1mi | N3c  | M0  |
-| T2   | N3c  | M0  |
-| T3   | N3c  | M0  |
-| T4   | N3c  | M0  |
-| T4a  | N3c  | M0  |
-| T4b  | N3c  | M0  |
-| T4c  | N3c  | M0  |
-| T4d  | N3c  | M0  |
-| Tis  | N3c  | M0  |
-| IV   |      |     |
-| T0   | N0   | M1  |
-| T1   | N0   | M1  |
-| T1a  | N0   | M1  |
-| T1b  | N0   | M1  |
-| T1c  | N0   | M1  |
-| T1mi | N0   | M1  |
-| T2   | N0   | M1  |
-| T3   | N0   | M1  |
-| T4   | N0   | M1  |
-| T4a  | N0   | M1  |
-| T4b  | N0   | M1  |
-| T4c  | N0   | M1  |
-| T4d  | N0   | M1  |
-| Tis  | N0   | M1  |
-| T0   | N1   | M1  |
-| T1   | N1   | M1  |
-| T1a  | N1   | M1  |
-| T1b  | N1   | M1  |
-| T1c  | N1   | M1  |
-| T1mi | N1   | M1  |
-| T2   | N1   | M1  |
-| T3   | N1   | M1  |
-| T4   | N1   | M1  |
-| T4a  | N1   | M1  |
-| T4b  | N1   | M1  |
-| T4c  | N1   | M1  |
-| T4d  | N1   | M1  |
-| Tis  | N1   | M1  |
-| T0   | N1a  | M1  |
-| T1   | N1a  | M1  |
-| T1a  | N1a  | M1  |
-| T1b  | N1a  | M1  |
-| T1c  | N1a  | M1  |
-| T1mi | N1a  | M1  |
-| T2   | N1a  | M1  |
-| T3   | N1a  | M1  |
-| T4   | N1a  | M1  |
-| T4a  | N1a  | M1  |
-| T4b  | N1a  | M1  |
-| T4c  | N1a  | M1  |
-| T4d  | N1a  | M1  |
-| Tis  | N1a  | M1  |
-| T0   | N1b  | M1  |
-| T1   | N1b  | M1  |
-| T1a  | N1b  | M1  |
-| T1b  | N1b  | M1  |
-| T1c  | N1b  | M1  |
-| T1mi | N1b  | M1  |
-| T2   | N1b  | M1  |
-| T3   | N1b  | M1  |
-| T4   | N1b  | M1  |
-| T4a  | N1b  | M1  |
-| T4b  | N1b  | M1  |
-| T4c  | N1b  | M1  |
-| T4d  | N1b  | M1  |
-| Tis  | N1b  | M1  |
-| T0   | N1c  | M1  |
-| T1   | N1c  | M1  |
-| T1a  | N1c  | M1  |
-| T1b  | N1c  | M1  |
-| T1c  | N1c  | M1  |
-| T1mi | N1c  | M1  |
-| T2   | N1c  | M1  |
-| T3   | N1c  | M1  |
-| T4   | N1c  | M1  |
-| T4a  | N1c  | M1  |
-| T4b  | N1c  | M1  |
-| T4c  | N1c  | M1  |
-| T4d  | N1c  | M1  |
-| Tis  | N1c  | M1  |
-| T0   | N1mi | M1  |
-| T1   | N1mi | M1  |
-| T1a  | N1mi | M1  |
-| T1b  | N1mi | M1  |
-| T1c  | N1mi | M1  |
-| T1mi | N1mi | M1  |
-| T2   | N1mi | M1  |
-| T3   | N1mi | M1  |
-| T4   | N1mi | M1  |
-| T4a  | N1mi | M1  |
-| T4b  | N1mi | M1  |
-| T4c  | N1mi | M1  |
-| T4d  | N1mi | M1  |
-| Tis  | N1mi | M1  |
-| T0   | N2   | M1  |
-| T1   | N2   | M1  |
-| T1a  | N2   | M1  |
-| T1b  | N2   | M1  |
-| T1c  | N2   | M1  |
-| T1mi | N2   | M1  |
-| T2   | N2   | M1  |
-| T3   | N2   | M1  |
-| T4   | N2   | M1  |
-| T4a  | N2   | M1  |
-| T4b  | N2   | M1  |
-| T4c  | N2   | M1  |
-| T4d  | N2   | M1  |
-| Tis  | N2   | M1  |
-| T0   | N2a  | M1  |
-| T1   | N2a  | M1  |
-| T1a  | N2a  | M1  |
-| T1b  | N2a  | M1  |
-| T1c  | N2a  | M1  |
-| T1mi | N2a  | M1  |
-| T2   | N2a  | M1  |
-| T3   | N2a  | M1  |
-| T4   | N2a  | M1  |
-| T4a  | N2a  | M1  |
-| T4b  | N2a  | M1  |
-| T4c  | N2a  | M1  |
-| T4d  | N2a  | M1  |
-| Tis  | N2a  | M1  |
-| T0   | N2b  | M1  |
-| T1   | N2b  | M1  |
-| T1a  | N2b  | M1  |
-| T1b  | N2b  | M1  |
-| T1c  | N2b  | M1  |
-| T1mi | N2b  | M1  |
-| T2   | N2b  | M1  |
-| T3   | N2b  | M1  |
-| T4   | N2b  | M1  |
-| T4a  | N2b  | M1  |
-| T4b  | N2b  | M1  |
-| T4c  | N2b  | M1  |
-| T4d  | N2b  | M1  |
-| Tis  | N2b  | M1  |
-| T0   | N3   | M1  |
-| T1   | N3   | M1  |
-| T1a  | N3   | M1  |
-| T1b  | N3   | M1  |
-| T1c  | N3   | M1  |
-| T1mi | N3   | M1  |
-| T2   | N3   | M1  |
-| T3   | N3   | M1  |
-| T4   | N3   | M1  |
-| T4a  | N3   | M1  |
-| T4b  | N3   | M1  |
-| T4c  | N3   | M1  |
-| T4d  | N3   | M1  |
-| Tis  | N3   | M1  |
-| T0   | N3a  | M1  |
-| T1   | N3a  | M1  |
-| T1a  | N3a  | M1  |
-| T1b  | N3a  | M1  |
-| T1c  | N3a  | M1  |
-| T1mi | N3a  | M1  |
-| T2   | N3a  | M1  |
-| T3   | N3a  | M1  |
-| T4   | N3a  | M1  |
-| T4a  | N3a  | M1  |
-| T4b  | N3a  | M1  |
-| T4c  | N3a  | M1  |
-| T4d  | N3a  | M1  |
-| Tis  | N3a  | M1  |
-| T0   | N3b  | M1  |
-| T1   | N3b  | M1  |
-| T1a  | N3b  | M1  |
-| T1b  | N3b  | M1  |
-| T1c  | N3b  | M1  |
-| T1mi | N3b  | M1  |
-| T2   | N3b  | M1  |
-| T3   | N3b  | M1  |
-| T4   | N3b  | M1  |
-| T4a  | N3b  | M1  |
-| T4b  | N3b  | M1  |
-| T4c  | N3b  | M1  |
-| T4d  | N3b  | M1  |
-| Tis  | N3b  | M1  |
-| T0   | N3c  | M1  |
-| T1   | N3c  | M1  |
-| T1a  | N3c  | M1  |
-| T1b  | N3c  | M1  |
-| T1c  | N3c  | M1  |
-| T1mi | N3c  | M1  |
-| T2   | N3c  | M1  |
-| T3   | N3c  | M1  |
-| T4   | N3c  | M1  |
-| T4a  | N3c  | M1  |
-| T4b  | N3c  | M1  |
-| T4c  | N3c  | M1  |
-| T4d  | N3c  | M1  |
-| Tis  | N3c  | M1  |
+Clinical (124 rules)
 
-colorectal
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| Tis | N0  | M0  | 0          |
+| Tis | N0  | M0  | 0          |
+| T1  | N0  | M0  | I          |
+| T1  | N0  | M0  | I          |
+| T1  | N1  | M0  | I          |
+| T1a | N0  | M0  | I          |
+| T1a | N0  | M0  | I          |
+| T1a | N1  | M0  | I          |
+| T1b | N0  | M0  | I          |
+| T1b | N0  | M0  | I          |
+| T1b | N1  | M0  | I          |
+| T2  | N0  | M0  | II         |
+| T2  | N1  | M0  | II         |
+| T3  | N0  | M0  | II         |
+| T1  | N1  | M0  | IIA        |
+| T1a | N1  | M0  | IIA        |
+| T1b | N1  | M0  | IIA        |
+| T2  | N0  | M0  | IIB        |
+| T1  | N2  | M0  | III        |
+| T1a | N2  | M0  | III        |
+| T1b | N2  | M0  | III        |
+| T2  | N1  | M0  | III        |
+| T2  | N2  | M0  | III        |
+| T3  | N0  | M0  | III        |
+| T3  | N1  | M0  | III        |
+| T3  | N1  | M0  | III        |
+| T3  | N2  | M0  | III        |
+| T4a | N0  | M0  | III        |
+| T4a | N1  | M0  | III        |
+| T1  | N2  | M0  | IVA        |
+| T1  | N3  | M0  | IVA        |
+| T1  | N3  | M0  | IVA        |
+| T1a | N2  | M0  | IVA        |
+| T1a | N3  | M0  | IVA        |
+| T1a | N3  | M0  | IVA        |
+| T1b | N2  | M0  | IVA        |
+| T1b | N3  | M0  | IVA        |
+| T1b | N3  | M0  | IVA        |
+| T2  | N2  | M0  | IVA        |
+| T2  | N3  | M0  | IVA        |
+| T2  | N3  | M0  | IVA        |
+| T3  | N2  | M0  | IVA        |
+| T3  | N3  | M0  | IVA        |
+| T3  | N3  | M0  | IVA        |
+| T4a | N0  | M0  | IVA        |
+| T4a | N1  | M0  | IVA        |
+| T4a | N2  | M0  | IVA        |
+| T4a | N2  | M0  | IVA        |
+| T4a | N3  | M0  | IVA        |
+| T4a | N3  | M0  | IVA        |
+| T4b | N0  | M0  | IVA        |
+| T4b | N0  | M0  | IVA        |
+| T4b | N1  | M0  | IVA        |
+| T4b | N1  | M0  | IVA        |
+| T4b | N2  | M0  | IVA        |
+| T4b | N2  | M0  | IVA        |
+| T4b | N3  | M0  | IVA        |
+| T4b | N3  | M0  | IVA        |
+| Tis | N3  | M0  | IVA        |
+| Tis | N3  | M0  | IVA        |
+| T1  | N0  | M1  | IVB        |
+| T1  | N0  | M1  | IVB        |
+| T1  | N1  | M1  | IVB        |
+| T1  | N1  | M1  | IVB        |
+| T1  | N2  | M1  | IVB        |
+| T1  | N2  | M1  | IVB        |
+| T1  | N3  | M1  | IVB        |
+| T1  | N3  | M1  | IVB        |
+| T1a | N0  | M1  | IVB        |
+| T1a | N0  | M1  | IVB        |
+| T1a | N1  | M1  | IVB        |
+| T1a | N1  | M1  | IVB        |
+| T1a | N2  | M1  | IVB        |
+| T1a | N2  | M1  | IVB        |
+| T1a | N3  | M1  | IVB        |
+| T1a | N3  | M1  | IVB        |
+| T1b | N0  | M1  | IVB        |
+| T1b | N0  | M1  | IVB        |
+| T1b | N1  | M1  | IVB        |
+| T1b | N1  | M1  | IVB        |
+| T1b | N2  | M1  | IVB        |
+| T1b | N2  | M1  | IVB        |
+| T1b | N3  | M1  | IVB        |
+| T1b | N3  | M1  | IVB        |
+| T2  | N0  | M1  | IVB        |
+| T2  | N0  | M1  | IVB        |
+| T2  | N1  | M1  | IVB        |
+| T2  | N1  | M1  | IVB        |
+| T2  | N2  | M1  | IVB        |
+| T2  | N2  | M1  | IVB        |
+| T2  | N3  | M1  | IVB        |
+| T2  | N3  | M1  | IVB        |
+| T3  | N0  | M1  | IVB        |
+| T3  | N0  | M1  | IVB        |
+| T3  | N1  | M1  | IVB        |
+| T3  | N1  | M1  | IVB        |
+| T3  | N2  | M1  | IVB        |
+| T3  | N2  | M1  | IVB        |
+| T3  | N3  | M1  | IVB        |
+| T3  | N3  | M1  | IVB        |
+| T4a | N0  | M1  | IVB        |
+| T4a | N0  | M1  | IVB        |
+| T4a | N1  | M1  | IVB        |
+| T4a | N1  | M1  | IVB        |
+| T4a | N2  | M1  | IVB        |
+| T4a | N2  | M1  | IVB        |
+| T4a | N3  | M1  | IVB        |
+| T4a | N3  | M1  | IVB        |
+| T4b | N0  | M1  | IVB        |
+| T4b | N0  | M1  | IVB        |
+| T4b | N1  | M1  | IVB        |
+| T4b | N1  | M1  | IVB        |
+| T4b | N2  | M1  | IVB        |
+| T4b | N2  | M1  | IVB        |
+| T4b | N3  | M1  | IVB        |
+| T4b | N3  | M1  | IVB        |
+| Tis | N0  | M1  | IVB        |
+| Tis | N0  | M1  | IVB        |
+| Tis | N1  | M1  | IVB        |
+| Tis | N1  | M1  | IVB        |
+| Tis | N2  | M1  | IVB        |
+| Tis | N2  | M1  | IVB        |
+| Tis | N3  | M1  | IVB        |
+| Tis | N3  | M1  | IVB        |
 
-base
+Pathological (61 rules)
 
-| T    | N   | M   |
-|------|-----|-----|
-| 0    |     |     |
-| Tis  | N0  | M0  |
-| I    |     |     |
-| T1   | N0  | M0  |
-| T2   | N0  | M0  |
-| IIA  |     |     |
-| T3   | N0  | M0  |
-| IIB  |     |     |
-| T4a  | N0  | M0  |
-| IIC  |     |     |
-| T4b  | N0  | M0  |
-| III  |     |     |
-| T1   | N2  | M0  |
-| T2   | N2  | M0  |
-| T3   | N2  | M0  |
-| T4a  | N2  | M0  |
-| IIIA |     |     |
-| T1   | N1  | M0  |
-| T2   | N1  | M0  |
-| T1   | N1a | M0  |
-| T2   | N1a | M0  |
-| T1   | N1b | M0  |
-| T2   | N1b | M0  |
-| T1   | N1c | M0  |
-| T2   | N1c | M0  |
-| T1   | N2a | M0  |
-| IIIB |     |     |
-| T3   | N1  | M0  |
-| T4a  | N1  | M0  |
-| T3   | N1a | M0  |
-| T4a  | N1a | M0  |
-| T3   | N1b | M0  |
-| T4a  | N1b | M0  |
-| T3   | N1c | M0  |
-| T4a  | N1c | M0  |
-| T2   | N2a | M0  |
-| T3   | N2a | M0  |
-| T1   | N2b | M0  |
-| T2   | N2b | M0  |
-| IIIC |     |     |
-| T4b  | N1  | M0  |
-|      | N1a | M0  |
-|      | N1b | M0  |
-|      | N1c | M0  |
-|      | N2  | M0  |
-| T4a  | N2a | M0  |
-| T4b  | N2a | M0  |
-| T3   | N2b | M0  |
-| T4a  | N2b | M0  |
-| T4b  | N2b | M0  |
-| IV   |     |     |
-| T1   | N0  | M1  |
-| T2   | N0  | M1  |
-| T3   | N0  | M1  |
-| T4a  | N0  | M1  |
-| T4b  | N0  | M1  |
-| Tis  | N0  | M1  |
-| T1   | N1  | M1  |
-| T2   | N1  | M1  |
-| T3   | N1  | M1  |
-| T4a  | N1  | M1  |
-| T4b  | N1  | M1  |
-| Tis  | N1  | M1  |
-| T1   | N1a | M1  |
-| T2   | N1a | M1  |
-| T3   | N1a | M1  |
-| T4a  | N1a | M1  |
-| T4b  | N1a | M1  |
-| Tis  | N1a | M1  |
-| T1   | N1b | M1  |
-| T2   | N1b | M1  |
-| T3   | N1b | M1  |
-| T4a  | N1b | M1  |
-| T4b  | N1b | M1  |
-| Tis  | N1b | M1  |
-| T1   | N1c | M1  |
-| T2   | N1c | M1  |
-| T3   | N1c | M1  |
-| T4a  | N1c | M1  |
-| T4b  | N1c | M1  |
-| Tis  | N1c | M1  |
-| T1   | N2  | M1  |
-| T2   | N2  | M1  |
-| T3   | N2  | M1  |
-| T4a  | N2  | M1  |
-| T4b  | N2  | M1  |
-| Tis  | N2  | M1  |
-| T1   | N2a | M1  |
-| T2   | N2a | M1  |
-| T3   | N2a | M1  |
-| T4a  | N2a | M1  |
-| T4b  | N2a | M1  |
-| Tis  | N2a | M1  |
-| T1   | N2b | M1  |
-| T2   | N2b | M1  |
-| T3   | N2b | M1  |
-| T4a  | N2b | M1  |
-| T4b  | N2b | M1  |
-| Tis  | N2b | M1  |
-| IVA  |     |     |
-| T1   | N0  | M1a |
-| T2   | N0  | M1a |
-| T3   | N0  | M1a |
-| T4a  | N0  | M1a |
-| T4b  | N0  | M1a |
-| Tis  | N0  | M1a |
-| T1   | N1  | M1a |
-| T2   | N1  | M1a |
-| T3   | N1  | M1a |
-| T4a  | N1  | M1a |
-| T4b  | N1  | M1a |
-| Tis  | N1  | M1a |
-| T1   | N1a | M1a |
-| T2   | N1a | M1a |
-| T3   | N1a | M1a |
-| T4a  | N1a | M1a |
-| T4b  | N1a | M1a |
-| Tis  | N1a | M1a |
-| T1   | N1b | M1a |
-| T2   | N1b | M1a |
-| T3   | N1b | M1a |
-| T4a  | N1b | M1a |
-| T4b  | N1b | M1a |
-| Tis  | N1b | M1a |
-| T1   | N1c | M1a |
-| T2   | N1c | M1a |
-| T3   | N1c | M1a |
-| T4a  | N1c | M1a |
-| T4b  | N1c | M1a |
-| Tis  | N1c | M1a |
-| T1   | N2  | M1a |
-| T2   | N2  | M1a |
-| T3   | N2  | M1a |
-| T4a  | N2  | M1a |
-| T4b  | N2  | M1a |
-| Tis  | N2  | M1a |
-| T1   | N2a | M1a |
-| T2   | N2a | M1a |
-| T3   | N2a | M1a |
-| T4a  | N2a | M1a |
-| T4b  | N2a | M1a |
-| Tis  | N2a | M1a |
-| T1   | N2b | M1a |
-| T2   | N2b | M1a |
-| T3   | N2b | M1a |
-| T4a  | N2b | M1a |
-| T4b  | N2b | M1a |
-| Tis  | N2b | M1a |
-| IVB  |     |     |
-| T1   | N0  | M1b |
-| T2   | N0  | M1b |
-| T3   | N0  | M1b |
-| T4a  | N0  | M1b |
-| T4b  | N0  | M1b |
-| Tis  | N0  | M1b |
-| T1   | N1  | M1b |
-| T2   | N1  | M1b |
-| T3   | N1  | M1b |
-| T4a  | N1  | M1b |
-| T4b  | N1  | M1b |
-| Tis  | N1  | M1b |
-| T1   | N1a | M1b |
-| T2   | N1a | M1b |
-| T3   | N1a | M1b |
-| T4a  | N1a | M1b |
-| T4b  | N1a | M1b |
-| Tis  | N1a | M1b |
-| T1   | N1b | M1b |
-| T2   | N1b | M1b |
-| T3   | N1b | M1b |
-| T4a  | N1b | M1b |
-| T4b  | N1b | M1b |
-| Tis  | N1b | M1b |
-| T1   | N1c | M1b |
-| T2   | N1c | M1b |
-| T3   | N1c | M1b |
-| T4a  | N1c | M1b |
-| T4b  | N1c | M1b |
-| Tis  | N1c | M1b |
-| T1   | N2  | M1b |
-| T2   | N2  | M1b |
-| T3   | N2  | M1b |
-| T4a  | N2  | M1b |
-| T4b  | N2  | M1b |
-| Tis  | N2  | M1b |
-| T1   | N2a | M1b |
-| T2   | N2a | M1b |
-| T3   | N2a | M1b |
-| T4a  | N2a | M1b |
-| T4b  | N2a | M1b |
-| Tis  | N2a | M1b |
-| T1   | N2b | M1b |
-| T2   | N2b | M1b |
-| T3   | N2b | M1b |
-| T4a  | N2b | M1b |
-| T4b  | N2b | M1b |
-| Tis  | N2b | M1b |
-| IVC  |     |     |
-| T1   | N0  | M1c |
-| T2   | N0  | M1c |
-| T3   | N0  | M1c |
-| T4a  | N0  | M1c |
-| T4b  | N0  | M1c |
-| Tis  | N0  | M1c |
-| T1   | N1  | M1c |
-| T2   | N1  | M1c |
-| T3   | N1  | M1c |
-| T4a  | N1  | M1c |
-| T4b  | N1  | M1c |
-| Tis  | N1  | M1c |
-| T1   | N1a | M1c |
-| T2   | N1a | M1c |
-| T3   | N1a | M1c |
-| T4a  | N1a | M1c |
-| T4b  | N1a | M1c |
-| Tis  | N1a | M1c |
-| T1   | N1b | M1c |
-| T2   | N1b | M1c |
-| T3   | N1b | M1c |
-| T4a  | N1b | M1c |
-| T4b  | N1b | M1c |
-| Tis  | N1b | M1c |
-| T1   | N1c | M1c |
-| T2   | N1c | M1c |
-| T3   | N1c | M1c |
-| T4a  | N1c | M1c |
-| T4b  | N1c | M1c |
-| Tis  | N1c | M1c |
-| T1   | N2  | M1c |
-| T2   | N2  | M1c |
-| T3   | N2  | M1c |
-| T4a  | N2  | M1c |
-| T4b  | N2  | M1c |
-| Tis  | N2  | M1c |
-| T1   | N2a | M1c |
-| T2   | N2a | M1c |
-| T3   | N2a | M1c |
-| T4a  | N2a | M1c |
-| T4b  | N2a | M1c |
-| Tis  | N2a | M1c |
-| T1   | N2b | M1c |
-| T2   | N2b | M1c |
-| T3   | N2b | M1c |
-| T4a  | N2b | M1c |
-| T4b  | N2b | M1c |
-| Tis  | N2b | M1c |
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| Tis | N0  | M0  | 0          |
+| T1a | N0  | M0  | IA         |
+| T1b | N0  | M0  | IB         |
+| T2  | N0  | M0  | IIA        |
+| T1  | N1  | M0  | IIB        |
+| T1a | N1  | M0  | IIB        |
+| T1b | N1  | M0  | IIB        |
+| T3  | N0  | M0  | IIB        |
+| T1  | N2  | M0  | IIIA       |
+| T1a | N2  | M0  | IIIA       |
+| T1b | N2  | M0  | IIIA       |
+| T2  | N1  | M0  | IIIA       |
+| T2  | N2  | M0  | IIIB       |
+| T3  | N1  | M0  | IIIB       |
+| T3  | N2  | M0  | IIIB       |
+| T4a | N0  | M0  | IIIB       |
+| T4a | N1  | M0  | IIIB       |
+| T1  | N3  | M0  | IVA        |
+| T1a | N3  | M0  | IVA        |
+| T1b | N3  | M0  | IVA        |
+| T2  | N3  | M0  | IVA        |
+| T3  | N3  | M0  | IVA        |
+| T4a | N2  | M0  | IVA        |
+| T4a | N3  | M0  | IVA        |
+| T4b | N0  | M0  | IVA        |
+| T4b | N1  | M0  | IVA        |
+| T4b | N2  | M0  | IVA        |
+| T4b | N3  | M0  | IVA        |
+| Tis | N3  | M0  | IVA        |
+| T1  | N0  | M1  | IVB        |
+| T1  | N1  | M1  | IVB        |
+| T1  | N2  | M1  | IVB        |
+| T1  | N3  | M1  | IVB        |
+| T1a | N0  | M1  | IVB        |
+| T1a | N1  | M1  | IVB        |
+| T1a | N2  | M1  | IVB        |
+| T1a | N3  | M1  | IVB        |
+| T1b | N0  | M1  | IVB        |
+| T1b | N1  | M1  | IVB        |
+| T1b | N2  | M1  | IVB        |
+| T1b | N3  | M1  | IVB        |
+| T2  | N0  | M1  | IVB        |
+| T2  | N1  | M1  | IVB        |
+| T2  | N2  | M1  | IVB        |
+| T2  | N3  | M1  | IVB        |
+| T3  | N0  | M1  | IVB        |
+| T3  | N1  | M1  | IVB        |
+| T3  | N2  | M1  | IVB        |
+| T3  | N3  | M1  | IVB        |
+| T4a | N0  | M1  | IVB        |
+| T4a | N1  | M1  | IVB        |
+| T4a | N2  | M1  | IVB        |
+| T4a | N3  | M1  | IVB        |
+| T4b | N0  | M1  | IVB        |
+| T4b | N1  | M1  | IVB        |
+| T4b | N2  | M1  | IVB        |
+| T4b | N3  | M1  | IVB        |
+| Tis | N0  | M1  | IVB        |
+| Tis | N1  | M1  | IVB        |
+| Tis | N2  | M1  | IVB        |
+| Tis | N3  | M1  | IVB        |
 
-clinical
+Prostate
 
-| T    | N   | M   |
-|------|-----|-----|
-| 0    |     |     |
-| Tis  | N0  | M0  |
-| I    |     |     |
-| T1   | N0  | M0  |
-| T2   | N0  | M0  |
-| IIA  |     |     |
-| T3   | N0  | M0  |
-| IIB  |     |     |
-| T4a  | N0  | M0  |
-| IIC  |     |     |
-| T4b  | N0  | M0  |
-| III  |     |     |
-| T1   | N2  | M0  |
-| T2   | N2  | M0  |
-| T3   | N2  | M0  |
-| T4a  | N2  | M0  |
-| IIIA |     |     |
-| T1   | N1  | M0  |
-| T2   | N1  | M0  |
-| T1   | N1a | M0  |
-| T2   | N1a | M0  |
-| T1   | N1b | M0  |
-| T2   | N1b | M0  |
-| T1   | N1c | M0  |
-| T2   | N1c | M0  |
-| T1   | N2a | M0  |
-| IIIB |     |     |
-| T3   | N1  | M0  |
-| T4a  | N1  | M0  |
-| T3   | N1a | M0  |
-| T4a  | N1a | M0  |
-| T3   | N1b | M0  |
-| T4a  | N1b | M0  |
-| T3   | N1c | M0  |
-| T4a  | N1c | M0  |
-| T2   | N2a | M0  |
-| T3   | N2a | M0  |
-| T1   | N2b | M0  |
-| T2   | N2b | M0  |
-| IIIC |     |     |
-| T4b  | N1  | M0  |
-|      | N1a | M0  |
-|      | N1b | M0  |
-|      | N1c | M0  |
-|      | N2  | M0  |
-| T4a  | N2a | M0  |
-| T4b  | N2a | M0  |
-| T3   | N2b | M0  |
-| T4a  | N2b | M0  |
-| T4b  | N2b | M0  |
-| IV   |     |     |
-| T1   | N0  | M1  |
-| T2   | N0  | M1  |
-| T3   | N0  | M1  |
-| T4a  | N0  | M1  |
-| T4b  | N0  | M1  |
-| Tis  | N0  | M1  |
-| T1   | N1  | M1  |
-| T2   | N1  | M1  |
-| T3   | N1  | M1  |
-| T4a  | N1  | M1  |
-| T4b  | N1  | M1  |
-| Tis  | N1  | M1  |
-| T1   | N1a | M1  |
-| T2   | N1a | M1  |
-| T3   | N1a | M1  |
-| T4a  | N1a | M1  |
-| T4b  | N1a | M1  |
-| Tis  | N1a | M1  |
-| T1   | N1b | M1  |
-| T2   | N1b | M1  |
-| T3   | N1b | M1  |
-| T4a  | N1b | M1  |
-| T4b  | N1b | M1  |
-| Tis  | N1b | M1  |
-| T1   | N1c | M1  |
-| T2   | N1c | M1  |
-| T3   | N1c | M1  |
-| T4a  | N1c | M1  |
-| T4b  | N1c | M1  |
-| Tis  | N1c | M1  |
-| T1   | N2  | M1  |
-| T2   | N2  | M1  |
-| T3   | N2  | M1  |
-| T4a  | N2  | M1  |
-| T4b  | N2  | M1  |
-| Tis  | N2  | M1  |
-| T1   | N2a | M1  |
-| T2   | N2a | M1  |
-| T3   | N2a | M1  |
-| T4a  | N2a | M1  |
-| T4b  | N2a | M1  |
-| Tis  | N2a | M1  |
-| T1   | N2b | M1  |
-| T2   | N2b | M1  |
-| T3   | N2b | M1  |
-| T4a  | N2b | M1  |
-| T4b  | N2b | M1  |
-| Tis  | N2b | M1  |
-| IVA  |     |     |
-| T1   | N0  | M1a |
-| T2   | N0  | M1a |
-| T3   | N0  | M1a |
-| T4a  | N0  | M1a |
-| T4b  | N0  | M1a |
-| Tis  | N0  | M1a |
-| T1   | N1  | M1a |
-| T2   | N1  | M1a |
-| T3   | N1  | M1a |
-| T4a  | N1  | M1a |
-| T4b  | N1  | M1a |
-| Tis  | N1  | M1a |
-| T1   | N1a | M1a |
-| T2   | N1a | M1a |
-| T3   | N1a | M1a |
-| T4a  | N1a | M1a |
-| T4b  | N1a | M1a |
-| Tis  | N1a | M1a |
-| T1   | N1b | M1a |
-| T2   | N1b | M1a |
-| T3   | N1b | M1a |
-| T4a  | N1b | M1a |
-| T4b  | N1b | M1a |
-| Tis  | N1b | M1a |
-| T1   | N1c | M1a |
-| T2   | N1c | M1a |
-| T3   | N1c | M1a |
-| T4a  | N1c | M1a |
-| T4b  | N1c | M1a |
-| Tis  | N1c | M1a |
-| T1   | N2  | M1a |
-| T2   | N2  | M1a |
-| T3   | N2  | M1a |
-| T4a  | N2  | M1a |
-| T4b  | N2  | M1a |
-| Tis  | N2  | M1a |
-| T1   | N2a | M1a |
-| T2   | N2a | M1a |
-| T3   | N2a | M1a |
-| T4a  | N2a | M1a |
-| T4b  | N2a | M1a |
-| Tis  | N2a | M1a |
-| T1   | N2b | M1a |
-| T2   | N2b | M1a |
-| T3   | N2b | M1a |
-| T4a  | N2b | M1a |
-| T4b  | N2b | M1a |
-| Tis  | N2b | M1a |
-| IVB  |     |     |
-| T1   | N0  | M1b |
-| T2   | N0  | M1b |
-| T3   | N0  | M1b |
-| T4a  | N0  | M1b |
-| T4b  | N0  | M1b |
-| Tis  | N0  | M1b |
-| T1   | N1  | M1b |
-| T2   | N1  | M1b |
-| T3   | N1  | M1b |
-| T4a  | N1  | M1b |
-| T4b  | N1  | M1b |
-| Tis  | N1  | M1b |
-| T1   | N1a | M1b |
-| T2   | N1a | M1b |
-| T3   | N1a | M1b |
-| T4a  | N1a | M1b |
-| T4b  | N1a | M1b |
-| Tis  | N1a | M1b |
-| T1   | N1b | M1b |
-| T2   | N1b | M1b |
-| T3   | N1b | M1b |
-| T4a  | N1b | M1b |
-| T4b  | N1b | M1b |
-| Tis  | N1b | M1b |
-| T1   | N1c | M1b |
-| T2   | N1c | M1b |
-| T3   | N1c | M1b |
-| T4a  | N1c | M1b |
-| T4b  | N1c | M1b |
-| Tis  | N1c | M1b |
-| T1   | N2  | M1b |
-| T2   | N2  | M1b |
-| T3   | N2  | M1b |
-| T4a  | N2  | M1b |
-| T4b  | N2  | M1b |
-| Tis  | N2  | M1b |
-| T1   | N2a | M1b |
-| T2   | N2a | M1b |
-| T3   | N2a | M1b |
-| T4a  | N2a | M1b |
-| T4b  | N2a | M1b |
-| Tis  | N2a | M1b |
-| T1   | N2b | M1b |
-| T2   | N2b | M1b |
-| T3   | N2b | M1b |
-| T4a  | N2b | M1b |
-| T4b  | N2b | M1b |
-| Tis  | N2b | M1b |
-| IVC  |     |     |
-| T1   | N0  | M1c |
-| T2   | N0  | M1c |
-| T3   | N0  | M1c |
-| T4a  | N0  | M1c |
-| T4b  | N0  | M1c |
-| Tis  | N0  | M1c |
-| T1   | N1  | M1c |
-| T2   | N1  | M1c |
-| T3   | N1  | M1c |
-| T4a  | N1  | M1c |
-| T4b  | N1  | M1c |
-| Tis  | N1  | M1c |
-| T1   | N1a | M1c |
-| T2   | N1a | M1c |
-| T3   | N1a | M1c |
-| T4a  | N1a | M1c |
-| T4b  | N1a | M1c |
-| Tis  | N1a | M1c |
-| T1   | N1b | M1c |
-| T2   | N1b | M1c |
-| T3   | N1b | M1c |
-| T4a  | N1b | M1c |
-| T4b  | N1b | M1c |
-| Tis  | N1b | M1c |
-| T1   | N1c | M1c |
-| T2   | N1c | M1c |
-| T3   | N1c | M1c |
-| T4a  | N1c | M1c |
-| T4b  | N1c | M1c |
-| Tis  | N1c | M1c |
-| T1   | N2  | M1c |
-| T2   | N2  | M1c |
-| T3   | N2  | M1c |
-| T4a  | N2  | M1c |
-| T4b  | N2  | M1c |
-| Tis  | N2  | M1c |
-| T1   | N2a | M1c |
-| T2   | N2a | M1c |
-| T3   | N2a | M1c |
-| T4a  | N2a | M1c |
-| T4b  | N2a | M1c |
-| Tis  | N2a | M1c |
-| T1   | N2b | M1c |
-| T2   | N2b | M1c |
-| T3   | N2b | M1c |
-| T4a  | N2b | M1c |
-| T4b  | N2b | M1c |
-| Tis  | N2b | M1c |
+Clinical (120 rules)
 
-pathological
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| T1  | N0  | M0  | I          |
+| T1a | N0  | M0  | I          |
+| T1b | N0  | M0  | I          |
+| T1c | N0  | M0  | I          |
+| T2a | N0  | M0  | I          |
+| T2  | N0  | M0  | II         |
+| T2b | N0  | M0  | II         |
+| T2c | N0  | M0  | II         |
+| T3  | N0  | M0  | III        |
+| T3a | N0  | M0  | III        |
+| T3b | N0  | M0  | III        |
+| T4  | N0  | M0  | III        |
+| T1  | N0  | M1  | IV         |
+| T1  | N0  | M1a | IV         |
+| T1  | N0  | M1b | IV         |
+| T1  | N0  | M1c | IV         |
+| T1  | N1  | M0  | IV         |
+| T1  | N1  | M1  | IV         |
+| T1  | N1  | M1a | IV         |
+| T1  | N1  | M1b | IV         |
+| T1  | N1  | M1c | IV         |
+| T1a | N0  | M1  | IV         |
+| T1a | N0  | M1a | IV         |
+| T1a | N0  | M1b | IV         |
+| T1a | N0  | M1c | IV         |
+| T1a | N1  | M0  | IV         |
+| T1a | N1  | M1  | IV         |
+| T1a | N1  | M1a | IV         |
+| T1a | N1  | M1b | IV         |
+| T1a | N1  | M1c | IV         |
+| T1b | N0  | M1  | IV         |
+| T1b | N0  | M1a | IV         |
+| T1b | N0  | M1b | IV         |
+| T1b | N0  | M1c | IV         |
+| T1b | N1  | M0  | IV         |
+| T1b | N1  | M1  | IV         |
+| T1b | N1  | M1a | IV         |
+| T1b | N1  | M1b | IV         |
+| T1b | N1  | M1c | IV         |
+| T1c | N0  | M1  | IV         |
+| T1c | N0  | M1a | IV         |
+| T1c | N0  | M1b | IV         |
+| T1c | N0  | M1c | IV         |
+| T1c | N1  | M0  | IV         |
+| T1c | N1  | M1  | IV         |
+| T1c | N1  | M1a | IV         |
+| T1c | N1  | M1b | IV         |
+| T1c | N1  | M1c | IV         |
+| T2  | N0  | M1  | IV         |
+| T2  | N0  | M1a | IV         |
+| T2  | N0  | M1b | IV         |
+| T2  | N0  | M1c | IV         |
+| T2  | N1  | M0  | IV         |
+| T2  | N1  | M1  | IV         |
+| T2  | N1  | M1a | IV         |
+| T2  | N1  | M1b | IV         |
+| T2  | N1  | M1c | IV         |
+| T2a | N0  | M1  | IV         |
+| T2a | N0  | M1a | IV         |
+| T2a | N0  | M1b | IV         |
+| T2a | N0  | M1c | IV         |
+| T2a | N1  | M0  | IV         |
+| T2a | N1  | M1  | IV         |
+| T2a | N1  | M1a | IV         |
+| T2a | N1  | M1b | IV         |
+| T2a | N1  | M1c | IV         |
+| T2b | N0  | M1  | IV         |
+| T2b | N0  | M1a | IV         |
+| T2b | N0  | M1b | IV         |
+| T2b | N0  | M1c | IV         |
+| T2b | N1  | M0  | IV         |
+| T2b | N1  | M1  | IV         |
+| T2b | N1  | M1a | IV         |
+| T2b | N1  | M1b | IV         |
+| T2b | N1  | M1c | IV         |
+| T2c | N0  | M1  | IV         |
+| T2c | N0  | M1a | IV         |
+| T2c | N0  | M1b | IV         |
+| T2c | N0  | M1c | IV         |
+| T2c | N1  | M0  | IV         |
+| T2c | N1  | M1  | IV         |
+| T2c | N1  | M1a | IV         |
+| T2c | N1  | M1b | IV         |
+| T2c | N1  | M1c | IV         |
+| T3  | N0  | M1  | IV         |
+| T3  | N0  | M1a | IV         |
+| T3  | N0  | M1b | IV         |
+| T3  | N0  | M1c | IV         |
+| T3  | N1  | M0  | IV         |
+| T3  | N1  | M1  | IV         |
+| T3  | N1  | M1a | IV         |
+| T3  | N1  | M1b | IV         |
+| T3  | N1  | M1c | IV         |
+| T3a | N0  | M1  | IV         |
+| T3a | N0  | M1a | IV         |
+| T3a | N0  | M1b | IV         |
+| T3a | N0  | M1c | IV         |
+| T3a | N1  | M0  | IV         |
+| T3a | N1  | M1  | IV         |
+| T3a | N1  | M1a | IV         |
+| T3a | N1  | M1b | IV         |
+| T3a | N1  | M1c | IV         |
+| T3b | N0  | M1  | IV         |
+| T3b | N0  | M1a | IV         |
+| T3b | N0  | M1b | IV         |
+| T3b | N0  | M1c | IV         |
+| T3b | N1  | M0  | IV         |
+| T3b | N1  | M1  | IV         |
+| T3b | N1  | M1a | IV         |
+| T3b | N1  | M1b | IV         |
+| T3b | N1  | M1c | IV         |
+| T4  | N0  | M1  | IV         |
+| T4  | N0  | M1a | IV         |
+| T4  | N0  | M1b | IV         |
+| T4  | N0  | M1c | IV         |
+| T4  | N1  | M0  | IV         |
+| T4  | N1  | M1  | IV         |
+| T4  | N1  | M1a | IV         |
+| T4  | N1  | M1b | IV         |
+| T4  | N1  | M1c | IV         |
 
-| T    | N   | M   |
-|------|-----|-----|
-| 0    |     |     |
-| Tis  | N0  | M0  |
-| I    |     |     |
-| T1   | N0  | M0  |
-| T2   | N0  | M0  |
-| IIA  |     |     |
-| T3   | N0  | M0  |
-| IIB  |     |     |
-| T4a  | N0  | M0  |
-| IIC  |     |     |
-| T4b  | N0  | M0  |
-| III  |     |     |
-| T1   | N2  | M0  |
-| T2   | N2  | M0  |
-| T3   | N2  | M0  |
-| T4a  | N2  | M0  |
-| IIIA |     |     |
-| T1   | N1  | M0  |
-| T2   | N1  | M0  |
-| T1   | N1a | M0  |
-| T2   | N1a | M0  |
-| T1   | N1b | M0  |
-| T2   | N1b | M0  |
-| T1   | N1c | M0  |
-| T2   | N1c | M0  |
-| T1   | N2a | M0  |
-| IIIB |     |     |
-| T3   | N1  | M0  |
-| T4a  | N1  | M0  |
-| T3   | N1a | M0  |
-| T4a  | N1a | M0  |
-| T3   | N1b | M0  |
-| T4a  | N1b | M0  |
-| T3   | N1c | M0  |
-| T4a  | N1c | M0  |
-| T2   | N2a | M0  |
-| T3   | N2a | M0  |
-| T1   | N2b | M0  |
-| T2   | N2b | M0  |
-| IIIC |     |     |
-| T4b  | N1  | M0  |
-|      | N1a | M0  |
-|      | N1b | M0  |
-|      | N1c | M0  |
-|      | N2  | M0  |
-| T4a  | N2a | M0  |
-| T4b  | N2a | M0  |
-| T3   | N2b | M0  |
-| T4a  | N2b | M0  |
-| T4b  | N2b | M0  |
-| IV   |     |     |
-| T1   | N0  | M1  |
-| T2   | N0  | M1  |
-| T3   | N0  | M1  |
-| T4a  | N0  | M1  |
-| T4b  | N0  | M1  |
-| Tis  | N0  | M1  |
-| T1   | N1  | M1  |
-| T2   | N1  | M1  |
-| T3   | N1  | M1  |
-| T4a  | N1  | M1  |
-| T4b  | N1  | M1  |
-| Tis  | N1  | M1  |
-| T1   | N1a | M1  |
-| T2   | N1a | M1  |
-| T3   | N1a | M1  |
-| T4a  | N1a | M1  |
-| T4b  | N1a | M1  |
-| Tis  | N1a | M1  |
-| T1   | N1b | M1  |
-| T2   | N1b | M1  |
-| T3   | N1b | M1  |
-| T4a  | N1b | M1  |
-| T4b  | N1b | M1  |
-| Tis  | N1b | M1  |
-| T1   | N1c | M1  |
-| T2   | N1c | M1  |
-| T3   | N1c | M1  |
-| T4a  | N1c | M1  |
-| T4b  | N1c | M1  |
-| Tis  | N1c | M1  |
-| T1   | N2  | M1  |
-| T2   | N2  | M1  |
-| T3   | N2  | M1  |
-| T4a  | N2  | M1  |
-| T4b  | N2  | M1  |
-| Tis  | N2  | M1  |
-| T1   | N2a | M1  |
-| T2   | N2a | M1  |
-| T3   | N2a | M1  |
-| T4a  | N2a | M1  |
-| T4b  | N2a | M1  |
-| Tis  | N2a | M1  |
-| T1   | N2b | M1  |
-| T2   | N2b | M1  |
-| T3   | N2b | M1  |
-| T4a  | N2b | M1  |
-| T4b  | N2b | M1  |
-| Tis  | N2b | M1  |
-| IVA  |     |     |
-| T1   | N0  | M1a |
-| T2   | N0  | M1a |
-| T3   | N0  | M1a |
-| T4a  | N0  | M1a |
-| T4b  | N0  | M1a |
-| Tis  | N0  | M1a |
-| T1   | N1  | M1a |
-| T2   | N1  | M1a |
-| T3   | N1  | M1a |
-| T4a  | N1  | M1a |
-| T4b  | N1  | M1a |
-| Tis  | N1  | M1a |
-| T1   | N1a | M1a |
-| T2   | N1a | M1a |
-| T3   | N1a | M1a |
-| T4a  | N1a | M1a |
-| T4b  | N1a | M1a |
-| Tis  | N1a | M1a |
-| T1   | N1b | M1a |
-| T2   | N1b | M1a |
-| T3   | N1b | M1a |
-| T4a  | N1b | M1a |
-| T4b  | N1b | M1a |
-| Tis  | N1b | M1a |
-| T1   | N1c | M1a |
-| T2   | N1c | M1a |
-| T3   | N1c | M1a |
-| T4a  | N1c | M1a |
-| T4b  | N1c | M1a |
-| Tis  | N1c | M1a |
-| T1   | N2  | M1a |
-| T2   | N2  | M1a |
-| T3   | N2  | M1a |
-| T4a  | N2  | M1a |
-| T4b  | N2  | M1a |
-| Tis  | N2  | M1a |
-| T1   | N2a | M1a |
-| T2   | N2a | M1a |
-| T3   | N2a | M1a |
-| T4a  | N2a | M1a |
-| T4b  | N2a | M1a |
-| Tis  | N2a | M1a |
-| T1   | N2b | M1a |
-| T2   | N2b | M1a |
-| T3   | N2b | M1a |
-| T4a  | N2b | M1a |
-| T4b  | N2b | M1a |
-| Tis  | N2b | M1a |
-| IVB  |     |     |
-| T1   | N0  | M1b |
-| T2   | N0  | M1b |
-| T3   | N0  | M1b |
-| T4a  | N0  | M1b |
-| T4b  | N0  | M1b |
-| Tis  | N0  | M1b |
-| T1   | N1  | M1b |
-| T2   | N1  | M1b |
-| T3   | N1  | M1b |
-| T4a  | N1  | M1b |
-| T4b  | N1  | M1b |
-| Tis  | N1  | M1b |
-| T1   | N1a | M1b |
-| T2   | N1a | M1b |
-| T3   | N1a | M1b |
-| T4a  | N1a | M1b |
-| T4b  | N1a | M1b |
-| Tis  | N1a | M1b |
-| T1   | N1b | M1b |
-| T2   | N1b | M1b |
-| T3   | N1b | M1b |
-| T4a  | N1b | M1b |
-| T4b  | N1b | M1b |
-| Tis  | N1b | M1b |
-| T1   | N1c | M1b |
-| T2   | N1c | M1b |
-| T3   | N1c | M1b |
-| T4a  | N1c | M1b |
-| T4b  | N1c | M1b |
-| Tis  | N1c | M1b |
-| T1   | N2  | M1b |
-| T2   | N2  | M1b |
-| T3   | N2  | M1b |
-| T4a  | N2  | M1b |
-| T4b  | N2  | M1b |
-| Tis  | N2  | M1b |
-| T1   | N2a | M1b |
-| T2   | N2a | M1b |
-| T3   | N2a | M1b |
-| T4a  | N2a | M1b |
-| T4b  | N2a | M1b |
-| Tis  | N2a | M1b |
-| T1   | N2b | M1b |
-| T2   | N2b | M1b |
-| T3   | N2b | M1b |
-| T4a  | N2b | M1b |
-| T4b  | N2b | M1b |
-| Tis  | N2b | M1b |
-| IVC  |     |     |
-| T1   | N0  | M1c |
-| T2   | N0  | M1c |
-| T3   | N0  | M1c |
-| T4a  | N0  | M1c |
-| T4b  | N0  | M1c |
-| Tis  | N0  | M1c |
-| T1   | N1  | M1c |
-| T2   | N1  | M1c |
-| T3   | N1  | M1c |
-| T4a  | N1  | M1c |
-| T4b  | N1  | M1c |
-| Tis  | N1  | M1c |
-| T1   | N1a | M1c |
-| T2   | N1a | M1c |
-| T3   | N1a | M1c |
-| T4a  | N1a | M1c |
-| T4b  | N1a | M1c |
-| Tis  | N1a | M1c |
-| T1   | N1b | M1c |
-| T2   | N1b | M1c |
-| T3   | N1b | M1c |
-| T4a  | N1b | M1c |
-| T4b  | N1b | M1c |
-| Tis  | N1b | M1c |
-| T1   | N1c | M1c |
-| T2   | N1c | M1c |
-| T3   | N1c | M1c |
-| T4a  | N1c | M1c |
-| T4b  | N1c | M1c |
-| Tis  | N1c | M1c |
-| T1   | N2  | M1c |
-| T2   | N2  | M1c |
-| T3   | N2  | M1c |
-| T4a  | N2  | M1c |
-| T4b  | N2  | M1c |
-| Tis  | N2  | M1c |
-| T1   | N2a | M1c |
-| T2   | N2a | M1c |
-| T3   | N2a | M1c |
-| T4a  | N2a | M1c |
-| T4b  | N2a | M1c |
-| Tis  | N2a | M1c |
-| T1   | N2b | M1c |
-| T2   | N2b | M1c |
-| T3   | N2b | M1c |
-| T4a  | N2b | M1c |
-| T4b  | N2b | M1c |
-| Tis  | N2b | M1c |
+Skin
 
-lung
+Clinical (844 rules)
 
-base
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| Tis | N0  | M0  | 0          |
+| T1a | N0  | M0  | IA         |
+| T1b | N0  | M0  | IB         |
+| T2a | N0  | M0  | IB         |
+| T2b | N0  | M0  | IIA        |
+| T3a | N0  | M0  | IIA        |
+| T3b | N0  | M0  | IIB        |
+| T4a | N0  | M0  | IIB        |
+| T4b | N0  | M0  | IIC        |
+| T0  | N1  | M0  | III        |
+| T0  | N1a | M0  | III        |
+| T0  | N1b | M0  | III        |
+| T0  | N1c | M0  | III        |
+| T0  | N2  | M0  | III        |
+| T0  | N2a | M0  | III        |
+| T0  | N2b | M0  | III        |
+| T0  | N2c | M0  | III        |
+| T0  | N3  | M0  | III        |
+| T0  | N3a | M0  | III        |
+| T0  | N3b | M0  | III        |
+| T0  | N3c | M0  | III        |
+| T1  | N1  | M0  | III        |
+| T1  | N1a | M0  | III        |
+| T1  | N1b | M0  | III        |
+| T1  | N1c | M0  | III        |
+| T1  | N2  | M0  | III        |
+| T1  | N2a | M0  | III        |
+| T1  | N2b | M0  | III        |
+| T1  | N2c | M0  | III        |
+| T1  | N3  | M0  | III        |
+| T1  | N3a | M0  | III        |
+| T1  | N3b | M0  | III        |
+| T1  | N3c | M0  | III        |
+| T1a | N1  | M0  | III        |
+| T1a | N1a | M0  | III        |
+| T1a | N1b | M0  | III        |
+| T1a | N1c | M0  | III        |
+| T1a | N2  | M0  | III        |
+| T1a | N2a | M0  | III        |
+| T1a | N2b | M0  | III        |
+| T1a | N2c | M0  | III        |
+| T1a | N3  | M0  | III        |
+| T1a | N3a | M0  | III        |
+| T1a | N3b | M0  | III        |
+| T1a | N3c | M0  | III        |
+| T1b | N1  | M0  | III        |
+| T1b | N1a | M0  | III        |
+| T1b | N1b | M0  | III        |
+| T1b | N1c | M0  | III        |
+| T1b | N2  | M0  | III        |
+| T1b | N2a | M0  | III        |
+| T1b | N2b | M0  | III        |
+| T1b | N2c | M0  | III        |
+| T1b | N3  | M0  | III        |
+| T1b | N3a | M0  | III        |
+| T1b | N3b | M0  | III        |
+| T1b | N3c | M0  | III        |
+| T2a | N1  | M0  | III        |
+| T2a | N1a | M0  | III        |
+| T2a | N1b | M0  | III        |
+| T2a | N1c | M0  | III        |
+| T2a | N2  | M0  | III        |
+| T2a | N2a | M0  | III        |
+| T2a | N2b | M0  | III        |
+| T2a | N2c | M0  | III        |
+| T2a | N3  | M0  | III        |
+| T2a | N3a | M0  | III        |
+| T2a | N3b | M0  | III        |
+| T2a | N3c | M0  | III        |
+| T2b | N1  | M0  | III        |
+| T2b | N1a | M0  | III        |
+| T2b | N1b | M0  | III        |
+| T2b | N1c | M0  | III        |
+| T2b | N2  | M0  | III        |
+| T2b | N2a | M0  | III        |
+| T2b | N2b | M0  | III        |
+| T2b | N2c | M0  | III        |
+| T2b | N3  | M0  | III        |
+| T2b | N3a | M0  | III        |
+| T2b | N3b | M0  | III        |
+| T2b | N3c | M0  | III        |
+| T3a | N1  | M0  | III        |
+| T3a | N1a | M0  | III        |
+| T3a | N1b | M0  | III        |
+| T3a | N1c | M0  | III        |
+| T3a | N2  | M0  | III        |
+| T3a | N2a | M0  | III        |
+| T3a | N2b | M0  | III        |
+| T3a | N2c | M0  | III        |
+| T3a | N3  | M0  | III        |
+| T3a | N3a | M0  | III        |
+| T3a | N3b | M0  | III        |
+| T3a | N3c | M0  | III        |
+| T3b | N1  | M0  | III        |
+| T3b | N1a | M0  | III        |
+| T3b | N1b | M0  | III        |
+| T3b | N1c | M0  | III        |
+| T3b | N2  | M0  | III        |
+| T3b | N2a | M0  | III        |
+| T3b | N2b | M0  | III        |
+| T3b | N2c | M0  | III        |
+| T3b | N3  | M0  | III        |
+| T3b | N3a | M0  | III        |
+| T3b | N3b | M0  | III        |
+| T3b | N3c | M0  | III        |
+| T4a | N1  | M0  | III        |
+| T4a | N1a | M0  | III        |
+| T4a | N1b | M0  | III        |
+| T4a | N1c | M0  | III        |
+| T4a | N2  | M0  | III        |
+| T4a | N2a | M0  | III        |
+| T4a | N2b | M0  | III        |
+| T4a | N2c | M0  | III        |
+| T4a | N3  | M0  | III        |
+| T4a | N3a | M0  | III        |
+| T4a | N3b | M0  | III        |
+| T4a | N3c | M0  | III        |
+| T4b | N1  | M0  | III        |
+| T4b | N1a | M0  | III        |
+| T4b | N1b | M0  | III        |
+| T4b | N1c | M0  | III        |
+| T4b | N2  | M0  | III        |
+| T4b | N2a | M0  | III        |
+| T4b | N2b | M0  | III        |
+| T4b | N2c | M0  | III        |
+| T4b | N3  | M0  | III        |
+| T4b | N3a | M0  | III        |
+| T4b | N3b | M0  | III        |
+| T4b | N3c | M0  | III        |
+| T0  | N0  | M1  | IV         |
+| T0  | N0  | M1a | IV         |
+| T0  | N0  | M1b | IV         |
+| T0  | N0  | M1c | IV         |
+| T0  | N0  | M1d | IV         |
+| T0  | N1  | M1  | IV         |
+| T0  | N1  | M1a | IV         |
+| T0  | N1  | M1b | IV         |
+| T0  | N1  | M1c | IV         |
+| T0  | N1  | M1d | IV         |
+| T0  | N1a | M1  | IV         |
+| T0  | N1a | M1a | IV         |
+| T0  | N1a | M1b | IV         |
+| T0  | N1a | M1c | IV         |
+| T0  | N1a | M1d | IV         |
+| T0  | N1b | M1  | IV         |
+| T0  | N1b | M1a | IV         |
+| T0  | N1b | M1b | IV         |
+| T0  | N1b | M1c | IV         |
+| T0  | N1b | M1d | IV         |
+| T0  | N1c | M1  | IV         |
+| T0  | N1c | M1a | IV         |
+| T0  | N1c | M1b | IV         |
+| T0  | N1c | M1c | IV         |
+| T0  | N1c | M1d | IV         |
+| T0  | N2  | M1  | IV         |
+| T0  | N2  | M1a | IV         |
+| T0  | N2  | M1b | IV         |
+| T0  | N2  | M1c | IV         |
+| T0  | N2  | M1d | IV         |
+| T0  | N2a | M1  | IV         |
+| T0  | N2a | M1a | IV         |
+| T0  | N2a | M1b | IV         |
+| T0  | N2a | M1c | IV         |
+| T0  | N2a | M1d | IV         |
+| T0  | N2b | M1  | IV         |
+| T0  | N2b | M1a | IV         |
+| T0  | N2b | M1b | IV         |
+| T0  | N2b | M1c | IV         |
+| T0  | N2b | M1d | IV         |
+| T0  | N2c | M1  | IV         |
+| T0  | N2c | M1a | IV         |
+| T0  | N2c | M1b | IV         |
+| T0  | N2c | M1c | IV         |
+| T0  | N2c | M1d | IV         |
+| T0  | N3  | M1  | IV         |
+| T0  | N3  | M1a | IV         |
+| T0  | N3  | M1b | IV         |
+| T0  | N3  | M1c | IV         |
+| T0  | N3  | M1d | IV         |
+| T0  | N3a | M1  | IV         |
+| T0  | N3a | M1a | IV         |
+| T0  | N3a | M1b | IV         |
+| T0  | N3a | M1c | IV         |
+| T0  | N3a | M1d | IV         |
+| T0  | N3b | M1  | IV         |
+| T0  | N3b | M1a | IV         |
+| T0  | N3b | M1b | IV         |
+| T0  | N3b | M1c | IV         |
+| T0  | N3b | M1d | IV         |
+| T0  | N3c | M1  | IV         |
+| T0  | N3c | M1a | IV         |
+| T0  | N3c | M1b | IV         |
+| T0  | N3c | M1c | IV         |
+| T0  | N3c | M1d | IV         |
+| T1  | N0  | M1  | IV         |
+| T1  | N0  | M1a | IV         |
+| T1  | N0  | M1b | IV         |
+| T1  | N0  | M1c | IV         |
+| T1  | N0  | M1d | IV         |
+| T1  | N1  | M1  | IV         |
+| T1  | N1  | M1a | IV         |
+| T1  | N1  | M1b | IV         |
+| T1  | N1  | M1c | IV         |
+| T1  | N1  | M1d | IV         |
+| T1  | N1a | M1  | IV         |
+| T1  | N1a | M1a | IV         |
+| T1  | N1a | M1b | IV         |
+| T1  | N1a | M1c | IV         |
+| T1  | N1a | M1d | IV         |
+| T1  | N1b | M1  | IV         |
+| T1  | N1b | M1a | IV         |
+| T1  | N1b | M1b | IV         |
+| T1  | N1b | M1c | IV         |
+| T1  | N1b | M1d | IV         |
+| T1  | N1c | M1  | IV         |
+| T1  | N1c | M1a | IV         |
+| T1  | N1c | M1b | IV         |
+| T1  | N1c | M1c | IV         |
+| T1  | N1c | M1d | IV         |
+| T1  | N2  | M1  | IV         |
+| T1  | N2  | M1a | IV         |
+| T1  | N2  | M1b | IV         |
+| T1  | N2  | M1c | IV         |
+| T1  | N2  | M1d | IV         |
+| T1  | N2a | M1  | IV         |
+| T1  | N2a | M1a | IV         |
+| T1  | N2a | M1b | IV         |
+| T1  | N2a | M1c | IV         |
+| T1  | N2a | M1d | IV         |
+| T1  | N2b | M1  | IV         |
+| T1  | N2b | M1a | IV         |
+| T1  | N2b | M1b | IV         |
+| T1  | N2b | M1c | IV         |
+| T1  | N2b | M1d | IV         |
+| T1  | N2c | M1  | IV         |
+| T1  | N2c | M1a | IV         |
+| T1  | N2c | M1b | IV         |
+| T1  | N2c | M1c | IV         |
+| T1  | N2c | M1d | IV         |
+| T1  | N3  | M1  | IV         |
+| T1  | N3  | M1a | IV         |
+| T1  | N3  | M1b | IV         |
+| T1  | N3  | M1c | IV         |
+| T1  | N3  | M1d | IV         |
+| T1  | N3a | M1  | IV         |
+| T1  | N3a | M1a | IV         |
+| T1  | N3a | M1b | IV         |
+| T1  | N3a | M1c | IV         |
+| T1  | N3a | M1d | IV         |
+| T1  | N3b | M1  | IV         |
+| T1  | N3b | M1a | IV         |
+| T1  | N3b | M1b | IV         |
+| T1  | N3b | M1c | IV         |
+| T1  | N3b | M1d | IV         |
+| T1  | N3c | M1  | IV         |
+| T1  | N3c | M1a | IV         |
+| T1  | N3c | M1b | IV         |
+| T1  | N3c | M1c | IV         |
+| T1  | N3c | M1d | IV         |
+| T1a | N0  | M1  | IV         |
+| T1a | N0  | M1a | IV         |
+| T1a | N0  | M1b | IV         |
+| T1a | N0  | M1c | IV         |
+| T1a | N0  | M1d | IV         |
+| T1a | N1  | M1  | IV         |
+| T1a | N1  | M1a | IV         |
+| T1a | N1  | M1b | IV         |
+| T1a | N1  | M1c | IV         |
+| T1a | N1  | M1d | IV         |
+| T1a | N1a | M1  | IV         |
+| T1a | N1a | M1a | IV         |
+| T1a | N1a | M1b | IV         |
+| T1a | N1a | M1c | IV         |
+| T1a | N1a | M1d | IV         |
+| T1a | N1b | M1  | IV         |
+| T1a | N1b | M1a | IV         |
+| T1a | N1b | M1b | IV         |
+| T1a | N1b | M1c | IV         |
+| T1a | N1b | M1d | IV         |
+| T1a | N1c | M1  | IV         |
+| T1a | N1c | M1a | IV         |
+| T1a | N1c | M1b | IV         |
+| T1a | N1c | M1c | IV         |
+| T1a | N1c | M1d | IV         |
+| T1a | N2  | M1  | IV         |
+| T1a | N2  | M1a | IV         |
+| T1a | N2  | M1b | IV         |
+| T1a | N2  | M1c | IV         |
+| T1a | N2  | M1d | IV         |
+| T1a | N2a | M1  | IV         |
+| T1a | N2a | M1a | IV         |
+| T1a | N2a | M1b | IV         |
+| T1a | N2a | M1c | IV         |
+| T1a | N2a | M1d | IV         |
+| T1a | N2b | M1  | IV         |
+| T1a | N2b | M1a | IV         |
+| T1a | N2b | M1b | IV         |
+| T1a | N2b | M1c | IV         |
+| T1a | N2b | M1d | IV         |
+| T1a | N2c | M1  | IV         |
+| T1a | N2c | M1a | IV         |
+| T1a | N2c | M1b | IV         |
+| T1a | N2c | M1c | IV         |
+| T1a | N2c | M1d | IV         |
+| T1a | N3  | M1  | IV         |
+| T1a | N3  | M1a | IV         |
+| T1a | N3  | M1b | IV         |
+| T1a | N3  | M1c | IV         |
+| T1a | N3  | M1d | IV         |
+| T1a | N3a | M1  | IV         |
+| T1a | N3a | M1a | IV         |
+| T1a | N3a | M1b | IV         |
+| T1a | N3a | M1c | IV         |
+| T1a | N3a | M1d | IV         |
+| T1a | N3b | M1  | IV         |
+| T1a | N3b | M1a | IV         |
+| T1a | N3b | M1b | IV         |
+| T1a | N3b | M1c | IV         |
+| T1a | N3b | M1d | IV         |
+| T1a | N3c | M1  | IV         |
+| T1a | N3c | M1a | IV         |
+| T1a | N3c | M1b | IV         |
+| T1a | N3c | M1c | IV         |
+| T1a | N3c | M1d | IV         |
+| T1b | N0  | M1  | IV         |
+| T1b | N0  | M1a | IV         |
+| T1b | N0  | M1b | IV         |
+| T1b | N0  | M1c | IV         |
+| T1b | N0  | M1d | IV         |
+| T1b | N1  | M1  | IV         |
+| T1b | N1  | M1a | IV         |
+| T1b | N1  | M1b | IV         |
+| T1b | N1  | M1c | IV         |
+| T1b | N1  | M1d | IV         |
+| T1b | N1a | M1  | IV         |
+| T1b | N1a | M1a | IV         |
+| T1b | N1a | M1b | IV         |
+| T1b | N1a | M1c | IV         |
+| T1b | N1a | M1d | IV         |
+| T1b | N1b | M1  | IV         |
+| T1b | N1b | M1a | IV         |
+| T1b | N1b | M1b | IV         |
+| T1b | N1b | M1c | IV         |
+| T1b | N1b | M1d | IV         |
+| T1b | N1c | M1  | IV         |
+| T1b | N1c | M1a | IV         |
+| T1b | N1c | M1b | IV         |
+| T1b | N1c | M1c | IV         |
+| T1b | N1c | M1d | IV         |
+| T1b | N2  | M1  | IV         |
+| T1b | N2  | M1a | IV         |
+| T1b | N2  | M1b | IV         |
+| T1b | N2  | M1c | IV         |
+| T1b | N2  | M1d | IV         |
+| T1b | N2a | M1  | IV         |
+| T1b | N2a | M1a | IV         |
+| T1b | N2a | M1b | IV         |
+| T1b | N2a | M1c | IV         |
+| T1b | N2a | M1d | IV         |
+| T1b | N2b | M1  | IV         |
+| T1b | N2b | M1a | IV         |
+| T1b | N2b | M1b | IV         |
+| T1b | N2b | M1c | IV         |
+| T1b | N2b | M1d | IV         |
+| T1b | N2c | M1  | IV         |
+| T1b | N2c | M1a | IV         |
+| T1b | N2c | M1b | IV         |
+| T1b | N2c | M1c | IV         |
+| T1b | N2c | M1d | IV         |
+| T1b | N3  | M1  | IV         |
+| T1b | N3  | M1a | IV         |
+| T1b | N3  | M1b | IV         |
+| T1b | N3  | M1c | IV         |
+| T1b | N3  | M1d | IV         |
+| T1b | N3a | M1  | IV         |
+| T1b | N3a | M1a | IV         |
+| T1b | N3a | M1b | IV         |
+| T1b | N3a | M1c | IV         |
+| T1b | N3a | M1d | IV         |
+| T1b | N3b | M1  | IV         |
+| T1b | N3b | M1a | IV         |
+| T1b | N3b | M1b | IV         |
+| T1b | N3b | M1c | IV         |
+| T1b | N3b | M1d | IV         |
+| T1b | N3c | M1  | IV         |
+| T1b | N3c | M1a | IV         |
+| T1b | N3c | M1b | IV         |
+| T1b | N3c | M1c | IV         |
+| T1b | N3c | M1d | IV         |
+| T2a | N0  | M1  | IV         |
+| T2a | N0  | M1a | IV         |
+| T2a | N0  | M1b | IV         |
+| T2a | N0  | M1c | IV         |
+| T2a | N0  | M1d | IV         |
+| T2a | N1  | M1  | IV         |
+| T2a | N1  | M1a | IV         |
+| T2a | N1  | M1b | IV         |
+| T2a | N1  | M1c | IV         |
+| T2a | N1  | M1d | IV         |
+| T2a | N1a | M1  | IV         |
+| T2a | N1a | M1a | IV         |
+| T2a | N1a | M1b | IV         |
+| T2a | N1a | M1c | IV         |
+| T2a | N1a | M1d | IV         |
+| T2a | N1b | M1  | IV         |
+| T2a | N1b | M1a | IV         |
+| T2a | N1b | M1b | IV         |
+| T2a | N1b | M1c | IV         |
+| T2a | N1b | M1d | IV         |
+| T2a | N1c | M1  | IV         |
+| T2a | N1c | M1a | IV         |
+| T2a | N1c | M1b | IV         |
+| T2a | N1c | M1c | IV         |
+| T2a | N1c | M1d | IV         |
+| T2a | N2  | M1  | IV         |
+| T2a | N2  | M1a | IV         |
+| T2a | N2  | M1b | IV         |
+| T2a | N2  | M1c | IV         |
+| T2a | N2  | M1d | IV         |
+| T2a | N2a | M1  | IV         |
+| T2a | N2a | M1a | IV         |
+| T2a | N2a | M1b | IV         |
+| T2a | N2a | M1c | IV         |
+| T2a | N2a | M1d | IV         |
+| T2a | N2b | M1  | IV         |
+| T2a | N2b | M1a | IV         |
+| T2a | N2b | M1b | IV         |
+| T2a | N2b | M1c | IV         |
+| T2a | N2b | M1d | IV         |
+| T2a | N2c | M1  | IV         |
+| T2a | N2c | M1a | IV         |
+| T2a | N2c | M1b | IV         |
+| T2a | N2c | M1c | IV         |
+| T2a | N2c | M1d | IV         |
+| T2a | N3  | M1  | IV         |
+| T2a | N3  | M1a | IV         |
+| T2a | N3  | M1b | IV         |
+| T2a | N3  | M1c | IV         |
+| T2a | N3  | M1d | IV         |
+| T2a | N3a | M1  | IV         |
+| T2a | N3a | M1a | IV         |
+| T2a | N3a | M1b | IV         |
+| T2a | N3a | M1c | IV         |
+| T2a | N3a | M1d | IV         |
+| T2a | N3b | M1  | IV         |
+| T2a | N3b | M1a | IV         |
+| T2a | N3b | M1b | IV         |
+| T2a | N3b | M1c | IV         |
+| T2a | N3b | M1d | IV         |
+| T2a | N3c | M1  | IV         |
+| T2a | N3c | M1a | IV         |
+| T2a | N3c | M1b | IV         |
+| T2a | N3c | M1c | IV         |
+| T2a | N3c | M1d | IV         |
+| T2b | N0  | M1  | IV         |
+| T2b | N0  | M1a | IV         |
+| T2b | N0  | M1b | IV         |
+| T2b | N0  | M1c | IV         |
+| T2b | N0  | M1d | IV         |
+| T2b | N1  | M1  | IV         |
+| T2b | N1  | M1a | IV         |
+| T2b | N1  | M1b | IV         |
+| T2b | N1  | M1c | IV         |
+| T2b | N1  | M1d | IV         |
+| T2b | N1a | M1  | IV         |
+| T2b | N1a | M1a | IV         |
+| T2b | N1a | M1b | IV         |
+| T2b | N1a | M1c | IV         |
+| T2b | N1a | M1d | IV         |
+| T2b | N1b | M1  | IV         |
+| T2b | N1b | M1a | IV         |
+| T2b | N1b | M1b | IV         |
+| T2b | N1b | M1c | IV         |
+| T2b | N1b | M1d | IV         |
+| T2b | N1c | M1  | IV         |
+| T2b | N1c | M1a | IV         |
+| T2b | N1c | M1b | IV         |
+| T2b | N1c | M1c | IV         |
+| T2b | N1c | M1d | IV         |
+| T2b | N2  | M1  | IV         |
+| T2b | N2  | M1a | IV         |
+| T2b | N2  | M1b | IV         |
+| T2b | N2  | M1c | IV         |
+| T2b | N2  | M1d | IV         |
+| T2b | N2a | M1  | IV         |
+| T2b | N2a | M1a | IV         |
+| T2b | N2a | M1b | IV         |
+| T2b | N2a | M1c | IV         |
+| T2b | N2a | M1d | IV         |
+| T2b | N2b | M1  | IV         |
+| T2b | N2b | M1a | IV         |
+| T2b | N2b | M1b | IV         |
+| T2b | N2b | M1c | IV         |
+| T2b | N2b | M1d | IV         |
+| T2b | N2c | M1  | IV         |
+| T2b | N2c | M1a | IV         |
+| T2b | N2c | M1b | IV         |
+| T2b | N2c | M1c | IV         |
+| T2b | N2c | M1d | IV         |
+| T2b | N3  | M1  | IV         |
+| T2b | N3  | M1a | IV         |
+| T2b | N3  | M1b | IV         |
+| T2b | N3  | M1c | IV         |
+| T2b | N3  | M1d | IV         |
+| T2b | N3a | M1  | IV         |
+| T2b | N3a | M1a | IV         |
+| T2b | N3a | M1b | IV         |
+| T2b | N3a | M1c | IV         |
+| T2b | N3a | M1d | IV         |
+| T2b | N3b | M1  | IV         |
+| T2b | N3b | M1a | IV         |
+| T2b | N3b | M1b | IV         |
+| T2b | N3b | M1c | IV         |
+| T2b | N3b | M1d | IV         |
+| T2b | N3c | M1  | IV         |
+| T2b | N3c | M1a | IV         |
+| T2b | N3c | M1b | IV         |
+| T2b | N3c | M1c | IV         |
+| T2b | N3c | M1d | IV         |
+| T3a | N0  | M1  | IV         |
+| T3a | N0  | M1a | IV         |
+| T3a | N0  | M1b | IV         |
+| T3a | N0  | M1c | IV         |
+| T3a | N0  | M1d | IV         |
+| T3a | N1  | M1  | IV         |
+| T3a | N1  | M1a | IV         |
+| T3a | N1  | M1b | IV         |
+| T3a | N1  | M1c | IV         |
+| T3a | N1  | M1d | IV         |
+| T3a | N1a | M1  | IV         |
+| T3a | N1a | M1a | IV         |
+| T3a | N1a | M1b | IV         |
+| T3a | N1a | M1c | IV         |
+| T3a | N1a | M1d | IV         |
+| T3a | N1b | M1  | IV         |
+| T3a | N1b | M1a | IV         |
+| T3a | N1b | M1b | IV         |
+| T3a | N1b | M1c | IV         |
+| T3a | N1b | M1d | IV         |
+| T3a | N1c | M1  | IV         |
+| T3a | N1c | M1a | IV         |
+| T3a | N1c | M1b | IV         |
+| T3a | N1c | M1c | IV         |
+| T3a | N1c | M1d | IV         |
+| T3a | N2  | M1  | IV         |
+| T3a | N2  | M1a | IV         |
+| T3a | N2  | M1b | IV         |
+| T3a | N2  | M1c | IV         |
+| T3a | N2  | M1d | IV         |
+| T3a | N2a | M1  | IV         |
+| T3a | N2a | M1a | IV         |
+| T3a | N2a | M1b | IV         |
+| T3a | N2a | M1c | IV         |
+| T3a | N2a | M1d | IV         |
+| T3a | N2b | M1  | IV         |
+| T3a | N2b | M1a | IV         |
+| T3a | N2b | M1b | IV         |
+| T3a | N2b | M1c | IV         |
+| T3a | N2b | M1d | IV         |
+| T3a | N2c | M1  | IV         |
+| T3a | N2c | M1a | IV         |
+| T3a | N2c | M1b | IV         |
+| T3a | N2c | M1c | IV         |
+| T3a | N2c | M1d | IV         |
+| T3a | N3  | M1  | IV         |
+| T3a | N3  | M1a | IV         |
+| T3a | N3  | M1b | IV         |
+| T3a | N3  | M1c | IV         |
+| T3a | N3  | M1d | IV         |
+| T3a | N3a | M1  | IV         |
+| T3a | N3a | M1a | IV         |
+| T3a | N3a | M1b | IV         |
+| T3a | N3a | M1c | IV         |
+| T3a | N3a | M1d | IV         |
+| T3a | N3b | M1  | IV         |
+| T3a | N3b | M1a | IV         |
+| T3a | N3b | M1b | IV         |
+| T3a | N3b | M1c | IV         |
+| T3a | N3b | M1d | IV         |
+| T3a | N3c | M1  | IV         |
+| T3a | N3c | M1a | IV         |
+| T3a | N3c | M1b | IV         |
+| T3a | N3c | M1c | IV         |
+| T3a | N3c | M1d | IV         |
+| T3b | N0  | M1  | IV         |
+| T3b | N0  | M1a | IV         |
+| T3b | N0  | M1b | IV         |
+| T3b | N0  | M1c | IV         |
+| T3b | N0  | M1d | IV         |
+| T3b | N1  | M1  | IV         |
+| T3b | N1  | M1a | IV         |
+| T3b | N1  | M1b | IV         |
+| T3b | N1  | M1c | IV         |
+| T3b | N1  | M1d | IV         |
+| T3b | N1a | M1  | IV         |
+| T3b | N1a | M1a | IV         |
+| T3b | N1a | M1b | IV         |
+| T3b | N1a | M1c | IV         |
+| T3b | N1a | M1d | IV         |
+| T3b | N1b | M1  | IV         |
+| T3b | N1b | M1a | IV         |
+| T3b | N1b | M1b | IV         |
+| T3b | N1b | M1c | IV         |
+| T3b | N1b | M1d | IV         |
+| T3b | N1c | M1  | IV         |
+| T3b | N1c | M1a | IV         |
+| T3b | N1c | M1b | IV         |
+| T3b | N1c | M1c | IV         |
+| T3b | N1c | M1d | IV         |
+| T3b | N2  | M1  | IV         |
+| T3b | N2  | M1a | IV         |
+| T3b | N2  | M1b | IV         |
+| T3b | N2  | M1c | IV         |
+| T3b | N2  | M1d | IV         |
+| T3b | N2a | M1  | IV         |
+| T3b | N2a | M1a | IV         |
+| T3b | N2a | M1b | IV         |
+| T3b | N2a | M1c | IV         |
+| T3b | N2a | M1d | IV         |
+| T3b | N2b | M1  | IV         |
+| T3b | N2b | M1a | IV         |
+| T3b | N2b | M1b | IV         |
+| T3b | N2b | M1c | IV         |
+| T3b | N2b | M1d | IV         |
+| T3b | N2c | M1  | IV         |
+| T3b | N2c | M1a | IV         |
+| T3b | N2c | M1b | IV         |
+| T3b | N2c | M1c | IV         |
+| T3b | N2c | M1d | IV         |
+| T3b | N3  | M1  | IV         |
+| T3b | N3  | M1a | IV         |
+| T3b | N3  | M1b | IV         |
+| T3b | N3  | M1c | IV         |
+| T3b | N3  | M1d | IV         |
+| T3b | N3a | M1  | IV         |
+| T3b | N3a | M1a | IV         |
+| T3b | N3a | M1b | IV         |
+| T3b | N3a | M1c | IV         |
+| T3b | N3a | M1d | IV         |
+| T3b | N3b | M1  | IV         |
+| T3b | N3b | M1a | IV         |
+| T3b | N3b | M1b | IV         |
+| T3b | N3b | M1c | IV         |
+| T3b | N3b | M1d | IV         |
+| T3b | N3c | M1  | IV         |
+| T3b | N3c | M1a | IV         |
+| T3b | N3c | M1b | IV         |
+| T3b | N3c | M1c | IV         |
+| T3b | N3c | M1d | IV         |
+| T4a | N0  | M1  | IV         |
+| T4a | N0  | M1a | IV         |
+| T4a | N0  | M1b | IV         |
+| T4a | N0  | M1c | IV         |
+| T4a | N0  | M1d | IV         |
+| T4a | N1  | M1  | IV         |
+| T4a | N1  | M1a | IV         |
+| T4a | N1  | M1b | IV         |
+| T4a | N1  | M1c | IV         |
+| T4a | N1  | M1d | IV         |
+| T4a | N1a | M1  | IV         |
+| T4a | N1a | M1a | IV         |
+| T4a | N1a | M1b | IV         |
+| T4a | N1a | M1c | IV         |
+| T4a | N1a | M1d | IV         |
+| T4a | N1b | M1  | IV         |
+| T4a | N1b | M1a | IV         |
+| T4a | N1b | M1b | IV         |
+| T4a | N1b | M1c | IV         |
+| T4a | N1b | M1d | IV         |
+| T4a | N1c | M1  | IV         |
+| T4a | N1c | M1a | IV         |
+| T4a | N1c | M1b | IV         |
+| T4a | N1c | M1c | IV         |
+| T4a | N1c | M1d | IV         |
+| T4a | N2  | M1  | IV         |
+| T4a | N2  | M1a | IV         |
+| T4a | N2  | M1b | IV         |
+| T4a | N2  | M1c | IV         |
+| T4a | N2  | M1d | IV         |
+| T4a | N2a | M1  | IV         |
+| T4a | N2a | M1a | IV         |
+| T4a | N2a | M1b | IV         |
+| T4a | N2a | M1c | IV         |
+| T4a | N2a | M1d | IV         |
+| T4a | N2b | M1  | IV         |
+| T4a | N2b | M1a | IV         |
+| T4a | N2b | M1b | IV         |
+| T4a | N2b | M1c | IV         |
+| T4a | N2b | M1d | IV         |
+| T4a | N2c | M1  | IV         |
+| T4a | N2c | M1a | IV         |
+| T4a | N2c | M1b | IV         |
+| T4a | N2c | M1c | IV         |
+| T4a | N2c | M1d | IV         |
+| T4a | N3  | M1  | IV         |
+| T4a | N3  | M1a | IV         |
+| T4a | N3  | M1b | IV         |
+| T4a | N3  | M1c | IV         |
+| T4a | N3  | M1d | IV         |
+| T4a | N3a | M1  | IV         |
+| T4a | N3a | M1a | IV         |
+| T4a | N3a | M1b | IV         |
+| T4a | N3a | M1c | IV         |
+| T4a | N3a | M1d | IV         |
+| T4a | N3b | M1  | IV         |
+| T4a | N3b | M1a | IV         |
+| T4a | N3b | M1b | IV         |
+| T4a | N3b | M1c | IV         |
+| T4a | N3b | M1d | IV         |
+| T4a | N3c | M1  | IV         |
+| T4a | N3c | M1a | IV         |
+| T4a | N3c | M1b | IV         |
+| T4a | N3c | M1c | IV         |
+| T4a | N3c | M1d | IV         |
+| T4b | N0  | M1  | IV         |
+| T4b | N0  | M1a | IV         |
+| T4b | N0  | M1b | IV         |
+| T4b | N0  | M1c | IV         |
+| T4b | N0  | M1d | IV         |
+| T4b | N1  | M1  | IV         |
+| T4b | N1  | M1a | IV         |
+| T4b | N1  | M1b | IV         |
+| T4b | N1  | M1c | IV         |
+| T4b | N1  | M1d | IV         |
+| T4b | N1a | M1  | IV         |
+| T4b | N1a | M1a | IV         |
+| T4b | N1a | M1b | IV         |
+| T4b | N1a | M1c | IV         |
+| T4b | N1a | M1d | IV         |
+| T4b | N1b | M1  | IV         |
+| T4b | N1b | M1a | IV         |
+| T4b | N1b | M1b | IV         |
+| T4b | N1b | M1c | IV         |
+| T4b | N1b | M1d | IV         |
+| T4b | N1c | M1  | IV         |
+| T4b | N1c | M1a | IV         |
+| T4b | N1c | M1b | IV         |
+| T4b | N1c | M1c | IV         |
+| T4b | N1c | M1d | IV         |
+| T4b | N2  | M1  | IV         |
+| T4b | N2  | M1a | IV         |
+| T4b | N2  | M1b | IV         |
+| T4b | N2  | M1c | IV         |
+| T4b | N2  | M1d | IV         |
+| T4b | N2a | M1  | IV         |
+| T4b | N2a | M1a | IV         |
+| T4b | N2a | M1b | IV         |
+| T4b | N2a | M1c | IV         |
+| T4b | N2a | M1d | IV         |
+| T4b | N2b | M1  | IV         |
+| T4b | N2b | M1a | IV         |
+| T4b | N2b | M1b | IV         |
+| T4b | N2b | M1c | IV         |
+| T4b | N2b | M1d | IV         |
+| T4b | N2c | M1  | IV         |
+| T4b | N2c | M1a | IV         |
+| T4b | N2c | M1b | IV         |
+| T4b | N2c | M1c | IV         |
+| T4b | N2c | M1d | IV         |
+| T4b | N3  | M1  | IV         |
+| T4b | N3  | M1a | IV         |
+| T4b | N3  | M1b | IV         |
+| T4b | N3  | M1c | IV         |
+| T4b | N3  | M1d | IV         |
+| T4b | N3a | M1  | IV         |
+| T4b | N3a | M1a | IV         |
+| T4b | N3a | M1b | IV         |
+| T4b | N3a | M1c | IV         |
+| T4b | N3a | M1d | IV         |
+| T4b | N3b | M1  | IV         |
+| T4b | N3b | M1a | IV         |
+| T4b | N3b | M1b | IV         |
+| T4b | N3b | M1c | IV         |
+| T4b | N3b | M1d | IV         |
+| T4b | N3c | M1  | IV         |
+| T4b | N3c | M1a | IV         |
+| T4b | N3c | M1b | IV         |
+| T4b | N3c | M1c | IV         |
+| T4b | N3c | M1d | IV         |
+| Tis | N0  | M1  | IV         |
+| Tis | N0  | M1a | IV         |
+| Tis | N0  | M1b | IV         |
+| Tis | N0  | M1c | IV         |
+| Tis | N0  | M1d | IV         |
+| Tis | N1  | M1  | IV         |
+| Tis | N1  | M1a | IV         |
+| Tis | N1  | M1b | IV         |
+| Tis | N1  | M1c | IV         |
+| Tis | N1  | M1d | IV         |
+| Tis | N1a | M1  | IV         |
+| Tis | N1a | M1a | IV         |
+| Tis | N1a | M1b | IV         |
+| Tis | N1a | M1c | IV         |
+| Tis | N1a | M1d | IV         |
+| Tis | N1b | M1  | IV         |
+| Tis | N1b | M1a | IV         |
+| Tis | N1b | M1b | IV         |
+| Tis | N1b | M1c | IV         |
+| Tis | N1b | M1d | IV         |
+| Tis | N1c | M1  | IV         |
+| Tis | N1c | M1a | IV         |
+| Tis | N1c | M1b | IV         |
+| Tis | N1c | M1c | IV         |
+| Tis | N1c | M1d | IV         |
+| Tis | N2  | M1  | IV         |
+| Tis | N2  | M1a | IV         |
+| Tis | N2  | M1b | IV         |
+| Tis | N2  | M1c | IV         |
+| Tis | N2  | M1d | IV         |
+| Tis | N2a | M1  | IV         |
+| Tis | N2a | M1a | IV         |
+| Tis | N2a | M1b | IV         |
+| Tis | N2a | M1c | IV         |
+| Tis | N2a | M1d | IV         |
+| Tis | N2b | M1  | IV         |
+| Tis | N2b | M1a | IV         |
+| Tis | N2b | M1b | IV         |
+| Tis | N2b | M1c | IV         |
+| Tis | N2b | M1d | IV         |
+| Tis | N2c | M1  | IV         |
+| Tis | N2c | M1a | IV         |
+| Tis | N2c | M1b | IV         |
+| Tis | N2c | M1c | IV         |
+| Tis | N2c | M1d | IV         |
+| Tis | N3  | M1  | IV         |
+| Tis | N3  | M1a | IV         |
+| Tis | N3  | M1b | IV         |
+| Tis | N3  | M1c | IV         |
+| Tis | N3  | M1d | IV         |
+| Tis | N3a | M1  | IV         |
+| Tis | N3a | M1a | IV         |
+| Tis | N3a | M1b | IV         |
+| Tis | N3a | M1c | IV         |
+| Tis | N3a | M1d | IV         |
+| Tis | N3b | M1  | IV         |
+| Tis | N3b | M1a | IV         |
+| Tis | N3b | M1b | IV         |
+| Tis | N3b | M1c | IV         |
+| Tis | N3b | M1d | IV         |
+| Tis | N3c | M1  | IV         |
+| Tis | N3c | M1a | IV         |
+| Tis | N3c | M1b | IV         |
+| Tis | N3c | M1c | IV         |
+| Tis | N3c | M1d | IV         |
 
-| T                | N   | M   |
-|------------------|-----|-----|
-| 0                |     |     |
-| Tis              | N0  | M0  |
-| IA               |     |     |
-| T1               | N0  | M0  |
-| IA1              |     |     |
-| T1a              | N0  | M0  |
-| T1mi             | N0  | M0  |
-| IA2              |     |     |
-| T1b              | N0  | M0  |
-| IA3              |     |     |
-| T1c              | N0  | M0  |
-| IB               |     |     |
-| T2a              | N0  | M0  |
-| IIA              |     |     |
-| T2b              | N0  | M0  |
-| IIB              |     |     |
-| T3               | N0  | M0  |
-| T1               | N1  | M0  |
-| T1a              | N1  | M0  |
-| T1b              | N1  | M0  |
-| T1c              | N1  | M0  |
-| T1mi             | N1  | M0  |
-| T2               | N1  | M0  |
-| T2a              | N1  | M0  |
-| T2b              | N1  | M0  |
-| IIIA             |     |     |
-| T4               | N0  | M0  |
-| T3               | N1  | M0  |
-| T4               | N1  | M0  |
-| T1               | N2  | M0  |
-| T1a              | N2  | M0  |
-| T1b              | N2  | M0  |
-| T1c              | N2  | M0  |
-| T1mi             | N2  | M0  |
-| T2               | N2  | M0  |
-| T2a              | N2  | M0  |
-| T2b              | N2  | M0  |
-| IIIB             |     |     |
-| T3               | N2  | M0  |
-| T4               | N2  | M0  |
-| T1               | N3  | M0  |
-| T1a              | N3  | M0  |
-| T1b              | N3  | M0  |
-| T1c              | N3  | M0  |
-| T1mi             | N3  | M0  |
-| T2               | N3  | M0  |
-| T2a              | N3  | M0  |
-| T2b              | N3  | M0  |
-| IIIC             |     |     |
-| T3               | N3  | M0  |
-| T4               | N3  | M0  |
-| IV               |     |     |
-| T1               | N0  | M1  |
-| T1a              | N0  | M1  |
-| T1b              | N0  | M1  |
-| T1c              | N0  | M1  |
-| T1mi             | N0  | M1  |
-| T2               | N0  | M1  |
-| T2a              | N0  | M1  |
-| T2b              | N0  | M1  |
-| T3               | N0  | M1  |
-| T4               | N0  | M1  |
-| Tis              | N0  | M1  |
-| TX               | N0  | M1  |
-| T1               | N1  | M1  |
-| T1a              | N1  | M1  |
-| T1b              | N1  | M1  |
-| T1c              | N1  | M1  |
-| T1mi             | N1  | M1  |
-| T2               | N1  | M1  |
-| T2a              | N1  | M1  |
-| T2b              | N1  | M1  |
-| T3               | N1  | M1  |
-| T4               | N1  | M1  |
-| Tis              | N1  | M1  |
-| TX               | N1  | M1  |
-| T1               | N2  | M1  |
-| T1a              | N2  | M1  |
-| T1b              | N2  | M1  |
-| T1c              | N2  | M1  |
-| T1mi             | N2  | M1  |
-| T2               | N2  | M1  |
-| T2a              | N2  | M1  |
-| T2b              | N2  | M1  |
-| T3               | N2  | M1  |
-| T4               | N2  | M1  |
-| Tis              | N2  | M1  |
-| TX               | N2  | M1  |
-| T1               | N3  | M1  |
-| T1a              | N3  | M1  |
-| T1b              | N3  | M1  |
-| T1c              | N3  | M1  |
-| T1mi             | N3  | M1  |
-| T2               | N3  | M1  |
-| T2a              | N3  | M1  |
-| T2b              | N3  | M1  |
-| T3               | N3  | M1  |
-| T4               | N3  | M1  |
-| Tis              | N3  | M1  |
-| TX               | N3  | M1  |
-| IVA              |     |     |
-| T1               | N0  | M1a |
-| T1a              | N0  | M1a |
-| T1b              | N0  | M1a |
-| T1c              | N0  | M1a |
-| T1mi             | N0  | M1a |
-| T2               | N0  | M1a |
-| T2a              | N0  | M1a |
-| T2b              | N0  | M1a |
-| T3               | N0  | M1a |
-| T4               | N0  | M1a |
-| Tis              | N0  | M1a |
-| TX               | N0  | M1a |
-| T1               | N1  | M1a |
-| T1a              | N1  | M1a |
-| T1b              | N1  | M1a |
-| T1c              | N1  | M1a |
-| T1mi             | N1  | M1a |
-| T2               | N1  | M1a |
-| T2a              | N1  | M1a |
-| T2b              | N1  | M1a |
-| T3               | N1  | M1a |
-| T4               | N1  | M1a |
-| Tis              | N1  | M1a |
-| TX               | N1  | M1a |
-| T1               | N2  | M1a |
-| T1a              | N2  | M1a |
-| T1b              | N2  | M1a |
-| T1c              | N2  | M1a |
-| T1mi             | N2  | M1a |
-| T2               | N2  | M1a |
-| T2a              | N2  | M1a |
-| T2b              | N2  | M1a |
-| T3               | N2  | M1a |
-| T4               | N2  | M1a |
-| Tis              | N2  | M1a |
-| TX               | N2  | M1a |
-| T1               | N3  | M1a |
-| T1a              | N3  | M1a |
-| T1b              | N3  | M1a |
-| T1c              | N3  | M1a |
-| T1mi             | N3  | M1a |
-| T2               | N3  | M1a |
-| T2a              | N3  | M1a |
-| T2b              | N3  | M1a |
-| T3               | N3  | M1a |
-| T4               | N3  | M1a |
-| Tis              | N3  | M1a |
-| TX               | N3  | M1a |
-| T1               | N0  | M1b |
-| T1a              | N0  | M1b |
-| T1b              | N0  | M1b |
-| T1c              | N0  | M1b |
-| T1mi             | N0  | M1b |
-| T2               | N0  | M1b |
-| T2a              | N0  | M1b |
-| T2b              | N0  | M1b |
-| T3               | N0  | M1b |
-| T4               | N0  | M1b |
-| Tis              | N0  | M1b |
-| TX               | N0  | M1b |
-| T1               | N1  | M1b |
-| T1a              | N1  | M1b |
-| T1b              | N1  | M1b |
-| T1c              | N1  | M1b |
-| T1mi             | N1  | M1b |
-| T2               | N1  | M1b |
-| T2a              | N1  | M1b |
-| T2b              | N1  | M1b |
-| T3               | N1  | M1b |
-| T4               | N1  | M1b |
-| Tis              | N1  | M1b |
-| TX               | N1  | M1b |
-| T1               | N2  | M1b |
-| T1a              | N2  | M1b |
-| T1b              | N2  | M1b |
-| T1c              | N2  | M1b |
-| T1mi             | N2  | M1b |
-| T2               | N2  | M1b |
-| T2a              | N2  | M1b |
-| T2b              | N2  | M1b |
-| T3               | N2  | M1b |
-| T4               | N2  | M1b |
-| Tis              | N2  | M1b |
-| TX               | N2  | M1b |
-| T1               | N3  | M1b |
-| T1a              | N3  | M1b |
-| T1b              | N3  | M1b |
-| T1c              | N3  | M1b |
-| T1mi             | N3  | M1b |
-| T2               | N3  | M1b |
-| T2a              | N3  | M1b |
-| T2b              | N3  | M1b |
-| T3               | N3  | M1b |
-| T4               | N3  | M1b |
-| Tis              | N3  | M1b |
-| TX               | N3  | M1b |
-| IVB              |     |     |
-| T1               | N0  | M1c |
-| T1a              | N0  | M1c |
-| T1b              | N0  | M1c |
-| T1c              | N0  | M1c |
-| T1mi             | N0  | M1c |
-| T2               | N0  | M1c |
-| T2a              | N0  | M1c |
-| T2b              | N0  | M1c |
-| T3               | N0  | M1c |
-| T4               | N0  | M1c |
-| Tis              | N0  | M1c |
-| TX               | N0  | M1c |
-| T1               | N1  | M1c |
-| T1a              | N1  | M1c |
-| T1b              | N1  | M1c |
-| T1c              | N1  | M1c |
-| T1mi             | N1  | M1c |
-| T2               | N1  | M1c |
-| T2a              | N1  | M1c |
-| T2b              | N1  | M1c |
-| T3               | N1  | M1c |
-| T4               | N1  | M1c |
-| Tis              | N1  | M1c |
-| TX               | N1  | M1c |
-| T1               | N2  | M1c |
-| T1a              | N2  | M1c |
-| T1b              | N2  | M1c |
-| T1c              | N2  | M1c |
-| T1mi             | N2  | M1c |
-| T2               | N2  | M1c |
-| T2a              | N2  | M1c |
-| T2b              | N2  | M1c |
-| T3               | N2  | M1c |
-| T4               | N2  | M1c |
-| Tis              | N2  | M1c |
-| TX               | N2  | M1c |
-| T1               | N3  | M1c |
-| T1a              | N3  | M1c |
-| T1b              | N3  | M1c |
-| T1c              | N3  | M1c |
-| T1mi             | N3  | M1c |
-| T2               | N3  | M1c |
-| T2a              | N3  | M1c |
-| T2b              | N3  | M1c |
-| T3               | N3  | M1c |
-| T4               | N3  | M1c |
-| Tis              | N3  | M1c |
-| TX               | N3  | M1c |
-| Occult carcinoma |     |     |
-| TX               | N0  | M0  |
+Pathological (829 rules)
 
-clinical
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| Tis | N0  | M0  | 0          |
+| T1  | N0  | M0  | I          |
+| T1a | N0  | M0  | IA         |
+| T1b | N0  | M0  | IA         |
+| T2a | N0  | M0  | IB         |
+| T2b | N0  | M0  | IIA        |
+| T3a | N0  | M0  | IIA        |
+| T3b | N0  | M0  | IIB        |
+| T4a | N0  | M0  | IIB        |
+| T4b | N0  | M0  | IIC        |
+| T1  | N1  | M0  | III        |
+| T1  | N2  | M0  | III        |
+| T1a | N1  | M0  | III        |
+| T1a | N2  | M0  | III        |
+| T1b | N1  | M0  | III        |
+| T1b | N2  | M0  | III        |
+| T2a | N1  | M0  | III        |
+| T2a | N2  | M0  | III        |
+| T2b | N2  | M0  | III        |
+| T3a | N2  | M0  | III        |
+| T1a | N1a | M0  | IIIA       |
+| T1a | N2a | M0  | IIIA       |
+| T1b | N1a | M0  | IIIA       |
+| T1b | N2a | M0  | IIIA       |
+| T2a | N1a | M0  | IIIA       |
+| T2a | N2a | M0  | IIIA       |
+| T0  | N1b | M0  | IIIB       |
+| T0  | N1c | M0  | IIIB       |
+| T1a | N1b | M0  | IIIB       |
+| T1a | N1c | M0  | IIIB       |
+| T1a | N2b | M0  | IIIB       |
+| T1b | N1b | M0  | IIIB       |
+| T1b | N1c | M0  | IIIB       |
+| T1b | N2b | M0  | IIIB       |
+| T2a | N1b | M0  | IIIB       |
+| T2a | N1c | M0  | IIIB       |
+| T2a | N2b | M0  | IIIB       |
+| T2b | N1  | M0  | IIIB       |
+| T2b | N1a | M0  | IIIB       |
+| T2b | N1b | M0  | IIIB       |
+| T2b | N1c | M0  | IIIB       |
+| T2b | N2a | M0  | IIIB       |
+| T2b | N2b | M0  | IIIB       |
+| T3a | N1  | M0  | IIIB       |
+| T3a | N1a | M0  | IIIB       |
+| T3a | N1b | M0  | IIIB       |
+| T3a | N1c | M0  | IIIB       |
+| T3a | N2a | M0  | IIIB       |
+| T3a | N2b | M0  | IIIB       |
+| T0  | N2b | M0  | IIIC       |
+| T0  | N2c | M0  | IIIC       |
+| T0  | N3b | M0  | IIIC       |
+| T0  | N3c | M0  | IIIC       |
+| T1a | N2c | M0  | IIIC       |
+| T1a | N3  | M0  | IIIC       |
+| T1a | N3a | M0  | IIIC       |
+| T1a | N3b | M0  | IIIC       |
+| T1a | N3c | M0  | IIIC       |
+| T1b | N2c | M0  | IIIC       |
+| T1b | N3  | M0  | IIIC       |
+| T1b | N3a | M0  | IIIC       |
+| T1b | N3b | M0  | IIIC       |
+| T1b | N3c | M0  | IIIC       |
+| T2a | N2c | M0  | IIIC       |
+| T2a | N3  | M0  | IIIC       |
+| T2a | N3a | M0  | IIIC       |
+| T2a | N3b | M0  | IIIC       |
+| T2a | N3c | M0  | IIIC       |
+| T2b | N2c | M0  | IIIC       |
+| T2b | N3  | M0  | IIIC       |
+| T2b | N3a | M0  | IIIC       |
+| T2b | N3b | M0  | IIIC       |
+| T2b | N3c | M0  | IIIC       |
+| T3a | N2c | M0  | IIIC       |
+| T3a | N3  | M0  | IIIC       |
+| T3a | N3a | M0  | IIIC       |
+| T3a | N3b | M0  | IIIC       |
+| T3a | N3c | M0  | IIIC       |
+| T3b | N1  | M0  | IIIC       |
+| T3b | N1a | M0  | IIIC       |
+| T3b | N1b | M0  | IIIC       |
+| T3b | N1c | M0  | IIIC       |
+| T3b | N2  | M0  | IIIC       |
+| T3b | N2a | M0  | IIIC       |
+| T3b | N2b | M0  | IIIC       |
+| T3b | N2c | M0  | IIIC       |
+| T3b | N3  | M0  | IIIC       |
+| T3b | N3a | M0  | IIIC       |
+| T3b | N3b | M0  | IIIC       |
+| T3b | N3c | M0  | IIIC       |
+| T4a | N1  | M0  | IIIC       |
+| T4a | N1a | M0  | IIIC       |
+| T4a | N1b | M0  | IIIC       |
+| T4a | N1c | M0  | IIIC       |
+| T4a | N2  | M0  | IIIC       |
+| T4a | N2a | M0  | IIIC       |
+| T4a | N2b | M0  | IIIC       |
+| T4a | N2c | M0  | IIIC       |
+| T4a | N3  | M0  | IIIC       |
+| T4a | N3a | M0  | IIIC       |
+| T4a | N3b | M0  | IIIC       |
+| T4a | N3c | M0  | IIIC       |
+| T4b | N1  | M0  | IIIC       |
+| T4b | N1a | M0  | IIIC       |
+| T4b | N1b | M0  | IIIC       |
+| T4b | N1c | M0  | IIIC       |
+| T4b | N2  | M0  | IIIC       |
+| T4b | N2a | M0  | IIIC       |
+| T4b | N2b | M0  | IIIC       |
+| T4b | N2c | M0  | IIIC       |
+| T4b | N3  | M0  | IIID       |
+| T4b | N3a | M0  | IIID       |
+| T4b | N3b | M0  | IIID       |
+| T4b | N3c | M0  | IIID       |
+| T0  | N0  | M1  | IV         |
+| T0  | N0  | M1a | IV         |
+| T0  | N0  | M1b | IV         |
+| T0  | N0  | M1c | IV         |
+| T0  | N0  | M1d | IV         |
+| T0  | N1  | M1  | IV         |
+| T0  | N1  | M1a | IV         |
+| T0  | N1  | M1b | IV         |
+| T0  | N1  | M1c | IV         |
+| T0  | N1  | M1d | IV         |
+| T0  | N1a | M1  | IV         |
+| T0  | N1a | M1a | IV         |
+| T0  | N1a | M1b | IV         |
+| T0  | N1a | M1c | IV         |
+| T0  | N1a | M1d | IV         |
+| T0  | N1b | M1  | IV         |
+| T0  | N1b | M1a | IV         |
+| T0  | N1b | M1b | IV         |
+| T0  | N1b | M1c | IV         |
+| T0  | N1b | M1d | IV         |
+| T0  | N1c | M1  | IV         |
+| T0  | N1c | M1a | IV         |
+| T0  | N1c | M1b | IV         |
+| T0  | N1c | M1c | IV         |
+| T0  | N1c | M1d | IV         |
+| T0  | N2  | M1  | IV         |
+| T0  | N2  | M1a | IV         |
+| T0  | N2  | M1b | IV         |
+| T0  | N2  | M1c | IV         |
+| T0  | N2  | M1d | IV         |
+| T0  | N2a | M1  | IV         |
+| T0  | N2a | M1a | IV         |
+| T0  | N2a | M1b | IV         |
+| T0  | N2a | M1c | IV         |
+| T0  | N2a | M1d | IV         |
+| T0  | N2b | M1  | IV         |
+| T0  | N2b | M1a | IV         |
+| T0  | N2b | M1b | IV         |
+| T0  | N2b | M1c | IV         |
+| T0  | N2b | M1d | IV         |
+| T0  | N2c | M1  | IV         |
+| T0  | N2c | M1a | IV         |
+| T0  | N2c | M1b | IV         |
+| T0  | N2c | M1c | IV         |
+| T0  | N2c | M1d | IV         |
+| T0  | N3  | M1  | IV         |
+| T0  | N3  | M1a | IV         |
+| T0  | N3  | M1b | IV         |
+| T0  | N3  | M1c | IV         |
+| T0  | N3  | M1d | IV         |
+| T0  | N3a | M1  | IV         |
+| T0  | N3a | M1a | IV         |
+| T0  | N3a | M1b | IV         |
+| T0  | N3a | M1c | IV         |
+| T0  | N3a | M1d | IV         |
+| T0  | N3b | M1  | IV         |
+| T0  | N3b | M1a | IV         |
+| T0  | N3b | M1b | IV         |
+| T0  | N3b | M1c | IV         |
+| T0  | N3b | M1d | IV         |
+| T0  | N3c | M1  | IV         |
+| T0  | N3c | M1a | IV         |
+| T0  | N3c | M1b | IV         |
+| T0  | N3c | M1c | IV         |
+| T0  | N3c | M1d | IV         |
+| T1  | N0  | M1  | IV         |
+| T1  | N0  | M1a | IV         |
+| T1  | N0  | M1b | IV         |
+| T1  | N0  | M1c | IV         |
+| T1  | N0  | M1d | IV         |
+| T1  | N1  | M1  | IV         |
+| T1  | N1  | M1a | IV         |
+| T1  | N1  | M1b | IV         |
+| T1  | N1  | M1c | IV         |
+| T1  | N1  | M1d | IV         |
+| T1  | N1a | M1  | IV         |
+| T1  | N1a | M1a | IV         |
+| T1  | N1a | M1b | IV         |
+| T1  | N1a | M1c | IV         |
+| T1  | N1a | M1d | IV         |
+| T1  | N1b | M1  | IV         |
+| T1  | N1b | M1a | IV         |
+| T1  | N1b | M1b | IV         |
+| T1  | N1b | M1c | IV         |
+| T1  | N1b | M1d | IV         |
+| T1  | N1c | M1  | IV         |
+| T1  | N1c | M1a | IV         |
+| T1  | N1c | M1b | IV         |
+| T1  | N1c | M1c | IV         |
+| T1  | N1c | M1d | IV         |
+| T1  | N2  | M1  | IV         |
+| T1  | N2  | M1a | IV         |
+| T1  | N2  | M1b | IV         |
+| T1  | N2  | M1c | IV         |
+| T1  | N2  | M1d | IV         |
+| T1  | N2a | M1  | IV         |
+| T1  | N2a | M1a | IV         |
+| T1  | N2a | M1b | IV         |
+| T1  | N2a | M1c | IV         |
+| T1  | N2a | M1d | IV         |
+| T1  | N2b | M1  | IV         |
+| T1  | N2b | M1a | IV         |
+| T1  | N2b | M1b | IV         |
+| T1  | N2b | M1c | IV         |
+| T1  | N2b | M1d | IV         |
+| T1  | N2c | M1  | IV         |
+| T1  | N2c | M1a | IV         |
+| T1  | N2c | M1b | IV         |
+| T1  | N2c | M1c | IV         |
+| T1  | N2c | M1d | IV         |
+| T1  | N3  | M1  | IV         |
+| T1  | N3  | M1a | IV         |
+| T1  | N3  | M1b | IV         |
+| T1  | N3  | M1c | IV         |
+| T1  | N3  | M1d | IV         |
+| T1  | N3a | M1  | IV         |
+| T1  | N3a | M1a | IV         |
+| T1  | N3a | M1b | IV         |
+| T1  | N3a | M1c | IV         |
+| T1  | N3a | M1d | IV         |
+| T1  | N3b | M1  | IV         |
+| T1  | N3b | M1a | IV         |
+| T1  | N3b | M1b | IV         |
+| T1  | N3b | M1c | IV         |
+| T1  | N3b | M1d | IV         |
+| T1  | N3c | M1  | IV         |
+| T1  | N3c | M1a | IV         |
+| T1  | N3c | M1b | IV         |
+| T1  | N3c | M1c | IV         |
+| T1  | N3c | M1d | IV         |
+| T1a | N0  | M1  | IV         |
+| T1a | N0  | M1a | IV         |
+| T1a | N0  | M1b | IV         |
+| T1a | N0  | M1c | IV         |
+| T1a | N0  | M1d | IV         |
+| T1a | N1  | M1  | IV         |
+| T1a | N1  | M1a | IV         |
+| T1a | N1  | M1b | IV         |
+| T1a | N1  | M1c | IV         |
+| T1a | N1  | M1d | IV         |
+| T1a | N1a | M1  | IV         |
+| T1a | N1a | M1a | IV         |
+| T1a | N1a | M1b | IV         |
+| T1a | N1a | M1c | IV         |
+| T1a | N1a | M1d | IV         |
+| T1a | N1b | M1  | IV         |
+| T1a | N1b | M1a | IV         |
+| T1a | N1b | M1b | IV         |
+| T1a | N1b | M1c | IV         |
+| T1a | N1b | M1d | IV         |
+| T1a | N1c | M1  | IV         |
+| T1a | N1c | M1a | IV         |
+| T1a | N1c | M1b | IV         |
+| T1a | N1c | M1c | IV         |
+| T1a | N1c | M1d | IV         |
+| T1a | N2  | M1  | IV         |
+| T1a | N2  | M1a | IV         |
+| T1a | N2  | M1b | IV         |
+| T1a | N2  | M1c | IV         |
+| T1a | N2  | M1d | IV         |
+| T1a | N2a | M1  | IV         |
+| T1a | N2a | M1a | IV         |
+| T1a | N2a | M1b | IV         |
+| T1a | N2a | M1c | IV         |
+| T1a | N2a | M1d | IV         |
+| T1a | N2b | M1  | IV         |
+| T1a | N2b | M1a | IV         |
+| T1a | N2b | M1b | IV         |
+| T1a | N2b | M1c | IV         |
+| T1a | N2b | M1d | IV         |
+| T1a | N2c | M1  | IV         |
+| T1a | N2c | M1a | IV         |
+| T1a | N2c | M1b | IV         |
+| T1a | N2c | M1c | IV         |
+| T1a | N2c | M1d | IV         |
+| T1a | N3  | M1  | IV         |
+| T1a | N3  | M1a | IV         |
+| T1a | N3  | M1b | IV         |
+| T1a | N3  | M1c | IV         |
+| T1a | N3  | M1d | IV         |
+| T1a | N3a | M1  | IV         |
+| T1a | N3a | M1a | IV         |
+| T1a | N3a | M1b | IV         |
+| T1a | N3a | M1c | IV         |
+| T1a | N3a | M1d | IV         |
+| T1a | N3b | M1  | IV         |
+| T1a | N3b | M1a | IV         |
+| T1a | N3b | M1b | IV         |
+| T1a | N3b | M1c | IV         |
+| T1a | N3b | M1d | IV         |
+| T1a | N3c | M1  | IV         |
+| T1a | N3c | M1a | IV         |
+| T1a | N3c | M1b | IV         |
+| T1a | N3c | M1c | IV         |
+| T1a | N3c | M1d | IV         |
+| T1b | N0  | M1  | IV         |
+| T1b | N0  | M1a | IV         |
+| T1b | N0  | M1b | IV         |
+| T1b | N0  | M1c | IV         |
+| T1b | N0  | M1d | IV         |
+| T1b | N1  | M1  | IV         |
+| T1b | N1  | M1a | IV         |
+| T1b | N1  | M1b | IV         |
+| T1b | N1  | M1c | IV         |
+| T1b | N1  | M1d | IV         |
+| T1b | N1a | M1  | IV         |
+| T1b | N1a | M1a | IV         |
+| T1b | N1a | M1b | IV         |
+| T1b | N1a | M1c | IV         |
+| T1b | N1a | M1d | IV         |
+| T1b | N1b | M1  | IV         |
+| T1b | N1b | M1a | IV         |
+| T1b | N1b | M1b | IV         |
+| T1b | N1b | M1c | IV         |
+| T1b | N1b | M1d | IV         |
+| T1b | N1c | M1  | IV         |
+| T1b | N1c | M1a | IV         |
+| T1b | N1c | M1b | IV         |
+| T1b | N1c | M1c | IV         |
+| T1b | N1c | M1d | IV         |
+| T1b | N2  | M1  | IV         |
+| T1b | N2  | M1a | IV         |
+| T1b | N2  | M1b | IV         |
+| T1b | N2  | M1c | IV         |
+| T1b | N2  | M1d | IV         |
+| T1b | N2a | M1  | IV         |
+| T1b | N2a | M1a | IV         |
+| T1b | N2a | M1b | IV         |
+| T1b | N2a | M1c | IV         |
+| T1b | N2a | M1d | IV         |
+| T1b | N2b | M1  | IV         |
+| T1b | N2b | M1a | IV         |
+| T1b | N2b | M1b | IV         |
+| T1b | N2b | M1c | IV         |
+| T1b | N2b | M1d | IV         |
+| T1b | N2c | M1  | IV         |
+| T1b | N2c | M1a | IV         |
+| T1b | N2c | M1b | IV         |
+| T1b | N2c | M1c | IV         |
+| T1b | N2c | M1d | IV         |
+| T1b | N3  | M1  | IV         |
+| T1b | N3  | M1a | IV         |
+| T1b | N3  | M1b | IV         |
+| T1b | N3  | M1c | IV         |
+| T1b | N3  | M1d | IV         |
+| T1b | N3a | M1  | IV         |
+| T1b | N3a | M1a | IV         |
+| T1b | N3a | M1b | IV         |
+| T1b | N3a | M1c | IV         |
+| T1b | N3a | M1d | IV         |
+| T1b | N3b | M1  | IV         |
+| T1b | N3b | M1a | IV         |
+| T1b | N3b | M1b | IV         |
+| T1b | N3b | M1c | IV         |
+| T1b | N3b | M1d | IV         |
+| T1b | N3c | M1  | IV         |
+| T1b | N3c | M1a | IV         |
+| T1b | N3c | M1b | IV         |
+| T1b | N3c | M1c | IV         |
+| T1b | N3c | M1d | IV         |
+| T2a | N0  | M1  | IV         |
+| T2a | N0  | M1a | IV         |
+| T2a | N0  | M1b | IV         |
+| T2a | N0  | M1c | IV         |
+| T2a | N0  | M1d | IV         |
+| T2a | N1  | M1  | IV         |
+| T2a | N1  | M1a | IV         |
+| T2a | N1  | M1b | IV         |
+| T2a | N1  | M1c | IV         |
+| T2a | N1  | M1d | IV         |
+| T2a | N1a | M1  | IV         |
+| T2a | N1a | M1a | IV         |
+| T2a | N1a | M1b | IV         |
+| T2a | N1a | M1c | IV         |
+| T2a | N1a | M1d | IV         |
+| T2a | N1b | M1  | IV         |
+| T2a | N1b | M1a | IV         |
+| T2a | N1b | M1b | IV         |
+| T2a | N1b | M1c | IV         |
+| T2a | N1b | M1d | IV         |
+| T2a | N1c | M1  | IV         |
+| T2a | N1c | M1a | IV         |
+| T2a | N1c | M1b | IV         |
+| T2a | N1c | M1c | IV         |
+| T2a | N1c | M1d | IV         |
+| T2a | N2  | M1  | IV         |
+| T2a | N2  | M1a | IV         |
+| T2a | N2  | M1b | IV         |
+| T2a | N2  | M1c | IV         |
+| T2a | N2  | M1d | IV         |
+| T2a | N2a | M1  | IV         |
+| T2a | N2a | M1a | IV         |
+| T2a | N2a | M1b | IV         |
+| T2a | N2a | M1c | IV         |
+| T2a | N2a | M1d | IV         |
+| T2a | N2b | M1  | IV         |
+| T2a | N2b | M1a | IV         |
+| T2a | N2b | M1b | IV         |
+| T2a | N2b | M1c | IV         |
+| T2a | N2b | M1d | IV         |
+| T2a | N2c | M1  | IV         |
+| T2a | N2c | M1a | IV         |
+| T2a | N2c | M1b | IV         |
+| T2a | N2c | M1c | IV         |
+| T2a | N2c | M1d | IV         |
+| T2a | N3  | M1  | IV         |
+| T2a | N3  | M1a | IV         |
+| T2a | N3  | M1b | IV         |
+| T2a | N3  | M1c | IV         |
+| T2a | N3  | M1d | IV         |
+| T2a | N3a | M1  | IV         |
+| T2a | N3a | M1a | IV         |
+| T2a | N3a | M1b | IV         |
+| T2a | N3a | M1c | IV         |
+| T2a | N3a | M1d | IV         |
+| T2a | N3b | M1  | IV         |
+| T2a | N3b | M1a | IV         |
+| T2a | N3b | M1b | IV         |
+| T2a | N3b | M1c | IV         |
+| T2a | N3b | M1d | IV         |
+| T2a | N3c | M1  | IV         |
+| T2a | N3c | M1a | IV         |
+| T2a | N3c | M1b | IV         |
+| T2a | N3c | M1c | IV         |
+| T2a | N3c | M1d | IV         |
+| T2b | N0  | M1  | IV         |
+| T2b | N0  | M1a | IV         |
+| T2b | N0  | M1b | IV         |
+| T2b | N0  | M1c | IV         |
+| T2b | N0  | M1d | IV         |
+| T2b | N1  | M1  | IV         |
+| T2b | N1  | M1a | IV         |
+| T2b | N1  | M1b | IV         |
+| T2b | N1  | M1c | IV         |
+| T2b | N1  | M1d | IV         |
+| T2b | N1a | M1  | IV         |
+| T2b | N1a | M1a | IV         |
+| T2b | N1a | M1b | IV         |
+| T2b | N1a | M1c | IV         |
+| T2b | N1a | M1d | IV         |
+| T2b | N1b | M1  | IV         |
+| T2b | N1b | M1a | IV         |
+| T2b | N1b | M1b | IV         |
+| T2b | N1b | M1c | IV         |
+| T2b | N1b | M1d | IV         |
+| T2b | N1c | M1  | IV         |
+| T2b | N1c | M1a | IV         |
+| T2b | N1c | M1b | IV         |
+| T2b | N1c | M1c | IV         |
+| T2b | N1c | M1d | IV         |
+| T2b | N2  | M1  | IV         |
+| T2b | N2  | M1a | IV         |
+| T2b | N2  | M1b | IV         |
+| T2b | N2  | M1c | IV         |
+| T2b | N2  | M1d | IV         |
+| T2b | N2a | M1  | IV         |
+| T2b | N2a | M1a | IV         |
+| T2b | N2a | M1b | IV         |
+| T2b | N2a | M1c | IV         |
+| T2b | N2a | M1d | IV         |
+| T2b | N2b | M1  | IV         |
+| T2b | N2b | M1a | IV         |
+| T2b | N2b | M1b | IV         |
+| T2b | N2b | M1c | IV         |
+| T2b | N2b | M1d | IV         |
+| T2b | N2c | M1  | IV         |
+| T2b | N2c | M1a | IV         |
+| T2b | N2c | M1b | IV         |
+| T2b | N2c | M1c | IV         |
+| T2b | N2c | M1d | IV         |
+| T2b | N3  | M1  | IV         |
+| T2b | N3  | M1a | IV         |
+| T2b | N3  | M1b | IV         |
+| T2b | N3  | M1c | IV         |
+| T2b | N3  | M1d | IV         |
+| T2b | N3a | M1  | IV         |
+| T2b | N3a | M1a | IV         |
+| T2b | N3a | M1b | IV         |
+| T2b | N3a | M1c | IV         |
+| T2b | N3a | M1d | IV         |
+| T2b | N3b | M1  | IV         |
+| T2b | N3b | M1a | IV         |
+| T2b | N3b | M1b | IV         |
+| T2b | N3b | M1c | IV         |
+| T2b | N3b | M1d | IV         |
+| T2b | N3c | M1  | IV         |
+| T2b | N3c | M1a | IV         |
+| T2b | N3c | M1b | IV         |
+| T2b | N3c | M1c | IV         |
+| T2b | N3c | M1d | IV         |
+| T3a | N0  | M1  | IV         |
+| T3a | N0  | M1a | IV         |
+| T3a | N0  | M1b | IV         |
+| T3a | N0  | M1c | IV         |
+| T3a | N0  | M1d | IV         |
+| T3a | N1  | M1  | IV         |
+| T3a | N1  | M1a | IV         |
+| T3a | N1  | M1b | IV         |
+| T3a | N1  | M1c | IV         |
+| T3a | N1  | M1d | IV         |
+| T3a | N1a | M1  | IV         |
+| T3a | N1a | M1a | IV         |
+| T3a | N1a | M1b | IV         |
+| T3a | N1a | M1c | IV         |
+| T3a | N1a | M1d | IV         |
+| T3a | N1b | M1  | IV         |
+| T3a | N1b | M1a | IV         |
+| T3a | N1b | M1b | IV         |
+| T3a | N1b | M1c | IV         |
+| T3a | N1b | M1d | IV         |
+| T3a | N1c | M1  | IV         |
+| T3a | N1c | M1a | IV         |
+| T3a | N1c | M1b | IV         |
+| T3a | N1c | M1c | IV         |
+| T3a | N1c | M1d | IV         |
+| T3a | N2  | M1  | IV         |
+| T3a | N2  | M1a | IV         |
+| T3a | N2  | M1b | IV         |
+| T3a | N2  | M1c | IV         |
+| T3a | N2  | M1d | IV         |
+| T3a | N2a | M1  | IV         |
+| T3a | N2a | M1a | IV         |
+| T3a | N2a | M1b | IV         |
+| T3a | N2a | M1c | IV         |
+| T3a | N2a | M1d | IV         |
+| T3a | N2b | M1  | IV         |
+| T3a | N2b | M1a | IV         |
+| T3a | N2b | M1b | IV         |
+| T3a | N2b | M1c | IV         |
+| T3a | N2b | M1d | IV         |
+| T3a | N2c | M1  | IV         |
+| T3a | N2c | M1a | IV         |
+| T3a | N2c | M1b | IV         |
+| T3a | N2c | M1c | IV         |
+| T3a | N2c | M1d | IV         |
+| T3a | N3  | M1  | IV         |
+| T3a | N3  | M1a | IV         |
+| T3a | N3  | M1b | IV         |
+| T3a | N3  | M1c | IV         |
+| T3a | N3  | M1d | IV         |
+| T3a | N3a | M1  | IV         |
+| T3a | N3a | M1a | IV         |
+| T3a | N3a | M1b | IV         |
+| T3a | N3a | M1c | IV         |
+| T3a | N3a | M1d | IV         |
+| T3a | N3b | M1  | IV         |
+| T3a | N3b | M1a | IV         |
+| T3a | N3b | M1b | IV         |
+| T3a | N3b | M1c | IV         |
+| T3a | N3b | M1d | IV         |
+| T3a | N3c | M1  | IV         |
+| T3a | N3c | M1a | IV         |
+| T3a | N3c | M1b | IV         |
+| T3a | N3c | M1c | IV         |
+| T3a | N3c | M1d | IV         |
+| T3b | N0  | M1  | IV         |
+| T3b | N0  | M1a | IV         |
+| T3b | N0  | M1b | IV         |
+| T3b | N0  | M1c | IV         |
+| T3b | N0  | M1d | IV         |
+| T3b | N1  | M1  | IV         |
+| T3b | N1  | M1a | IV         |
+| T3b | N1  | M1b | IV         |
+| T3b | N1  | M1c | IV         |
+| T3b | N1  | M1d | IV         |
+| T3b | N1a | M1  | IV         |
+| T3b | N1a | M1a | IV         |
+| T3b | N1a | M1b | IV         |
+| T3b | N1a | M1c | IV         |
+| T3b | N1a | M1d | IV         |
+| T3b | N1b | M1  | IV         |
+| T3b | N1b | M1a | IV         |
+| T3b | N1b | M1b | IV         |
+| T3b | N1b | M1c | IV         |
+| T3b | N1b | M1d | IV         |
+| T3b | N1c | M1  | IV         |
+| T3b | N1c | M1a | IV         |
+| T3b | N1c | M1b | IV         |
+| T3b | N1c | M1c | IV         |
+| T3b | N1c | M1d | IV         |
+| T3b | N2  | M1  | IV         |
+| T3b | N2  | M1a | IV         |
+| T3b | N2  | M1b | IV         |
+| T3b | N2  | M1c | IV         |
+| T3b | N2  | M1d | IV         |
+| T3b | N2a | M1  | IV         |
+| T3b | N2a | M1a | IV         |
+| T3b | N2a | M1b | IV         |
+| T3b | N2a | M1c | IV         |
+| T3b | N2a | M1d | IV         |
+| T3b | N2b | M1  | IV         |
+| T3b | N2b | M1a | IV         |
+| T3b | N2b | M1b | IV         |
+| T3b | N2b | M1c | IV         |
+| T3b | N2b | M1d | IV         |
+| T3b | N2c | M1  | IV         |
+| T3b | N2c | M1a | IV         |
+| T3b | N2c | M1b | IV         |
+| T3b | N2c | M1c | IV         |
+| T3b | N2c | M1d | IV         |
+| T3b | N3  | M1  | IV         |
+| T3b | N3  | M1a | IV         |
+| T3b | N3  | M1b | IV         |
+| T3b | N3  | M1c | IV         |
+| T3b | N3  | M1d | IV         |
+| T3b | N3a | M1  | IV         |
+| T3b | N3a | M1a | IV         |
+| T3b | N3a | M1b | IV         |
+| T3b | N3a | M1c | IV         |
+| T3b | N3a | M1d | IV         |
+| T3b | N3b | M1  | IV         |
+| T3b | N3b | M1a | IV         |
+| T3b | N3b | M1b | IV         |
+| T3b | N3b | M1c | IV         |
+| T3b | N3b | M1d | IV         |
+| T3b | N3c | M1  | IV         |
+| T3b | N3c | M1a | IV         |
+| T3b | N3c | M1b | IV         |
+| T3b | N3c | M1c | IV         |
+| T3b | N3c | M1d | IV         |
+| T4a | N0  | M1  | IV         |
+| T4a | N0  | M1a | IV         |
+| T4a | N0  | M1b | IV         |
+| T4a | N0  | M1c | IV         |
+| T4a | N0  | M1d | IV         |
+| T4a | N1  | M1  | IV         |
+| T4a | N1  | M1a | IV         |
+| T4a | N1  | M1b | IV         |
+| T4a | N1  | M1c | IV         |
+| T4a | N1  | M1d | IV         |
+| T4a | N1a | M1  | IV         |
+| T4a | N1a | M1a | IV         |
+| T4a | N1a | M1b | IV         |
+| T4a | N1a | M1c | IV         |
+| T4a | N1a | M1d | IV         |
+| T4a | N1b | M1  | IV         |
+| T4a | N1b | M1a | IV         |
+| T4a | N1b | M1b | IV         |
+| T4a | N1b | M1c | IV         |
+| T4a | N1b | M1d | IV         |
+| T4a | N1c | M1  | IV         |
+| T4a | N1c | M1a | IV         |
+| T4a | N1c | M1b | IV         |
+| T4a | N1c | M1c | IV         |
+| T4a | N1c | M1d | IV         |
+| T4a | N2  | M1  | IV         |
+| T4a | N2  | M1a | IV         |
+| T4a | N2  | M1b | IV         |
+| T4a | N2  | M1c | IV         |
+| T4a | N2  | M1d | IV         |
+| T4a | N2a | M1  | IV         |
+| T4a | N2a | M1a | IV         |
+| T4a | N2a | M1b | IV         |
+| T4a | N2a | M1c | IV         |
+| T4a | N2a | M1d | IV         |
+| T4a | N2b | M1  | IV         |
+| T4a | N2b | M1a | IV         |
+| T4a | N2b | M1b | IV         |
+| T4a | N2b | M1c | IV         |
+| T4a | N2b | M1d | IV         |
+| T4a | N2c | M1  | IV         |
+| T4a | N2c | M1a | IV         |
+| T4a | N2c | M1b | IV         |
+| T4a | N2c | M1c | IV         |
+| T4a | N2c | M1d | IV         |
+| T4a | N3  | M1  | IV         |
+| T4a | N3  | M1a | IV         |
+| T4a | N3  | M1b | IV         |
+| T4a | N3  | M1c | IV         |
+| T4a | N3  | M1d | IV         |
+| T4a | N3a | M1  | IV         |
+| T4a | N3a | M1a | IV         |
+| T4a | N3a | M1b | IV         |
+| T4a | N3a | M1c | IV         |
+| T4a | N3a | M1d | IV         |
+| T4a | N3b | M1  | IV         |
+| T4a | N3b | M1a | IV         |
+| T4a | N3b | M1b | IV         |
+| T4a | N3b | M1c | IV         |
+| T4a | N3b | M1d | IV         |
+| T4a | N3c | M1  | IV         |
+| T4a | N3c | M1a | IV         |
+| T4a | N3c | M1b | IV         |
+| T4a | N3c | M1c | IV         |
+| T4a | N3c | M1d | IV         |
+| T4b | N0  | M1  | IV         |
+| T4b | N0  | M1a | IV         |
+| T4b | N0  | M1b | IV         |
+| T4b | N0  | M1c | IV         |
+| T4b | N0  | M1d | IV         |
+| T4b | N1  | M1  | IV         |
+| T4b | N1  | M1a | IV         |
+| T4b | N1  | M1b | IV         |
+| T4b | N1  | M1c | IV         |
+| T4b | N1  | M1d | IV         |
+| T4b | N1a | M1  | IV         |
+| T4b | N1a | M1a | IV         |
+| T4b | N1a | M1b | IV         |
+| T4b | N1a | M1c | IV         |
+| T4b | N1a | M1d | IV         |
+| T4b | N1b | M1  | IV         |
+| T4b | N1b | M1a | IV         |
+| T4b | N1b | M1b | IV         |
+| T4b | N1b | M1c | IV         |
+| T4b | N1b | M1d | IV         |
+| T4b | N1c | M1  | IV         |
+| T4b | N1c | M1a | IV         |
+| T4b | N1c | M1b | IV         |
+| T4b | N1c | M1c | IV         |
+| T4b | N1c | M1d | IV         |
+| T4b | N2  | M1  | IV         |
+| T4b | N2  | M1a | IV         |
+| T4b | N2  | M1b | IV         |
+| T4b | N2  | M1c | IV         |
+| T4b | N2  | M1d | IV         |
+| T4b | N2a | M1  | IV         |
+| T4b | N2a | M1a | IV         |
+| T4b | N2a | M1b | IV         |
+| T4b | N2a | M1c | IV         |
+| T4b | N2a | M1d | IV         |
+| T4b | N2b | M1  | IV         |
+| T4b | N2b | M1a | IV         |
+| T4b | N2b | M1b | IV         |
+| T4b | N2b | M1c | IV         |
+| T4b | N2b | M1d | IV         |
+| T4b | N2c | M1  | IV         |
+| T4b | N2c | M1a | IV         |
+| T4b | N2c | M1b | IV         |
+| T4b | N2c | M1c | IV         |
+| T4b | N2c | M1d | IV         |
+| T4b | N3  | M1  | IV         |
+| T4b | N3  | M1a | IV         |
+| T4b | N3  | M1b | IV         |
+| T4b | N3  | M1c | IV         |
+| T4b | N3  | M1d | IV         |
+| T4b | N3a | M1  | IV         |
+| T4b | N3a | M1a | IV         |
+| T4b | N3a | M1b | IV         |
+| T4b | N3a | M1c | IV         |
+| T4b | N3a | M1d | IV         |
+| T4b | N3b | M1  | IV         |
+| T4b | N3b | M1a | IV         |
+| T4b | N3b | M1b | IV         |
+| T4b | N3b | M1c | IV         |
+| T4b | N3b | M1d | IV         |
+| T4b | N3c | M1  | IV         |
+| T4b | N3c | M1a | IV         |
+| T4b | N3c | M1b | IV         |
+| T4b | N3c | M1c | IV         |
+| T4b | N3c | M1d | IV         |
+| Tis | N0  | M1  | IV         |
+| Tis | N0  | M1a | IV         |
+| Tis | N0  | M1b | IV         |
+| Tis | N0  | M1c | IV         |
+| Tis | N0  | M1d | IV         |
+| Tis | N1  | M1  | IV         |
+| Tis | N1  | M1a | IV         |
+| Tis | N1  | M1b | IV         |
+| Tis | N1  | M1c | IV         |
+| Tis | N1  | M1d | IV         |
+| Tis | N1a | M1  | IV         |
+| Tis | N1a | M1a | IV         |
+| Tis | N1a | M1b | IV         |
+| Tis | N1a | M1c | IV         |
+| Tis | N1a | M1d | IV         |
+| Tis | N1b | M1  | IV         |
+| Tis | N1b | M1a | IV         |
+| Tis | N1b | M1b | IV         |
+| Tis | N1b | M1c | IV         |
+| Tis | N1b | M1d | IV         |
+| Tis | N1c | M1  | IV         |
+| Tis | N1c | M1a | IV         |
+| Tis | N1c | M1b | IV         |
+| Tis | N1c | M1c | IV         |
+| Tis | N1c | M1d | IV         |
+| Tis | N2  | M1  | IV         |
+| Tis | N2  | M1a | IV         |
+| Tis | N2  | M1b | IV         |
+| Tis | N2  | M1c | IV         |
+| Tis | N2  | M1d | IV         |
+| Tis | N2a | M1  | IV         |
+| Tis | N2a | M1a | IV         |
+| Tis | N2a | M1b | IV         |
+| Tis | N2a | M1c | IV         |
+| Tis | N2a | M1d | IV         |
+| Tis | N2b | M1  | IV         |
+| Tis | N2b | M1a | IV         |
+| Tis | N2b | M1b | IV         |
+| Tis | N2b | M1c | IV         |
+| Tis | N2b | M1d | IV         |
+| Tis | N2c | M1  | IV         |
+| Tis | N2c | M1a | IV         |
+| Tis | N2c | M1b | IV         |
+| Tis | N2c | M1c | IV         |
+| Tis | N2c | M1d | IV         |
+| Tis | N3  | M1  | IV         |
+| Tis | N3  | M1a | IV         |
+| Tis | N3  | M1b | IV         |
+| Tis | N3  | M1c | IV         |
+| Tis | N3  | M1d | IV         |
+| Tis | N3a | M1  | IV         |
+| Tis | N3a | M1a | IV         |
+| Tis | N3a | M1b | IV         |
+| Tis | N3a | M1c | IV         |
+| Tis | N3a | M1d | IV         |
+| Tis | N3b | M1  | IV         |
+| Tis | N3b | M1a | IV         |
+| Tis | N3b | M1b | IV         |
+| Tis | N3b | M1c | IV         |
+| Tis | N3b | M1d | IV         |
+| Tis | N3c | M1  | IV         |
+| Tis | N3c | M1a | IV         |
+| Tis | N3c | M1b | IV         |
+| Tis | N3c | M1c | IV         |
+| Tis | N3c | M1d | IV         |
 
-| T                | N   | M   |
-|------------------|-----|-----|
-| 0                |     |     |
-| Tis              | N0  | M0  |
-| IA               |     |     |
-| T1               | N0  | M0  |
-| IA1              |     |     |
-| T1a              | N0  | M0  |
-| T1mi             | N0  | M0  |
-| IA2              |     |     |
-| T1b              | N0  | M0  |
-| IA3              |     |     |
-| T1c              | N0  | M0  |
-| IB               |     |     |
-| T2a              | N0  | M0  |
-| IIA              |     |     |
-| T2b              | N0  | M0  |
-| IIB              |     |     |
-| T3               | N0  | M0  |
-| T1               | N1  | M0  |
-| T1a              | N1  | M0  |
-| T1b              | N1  | M0  |
-| T1c              | N1  | M0  |
-| T1mi             | N1  | M0  |
-| T2               | N1  | M0  |
-| T2a              | N1  | M0  |
-| T2b              | N1  | M0  |
-| IIIA             |     |     |
-| T4               | N0  | M0  |
-| T3               | N1  | M0  |
-| T4               | N1  | M0  |
-| T1               | N2  | M0  |
-| T1a              | N2  | M0  |
-| T1b              | N2  | M0  |
-| T1c              | N2  | M0  |
-| T1mi             | N2  | M0  |
-| T2               | N2  | M0  |
-| T2a              | N2  | M0  |
-| T2b              | N2  | M0  |
-| IIIB             |     |     |
-| T3               | N2  | M0  |
-| T4               | N2  | M0  |
-| T1               | N3  | M0  |
-| T1a              | N3  | M0  |
-| T1b              | N3  | M0  |
-| T1c              | N3  | M0  |
-| T1mi             | N3  | M0  |
-| T2               | N3  | M0  |
-| T2a              | N3  | M0  |
-| T2b              | N3  | M0  |
-| IIIC             |     |     |
-| T3               | N3  | M0  |
-| T4               | N3  | M0  |
-| IV               |     |     |
-| T1               | N0  | M1  |
-| T1a              | N0  | M1  |
-| T1b              | N0  | M1  |
-| T1c              | N0  | M1  |
-| T1mi             | N0  | M1  |
-| T2               | N0  | M1  |
-| T2a              | N0  | M1  |
-| T2b              | N0  | M1  |
-| T3               | N0  | M1  |
-| T4               | N0  | M1  |
-| Tis              | N0  | M1  |
-| TX               | N0  | M1  |
-| T1               | N1  | M1  |
-| T1a              | N1  | M1  |
-| T1b              | N1  | M1  |
-| T1c              | N1  | M1  |
-| T1mi             | N1  | M1  |
-| T2               | N1  | M1  |
-| T2a              | N1  | M1  |
-| T2b              | N1  | M1  |
-| T3               | N1  | M1  |
-| T4               | N1  | M1  |
-| Tis              | N1  | M1  |
-| TX               | N1  | M1  |
-| T1               | N2  | M1  |
-| T1a              | N2  | M1  |
-| T1b              | N2  | M1  |
-| T1c              | N2  | M1  |
-| T1mi             | N2  | M1  |
-| T2               | N2  | M1  |
-| T2a              | N2  | M1  |
-| T2b              | N2  | M1  |
-| T3               | N2  | M1  |
-| T4               | N2  | M1  |
-| Tis              | N2  | M1  |
-| TX               | N2  | M1  |
-| T1               | N3  | M1  |
-| T1a              | N3  | M1  |
-| T1b              | N3  | M1  |
-| T1c              | N3  | M1  |
-| T1mi             | N3  | M1  |
-| T2               | N3  | M1  |
-| T2a              | N3  | M1  |
-| T2b              | N3  | M1  |
-| T3               | N3  | M1  |
-| T4               | N3  | M1  |
-| Tis              | N3  | M1  |
-| TX               | N3  | M1  |
-| IVA              |     |     |
-| T1               | N0  | M1a |
-| T1a              | N0  | M1a |
-| T1b              | N0  | M1a |
-| T1c              | N0  | M1a |
-| T1mi             | N0  | M1a |
-| T2               | N0  | M1a |
-| T2a              | N0  | M1a |
-| T2b              | N0  | M1a |
-| T3               | N0  | M1a |
-| T4               | N0  | M1a |
-| Tis              | N0  | M1a |
-| TX               | N0  | M1a |
-| T1               | N1  | M1a |
-| T1a              | N1  | M1a |
-| T1b              | N1  | M1a |
-| T1c              | N1  | M1a |
-| T1mi             | N1  | M1a |
-| T2               | N1  | M1a |
-| T2a              | N1  | M1a |
-| T2b              | N1  | M1a |
-| T3               | N1  | M1a |
-| T4               | N1  | M1a |
-| Tis              | N1  | M1a |
-| TX               | N1  | M1a |
-| T1               | N2  | M1a |
-| T1a              | N2  | M1a |
-| T1b              | N2  | M1a |
-| T1c              | N2  | M1a |
-| T1mi             | N2  | M1a |
-| T2               | N2  | M1a |
-| T2a              | N2  | M1a |
-| T2b              | N2  | M1a |
-| T3               | N2  | M1a |
-| T4               | N2  | M1a |
-| Tis              | N2  | M1a |
-| TX               | N2  | M1a |
-| T1               | N3  | M1a |
-| T1a              | N3  | M1a |
-| T1b              | N3  | M1a |
-| T1c              | N3  | M1a |
-| T1mi             | N3  | M1a |
-| T2               | N3  | M1a |
-| T2a              | N3  | M1a |
-| T2b              | N3  | M1a |
-| T3               | N3  | M1a |
-| T4               | N3  | M1a |
-| Tis              | N3  | M1a |
-| TX               | N3  | M1a |
-| T1               | N0  | M1b |
-| T1a              | N0  | M1b |
-| T1b              | N0  | M1b |
-| T1c              | N0  | M1b |
-| T1mi             | N0  | M1b |
-| T2               | N0  | M1b |
-| T2a              | N0  | M1b |
-| T2b              | N0  | M1b |
-| T3               | N0  | M1b |
-| T4               | N0  | M1b |
-| Tis              | N0  | M1b |
-| TX               | N0  | M1b |
-| T1               | N1  | M1b |
-| T1a              | N1  | M1b |
-| T1b              | N1  | M1b |
-| T1c              | N1  | M1b |
-| T1mi             | N1  | M1b |
-| T2               | N1  | M1b |
-| T2a              | N1  | M1b |
-| T2b              | N1  | M1b |
-| T3               | N1  | M1b |
-| T4               | N1  | M1b |
-| Tis              | N1  | M1b |
-| TX               | N1  | M1b |
-| T1               | N2  | M1b |
-| T1a              | N2  | M1b |
-| T1b              | N2  | M1b |
-| T1c              | N2  | M1b |
-| T1mi             | N2  | M1b |
-| T2               | N2  | M1b |
-| T2a              | N2  | M1b |
-| T2b              | N2  | M1b |
-| T3               | N2  | M1b |
-| T4               | N2  | M1b |
-| Tis              | N2  | M1b |
-| TX               | N2  | M1b |
-| T1               | N3  | M1b |
-| T1a              | N3  | M1b |
-| T1b              | N3  | M1b |
-| T1c              | N3  | M1b |
-| T1mi             | N3  | M1b |
-| T2               | N3  | M1b |
-| T2a              | N3  | M1b |
-| T2b              | N3  | M1b |
-| T3               | N3  | M1b |
-| T4               | N3  | M1b |
-| Tis              | N3  | M1b |
-| TX               | N3  | M1b |
-| IVB              |     |     |
-| T1               | N0  | M1c |
-| T1a              | N0  | M1c |
-| T1b              | N0  | M1c |
-| T1c              | N0  | M1c |
-| T1mi             | N0  | M1c |
-| T2               | N0  | M1c |
-| T2a              | N0  | M1c |
-| T2b              | N0  | M1c |
-| T3               | N0  | M1c |
-| T4               | N0  | M1c |
-| Tis              | N0  | M1c |
-| TX               | N0  | M1c |
-| T1               | N1  | M1c |
-| T1a              | N1  | M1c |
-| T1b              | N1  | M1c |
-| T1c              | N1  | M1c |
-| T1mi             | N1  | M1c |
-| T2               | N1  | M1c |
-| T2a              | N1  | M1c |
-| T2b              | N1  | M1c |
-| T3               | N1  | M1c |
-| T4               | N1  | M1c |
-| Tis              | N1  | M1c |
-| TX               | N1  | M1c |
-| T1               | N2  | M1c |
-| T1a              | N2  | M1c |
-| T1b              | N2  | M1c |
-| T1c              | N2  | M1c |
-| T1mi             | N2  | M1c |
-| T2               | N2  | M1c |
-| T2a              | N2  | M1c |
-| T2b              | N2  | M1c |
-| T3               | N2  | M1c |
-| T4               | N2  | M1c |
-| Tis              | N2  | M1c |
-| TX               | N2  | M1c |
-| T1               | N3  | M1c |
-| T1a              | N3  | M1c |
-| T1b              | N3  | M1c |
-| T1c              | N3  | M1c |
-| T1mi             | N3  | M1c |
-| T2               | N3  | M1c |
-| T2a              | N3  | M1c |
-| T2b              | N3  | M1c |
-| T3               | N3  | M1c |
-| T4               | N3  | M1c |
-| Tis              | N3  | M1c |
-| TX               | N3  | M1c |
-| Occult carcinoma |     |     |
-| TX               | N0  | M0  |
+9th edition
 
-pathological
+Bladder
 
-| T                | N   | M   |
-|------------------|-----|-----|
-| 0                |     |     |
-| Tis              | N0  | M0  |
-| IA               |     |     |
-| T1               | N0  | M0  |
-| IA1              |     |     |
-| T1a              | N0  | M0  |
-| T1mi             | N0  | M0  |
-| IA2              |     |     |
-| T1b              | N0  | M0  |
-| IA3              |     |     |
-| T1c              | N0  | M0  |
-| IB               |     |     |
-| T2a              | N0  | M0  |
-| IIA              |     |     |
-| T2b              | N0  | M0  |
-| IIB              |     |     |
-| T3               | N0  | M0  |
-| T1               | N1  | M0  |
-| T1a              | N1  | M0  |
-| T1b              | N1  | M0  |
-| T1c              | N1  | M0  |
-| T1mi             | N1  | M0  |
-| T2               | N1  | M0  |
-| T2a              | N1  | M0  |
-| T2b              | N1  | M0  |
-| IIIA             |     |     |
-| T4               | N0  | M0  |
-| T3               | N1  | M0  |
-| T4               | N1  | M0  |
-| T1               | N2  | M0  |
-| T1a              | N2  | M0  |
-| T1b              | N2  | M0  |
-| T1c              | N2  | M0  |
-| T1mi             | N2  | M0  |
-| T2               | N2  | M0  |
-| T2a              | N2  | M0  |
-| T2b              | N2  | M0  |
-| IIIB             |     |     |
-| T3               | N2  | M0  |
-| T4               | N2  | M0  |
-| T1               | N3  | M0  |
-| T1a              | N3  | M0  |
-| T1b              | N3  | M0  |
-| T1c              | N3  | M0  |
-| T1mi             | N3  | M0  |
-| T2               | N3  | M0  |
-| T2a              | N3  | M0  |
-| T2b              | N3  | M0  |
-| IIIC             |     |     |
-| T3               | N3  | M0  |
-| T4               | N3  | M0  |
-| IV               |     |     |
-| T1               | N0  | M1  |
-| T1a              | N0  | M1  |
-| T1b              | N0  | M1  |
-| T1c              | N0  | M1  |
-| T1mi             | N0  | M1  |
-| T2               | N0  | M1  |
-| T2a              | N0  | M1  |
-| T2b              | N0  | M1  |
-| T3               | N0  | M1  |
-| T4               | N0  | M1  |
-| Tis              | N0  | M1  |
-| TX               | N0  | M1  |
-| T1               | N1  | M1  |
-| T1a              | N1  | M1  |
-| T1b              | N1  | M1  |
-| T1c              | N1  | M1  |
-| T1mi             | N1  | M1  |
-| T2               | N1  | M1  |
-| T2a              | N1  | M1  |
-| T2b              | N1  | M1  |
-| T3               | N1  | M1  |
-| T4               | N1  | M1  |
-| Tis              | N1  | M1  |
-| TX               | N1  | M1  |
-| T1               | N2  | M1  |
-| T1a              | N2  | M1  |
-| T1b              | N2  | M1  |
-| T1c              | N2  | M1  |
-| T1mi             | N2  | M1  |
-| T2               | N2  | M1  |
-| T2a              | N2  | M1  |
-| T2b              | N2  | M1  |
-| T3               | N2  | M1  |
-| T4               | N2  | M1  |
-| Tis              | N2  | M1  |
-| TX               | N2  | M1  |
-| T1               | N3  | M1  |
-| T1a              | N3  | M1  |
-| T1b              | N3  | M1  |
-| T1c              | N3  | M1  |
-| T1mi             | N3  | M1  |
-| T2               | N3  | M1  |
-| T2a              | N3  | M1  |
-| T2b              | N3  | M1  |
-| T3               | N3  | M1  |
-| T4               | N3  | M1  |
-| Tis              | N3  | M1  |
-| TX               | N3  | M1  |
-| IVA              |     |     |
-| T1               | N0  | M1a |
-| T1a              | N0  | M1a |
-| T1b              | N0  | M1a |
-| T1c              | N0  | M1a |
-| T1mi             | N0  | M1a |
-| T2               | N0  | M1a |
-| T2a              | N0  | M1a |
-| T2b              | N0  | M1a |
-| T3               | N0  | M1a |
-| T4               | N0  | M1a |
-| Tis              | N0  | M1a |
-| TX               | N0  | M1a |
-| T1               | N1  | M1a |
-| T1a              | N1  | M1a |
-| T1b              | N1  | M1a |
-| T1c              | N1  | M1a |
-| T1mi             | N1  | M1a |
-| T2               | N1  | M1a |
-| T2a              | N1  | M1a |
-| T2b              | N1  | M1a |
-| T3               | N1  | M1a |
-| T4               | N1  | M1a |
-| Tis              | N1  | M1a |
-| TX               | N1  | M1a |
-| T1               | N2  | M1a |
-| T1a              | N2  | M1a |
-| T1b              | N2  | M1a |
-| T1c              | N2  | M1a |
-| T1mi             | N2  | M1a |
-| T2               | N2  | M1a |
-| T2a              | N2  | M1a |
-| T2b              | N2  | M1a |
-| T3               | N2  | M1a |
-| T4               | N2  | M1a |
-| Tis              | N2  | M1a |
-| TX               | N2  | M1a |
-| T1               | N3  | M1a |
-| T1a              | N3  | M1a |
-| T1b              | N3  | M1a |
-| T1c              | N3  | M1a |
-| T1mi             | N3  | M1a |
-| T2               | N3  | M1a |
-| T2a              | N3  | M1a |
-| T2b              | N3  | M1a |
-| T3               | N3  | M1a |
-| T4               | N3  | M1a |
-| Tis              | N3  | M1a |
-| TX               | N3  | M1a |
-| T1               | N0  | M1b |
-| T1a              | N0  | M1b |
-| T1b              | N0  | M1b |
-| T1c              | N0  | M1b |
-| T1mi             | N0  | M1b |
-| T2               | N0  | M1b |
-| T2a              | N0  | M1b |
-| T2b              | N0  | M1b |
-| T3               | N0  | M1b |
-| T4               | N0  | M1b |
-| Tis              | N0  | M1b |
-| TX               | N0  | M1b |
-| T1               | N1  | M1b |
-| T1a              | N1  | M1b |
-| T1b              | N1  | M1b |
-| T1c              | N1  | M1b |
-| T1mi             | N1  | M1b |
-| T2               | N1  | M1b |
-| T2a              | N1  | M1b |
-| T2b              | N1  | M1b |
-| T3               | N1  | M1b |
-| T4               | N1  | M1b |
-| Tis              | N1  | M1b |
-| TX               | N1  | M1b |
-| T1               | N2  | M1b |
-| T1a              | N2  | M1b |
-| T1b              | N2  | M1b |
-| T1c              | N2  | M1b |
-| T1mi             | N2  | M1b |
-| T2               | N2  | M1b |
-| T2a              | N2  | M1b |
-| T2b              | N2  | M1b |
-| T3               | N2  | M1b |
-| T4               | N2  | M1b |
-| Tis              | N2  | M1b |
-| TX               | N2  | M1b |
-| T1               | N3  | M1b |
-| T1a              | N3  | M1b |
-| T1b              | N3  | M1b |
-| T1c              | N3  | M1b |
-| T1mi             | N3  | M1b |
-| T2               | N3  | M1b |
-| T2a              | N3  | M1b |
-| T2b              | N3  | M1b |
-| T3               | N3  | M1b |
-| T4               | N3  | M1b |
-| Tis              | N3  | M1b |
-| TX               | N3  | M1b |
-| IVB              |     |     |
-| T1               | N0  | M1c |
-| T1a              | N0  | M1c |
-| T1b              | N0  | M1c |
-| T1c              | N0  | M1c |
-| T1mi             | N0  | M1c |
-| T2               | N0  | M1c |
-| T2a              | N0  | M1c |
-| T2b              | N0  | M1c |
-| T3               | N0  | M1c |
-| T4               | N0  | M1c |
-| Tis              | N0  | M1c |
-| TX               | N0  | M1c |
-| T1               | N1  | M1c |
-| T1a              | N1  | M1c |
-| T1b              | N1  | M1c |
-| T1c              | N1  | M1c |
-| T1mi             | N1  | M1c |
-| T2               | N1  | M1c |
-| T2a              | N1  | M1c |
-| T2b              | N1  | M1c |
-| T3               | N1  | M1c |
-| T4               | N1  | M1c |
-| Tis              | N1  | M1c |
-| TX               | N1  | M1c |
-| T1               | N2  | M1c |
-| T1a              | N2  | M1c |
-| T1b              | N2  | M1c |
-| T1c              | N2  | M1c |
-| T1mi             | N2  | M1c |
-| T2               | N2  | M1c |
-| T2a              | N2  | M1c |
-| T2b              | N2  | M1c |
-| T3               | N2  | M1c |
-| T4               | N2  | M1c |
-| Tis              | N2  | M1c |
-| TX               | N2  | M1c |
-| T1               | N3  | M1c |
-| T1a              | N3  | M1c |
-| T1b              | N3  | M1c |
-| T1c              | N3  | M1c |
-| T1mi             | N3  | M1c |
-| T2               | N3  | M1c |
-| T2a              | N3  | M1c |
-| T2b              | N3  | M1c |
-| T3               | N3  | M1c |
-| T4               | N3  | M1c |
-| Tis              | N3  | M1c |
-| TX               | N3  | M1c |
-| Occult carcinoma |     |     |
-| TX               | N0  | M0  |
+Base (182 rules)
 
-melanoma
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| Ta  | N0  | M0  | 0a         |
+| Tis | N0  | M0  | 0is        |
+| T1  | N0  | M0  | I          |
+| T2  | N0  | M0  | II         |
+| T2a | N0  | M0  | II         |
+| T2b | N0  | M0  | II         |
+| T1  | N1  | M0  | IIIA       |
+| T2  | N1  | M0  | IIIA       |
+| T2a | N1  | M0  | IIIA       |
+| T2b | N1  | M0  | IIIA       |
+| T3  | N0  | M0  | IIIA       |
+| T3  | N1  | M0  | IIIA       |
+| T3a | N0  | M0  | IIIA       |
+| T3a | N1  | M0  | IIIA       |
+| T3b | N0  | M0  | IIIA       |
+| T3b | N1  | M0  | IIIA       |
+| T4a | N0  | M0  | IIIA       |
+| T4a | N1  | M0  | IIIA       |
+| T1  | N2  | M0  | IIIB       |
+| T1  | N3  | M0  | IIIB       |
+| T2  | N2  | M0  | IIIB       |
+| T2  | N3  | M0  | IIIB       |
+| T2a | N2  | M0  | IIIB       |
+| T2a | N3  | M0  | IIIB       |
+| T2b | N2  | M0  | IIIB       |
+| T2b | N3  | M0  | IIIB       |
+| T3  | N2  | M0  | IIIB       |
+| T3  | N3  | M0  | IIIB       |
+| T3a | N2  | M0  | IIIB       |
+| T3a | N3  | M0  | IIIB       |
+| T3b | N2  | M0  | IIIB       |
+| T3b | N3  | M0  | IIIB       |
+| T4a | N2  | M0  | IIIB       |
+| T4a | N3  | M0  | IIIB       |
+| T1  | N0  | M1  | IV         |
+| T1  | N1  | M1  | IV         |
+| T1  | N2  | M1  | IV         |
+| T1  | N3  | M1  | IV         |
+| T2  | N0  | M1  | IV         |
+| T2  | N1  | M1  | IV         |
+| T2  | N2  | M1  | IV         |
+| T2  | N3  | M1  | IV         |
+| T2a | N0  | M1  | IV         |
+| T2a | N1  | M1  | IV         |
+| T2a | N2  | M1  | IV         |
+| T2a | N3  | M1  | IV         |
+| T2b | N0  | M1  | IV         |
+| T2b | N1  | M1  | IV         |
+| T2b | N2  | M1  | IV         |
+| T2b | N3  | M1  | IV         |
+| T3  | N0  | M1  | IV         |
+| T3  | N1  | M1  | IV         |
+| T3  | N2  | M1  | IV         |
+| T3  | N3  | M1  | IV         |
+| T3a | N0  | M1  | IV         |
+| T3a | N1  | M1  | IV         |
+| T3a | N2  | M1  | IV         |
+| T3a | N3  | M1  | IV         |
+| T3b | N0  | M1  | IV         |
+| T3b | N1  | M1  | IV         |
+| T3b | N2  | M1  | IV         |
+| T3b | N3  | M1  | IV         |
+| T4  | N0  | M1  | IV         |
+| T4  | N1  | M1  | IV         |
+| T4  | N2  | M1  | IV         |
+| T4  | N3  | M1  | IV         |
+| T4a | N0  | M1  | IV         |
+| T4a | N1  | M1  | IV         |
+| T4a | N2  | M1  | IV         |
+| T4a | N3  | M1  | IV         |
+| T4b | N0  | M1  | IV         |
+| T4b | N1  | M1  | IV         |
+| T4b | N2  | M1  | IV         |
+| T4b | N3  | M1  | IV         |
+| Ta  | N0  | M1  | IV         |
+| Ta  | N1  | M1  | IV         |
+| Ta  | N2  | M1  | IV         |
+| Ta  | N3  | M1  | IV         |
+| Tis | N0  | M1  | IV         |
+| Tis | N1  | M1  | IV         |
+| Tis | N2  | M1  | IV         |
+| Tis | N3  | M1  | IV         |
+| T1  | N0  | M1a | IVA        |
+| T1  | N1  | M1a | IVA        |
+| T1  | N2  | M1a | IVA        |
+| T1  | N3  | M1a | IVA        |
+| T2  | N0  | M1a | IVA        |
+| T2  | N1  | M1a | IVA        |
+| T2  | N2  | M1a | IVA        |
+| T2  | N3  | M1a | IVA        |
+| T2a | N0  | M1a | IVA        |
+| T2a | N1  | M1a | IVA        |
+| T2a | N2  | M1a | IVA        |
+| T2a | N3  | M1a | IVA        |
+| T2b | N0  | M1a | IVA        |
+| T2b | N1  | M1a | IVA        |
+| T2b | N2  | M1a | IVA        |
+| T2b | N3  | M1a | IVA        |
+| T3  | N0  | M1a | IVA        |
+| T3  | N1  | M1a | IVA        |
+| T3  | N2  | M1a | IVA        |
+| T3  | N3  | M1a | IVA        |
+| T3a | N0  | M1a | IVA        |
+| T3a | N1  | M1a | IVA        |
+| T3a | N2  | M1a | IVA        |
+| T3a | N3  | M1a | IVA        |
+| T3b | N0  | M1a | IVA        |
+| T3b | N1  | M1a | IVA        |
+| T3b | N2  | M1a | IVA        |
+| T3b | N3  | M1a | IVA        |
+| T4  | N0  | M1a | IVA        |
+| T4  | N1  | M1a | IVA        |
+| T4  | N2  | M1a | IVA        |
+| T4  | N3  | M1a | IVA        |
+| T4a | N0  | M1a | IVA        |
+| T4a | N1  | M1a | IVA        |
+| T4a | N2  | M1a | IVA        |
+| T4a | N3  | M1a | IVA        |
+| T4b | N0  | M0  | IVA        |
+| T4b | N0  | M1a | IVA        |
+| T4b | N1  | M0  | IVA        |
+| T4b | N1  | M1a | IVA        |
+| T4b | N2  | M0  | IVA        |
+| T4b | N2  | M1a | IVA        |
+| T4b | N3  | M0  | IVA        |
+| T4b | N3  | M1a | IVA        |
+| Ta  | N0  | M1a | IVA        |
+| Ta  | N1  | M1a | IVA        |
+| Ta  | N2  | M1a | IVA        |
+| Ta  | N3  | M1a | IVA        |
+| Tis | N0  | M1a | IVA        |
+| Tis | N1  | M1a | IVA        |
+| Tis | N2  | M1a | IVA        |
+| Tis | N3  | M1a | IVA        |
+| T1  | N0  | M1b | IVB        |
+| T1  | N1  | M1b | IVB        |
+| T1  | N2  | M1b | IVB        |
+| T1  | N3  | M1b | IVB        |
+| T2  | N0  | M1b | IVB        |
+| T2  | N1  | M1b | IVB        |
+| T2  | N2  | M1b | IVB        |
+| T2  | N3  | M1b | IVB        |
+| T2a | N0  | M1b | IVB        |
+| T2a | N1  | M1b | IVB        |
+| T2a | N2  | M1b | IVB        |
+| T2a | N3  | M1b | IVB        |
+| T2b | N0  | M1b | IVB        |
+| T2b | N1  | M1b | IVB        |
+| T2b | N2  | M1b | IVB        |
+| T2b | N3  | M1b | IVB        |
+| T3  | N0  | M1b | IVB        |
+| T3  | N1  | M1b | IVB        |
+| T3  | N2  | M1b | IVB        |
+| T3  | N3  | M1b | IVB        |
+| T3a | N0  | M1b | IVB        |
+| T3a | N1  | M1b | IVB        |
+| T3a | N2  | M1b | IVB        |
+| T3a | N3  | M1b | IVB        |
+| T3b | N0  | M1b | IVB        |
+| T3b | N1  | M1b | IVB        |
+| T3b | N2  | M1b | IVB        |
+| T3b | N3  | M1b | IVB        |
+| T4  | N0  | M1b | IVB        |
+| T4  | N1  | M1b | IVB        |
+| T4  | N2  | M1b | IVB        |
+| T4  | N3  | M1b | IVB        |
+| T4a | N0  | M1b | IVB        |
+| T4a | N1  | M1b | IVB        |
+| T4a | N2  | M1b | IVB        |
+| T4a | N3  | M1b | IVB        |
+| T4b | N0  | M1b | IVB        |
+| T4b | N1  | M1b | IVB        |
+| T4b | N2  | M1b | IVB        |
+| T4b | N3  | M1b | IVB        |
+| Ta  | N0  | M1b | IVB        |
+| Ta  | N1  | M1b | IVB        |
+| Ta  | N2  | M1b | IVB        |
+| Ta  | N3  | M1b | IVB        |
+| Tis | N0  | M1b | IVB        |
+| Tis | N1  | M1b | IVB        |
+| Tis | N2  | M1b | IVB        |
+| Tis | N3  | M1b | IVB        |
 
-base
+Breast
 
-|                   |
-|-------------------|
-| Table has no data |
+Base (348 rules)
 
-clinical
+| T    | N    | M   | uicc_stage |
+|:-----|:-----|:----|:-----------|
+| Tis  | N0   | M0  | 0          |
+| T1   | N0   | M0  | IA         |
+| T1a  | N0   | M0  | IA         |
+| T1b  | N0   | M0  | IA         |
+| T1c  | N0   | M0  | IA         |
+| T1mi | N0   | M0  | IA         |
+| T0   | N1mi | M0  | IB         |
+| T1   | N1mi | M0  | IB         |
+| T1a  | N1mi | M0  | IB         |
+| T1b  | N1mi | M0  | IB         |
+| T1c  | N1mi | M0  | IB         |
+| T1mi | N1mi | M0  | IB         |
+| T0   | N1   | M0  | IIA        |
+| T0   | N1a  | M0  | IIA        |
+| T0   | N1b  | M0  | IIA        |
+| T0   | N1c  | M0  | IIA        |
+| T1   | N1   | M0  | IIA        |
+| T1   | N1a  | M0  | IIA        |
+| T1   | N1b  | M0  | IIA        |
+| T1   | N1c  | M0  | IIA        |
+| T1a  | N1   | M0  | IIA        |
+| T1a  | N1a  | M0  | IIA        |
+| T1a  | N1b  | M0  | IIA        |
+| T1a  | N1c  | M0  | IIA        |
+| T1b  | N1   | M0  | IIA        |
+| T1b  | N1a  | M0  | IIA        |
+| T1b  | N1b  | M0  | IIA        |
+| T1b  | N1c  | M0  | IIA        |
+| T1c  | N1   | M0  | IIA        |
+| T1c  | N1a  | M0  | IIA        |
+| T1c  | N1b  | M0  | IIA        |
+| T1c  | N1c  | M0  | IIA        |
+| T1mi | N1   | M0  | IIA        |
+| T1mi | N1a  | M0  | IIA        |
+| T1mi | N1b  | M0  | IIA        |
+| T1mi | N1c  | M0  | IIA        |
+| T2   | N0   | M0  | IIA        |
+| T2   | N1   | M0  | IIB        |
+| T2   | N1a  | M0  | IIB        |
+| T2   | N1b  | M0  | IIB        |
+| T2   | N1c  | M0  | IIB        |
+| T3   | N0   | M0  | IIB        |
+| T0   | N2   | M0  | IIIA       |
+| T0   | N2a  | M0  | IIIA       |
+| T0   | N2b  | M0  | IIIA       |
+| T1   | N2   | M0  | IIIA       |
+| T1   | N2a  | M0  | IIIA       |
+| T1   | N2b  | M0  | IIIA       |
+| T1a  | N2   | M0  | IIIA       |
+| T1a  | N2a  | M0  | IIIA       |
+| T1a  | N2b  | M0  | IIIA       |
+| T1b  | N2   | M0  | IIIA       |
+| T1b  | N2a  | M0  | IIIA       |
+| T1b  | N2b  | M0  | IIIA       |
+| T1c  | N2   | M0  | IIIA       |
+| T1c  | N2a  | M0  | IIIA       |
+| T1c  | N2b  | M0  | IIIA       |
+| T1mi | N2   | M0  | IIIA       |
+| T1mi | N2a  | M0  | IIIA       |
+| T1mi | N2b  | M0  | IIIA       |
+| T2   | N2   | M0  | IIIA       |
+| T2   | N2a  | M0  | IIIA       |
+| T2   | N2b  | M0  | IIIA       |
+| T3   | N1   | M0  | IIIA       |
+| T3   | N1a  | M0  | IIIA       |
+| T3   | N1b  | M0  | IIIA       |
+| T3   | N1c  | M0  | IIIA       |
+| T3   | N2   | M0  | IIIA       |
+| T3   | N2a  | M0  | IIIA       |
+| T3   | N2b  | M0  | IIIA       |
+| T4   | N0   | M0  | IIIB       |
+| T4   | N1   | M0  | IIIB       |
+| T4   | N1a  | M0  | IIIB       |
+| T4   | N1b  | M0  | IIIB       |
+| T4   | N1c  | M0  | IIIB       |
+| T4   | N2   | M0  | IIIB       |
+| T4   | N2a  | M0  | IIIB       |
+| T4   | N2b  | M0  | IIIB       |
+| T4a  | N0   | M0  | IIIB       |
+| T4a  | N1   | M0  | IIIB       |
+| T4a  | N1a  | M0  | IIIB       |
+| T4a  | N1b  | M0  | IIIB       |
+| T4a  | N1c  | M0  | IIIB       |
+| T4a  | N2   | M0  | IIIB       |
+| T4a  | N2a  | M0  | IIIB       |
+| T4a  | N2b  | M0  | IIIB       |
+| T4b  | N0   | M0  | IIIB       |
+| T4b  | N1   | M0  | IIIB       |
+| T4b  | N1a  | M0  | IIIB       |
+| T4b  | N1b  | M0  | IIIB       |
+| T4b  | N1c  | M0  | IIIB       |
+| T4b  | N2   | M0  | IIIB       |
+| T4b  | N2a  | M0  | IIIB       |
+| T4b  | N2b  | M0  | IIIB       |
+| T4c  | N0   | M0  | IIIB       |
+| T4c  | N1   | M0  | IIIB       |
+| T4c  | N1a  | M0  | IIIB       |
+| T4c  | N1b  | M0  | IIIB       |
+| T4c  | N1c  | M0  | IIIB       |
+| T4c  | N2   | M0  | IIIB       |
+| T4c  | N2a  | M0  | IIIB       |
+| T4c  | N2b  | M0  | IIIB       |
+| T4d  | N0   | M0  | IIIB       |
+| T4d  | N1   | M0  | IIIB       |
+| T4d  | N1a  | M0  | IIIB       |
+| T4d  | N1b  | M0  | IIIB       |
+| T4d  | N1c  | M0  | IIIB       |
+| T4d  | N2   | M0  | IIIB       |
+| T4d  | N2a  | M0  | IIIB       |
+| T4d  | N2b  | M0  | IIIB       |
+| T0   | N3   | M0  | IIIC       |
+| T0   | N3a  | M0  | IIIC       |
+| T0   | N3b  | M0  | IIIC       |
+| T0   | N3c  | M0  | IIIC       |
+| T1   | N3   | M0  | IIIC       |
+| T1   | N3a  | M0  | IIIC       |
+| T1   | N3b  | M0  | IIIC       |
+| T1   | N3c  | M0  | IIIC       |
+| T1a  | N3   | M0  | IIIC       |
+| T1a  | N3a  | M0  | IIIC       |
+| T1a  | N3b  | M0  | IIIC       |
+| T1a  | N3c  | M0  | IIIC       |
+| T1b  | N3   | M0  | IIIC       |
+| T1b  | N3a  | M0  | IIIC       |
+| T1b  | N3b  | M0  | IIIC       |
+| T1b  | N3c  | M0  | IIIC       |
+| T1c  | N3   | M0  | IIIC       |
+| T1c  | N3a  | M0  | IIIC       |
+| T1c  | N3b  | M0  | IIIC       |
+| T1c  | N3c  | M0  | IIIC       |
+| T1mi | N3   | M0  | IIIC       |
+| T1mi | N3a  | M0  | IIIC       |
+| T1mi | N3b  | M0  | IIIC       |
+| T1mi | N3c  | M0  | IIIC       |
+| T2   | N3   | M0  | IIIC       |
+| T2   | N3a  | M0  | IIIC       |
+| T2   | N3b  | M0  | IIIC       |
+| T2   | N3c  | M0  | IIIC       |
+| T3   | N3   | M0  | IIIC       |
+| T3   | N3a  | M0  | IIIC       |
+| T3   | N3b  | M0  | IIIC       |
+| T3   | N3c  | M0  | IIIC       |
+| T4   | N3   | M0  | IIIC       |
+| T4   | N3a  | M0  | IIIC       |
+| T4   | N3b  | M0  | IIIC       |
+| T4   | N3c  | M0  | IIIC       |
+| T4a  | N3   | M0  | IIIC       |
+| T4a  | N3a  | M0  | IIIC       |
+| T4a  | N3b  | M0  | IIIC       |
+| T4a  | N3c  | M0  | IIIC       |
+| T4b  | N3   | M0  | IIIC       |
+| T4b  | N3a  | M0  | IIIC       |
+| T4b  | N3b  | M0  | IIIC       |
+| T4b  | N3c  | M0  | IIIC       |
+| T4c  | N3   | M0  | IIIC       |
+| T4c  | N3a  | M0  | IIIC       |
+| T4c  | N3b  | M0  | IIIC       |
+| T4c  | N3c  | M0  | IIIC       |
+| T4d  | N3   | M0  | IIIC       |
+| T4d  | N3a  | M0  | IIIC       |
+| T4d  | N3b  | M0  | IIIC       |
+| T4d  | N3c  | M0  | IIIC       |
+| Tis  | N3   | M0  | IIIC       |
+| Tis  | N3a  | M0  | IIIC       |
+| Tis  | N3b  | M0  | IIIC       |
+| Tis  | N3c  | M0  | IIIC       |
+| T0   | N0   | M1  | IV         |
+| T0   | N1   | M1  | IV         |
+| T0   | N1a  | M1  | IV         |
+| T0   | N1b  | M1  | IV         |
+| T0   | N1c  | M1  | IV         |
+| T0   | N1mi | M1  | IV         |
+| T0   | N2   | M1  | IV         |
+| T0   | N2a  | M1  | IV         |
+| T0   | N2b  | M1  | IV         |
+| T0   | N3   | M1  | IV         |
+| T0   | N3a  | M1  | IV         |
+| T0   | N3b  | M1  | IV         |
+| T0   | N3c  | M1  | IV         |
+| T1   | N0   | M1  | IV         |
+| T1   | N1   | M1  | IV         |
+| T1   | N1a  | M1  | IV         |
+| T1   | N1b  | M1  | IV         |
+| T1   | N1c  | M1  | IV         |
+| T1   | N1mi | M1  | IV         |
+| T1   | N2   | M1  | IV         |
+| T1   | N2a  | M1  | IV         |
+| T1   | N2b  | M1  | IV         |
+| T1   | N3   | M1  | IV         |
+| T1   | N3a  | M1  | IV         |
+| T1   | N3b  | M1  | IV         |
+| T1   | N3c  | M1  | IV         |
+| T1a  | N0   | M1  | IV         |
+| T1a  | N1   | M1  | IV         |
+| T1a  | N1a  | M1  | IV         |
+| T1a  | N1b  | M1  | IV         |
+| T1a  | N1c  | M1  | IV         |
+| T1a  | N1mi | M1  | IV         |
+| T1a  | N2   | M1  | IV         |
+| T1a  | N2a  | M1  | IV         |
+| T1a  | N2b  | M1  | IV         |
+| T1a  | N3   | M1  | IV         |
+| T1a  | N3a  | M1  | IV         |
+| T1a  | N3b  | M1  | IV         |
+| T1a  | N3c  | M1  | IV         |
+| T1b  | N0   | M1  | IV         |
+| T1b  | N1   | M1  | IV         |
+| T1b  | N1a  | M1  | IV         |
+| T1b  | N1b  | M1  | IV         |
+| T1b  | N1c  | M1  | IV         |
+| T1b  | N1mi | M1  | IV         |
+| T1b  | N2   | M1  | IV         |
+| T1b  | N2a  | M1  | IV         |
+| T1b  | N2b  | M1  | IV         |
+| T1b  | N3   | M1  | IV         |
+| T1b  | N3a  | M1  | IV         |
+| T1b  | N3b  | M1  | IV         |
+| T1b  | N3c  | M1  | IV         |
+| T1c  | N0   | M1  | IV         |
+| T1c  | N1   | M1  | IV         |
+| T1c  | N1a  | M1  | IV         |
+| T1c  | N1b  | M1  | IV         |
+| T1c  | N1c  | M1  | IV         |
+| T1c  | N1mi | M1  | IV         |
+| T1c  | N2   | M1  | IV         |
+| T1c  | N2a  | M1  | IV         |
+| T1c  | N2b  | M1  | IV         |
+| T1c  | N3   | M1  | IV         |
+| T1c  | N3a  | M1  | IV         |
+| T1c  | N3b  | M1  | IV         |
+| T1c  | N3c  | M1  | IV         |
+| T1mi | N0   | M1  | IV         |
+| T1mi | N1   | M1  | IV         |
+| T1mi | N1a  | M1  | IV         |
+| T1mi | N1b  | M1  | IV         |
+| T1mi | N1c  | M1  | IV         |
+| T1mi | N1mi | M1  | IV         |
+| T1mi | N2   | M1  | IV         |
+| T1mi | N2a  | M1  | IV         |
+| T1mi | N2b  | M1  | IV         |
+| T1mi | N3   | M1  | IV         |
+| T1mi | N3a  | M1  | IV         |
+| T1mi | N3b  | M1  | IV         |
+| T1mi | N3c  | M1  | IV         |
+| T2   | N0   | M1  | IV         |
+| T2   | N1   | M1  | IV         |
+| T2   | N1a  | M1  | IV         |
+| T2   | N1b  | M1  | IV         |
+| T2   | N1c  | M1  | IV         |
+| T2   | N1mi | M1  | IV         |
+| T2   | N2   | M1  | IV         |
+| T2   | N2a  | M1  | IV         |
+| T2   | N2b  | M1  | IV         |
+| T2   | N3   | M1  | IV         |
+| T2   | N3a  | M1  | IV         |
+| T2   | N3b  | M1  | IV         |
+| T2   | N3c  | M1  | IV         |
+| T3   | N0   | M1  | IV         |
+| T3   | N1   | M1  | IV         |
+| T3   | N1a  | M1  | IV         |
+| T3   | N1b  | M1  | IV         |
+| T3   | N1c  | M1  | IV         |
+| T3   | N1mi | M1  | IV         |
+| T3   | N2   | M1  | IV         |
+| T3   | N2a  | M1  | IV         |
+| T3   | N2b  | M1  | IV         |
+| T3   | N3   | M1  | IV         |
+| T3   | N3a  | M1  | IV         |
+| T3   | N3b  | M1  | IV         |
+| T3   | N3c  | M1  | IV         |
+| T4   | N0   | M1  | IV         |
+| T4   | N1   | M1  | IV         |
+| T4   | N1a  | M1  | IV         |
+| T4   | N1b  | M1  | IV         |
+| T4   | N1c  | M1  | IV         |
+| T4   | N1mi | M1  | IV         |
+| T4   | N2   | M1  | IV         |
+| T4   | N2a  | M1  | IV         |
+| T4   | N2b  | M1  | IV         |
+| T4   | N3   | M1  | IV         |
+| T4   | N3a  | M1  | IV         |
+| T4   | N3b  | M1  | IV         |
+| T4   | N3c  | M1  | IV         |
+| T4a  | N0   | M1  | IV         |
+| T4a  | N1   | M1  | IV         |
+| T4a  | N1a  | M1  | IV         |
+| T4a  | N1b  | M1  | IV         |
+| T4a  | N1c  | M1  | IV         |
+| T4a  | N1mi | M1  | IV         |
+| T4a  | N2   | M1  | IV         |
+| T4a  | N2a  | M1  | IV         |
+| T4a  | N2b  | M1  | IV         |
+| T4a  | N3   | M1  | IV         |
+| T4a  | N3a  | M1  | IV         |
+| T4a  | N3b  | M1  | IV         |
+| T4a  | N3c  | M1  | IV         |
+| T4b  | N0   | M1  | IV         |
+| T4b  | N1   | M1  | IV         |
+| T4b  | N1a  | M1  | IV         |
+| T4b  | N1b  | M1  | IV         |
+| T4b  | N1c  | M1  | IV         |
+| T4b  | N1mi | M1  | IV         |
+| T4b  | N2   | M1  | IV         |
+| T4b  | N2a  | M1  | IV         |
+| T4b  | N2b  | M1  | IV         |
+| T4b  | N3   | M1  | IV         |
+| T4b  | N3a  | M1  | IV         |
+| T4b  | N3b  | M1  | IV         |
+| T4b  | N3c  | M1  | IV         |
+| T4c  | N0   | M1  | IV         |
+| T4c  | N1   | M1  | IV         |
+| T4c  | N1a  | M1  | IV         |
+| T4c  | N1b  | M1  | IV         |
+| T4c  | N1c  | M1  | IV         |
+| T4c  | N1mi | M1  | IV         |
+| T4c  | N2   | M1  | IV         |
+| T4c  | N2a  | M1  | IV         |
+| T4c  | N2b  | M1  | IV         |
+| T4c  | N3   | M1  | IV         |
+| T4c  | N3a  | M1  | IV         |
+| T4c  | N3b  | M1  | IV         |
+| T4c  | N3c  | M1  | IV         |
+| T4d  | N0   | M1  | IV         |
+| T4d  | N1   | M1  | IV         |
+| T4d  | N1a  | M1  | IV         |
+| T4d  | N1b  | M1  | IV         |
+| T4d  | N1c  | M1  | IV         |
+| T4d  | N1mi | M1  | IV         |
+| T4d  | N2   | M1  | IV         |
+| T4d  | N2a  | M1  | IV         |
+| T4d  | N2b  | M1  | IV         |
+| T4d  | N3   | M1  | IV         |
+| T4d  | N3a  | M1  | IV         |
+| T4d  | N3b  | M1  | IV         |
+| T4d  | N3c  | M1  | IV         |
+| Tis  | N0   | M1  | IV         |
+| Tis  | N1   | M1  | IV         |
+| Tis  | N1a  | M1  | IV         |
+| Tis  | N1b  | M1  | IV         |
+| Tis  | N1c  | M1  | IV         |
+| Tis  | N1mi | M1  | IV         |
+| Tis  | N2   | M1  | IV         |
+| Tis  | N2a  | M1  | IV         |
+| Tis  | N2b  | M1  | IV         |
+| Tis  | N3   | M1  | IV         |
+| Tis  | N3a  | M1  | IV         |
+| Tis  | N3b  | M1  | IV         |
+| Tis  | N3c  | M1  | IV         |
 
-|                   |
-|-------------------|
-| Table has no data |
+Colorectal
 
-pathological
+Base (233 rules)
 
-|                   |
-|-------------------|
-| Table has no data |
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| Tis | N0  | M0  | 0          |
+| T1  | N0  | M0  | I          |
+| T2  | N0  | M0  | I          |
+| T3  | N0  | M0  | IIA        |
+| T4a | N0  | M0  | IIB        |
+| T4b | N0  | M0  | IIC        |
+| T1  | N2  | M0  | III        |
+| T2  | N2  | M0  | III        |
+| T3  | N2  | M0  | III        |
+| T4a | N2  | M0  | III        |
+| T1  | N1  | M0  | IIIA       |
+| T1  | N1a | M0  | IIIA       |
+| T1  | N1b | M0  | IIIA       |
+| T1  | N1c | M0  | IIIA       |
+| T1  | N2a | M0  | IIIA       |
+| T2  | N1  | M0  | IIIA       |
+| T2  | N1a | M0  | IIIA       |
+| T2  | N1b | M0  | IIIA       |
+| T2  | N1c | M0  | IIIA       |
+| T1  | N2b | M0  | IIIB       |
+| T2  | N2a | M0  | IIIB       |
+| T2  | N2b | M0  | IIIB       |
+| T3  | N1  | M0  | IIIB       |
+| T3  | N1a | M0  | IIIB       |
+| T3  | N1b | M0  | IIIB       |
+| T3  | N1c | M0  | IIIB       |
+| T3  | N2a | M0  | IIIB       |
+| T4a | N1  | M0  | IIIB       |
+| T4a | N1a | M0  | IIIB       |
+| T4a | N1b | M0  | IIIB       |
+| T4a | N1c | M0  | IIIB       |
+| T3  | N2b | M0  | IIIC       |
+| T4a | N2a | M0  | IIIC       |
+| T4a | N2b | M0  | IIIC       |
+| T4b | N1  | M0  | IIIC       |
+| T4b | N1a | M0  | IIIC       |
+| T4b | N1b | M0  | IIIC       |
+| T4b | N1c | M0  | IIIC       |
+| T4b | N2  | M0  | IIIC       |
+| T4b | N2a | M0  | IIIC       |
+| T4b | N2b | M0  | IIIC       |
+| T1  | N0  | M1  | IV         |
+| T1  | N1  | M1  | IV         |
+| T1  | N1a | M1  | IV         |
+| T1  | N1b | M1  | IV         |
+| T1  | N1c | M1  | IV         |
+| T1  | N2  | M1  | IV         |
+| T1  | N2a | M1  | IV         |
+| T1  | N2b | M1  | IV         |
+| T2  | N0  | M1  | IV         |
+| T2  | N1  | M1  | IV         |
+| T2  | N1a | M1  | IV         |
+| T2  | N1b | M1  | IV         |
+| T2  | N1c | M1  | IV         |
+| T2  | N2  | M1  | IV         |
+| T2  | N2a | M1  | IV         |
+| T2  | N2b | M1  | IV         |
+| T3  | N0  | M1  | IV         |
+| T3  | N1  | M1  | IV         |
+| T3  | N1a | M1  | IV         |
+| T3  | N1b | M1  | IV         |
+| T3  | N1c | M1  | IV         |
+| T3  | N2  | M1  | IV         |
+| T3  | N2a | M1  | IV         |
+| T3  | N2b | M1  | IV         |
+| T4a | N0  | M1  | IV         |
+| T4a | N1  | M1  | IV         |
+| T4a | N1a | M1  | IV         |
+| T4a | N1b | M1  | IV         |
+| T4a | N1c | M1  | IV         |
+| T4a | N2  | M1  | IV         |
+| T4a | N2a | M1  | IV         |
+| T4a | N2b | M1  | IV         |
+| T4b | N0  | M1  | IV         |
+| T4b | N1  | M1  | IV         |
+| T4b | N1a | M1  | IV         |
+| T4b | N1b | M1  | IV         |
+| T4b | N1c | M1  | IV         |
+| T4b | N2  | M1  | IV         |
+| T4b | N2a | M1  | IV         |
+| T4b | N2b | M1  | IV         |
+| Tis | N0  | M1  | IV         |
+| Tis | N1  | M1  | IV         |
+| Tis | N1a | M1  | IV         |
+| Tis | N1b | M1  | IV         |
+| Tis | N1c | M1  | IV         |
+| Tis | N2  | M1  | IV         |
+| Tis | N2a | M1  | IV         |
+| Tis | N2b | M1  | IV         |
+| T1  | N0  | M1a | IVA        |
+| T1  | N1  | M1a | IVA        |
+| T1  | N1a | M1a | IVA        |
+| T1  | N1b | M1a | IVA        |
+| T1  | N1c | M1a | IVA        |
+| T1  | N2  | M1a | IVA        |
+| T1  | N2a | M1a | IVA        |
+| T1  | N2b | M1a | IVA        |
+| T2  | N0  | M1a | IVA        |
+| T2  | N1  | M1a | IVA        |
+| T2  | N1a | M1a | IVA        |
+| T2  | N1b | M1a | IVA        |
+| T2  | N1c | M1a | IVA        |
+| T2  | N2  | M1a | IVA        |
+| T2  | N2a | M1a | IVA        |
+| T2  | N2b | M1a | IVA        |
+| T3  | N0  | M1a | IVA        |
+| T3  | N1  | M1a | IVA        |
+| T3  | N1a | M1a | IVA        |
+| T3  | N1b | M1a | IVA        |
+| T3  | N1c | M1a | IVA        |
+| T3  | N2  | M1a | IVA        |
+| T3  | N2a | M1a | IVA        |
+| T3  | N2b | M1a | IVA        |
+| T4a | N0  | M1a | IVA        |
+| T4a | N1  | M1a | IVA        |
+| T4a | N1a | M1a | IVA        |
+| T4a | N1b | M1a | IVA        |
+| T4a | N1c | M1a | IVA        |
+| T4a | N2  | M1a | IVA        |
+| T4a | N2a | M1a | IVA        |
+| T4a | N2b | M1a | IVA        |
+| T4b | N0  | M1a | IVA        |
+| T4b | N1  | M1a | IVA        |
+| T4b | N1a | M1a | IVA        |
+| T4b | N1b | M1a | IVA        |
+| T4b | N1c | M1a | IVA        |
+| T4b | N2  | M1a | IVA        |
+| T4b | N2a | M1a | IVA        |
+| T4b | N2b | M1a | IVA        |
+| Tis | N0  | M1a | IVA        |
+| Tis | N1  | M1a | IVA        |
+| Tis | N1a | M1a | IVA        |
+| Tis | N1b | M1a | IVA        |
+| Tis | N1c | M1a | IVA        |
+| Tis | N2  | M1a | IVA        |
+| Tis | N2a | M1a | IVA        |
+| Tis | N2b | M1a | IVA        |
+| T1  | N0  | M1b | IVB        |
+| T1  | N1  | M1b | IVB        |
+| T1  | N1a | M1b | IVB        |
+| T1  | N1b | M1b | IVB        |
+| T1  | N1c | M1b | IVB        |
+| T1  | N2  | M1b | IVB        |
+| T1  | N2a | M1b | IVB        |
+| T1  | N2b | M1b | IVB        |
+| T2  | N0  | M1b | IVB        |
+| T2  | N1  | M1b | IVB        |
+| T2  | N1a | M1b | IVB        |
+| T2  | N1b | M1b | IVB        |
+| T2  | N1c | M1b | IVB        |
+| T2  | N2  | M1b | IVB        |
+| T2  | N2a | M1b | IVB        |
+| T2  | N2b | M1b | IVB        |
+| T3  | N0  | M1b | IVB        |
+| T3  | N1  | M1b | IVB        |
+| T3  | N1a | M1b | IVB        |
+| T3  | N1b | M1b | IVB        |
+| T3  | N1c | M1b | IVB        |
+| T3  | N2  | M1b | IVB        |
+| T3  | N2a | M1b | IVB        |
+| T3  | N2b | M1b | IVB        |
+| T4a | N0  | M1b | IVB        |
+| T4a | N1  | M1b | IVB        |
+| T4a | N1a | M1b | IVB        |
+| T4a | N1b | M1b | IVB        |
+| T4a | N1c | M1b | IVB        |
+| T4a | N2  | M1b | IVB        |
+| T4a | N2a | M1b | IVB        |
+| T4a | N2b | M1b | IVB        |
+| T4b | N0  | M1b | IVB        |
+| T4b | N1  | M1b | IVB        |
+| T4b | N1a | M1b | IVB        |
+| T4b | N1b | M1b | IVB        |
+| T4b | N1c | M1b | IVB        |
+| T4b | N2  | M1b | IVB        |
+| T4b | N2a | M1b | IVB        |
+| T4b | N2b | M1b | IVB        |
+| Tis | N0  | M1b | IVB        |
+| Tis | N1  | M1b | IVB        |
+| Tis | N1a | M1b | IVB        |
+| Tis | N1b | M1b | IVB        |
+| Tis | N1c | M1b | IVB        |
+| Tis | N2  | M1b | IVB        |
+| Tis | N2a | M1b | IVB        |
+| Tis | N2b | M1b | IVB        |
+| T1  | N0  | M1c | IVC        |
+| T1  | N1  | M1c | IVC        |
+| T1  | N1a | M1c | IVC        |
+| T1  | N1b | M1c | IVC        |
+| T1  | N1c | M1c | IVC        |
+| T1  | N2  | M1c | IVC        |
+| T1  | N2a | M1c | IVC        |
+| T1  | N2b | M1c | IVC        |
+| T2  | N0  | M1c | IVC        |
+| T2  | N1  | M1c | IVC        |
+| T2  | N1a | M1c | IVC        |
+| T2  | N1b | M1c | IVC        |
+| T2  | N1c | M1c | IVC        |
+| T2  | N2  | M1c | IVC        |
+| T2  | N2a | M1c | IVC        |
+| T2  | N2b | M1c | IVC        |
+| T3  | N0  | M1c | IVC        |
+| T3  | N1  | M1c | IVC        |
+| T3  | N1a | M1c | IVC        |
+| T3  | N1b | M1c | IVC        |
+| T3  | N1c | M1c | IVC        |
+| T3  | N2  | M1c | IVC        |
+| T3  | N2a | M1c | IVC        |
+| T3  | N2b | M1c | IVC        |
+| T4a | N0  | M1c | IVC        |
+| T4a | N1  | M1c | IVC        |
+| T4a | N1a | M1c | IVC        |
+| T4a | N1b | M1c | IVC        |
+| T4a | N1c | M1c | IVC        |
+| T4a | N2  | M1c | IVC        |
+| T4a | N2a | M1c | IVC        |
+| T4a | N2b | M1c | IVC        |
+| T4b | N0  | M1c | IVC        |
+| T4b | N1  | M1c | IVC        |
+| T4b | N1a | M1c | IVC        |
+| T4b | N1b | M1c | IVC        |
+| T4b | N1c | M1c | IVC        |
+| T4b | N2  | M1c | IVC        |
+| T4b | N2a | M1c | IVC        |
+| T4b | N2b | M1c | IVC        |
+| Tis | N0  | M1c | IVC        |
+| Tis | N1  | M1c | IVC        |
+| Tis | N1a | M1c | IVC        |
+| Tis | N1b | M1c | IVC        |
+| Tis | N1c | M1c | IVC        |
+| Tis | N2  | M1c | IVC        |
+| Tis | N2a | M1c | IVC        |
+| Tis | N2b | M1c | IVC        |
 
-oesophagus
+Lung
 
-base
+Base (492 rules)
 
-|                   |
-|-------------------|
-| Table has no data |
+| T    | N   | M    | uicc_stage       |
+|:-----|:----|:-----|:-----------------|
+| Tis  | N0  | M0   | 0                |
+| T1a  | N0  | M0   | IA1              |
+| T1mi | N0  | M0   | IA1              |
+| T1b  | N0  | M0   | IA2              |
+| T1c  | N0  | M0   | IA3              |
+| T2a  | N0  | M0   | IB               |
+| T1   | N1  | M0   | IIA              |
+| T1a  | N1  | M0   | IIA              |
+| T1b  | N1  | M0   | IIA              |
+| T1c  | N1  | M0   | IIA              |
+| T1mi | N1  | M0   | IIA              |
+| T2b  | N0  | M0   | IIA              |
+| T1   | N2a | M0   | IIB              |
+| T1a  | N2a | M0   | IIB              |
+| T1b  | N2a | M0   | IIB              |
+| T1c  | N2a | M0   | IIB              |
+| T1mi | N2a | M0   | IIB              |
+| T2   | N1  | M0   | IIB              |
+| T2a  | N1  | M0   | IIB              |
+| T2b  | N1  | M0   | IIB              |
+| T3   | N0  | M0   | IIB              |
+| T1   | N2  | M0   | III              |
+| T1a  | N2  | M0   | III              |
+| T1b  | N2  | M0   | III              |
+| T1c  | N2  | M0   | III              |
+| T1mi | N2  | M0   | III              |
+| T2   | N2  | M0   | III              |
+| T2a  | N2  | M0   | III              |
+| T2b  | N2  | M0   | III              |
+| T3   | N2  | M0   | III              |
+| T4   | N2  | M0   | III              |
+| T1   | N2b | M0   | IIIA             |
+| T1a  | N2b | M0   | IIIA             |
+| T1b  | N2b | M0   | IIIA             |
+| T1c  | N2b | M0   | IIIA             |
+| T1mi | N2b | M0   | IIIA             |
+| T2   | N2a | M0   | IIIA             |
+| T2a  | N2a | M0   | IIIA             |
+| T2b  | N2a | M0   | IIIA             |
+| T3   | N1  | M0   | IIIA             |
+| T3   | N2a | M0   | IIIA             |
+| T4   | N0  | M0   | IIIA             |
+| T4   | N1  | M0   | IIIA             |
+| T1   | N3  | M0   | IIIB             |
+| T1a  | N3  | M0   | IIIB             |
+| T1b  | N3  | M0   | IIIB             |
+| T1c  | N3  | M0   | IIIB             |
+| T1mi | N3  | M0   | IIIB             |
+| T2   | N2b | M0   | IIIB             |
+| T2   | N3  | M0   | IIIB             |
+| T2a  | N2b | M0   | IIIB             |
+| T2a  | N3  | M0   | IIIB             |
+| T2b  | N2b | M0   | IIIB             |
+| T2b  | N3  | M0   | IIIB             |
+| T3   | N2b | M0   | IIIB             |
+| T4   | N2a | M0   | IIIB             |
+| T4   | N2b | M0   | IIIB             |
+| T3   | N3  | M0   | IIIC             |
+| T4   | N3  | M0   | IIIC             |
+| T1   | N0  | M1   | IV               |
+| T1   | N1  | M1   | IV               |
+| T1   | N2  | M1   | IV               |
+| T1   | N2a | M1   | IV               |
+| T1   | N2b | M1   | IV               |
+| T1   | N3  | M1   | IV               |
+| T1a  | N0  | M1   | IV               |
+| T1a  | N1  | M1   | IV               |
+| T1a  | N2  | M1   | IV               |
+| T1a  | N2a | M1   | IV               |
+| T1a  | N2b | M1   | IV               |
+| T1a  | N3  | M1   | IV               |
+| T1b  | N0  | M1   | IV               |
+| T1b  | N1  | M1   | IV               |
+| T1b  | N2  | M1   | IV               |
+| T1b  | N2a | M1   | IV               |
+| T1b  | N2b | M1   | IV               |
+| T1b  | N3  | M1   | IV               |
+| T1c  | N0  | M1   | IV               |
+| T1c  | N1  | M1   | IV               |
+| T1c  | N2  | M1   | IV               |
+| T1c  | N2a | M1   | IV               |
+| T1c  | N2b | M1   | IV               |
+| T1c  | N3  | M1   | IV               |
+| T1mi | N0  | M1   | IV               |
+| T1mi | N1  | M1   | IV               |
+| T1mi | N2  | M1   | IV               |
+| T1mi | N2a | M1   | IV               |
+| T1mi | N2b | M1   | IV               |
+| T1mi | N3  | M1   | IV               |
+| T2   | N0  | M1   | IV               |
+| T2   | N1  | M1   | IV               |
+| T2   | N2  | M1   | IV               |
+| T2   | N2a | M1   | IV               |
+| T2   | N2b | M1   | IV               |
+| T2   | N3  | M1   | IV               |
+| T2a  | N0  | M1   | IV               |
+| T2a  | N1  | M1   | IV               |
+| T2a  | N2  | M1   | IV               |
+| T2a  | N2a | M1   | IV               |
+| T2a  | N2b | M1   | IV               |
+| T2a  | N3  | M1   | IV               |
+| T2b  | N0  | M1   | IV               |
+| T2b  | N1  | M1   | IV               |
+| T2b  | N2  | M1   | IV               |
+| T2b  | N2a | M1   | IV               |
+| T2b  | N2b | M1   | IV               |
+| T2b  | N3  | M1   | IV               |
+| T3   | N0  | M1   | IV               |
+| T3   | N1  | M1   | IV               |
+| T3   | N2  | M1   | IV               |
+| T3   | N2a | M1   | IV               |
+| T3   | N2b | M1   | IV               |
+| T3   | N3  | M1   | IV               |
+| T4   | N0  | M1   | IV               |
+| T4   | N1  | M1   | IV               |
+| T4   | N2  | M1   | IV               |
+| T4   | N2a | M1   | IV               |
+| T4   | N2b | M1   | IV               |
+| T4   | N3  | M1   | IV               |
+| TX   | N0  | M1   | IV               |
+| TX   | N1  | M1   | IV               |
+| TX   | N2  | M1   | IV               |
+| TX   | N2a | M1   | IV               |
+| TX   | N2b | M1   | IV               |
+| TX   | N3  | M1   | IV               |
+| Tis  | N0  | M1   | IV               |
+| Tis  | N1  | M1   | IV               |
+| Tis  | N2  | M1   | IV               |
+| Tis  | N2a | M1   | IV               |
+| Tis  | N2b | M1   | IV               |
+| Tis  | N3  | M1   | IV               |
+| T1   | N0  | M1a  | IVA              |
+| T1   | N0  | M1b  | IVA              |
+| T1   | N1  | M1a  | IVA              |
+| T1   | N1  | M1b  | IVA              |
+| T1   | N2  | M1a  | IVA              |
+| T1   | N2  | M1b  | IVA              |
+| T1   | N2a | M1a  | IVA              |
+| T1   | N2a | M1b  | IVA              |
+| T1   | N2b | M1a  | IVA              |
+| T1   | N2b | M1b  | IVA              |
+| T1   | N3  | M1a  | IVA              |
+| T1   | N3  | M1b  | IVA              |
+| T1a  | N0  | M1a  | IVA              |
+| T1a  | N0  | M1b  | IVA              |
+| T1a  | N1  | M1a  | IVA              |
+| T1a  | N1  | M1b  | IVA              |
+| T1a  | N2  | M1a  | IVA              |
+| T1a  | N2  | M1b  | IVA              |
+| T1a  | N2a | M1a  | IVA              |
+| T1a  | N2a | M1b  | IVA              |
+| T1a  | N2b | M1a  | IVA              |
+| T1a  | N2b | M1b  | IVA              |
+| T1a  | N3  | M1a  | IVA              |
+| T1a  | N3  | M1b  | IVA              |
+| T1b  | N0  | M1a  | IVA              |
+| T1b  | N0  | M1b  | IVA              |
+| T1b  | N1  | M1a  | IVA              |
+| T1b  | N1  | M1b  | IVA              |
+| T1b  | N2  | M1a  | IVA              |
+| T1b  | N2  | M1b  | IVA              |
+| T1b  | N2a | M1a  | IVA              |
+| T1b  | N2a | M1b  | IVA              |
+| T1b  | N2b | M1a  | IVA              |
+| T1b  | N2b | M1b  | IVA              |
+| T1b  | N3  | M1a  | IVA              |
+| T1b  | N3  | M1b  | IVA              |
+| T1c  | N0  | M1a  | IVA              |
+| T1c  | N0  | M1b  | IVA              |
+| T1c  | N1  | M1a  | IVA              |
+| T1c  | N1  | M1b  | IVA              |
+| T1c  | N2  | M1a  | IVA              |
+| T1c  | N2  | M1b  | IVA              |
+| T1c  | N2a | M1a  | IVA              |
+| T1c  | N2a | M1b  | IVA              |
+| T1c  | N2b | M1a  | IVA              |
+| T1c  | N2b | M1b  | IVA              |
+| T1c  | N3  | M1a  | IVA              |
+| T1c  | N3  | M1b  | IVA              |
+| T1mi | N0  | M1a  | IVA              |
+| T1mi | N0  | M1b  | IVA              |
+| T1mi | N1  | M1a  | IVA              |
+| T1mi | N1  | M1b  | IVA              |
+| T1mi | N2  | M1a  | IVA              |
+| T1mi | N2  | M1b  | IVA              |
+| T1mi | N2a | M1a  | IVA              |
+| T1mi | N2a | M1b  | IVA              |
+| T1mi | N2b | M1a  | IVA              |
+| T1mi | N2b | M1b  | IVA              |
+| T1mi | N3  | M1a  | IVA              |
+| T1mi | N3  | M1b  | IVA              |
+| T2   | N0  | M1a  | IVA              |
+| T2   | N0  | M1b  | IVA              |
+| T2   | N1  | M1a  | IVA              |
+| T2   | N1  | M1b  | IVA              |
+| T2   | N2  | M1a  | IVA              |
+| T2   | N2  | M1b  | IVA              |
+| T2   | N2a | M1a  | IVA              |
+| T2   | N2a | M1b  | IVA              |
+| T2   | N2b | M1a  | IVA              |
+| T2   | N2b | M1b  | IVA              |
+| T2   | N3  | M1a  | IVA              |
+| T2   | N3  | M1b  | IVA              |
+| T2a  | N0  | M1a  | IVA              |
+| T2a  | N0  | M1b  | IVA              |
+| T2a  | N1  | M1a  | IVA              |
+| T2a  | N1  | M1b  | IVA              |
+| T2a  | N2  | M1a  | IVA              |
+| T2a  | N2  | M1b  | IVA              |
+| T2a  | N2a | M1a  | IVA              |
+| T2a  | N2a | M1b  | IVA              |
+| T2a  | N2b | M1a  | IVA              |
+| T2a  | N2b | M1b  | IVA              |
+| T2a  | N3  | M1a  | IVA              |
+| T2a  | N3  | M1b  | IVA              |
+| T2b  | N0  | M1a  | IVA              |
+| T2b  | N0  | M1b  | IVA              |
+| T2b  | N1  | M1a  | IVA              |
+| T2b  | N1  | M1b  | IVA              |
+| T2b  | N2  | M1a  | IVA              |
+| T2b  | N2  | M1b  | IVA              |
+| T2b  | N2a | M1a  | IVA              |
+| T2b  | N2a | M1b  | IVA              |
+| T2b  | N2b | M1a  | IVA              |
+| T2b  | N2b | M1b  | IVA              |
+| T2b  | N3  | M1a  | IVA              |
+| T2b  | N3  | M1b  | IVA              |
+| T3   | N0  | M1a  | IVA              |
+| T3   | N0  | M1b  | IVA              |
+| T3   | N1  | M1a  | IVA              |
+| T3   | N1  | M1b  | IVA              |
+| T3   | N2  | M1a  | IVA              |
+| T3   | N2  | M1b  | IVA              |
+| T3   | N2a | M1a  | IVA              |
+| T3   | N2a | M1b  | IVA              |
+| T3   | N2b | M1a  | IVA              |
+| T3   | N2b | M1b  | IVA              |
+| T3   | N3  | M1a  | IVA              |
+| T3   | N3  | M1b  | IVA              |
+| T4   | N0  | M1a  | IVA              |
+| T4   | N0  | M1b  | IVA              |
+| T4   | N1  | M1a  | IVA              |
+| T4   | N1  | M1b  | IVA              |
+| T4   | N2  | M1a  | IVA              |
+| T4   | N2  | M1b  | IVA              |
+| T4   | N2a | M1a  | IVA              |
+| T4   | N2a | M1b  | IVA              |
+| T4   | N2b | M1a  | IVA              |
+| T4   | N2b | M1b  | IVA              |
+| T4   | N3  | M1a  | IVA              |
+| T4   | N3  | M1b  | IVA              |
+| TX   | N0  | M1a  | IVA              |
+| TX   | N0  | M1b  | IVA              |
+| TX   | N1  | M1a  | IVA              |
+| TX   | N1  | M1b  | IVA              |
+| TX   | N2  | M1a  | IVA              |
+| TX   | N2  | M1b  | IVA              |
+| TX   | N2a | M1a  | IVA              |
+| TX   | N2a | M1b  | IVA              |
+| TX   | N2b | M1a  | IVA              |
+| TX   | N2b | M1b  | IVA              |
+| TX   | N3  | M1a  | IVA              |
+| TX   | N3  | M1b  | IVA              |
+| Tis  | N0  | M1a  | IVA              |
+| Tis  | N0  | M1b  | IVA              |
+| Tis  | N1  | M1a  | IVA              |
+| Tis  | N1  | M1b  | IVA              |
+| Tis  | N2  | M1a  | IVA              |
+| Tis  | N2  | M1b  | IVA              |
+| Tis  | N2a | M1a  | IVA              |
+| Tis  | N2a | M1b  | IVA              |
+| Tis  | N2b | M1a  | IVA              |
+| Tis  | N2b | M1b  | IVA              |
+| Tis  | N3  | M1a  | IVA              |
+| Tis  | N3  | M1b  | IVA              |
+| T1   | N0  | M1c  | IVB              |
+| T1   | N0  | M1c1 | IVB              |
+| T1   | N0  | M1c2 | IVB              |
+| T1   | N1  | M1c  | IVB              |
+| T1   | N1  | M1c1 | IVB              |
+| T1   | N1  | M1c2 | IVB              |
+| T1   | N2  | M1c  | IVB              |
+| T1   | N2  | M1c1 | IVB              |
+| T1   | N2  | M1c2 | IVB              |
+| T1   | N2a | M1c  | IVB              |
+| T1   | N2a | M1c1 | IVB              |
+| T1   | N2a | M1c2 | IVB              |
+| T1   | N2b | M1c  | IVB              |
+| T1   | N2b | M1c1 | IVB              |
+| T1   | N2b | M1c2 | IVB              |
+| T1   | N3  | M1c  | IVB              |
+| T1   | N3  | M1c1 | IVB              |
+| T1   | N3  | M1c2 | IVB              |
+| T1a  | N0  | M1c  | IVB              |
+| T1a  | N0  | M1c1 | IVB              |
+| T1a  | N0  | M1c2 | IVB              |
+| T1a  | N1  | M1c  | IVB              |
+| T1a  | N1  | M1c1 | IVB              |
+| T1a  | N1  | M1c2 | IVB              |
+| T1a  | N2  | M1c  | IVB              |
+| T1a  | N2  | M1c1 | IVB              |
+| T1a  | N2  | M1c2 | IVB              |
+| T1a  | N2a | M1c  | IVB              |
+| T1a  | N2a | M1c1 | IVB              |
+| T1a  | N2a | M1c2 | IVB              |
+| T1a  | N2b | M1c  | IVB              |
+| T1a  | N2b | M1c1 | IVB              |
+| T1a  | N2b | M1c2 | IVB              |
+| T1a  | N3  | M1c  | IVB              |
+| T1a  | N3  | M1c1 | IVB              |
+| T1a  | N3  | M1c2 | IVB              |
+| T1b  | N0  | M1c  | IVB              |
+| T1b  | N0  | M1c1 | IVB              |
+| T1b  | N0  | M1c2 | IVB              |
+| T1b  | N1  | M1c  | IVB              |
+| T1b  | N1  | M1c1 | IVB              |
+| T1b  | N1  | M1c2 | IVB              |
+| T1b  | N2  | M1c  | IVB              |
+| T1b  | N2  | M1c1 | IVB              |
+| T1b  | N2  | M1c2 | IVB              |
+| T1b  | N2a | M1c  | IVB              |
+| T1b  | N2a | M1c1 | IVB              |
+| T1b  | N2a | M1c2 | IVB              |
+| T1b  | N2b | M1c  | IVB              |
+| T1b  | N2b | M1c1 | IVB              |
+| T1b  | N2b | M1c2 | IVB              |
+| T1b  | N3  | M1c  | IVB              |
+| T1b  | N3  | M1c1 | IVB              |
+| T1b  | N3  | M1c2 | IVB              |
+| T1c  | N0  | M1c  | IVB              |
+| T1c  | N0  | M1c1 | IVB              |
+| T1c  | N0  | M1c2 | IVB              |
+| T1c  | N1  | M1c  | IVB              |
+| T1c  | N1  | M1c1 | IVB              |
+| T1c  | N1  | M1c2 | IVB              |
+| T1c  | N2  | M1c  | IVB              |
+| T1c  | N2  | M1c1 | IVB              |
+| T1c  | N2  | M1c2 | IVB              |
+| T1c  | N2a | M1c  | IVB              |
+| T1c  | N2a | M1c1 | IVB              |
+| T1c  | N2a | M1c2 | IVB              |
+| T1c  | N2b | M1c  | IVB              |
+| T1c  | N2b | M1c1 | IVB              |
+| T1c  | N2b | M1c2 | IVB              |
+| T1c  | N3  | M1c  | IVB              |
+| T1c  | N3  | M1c1 | IVB              |
+| T1c  | N3  | M1c2 | IVB              |
+| T1mi | N0  | M1c  | IVB              |
+| T1mi | N0  | M1c1 | IVB              |
+| T1mi | N0  | M1c2 | IVB              |
+| T1mi | N1  | M1c  | IVB              |
+| T1mi | N1  | M1c1 | IVB              |
+| T1mi | N1  | M1c2 | IVB              |
+| T1mi | N2  | M1c  | IVB              |
+| T1mi | N2  | M1c1 | IVB              |
+| T1mi | N2  | M1c2 | IVB              |
+| T1mi | N2a | M1c  | IVB              |
+| T1mi | N2a | M1c1 | IVB              |
+| T1mi | N2a | M1c2 | IVB              |
+| T1mi | N2b | M1c  | IVB              |
+| T1mi | N2b | M1c1 | IVB              |
+| T1mi | N2b | M1c2 | IVB              |
+| T1mi | N3  | M1c  | IVB              |
+| T1mi | N3  | M1c1 | IVB              |
+| T1mi | N3  | M1c2 | IVB              |
+| T2   | N0  | M1c  | IVB              |
+| T2   | N0  | M1c1 | IVB              |
+| T2   | N0  | M1c2 | IVB              |
+| T2   | N1  | M1c  | IVB              |
+| T2   | N1  | M1c1 | IVB              |
+| T2   | N1  | M1c2 | IVB              |
+| T2   | N2  | M1c  | IVB              |
+| T2   | N2  | M1c1 | IVB              |
+| T2   | N2  | M1c2 | IVB              |
+| T2   | N2a | M1c  | IVB              |
+| T2   | N2a | M1c1 | IVB              |
+| T2   | N2a | M1c2 | IVB              |
+| T2   | N2b | M1c  | IVB              |
+| T2   | N2b | M1c1 | IVB              |
+| T2   | N2b | M1c2 | IVB              |
+| T2   | N3  | M1c  | IVB              |
+| T2   | N3  | M1c1 | IVB              |
+| T2   | N3  | M1c2 | IVB              |
+| T2a  | N0  | M1c  | IVB              |
+| T2a  | N0  | M1c1 | IVB              |
+| T2a  | N0  | M1c2 | IVB              |
+| T2a  | N1  | M1c  | IVB              |
+| T2a  | N1  | M1c1 | IVB              |
+| T2a  | N1  | M1c2 | IVB              |
+| T2a  | N2  | M1c  | IVB              |
+| T2a  | N2  | M1c1 | IVB              |
+| T2a  | N2  | M1c2 | IVB              |
+| T2a  | N2a | M1c  | IVB              |
+| T2a  | N2a | M1c1 | IVB              |
+| T2a  | N2a | M1c2 | IVB              |
+| T2a  | N2b | M1c  | IVB              |
+| T2a  | N2b | M1c1 | IVB              |
+| T2a  | N2b | M1c2 | IVB              |
+| T2a  | N3  | M1c  | IVB              |
+| T2a  | N3  | M1c1 | IVB              |
+| T2a  | N3  | M1c2 | IVB              |
+| T2b  | N0  | M1c  | IVB              |
+| T2b  | N0  | M1c1 | IVB              |
+| T2b  | N0  | M1c2 | IVB              |
+| T2b  | N1  | M1c  | IVB              |
+| T2b  | N1  | M1c1 | IVB              |
+| T2b  | N1  | M1c2 | IVB              |
+| T2b  | N2  | M1c  | IVB              |
+| T2b  | N2  | M1c1 | IVB              |
+| T2b  | N2  | M1c2 | IVB              |
+| T2b  | N2a | M1c  | IVB              |
+| T2b  | N2a | M1c1 | IVB              |
+| T2b  | N2a | M1c2 | IVB              |
+| T2b  | N2b | M1c  | IVB              |
+| T2b  | N2b | M1c1 | IVB              |
+| T2b  | N2b | M1c2 | IVB              |
+| T2b  | N3  | M1c  | IVB              |
+| T2b  | N3  | M1c1 | IVB              |
+| T2b  | N3  | M1c2 | IVB              |
+| T3   | N0  | M1c  | IVB              |
+| T3   | N0  | M1c1 | IVB              |
+| T3   | N0  | M1c2 | IVB              |
+| T3   | N1  | M1c  | IVB              |
+| T3   | N1  | M1c1 | IVB              |
+| T3   | N1  | M1c2 | IVB              |
+| T3   | N2  | M1c  | IVB              |
+| T3   | N2  | M1c1 | IVB              |
+| T3   | N2  | M1c2 | IVB              |
+| T3   | N2a | M1c  | IVB              |
+| T3   | N2a | M1c1 | IVB              |
+| T3   | N2a | M1c2 | IVB              |
+| T3   | N2b | M1c  | IVB              |
+| T3   | N2b | M1c1 | IVB              |
+| T3   | N2b | M1c2 | IVB              |
+| T3   | N3  | M1c  | IVB              |
+| T3   | N3  | M1c1 | IVB              |
+| T3   | N3  | M1c2 | IVB              |
+| T4   | N0  | M1c  | IVB              |
+| T4   | N0  | M1c1 | IVB              |
+| T4   | N0  | M1c2 | IVB              |
+| T4   | N1  | M1c  | IVB              |
+| T4   | N1  | M1c1 | IVB              |
+| T4   | N1  | M1c2 | IVB              |
+| T4   | N2  | M1c  | IVB              |
+| T4   | N2  | M1c1 | IVB              |
+| T4   | N2  | M1c2 | IVB              |
+| T4   | N2a | M1c  | IVB              |
+| T4   | N2a | M1c1 | IVB              |
+| T4   | N2a | M1c2 | IVB              |
+| T4   | N2b | M1c  | IVB              |
+| T4   | N2b | M1c1 | IVB              |
+| T4   | N2b | M1c2 | IVB              |
+| T4   | N3  | M1c  | IVB              |
+| T4   | N3  | M1c1 | IVB              |
+| T4   | N3  | M1c2 | IVB              |
+| TX   | N0  | M1c  | IVB              |
+| TX   | N0  | M1c1 | IVB              |
+| TX   | N0  | M1c2 | IVB              |
+| TX   | N1  | M1c  | IVB              |
+| TX   | N1  | M1c1 | IVB              |
+| TX   | N1  | M1c2 | IVB              |
+| TX   | N2  | M1c  | IVB              |
+| TX   | N2  | M1c1 | IVB              |
+| TX   | N2  | M1c2 | IVB              |
+| TX   | N2a | M1c  | IVB              |
+| TX   | N2a | M1c1 | IVB              |
+| TX   | N2a | M1c2 | IVB              |
+| TX   | N2b | M1c  | IVB              |
+| TX   | N2b | M1c1 | IVB              |
+| TX   | N2b | M1c2 | IVB              |
+| TX   | N3  | M1c  | IVB              |
+| TX   | N3  | M1c1 | IVB              |
+| TX   | N3  | M1c2 | IVB              |
+| Tis  | N0  | M1c  | IVB              |
+| Tis  | N0  | M1c1 | IVB              |
+| Tis  | N0  | M1c2 | IVB              |
+| Tis  | N1  | M1c  | IVB              |
+| Tis  | N1  | M1c1 | IVB              |
+| Tis  | N1  | M1c2 | IVB              |
+| Tis  | N2  | M1c  | IVB              |
+| Tis  | N2  | M1c1 | IVB              |
+| Tis  | N2  | M1c2 | IVB              |
+| Tis  | N2a | M1c  | IVB              |
+| Tis  | N2a | M1c1 | IVB              |
+| Tis  | N2a | M1c2 | IVB              |
+| Tis  | N2b | M1c  | IVB              |
+| Tis  | N2b | M1c1 | IVB              |
+| Tis  | N2b | M1c2 | IVB              |
+| Tis  | N3  | M1c  | IVB              |
+| Tis  | N3  | M1c1 | IVB              |
+| Tis  | N3  | M1c2 | IVB              |
+| TX   | N0  | M0   | Occult carcinoma |
 
-clinical
+Oesophagus
 
-|                   |
-|-------------------|
-| Table has no data |
+Clinical (124 rules)
 
-pathological
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| Tis | N0  | M0  | 0          |
+| Tis | N0  | M0  | 0          |
+| T1  | N0  | M0  | I          |
+| T1  | N0  | M0  | I          |
+| T1  | N1  | M0  | I          |
+| T1a | N0  | M0  | I          |
+| T1a | N0  | M0  | I          |
+| T1a | N1  | M0  | I          |
+| T1b | N0  | M0  | I          |
+| T1b | N0  | M0  | I          |
+| T1b | N1  | M0  | I          |
+| T2  | N0  | M0  | II         |
+| T2  | N1  | M0  | II         |
+| T3  | N0  | M0  | II         |
+| T1  | N1  | M0  | IIA        |
+| T1a | N1  | M0  | IIA        |
+| T1b | N1  | M0  | IIA        |
+| T2  | N0  | M0  | IIB        |
+| T1  | N2  | M0  | III        |
+| T1a | N2  | M0  | III        |
+| T1b | N2  | M0  | III        |
+| T2  | N1  | M0  | III        |
+| T2  | N2  | M0  | III        |
+| T3  | N0  | M0  | III        |
+| T3  | N1  | M0  | III        |
+| T3  | N1  | M0  | III        |
+| T3  | N2  | M0  | III        |
+| T4a | N0  | M0  | III        |
+| T4a | N1  | M0  | III        |
+| T1  | N2  | M0  | IVA        |
+| T1  | N3  | M0  | IVA        |
+| T1  | N3  | M0  | IVA        |
+| T1a | N2  | M0  | IVA        |
+| T1a | N3  | M0  | IVA        |
+| T1a | N3  | M0  | IVA        |
+| T1b | N2  | M0  | IVA        |
+| T1b | N3  | M0  | IVA        |
+| T1b | N3  | M0  | IVA        |
+| T2  | N2  | M0  | IVA        |
+| T2  | N3  | M0  | IVA        |
+| T2  | N3  | M0  | IVA        |
+| T3  | N2  | M0  | IVA        |
+| T3  | N3  | M0  | IVA        |
+| T3  | N3  | M0  | IVA        |
+| T4a | N0  | M0  | IVA        |
+| T4a | N1  | M0  | IVA        |
+| T4a | N2  | M0  | IVA        |
+| T4a | N2  | M0  | IVA        |
+| T4a | N3  | M0  | IVA        |
+| T4a | N3  | M0  | IVA        |
+| T4b | N0  | M0  | IVA        |
+| T4b | N0  | M0  | IVA        |
+| T4b | N1  | M0  | IVA        |
+| T4b | N1  | M0  | IVA        |
+| T4b | N2  | M0  | IVA        |
+| T4b | N2  | M0  | IVA        |
+| T4b | N3  | M0  | IVA        |
+| T4b | N3  | M0  | IVA        |
+| Tis | N3  | M0  | IVA        |
+| Tis | N3  | M0  | IVA        |
+| T1  | N0  | M1  | IVB        |
+| T1  | N0  | M1  | IVB        |
+| T1  | N1  | M1  | IVB        |
+| T1  | N1  | M1  | IVB        |
+| T1  | N2  | M1  | IVB        |
+| T1  | N2  | M1  | IVB        |
+| T1  | N3  | M1  | IVB        |
+| T1  | N3  | M1  | IVB        |
+| T1a | N0  | M1  | IVB        |
+| T1a | N0  | M1  | IVB        |
+| T1a | N1  | M1  | IVB        |
+| T1a | N1  | M1  | IVB        |
+| T1a | N2  | M1  | IVB        |
+| T1a | N2  | M1  | IVB        |
+| T1a | N3  | M1  | IVB        |
+| T1a | N3  | M1  | IVB        |
+| T1b | N0  | M1  | IVB        |
+| T1b | N0  | M1  | IVB        |
+| T1b | N1  | M1  | IVB        |
+| T1b | N1  | M1  | IVB        |
+| T1b | N2  | M1  | IVB        |
+| T1b | N2  | M1  | IVB        |
+| T1b | N3  | M1  | IVB        |
+| T1b | N3  | M1  | IVB        |
+| T2  | N0  | M1  | IVB        |
+| T2  | N0  | M1  | IVB        |
+| T2  | N1  | M1  | IVB        |
+| T2  | N1  | M1  | IVB        |
+| T2  | N2  | M1  | IVB        |
+| T2  | N2  | M1  | IVB        |
+| T2  | N3  | M1  | IVB        |
+| T2  | N3  | M1  | IVB        |
+| T3  | N0  | M1  | IVB        |
+| T3  | N0  | M1  | IVB        |
+| T3  | N1  | M1  | IVB        |
+| T3  | N1  | M1  | IVB        |
+| T3  | N2  | M1  | IVB        |
+| T3  | N2  | M1  | IVB        |
+| T3  | N3  | M1  | IVB        |
+| T3  | N3  | M1  | IVB        |
+| T4a | N0  | M1  | IVB        |
+| T4a | N0  | M1  | IVB        |
+| T4a | N1  | M1  | IVB        |
+| T4a | N1  | M1  | IVB        |
+| T4a | N2  | M1  | IVB        |
+| T4a | N2  | M1  | IVB        |
+| T4a | N3  | M1  | IVB        |
+| T4a | N3  | M1  | IVB        |
+| T4b | N0  | M1  | IVB        |
+| T4b | N0  | M1  | IVB        |
+| T4b | N1  | M1  | IVB        |
+| T4b | N1  | M1  | IVB        |
+| T4b | N2  | M1  | IVB        |
+| T4b | N2  | M1  | IVB        |
+| T4b | N3  | M1  | IVB        |
+| T4b | N3  | M1  | IVB        |
+| Tis | N0  | M1  | IVB        |
+| Tis | N0  | M1  | IVB        |
+| Tis | N1  | M1  | IVB        |
+| Tis | N1  | M1  | IVB        |
+| Tis | N2  | M1  | IVB        |
+| Tis | N2  | M1  | IVB        |
+| Tis | N3  | M1  | IVB        |
+| Tis | N3  | M1  | IVB        |
 
-|                   |
-|-------------------|
-| Table has no data |
+Pathological (61 rules)
 
-prostate
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| Tis | N0  | M0  | 0          |
+| T1a | N0  | M0  | IA         |
+| T1b | N0  | M0  | IB         |
+| T2  | N0  | M0  | IIA        |
+| T1  | N1  | M0  | IIB        |
+| T1a | N1  | M0  | IIB        |
+| T1b | N1  | M0  | IIB        |
+| T3  | N0  | M0  | IIB        |
+| T1  | N2  | M0  | IIIA       |
+| T1a | N2  | M0  | IIIA       |
+| T1b | N2  | M0  | IIIA       |
+| T2  | N1  | M0  | IIIA       |
+| T2  | N2  | M0  | IIIB       |
+| T3  | N1  | M0  | IIIB       |
+| T3  | N2  | M0  | IIIB       |
+| T4a | N0  | M0  | IIIB       |
+| T4a | N1  | M0  | IIIB       |
+| T1  | N3  | M0  | IVA        |
+| T1a | N3  | M0  | IVA        |
+| T1b | N3  | M0  | IVA        |
+| T2  | N3  | M0  | IVA        |
+| T3  | N3  | M0  | IVA        |
+| T4a | N2  | M0  | IVA        |
+| T4a | N3  | M0  | IVA        |
+| T4b | N0  | M0  | IVA        |
+| T4b | N1  | M0  | IVA        |
+| T4b | N2  | M0  | IVA        |
+| T4b | N3  | M0  | IVA        |
+| Tis | N3  | M0  | IVA        |
+| T1  | N0  | M1  | IVB        |
+| T1  | N1  | M1  | IVB        |
+| T1  | N2  | M1  | IVB        |
+| T1  | N3  | M1  | IVB        |
+| T1a | N0  | M1  | IVB        |
+| T1a | N1  | M1  | IVB        |
+| T1a | N2  | M1  | IVB        |
+| T1a | N3  | M1  | IVB        |
+| T1b | N0  | M1  | IVB        |
+| T1b | N1  | M1  | IVB        |
+| T1b | N2  | M1  | IVB        |
+| T1b | N3  | M1  | IVB        |
+| T2  | N0  | M1  | IVB        |
+| T2  | N1  | M1  | IVB        |
+| T2  | N2  | M1  | IVB        |
+| T2  | N3  | M1  | IVB        |
+| T3  | N0  | M1  | IVB        |
+| T3  | N1  | M1  | IVB        |
+| T3  | N2  | M1  | IVB        |
+| T3  | N3  | M1  | IVB        |
+| T4a | N0  | M1  | IVB        |
+| T4a | N1  | M1  | IVB        |
+| T4a | N2  | M1  | IVB        |
+| T4a | N3  | M1  | IVB        |
+| T4b | N0  | M1  | IVB        |
+| T4b | N1  | M1  | IVB        |
+| T4b | N2  | M1  | IVB        |
+| T4b | N3  | M1  | IVB        |
+| Tis | N0  | M1  | IVB        |
+| Tis | N1  | M1  | IVB        |
+| Tis | N2  | M1  | IVB        |
+| Tis | N3  | M1  | IVB        |
 
-base
+Prostate
 
-|                   |
-|-------------------|
-| Table has no data |
+Clinical (120 rules)
 
-clinical
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| T1  | N0  | M0  | I          |
+| T1a | N0  | M0  | I          |
+| T1b | N0  | M0  | I          |
+| T1c | N0  | M0  | I          |
+| T2a | N0  | M0  | I          |
+| T2  | N0  | M0  | II         |
+| T2b | N0  | M0  | II         |
+| T2c | N0  | M0  | II         |
+| T3  | N0  | M0  | III        |
+| T3a | N0  | M0  | III        |
+| T3b | N0  | M0  | III        |
+| T4  | N0  | M0  | III        |
+| T1  | N0  | M1  | IV         |
+| T1  | N0  | M1a | IV         |
+| T1  | N0  | M1b | IV         |
+| T1  | N0  | M1c | IV         |
+| T1  | N1  | M0  | IV         |
+| T1  | N1  | M1  | IV         |
+| T1  | N1  | M1a | IV         |
+| T1  | N1  | M1b | IV         |
+| T1  | N1  | M1c | IV         |
+| T1a | N0  | M1  | IV         |
+| T1a | N0  | M1a | IV         |
+| T1a | N0  | M1b | IV         |
+| T1a | N0  | M1c | IV         |
+| T1a | N1  | M0  | IV         |
+| T1a | N1  | M1  | IV         |
+| T1a | N1  | M1a | IV         |
+| T1a | N1  | M1b | IV         |
+| T1a | N1  | M1c | IV         |
+| T1b | N0  | M1  | IV         |
+| T1b | N0  | M1a | IV         |
+| T1b | N0  | M1b | IV         |
+| T1b | N0  | M1c | IV         |
+| T1b | N1  | M0  | IV         |
+| T1b | N1  | M1  | IV         |
+| T1b | N1  | M1a | IV         |
+| T1b | N1  | M1b | IV         |
+| T1b | N1  | M1c | IV         |
+| T1c | N0  | M1  | IV         |
+| T1c | N0  | M1a | IV         |
+| T1c | N0  | M1b | IV         |
+| T1c | N0  | M1c | IV         |
+| T1c | N1  | M0  | IV         |
+| T1c | N1  | M1  | IV         |
+| T1c | N1  | M1a | IV         |
+| T1c | N1  | M1b | IV         |
+| T1c | N1  | M1c | IV         |
+| T2  | N0  | M1  | IV         |
+| T2  | N0  | M1a | IV         |
+| T2  | N0  | M1b | IV         |
+| T2  | N0  | M1c | IV         |
+| T2  | N1  | M0  | IV         |
+| T2  | N1  | M1  | IV         |
+| T2  | N1  | M1a | IV         |
+| T2  | N1  | M1b | IV         |
+| T2  | N1  | M1c | IV         |
+| T2a | N0  | M1  | IV         |
+| T2a | N0  | M1a | IV         |
+| T2a | N0  | M1b | IV         |
+| T2a | N0  | M1c | IV         |
+| T2a | N1  | M0  | IV         |
+| T2a | N1  | M1  | IV         |
+| T2a | N1  | M1a | IV         |
+| T2a | N1  | M1b | IV         |
+| T2a | N1  | M1c | IV         |
+| T2b | N0  | M1  | IV         |
+| T2b | N0  | M1a | IV         |
+| T2b | N0  | M1b | IV         |
+| T2b | N0  | M1c | IV         |
+| T2b | N1  | M0  | IV         |
+| T2b | N1  | M1  | IV         |
+| T2b | N1  | M1a | IV         |
+| T2b | N1  | M1b | IV         |
+| T2b | N1  | M1c | IV         |
+| T2c | N0  | M1  | IV         |
+| T2c | N0  | M1a | IV         |
+| T2c | N0  | M1b | IV         |
+| T2c | N0  | M1c | IV         |
+| T2c | N1  | M0  | IV         |
+| T2c | N1  | M1  | IV         |
+| T2c | N1  | M1a | IV         |
+| T2c | N1  | M1b | IV         |
+| T2c | N1  | M1c | IV         |
+| T3  | N0  | M1  | IV         |
+| T3  | N0  | M1a | IV         |
+| T3  | N0  | M1b | IV         |
+| T3  | N0  | M1c | IV         |
+| T3  | N1  | M0  | IV         |
+| T3  | N1  | M1  | IV         |
+| T3  | N1  | M1a | IV         |
+| T3  | N1  | M1b | IV         |
+| T3  | N1  | M1c | IV         |
+| T3a | N0  | M1  | IV         |
+| T3a | N0  | M1a | IV         |
+| T3a | N0  | M1b | IV         |
+| T3a | N0  | M1c | IV         |
+| T3a | N1  | M0  | IV         |
+| T3a | N1  | M1  | IV         |
+| T3a | N1  | M1a | IV         |
+| T3a | N1  | M1b | IV         |
+| T3a | N1  | M1c | IV         |
+| T3b | N0  | M1  | IV         |
+| T3b | N0  | M1a | IV         |
+| T3b | N0  | M1b | IV         |
+| T3b | N0  | M1c | IV         |
+| T3b | N1  | M0  | IV         |
+| T3b | N1  | M1  | IV         |
+| T3b | N1  | M1a | IV         |
+| T3b | N1  | M1b | IV         |
+| T3b | N1  | M1c | IV         |
+| T4  | N0  | M1  | IV         |
+| T4  | N0  | M1a | IV         |
+| T4  | N0  | M1b | IV         |
+| T4  | N0  | M1c | IV         |
+| T4  | N1  | M0  | IV         |
+| T4  | N1  | M1  | IV         |
+| T4  | N1  | M1a | IV         |
+| T4  | N1  | M1b | IV         |
+| T4  | N1  | M1c | IV         |
 
-|                   |
-|-------------------|
-| Table has no data |
+Pathological (116 rules)
 
-pathological
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| T2  | N0  | M0  | II         |
+| T2a | N0  | M0  | II         |
+| T2b | N0  | M0  | II         |
+| T2c | N0  | M0  | II         |
+| T3  | N0  | M0  | III        |
+| T3a | N0  | M0  | III        |
+| T3b | N0  | M0  | III        |
+| T4  | N0  | M0  | III        |
+| T1  | N0  | M1  | IV         |
+| T1  | N0  | M1a | IV         |
+| T1  | N0  | M1b | IV         |
+| T1  | N0  | M1c | IV         |
+| T1  | N1  | M0  | IV         |
+| T1  | N1  | M1  | IV         |
+| T1  | N1  | M1a | IV         |
+| T1  | N1  | M1b | IV         |
+| T1  | N1  | M1c | IV         |
+| T1a | N0  | M1  | IV         |
+| T1a | N0  | M1a | IV         |
+| T1a | N0  | M1b | IV         |
+| T1a | N0  | M1c | IV         |
+| T1a | N1  | M0  | IV         |
+| T1a | N1  | M1  | IV         |
+| T1a | N1  | M1a | IV         |
+| T1a | N1  | M1b | IV         |
+| T1a | N1  | M1c | IV         |
+| T1b | N0  | M1  | IV         |
+| T1b | N0  | M1a | IV         |
+| T1b | N0  | M1b | IV         |
+| T1b | N0  | M1c | IV         |
+| T1b | N1  | M0  | IV         |
+| T1b | N1  | M1  | IV         |
+| T1b | N1  | M1a | IV         |
+| T1b | N1  | M1b | IV         |
+| T1b | N1  | M1c | IV         |
+| T1c | N0  | M1  | IV         |
+| T1c | N0  | M1a | IV         |
+| T1c | N0  | M1b | IV         |
+| T1c | N0  | M1c | IV         |
+| T1c | N1  | M0  | IV         |
+| T1c | N1  | M1  | IV         |
+| T1c | N1  | M1a | IV         |
+| T1c | N1  | M1b | IV         |
+| T1c | N1  | M1c | IV         |
+| T2  | N0  | M1  | IV         |
+| T2  | N0  | M1a | IV         |
+| T2  | N0  | M1b | IV         |
+| T2  | N0  | M1c | IV         |
+| T2  | N1  | M0  | IV         |
+| T2  | N1  | M1  | IV         |
+| T2  | N1  | M1a | IV         |
+| T2  | N1  | M1b | IV         |
+| T2  | N1  | M1c | IV         |
+| T2a | N0  | M1  | IV         |
+| T2a | N0  | M1a | IV         |
+| T2a | N0  | M1b | IV         |
+| T2a | N0  | M1c | IV         |
+| T2a | N1  | M0  | IV         |
+| T2a | N1  | M1  | IV         |
+| T2a | N1  | M1a | IV         |
+| T2a | N1  | M1b | IV         |
+| T2a | N1  | M1c | IV         |
+| T2b | N0  | M1  | IV         |
+| T2b | N0  | M1a | IV         |
+| T2b | N0  | M1b | IV         |
+| T2b | N0  | M1c | IV         |
+| T2b | N1  | M0  | IV         |
+| T2b | N1  | M1  | IV         |
+| T2b | N1  | M1a | IV         |
+| T2b | N1  | M1b | IV         |
+| T2b | N1  | M1c | IV         |
+| T2c | N0  | M1  | IV         |
+| T2c | N0  | M1a | IV         |
+| T2c | N0  | M1b | IV         |
+| T2c | N0  | M1c | IV         |
+| T2c | N1  | M0  | IV         |
+| T2c | N1  | M1  | IV         |
+| T2c | N1  | M1a | IV         |
+| T2c | N1  | M1b | IV         |
+| T2c | N1  | M1c | IV         |
+| T3  | N0  | M1  | IV         |
+| T3  | N0  | M1a | IV         |
+| T3  | N0  | M1b | IV         |
+| T3  | N0  | M1c | IV         |
+| T3  | N1  | M0  | IV         |
+| T3  | N1  | M1  | IV         |
+| T3  | N1  | M1a | IV         |
+| T3  | N1  | M1b | IV         |
+| T3  | N1  | M1c | IV         |
+| T3a | N0  | M1  | IV         |
+| T3a | N0  | M1a | IV         |
+| T3a | N0  | M1b | IV         |
+| T3a | N0  | M1c | IV         |
+| T3a | N1  | M0  | IV         |
+| T3a | N1  | M1  | IV         |
+| T3a | N1  | M1a | IV         |
+| T3a | N1  | M1b | IV         |
+| T3a | N1  | M1c | IV         |
+| T3b | N0  | M1  | IV         |
+| T3b | N0  | M1a | IV         |
+| T3b | N0  | M1b | IV         |
+| T3b | N0  | M1c | IV         |
+| T3b | N1  | M0  | IV         |
+| T3b | N1  | M1  | IV         |
+| T3b | N1  | M1a | IV         |
+| T3b | N1  | M1b | IV         |
+| T3b | N1  | M1c | IV         |
+| T4  | N0  | M1  | IV         |
+| T4  | N0  | M1a | IV         |
+| T4  | N0  | M1b | IV         |
+| T4  | N0  | M1c | IV         |
+| T4  | N1  | M0  | IV         |
+| T4  | N1  | M1  | IV         |
+| T4  | N1  | M1a | IV         |
+| T4  | N1  | M1b | IV         |
+| T4  | N1  | M1c | IV         |
 
-|                   |
-|-------------------|
-| Table has no data |
+Skin
+
+Clinical (844 rules)
+
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| Tis | N0  | M0  | 0          |
+| T1a | N0  | M0  | IA         |
+| T1b | N0  | M0  | IB         |
+| T2a | N0  | M0  | IB         |
+| T2b | N0  | M0  | IIA        |
+| T3a | N0  | M0  | IIA        |
+| T3b | N0  | M0  | IIB        |
+| T4a | N0  | M0  | IIB        |
+| T4b | N0  | M0  | IIC        |
+| T0  | N1  | M0  | III        |
+| T0  | N1a | M0  | III        |
+| T0  | N1b | M0  | III        |
+| T0  | N1c | M0  | III        |
+| T0  | N2  | M0  | III        |
+| T0  | N2a | M0  | III        |
+| T0  | N2b | M0  | III        |
+| T0  | N2c | M0  | III        |
+| T0  | N3  | M0  | III        |
+| T0  | N3a | M0  | III        |
+| T0  | N3b | M0  | III        |
+| T0  | N3c | M0  | III        |
+| T1  | N1  | M0  | III        |
+| T1  | N1a | M0  | III        |
+| T1  | N1b | M0  | III        |
+| T1  | N1c | M0  | III        |
+| T1  | N2  | M0  | III        |
+| T1  | N2a | M0  | III        |
+| T1  | N2b | M0  | III        |
+| T1  | N2c | M0  | III        |
+| T1  | N3  | M0  | III        |
+| T1  | N3a | M0  | III        |
+| T1  | N3b | M0  | III        |
+| T1  | N3c | M0  | III        |
+| T1a | N1  | M0  | III        |
+| T1a | N1a | M0  | III        |
+| T1a | N1b | M0  | III        |
+| T1a | N1c | M0  | III        |
+| T1a | N2  | M0  | III        |
+| T1a | N2a | M0  | III        |
+| T1a | N2b | M0  | III        |
+| T1a | N2c | M0  | III        |
+| T1a | N3  | M0  | III        |
+| T1a | N3a | M0  | III        |
+| T1a | N3b | M0  | III        |
+| T1a | N3c | M0  | III        |
+| T1b | N1  | M0  | III        |
+| T1b | N1a | M0  | III        |
+| T1b | N1b | M0  | III        |
+| T1b | N1c | M0  | III        |
+| T1b | N2  | M0  | III        |
+| T1b | N2a | M0  | III        |
+| T1b | N2b | M0  | III        |
+| T1b | N2c | M0  | III        |
+| T1b | N3  | M0  | III        |
+| T1b | N3a | M0  | III        |
+| T1b | N3b | M0  | III        |
+| T1b | N3c | M0  | III        |
+| T2a | N1  | M0  | III        |
+| T2a | N1a | M0  | III        |
+| T2a | N1b | M0  | III        |
+| T2a | N1c | M0  | III        |
+| T2a | N2  | M0  | III        |
+| T2a | N2a | M0  | III        |
+| T2a | N2b | M0  | III        |
+| T2a | N2c | M0  | III        |
+| T2a | N3  | M0  | III        |
+| T2a | N3a | M0  | III        |
+| T2a | N3b | M0  | III        |
+| T2a | N3c | M0  | III        |
+| T2b | N1  | M0  | III        |
+| T2b | N1a | M0  | III        |
+| T2b | N1b | M0  | III        |
+| T2b | N1c | M0  | III        |
+| T2b | N2  | M0  | III        |
+| T2b | N2a | M0  | III        |
+| T2b | N2b | M0  | III        |
+| T2b | N2c | M0  | III        |
+| T2b | N3  | M0  | III        |
+| T2b | N3a | M0  | III        |
+| T2b | N3b | M0  | III        |
+| T2b | N3c | M0  | III        |
+| T3a | N1  | M0  | III        |
+| T3a | N1a | M0  | III        |
+| T3a | N1b | M0  | III        |
+| T3a | N1c | M0  | III        |
+| T3a | N2  | M0  | III        |
+| T3a | N2a | M0  | III        |
+| T3a | N2b | M0  | III        |
+| T3a | N2c | M0  | III        |
+| T3a | N3  | M0  | III        |
+| T3a | N3a | M0  | III        |
+| T3a | N3b | M0  | III        |
+| T3a | N3c | M0  | III        |
+| T3b | N1  | M0  | III        |
+| T3b | N1a | M0  | III        |
+| T3b | N1b | M0  | III        |
+| T3b | N1c | M0  | III        |
+| T3b | N2  | M0  | III        |
+| T3b | N2a | M0  | III        |
+| T3b | N2b | M0  | III        |
+| T3b | N2c | M0  | III        |
+| T3b | N3  | M0  | III        |
+| T3b | N3a | M0  | III        |
+| T3b | N3b | M0  | III        |
+| T3b | N3c | M0  | III        |
+| T4a | N1  | M0  | III        |
+| T4a | N1a | M0  | III        |
+| T4a | N1b | M0  | III        |
+| T4a | N1c | M0  | III        |
+| T4a | N2  | M0  | III        |
+| T4a | N2a | M0  | III        |
+| T4a | N2b | M0  | III        |
+| T4a | N2c | M0  | III        |
+| T4a | N3  | M0  | III        |
+| T4a | N3a | M0  | III        |
+| T4a | N3b | M0  | III        |
+| T4a | N3c | M0  | III        |
+| T4b | N1  | M0  | III        |
+| T4b | N1a | M0  | III        |
+| T4b | N1b | M0  | III        |
+| T4b | N1c | M0  | III        |
+| T4b | N2  | M0  | III        |
+| T4b | N2a | M0  | III        |
+| T4b | N2b | M0  | III        |
+| T4b | N2c | M0  | III        |
+| T4b | N3  | M0  | III        |
+| T4b | N3a | M0  | III        |
+| T4b | N3b | M0  | III        |
+| T4b | N3c | M0  | III        |
+| T0  | N0  | M1  | IV         |
+| T0  | N0  | M1a | IV         |
+| T0  | N0  | M1b | IV         |
+| T0  | N0  | M1c | IV         |
+| T0  | N0  | M1d | IV         |
+| T0  | N1  | M1  | IV         |
+| T0  | N1  | M1a | IV         |
+| T0  | N1  | M1b | IV         |
+| T0  | N1  | M1c | IV         |
+| T0  | N1  | M1d | IV         |
+| T0  | N1a | M1  | IV         |
+| T0  | N1a | M1a | IV         |
+| T0  | N1a | M1b | IV         |
+| T0  | N1a | M1c | IV         |
+| T0  | N1a | M1d | IV         |
+| T0  | N1b | M1  | IV         |
+| T0  | N1b | M1a | IV         |
+| T0  | N1b | M1b | IV         |
+| T0  | N1b | M1c | IV         |
+| T0  | N1b | M1d | IV         |
+| T0  | N1c | M1  | IV         |
+| T0  | N1c | M1a | IV         |
+| T0  | N1c | M1b | IV         |
+| T0  | N1c | M1c | IV         |
+| T0  | N1c | M1d | IV         |
+| T0  | N2  | M1  | IV         |
+| T0  | N2  | M1a | IV         |
+| T0  | N2  | M1b | IV         |
+| T0  | N2  | M1c | IV         |
+| T0  | N2  | M1d | IV         |
+| T0  | N2a | M1  | IV         |
+| T0  | N2a | M1a | IV         |
+| T0  | N2a | M1b | IV         |
+| T0  | N2a | M1c | IV         |
+| T0  | N2a | M1d | IV         |
+| T0  | N2b | M1  | IV         |
+| T0  | N2b | M1a | IV         |
+| T0  | N2b | M1b | IV         |
+| T0  | N2b | M1c | IV         |
+| T0  | N2b | M1d | IV         |
+| T0  | N2c | M1  | IV         |
+| T0  | N2c | M1a | IV         |
+| T0  | N2c | M1b | IV         |
+| T0  | N2c | M1c | IV         |
+| T0  | N2c | M1d | IV         |
+| T0  | N3  | M1  | IV         |
+| T0  | N3  | M1a | IV         |
+| T0  | N3  | M1b | IV         |
+| T0  | N3  | M1c | IV         |
+| T0  | N3  | M1d | IV         |
+| T0  | N3a | M1  | IV         |
+| T0  | N3a | M1a | IV         |
+| T0  | N3a | M1b | IV         |
+| T0  | N3a | M1c | IV         |
+| T0  | N3a | M1d | IV         |
+| T0  | N3b | M1  | IV         |
+| T0  | N3b | M1a | IV         |
+| T0  | N3b | M1b | IV         |
+| T0  | N3b | M1c | IV         |
+| T0  | N3b | M1d | IV         |
+| T0  | N3c | M1  | IV         |
+| T0  | N3c | M1a | IV         |
+| T0  | N3c | M1b | IV         |
+| T0  | N3c | M1c | IV         |
+| T0  | N3c | M1d | IV         |
+| T1  | N0  | M1  | IV         |
+| T1  | N0  | M1a | IV         |
+| T1  | N0  | M1b | IV         |
+| T1  | N0  | M1c | IV         |
+| T1  | N0  | M1d | IV         |
+| T1  | N1  | M1  | IV         |
+| T1  | N1  | M1a | IV         |
+| T1  | N1  | M1b | IV         |
+| T1  | N1  | M1c | IV         |
+| T1  | N1  | M1d | IV         |
+| T1  | N1a | M1  | IV         |
+| T1  | N1a | M1a | IV         |
+| T1  | N1a | M1b | IV         |
+| T1  | N1a | M1c | IV         |
+| T1  | N1a | M1d | IV         |
+| T1  | N1b | M1  | IV         |
+| T1  | N1b | M1a | IV         |
+| T1  | N1b | M1b | IV         |
+| T1  | N1b | M1c | IV         |
+| T1  | N1b | M1d | IV         |
+| T1  | N1c | M1  | IV         |
+| T1  | N1c | M1a | IV         |
+| T1  | N1c | M1b | IV         |
+| T1  | N1c | M1c | IV         |
+| T1  | N1c | M1d | IV         |
+| T1  | N2  | M1  | IV         |
+| T1  | N2  | M1a | IV         |
+| T1  | N2  | M1b | IV         |
+| T1  | N2  | M1c | IV         |
+| T1  | N2  | M1d | IV         |
+| T1  | N2a | M1  | IV         |
+| T1  | N2a | M1a | IV         |
+| T1  | N2a | M1b | IV         |
+| T1  | N2a | M1c | IV         |
+| T1  | N2a | M1d | IV         |
+| T1  | N2b | M1  | IV         |
+| T1  | N2b | M1a | IV         |
+| T1  | N2b | M1b | IV         |
+| T1  | N2b | M1c | IV         |
+| T1  | N2b | M1d | IV         |
+| T1  | N2c | M1  | IV         |
+| T1  | N2c | M1a | IV         |
+| T1  | N2c | M1b | IV         |
+| T1  | N2c | M1c | IV         |
+| T1  | N2c | M1d | IV         |
+| T1  | N3  | M1  | IV         |
+| T1  | N3  | M1a | IV         |
+| T1  | N3  | M1b | IV         |
+| T1  | N3  | M1c | IV         |
+| T1  | N3  | M1d | IV         |
+| T1  | N3a | M1  | IV         |
+| T1  | N3a | M1a | IV         |
+| T1  | N3a | M1b | IV         |
+| T1  | N3a | M1c | IV         |
+| T1  | N3a | M1d | IV         |
+| T1  | N3b | M1  | IV         |
+| T1  | N3b | M1a | IV         |
+| T1  | N3b | M1b | IV         |
+| T1  | N3b | M1c | IV         |
+| T1  | N3b | M1d | IV         |
+| T1  | N3c | M1  | IV         |
+| T1  | N3c | M1a | IV         |
+| T1  | N3c | M1b | IV         |
+| T1  | N3c | M1c | IV         |
+| T1  | N3c | M1d | IV         |
+| T1a | N0  | M1  | IV         |
+| T1a | N0  | M1a | IV         |
+| T1a | N0  | M1b | IV         |
+| T1a | N0  | M1c | IV         |
+| T1a | N0  | M1d | IV         |
+| T1a | N1  | M1  | IV         |
+| T1a | N1  | M1a | IV         |
+| T1a | N1  | M1b | IV         |
+| T1a | N1  | M1c | IV         |
+| T1a | N1  | M1d | IV         |
+| T1a | N1a | M1  | IV         |
+| T1a | N1a | M1a | IV         |
+| T1a | N1a | M1b | IV         |
+| T1a | N1a | M1c | IV         |
+| T1a | N1a | M1d | IV         |
+| T1a | N1b | M1  | IV         |
+| T1a | N1b | M1a | IV         |
+| T1a | N1b | M1b | IV         |
+| T1a | N1b | M1c | IV         |
+| T1a | N1b | M1d | IV         |
+| T1a | N1c | M1  | IV         |
+| T1a | N1c | M1a | IV         |
+| T1a | N1c | M1b | IV         |
+| T1a | N1c | M1c | IV         |
+| T1a | N1c | M1d | IV         |
+| T1a | N2  | M1  | IV         |
+| T1a | N2  | M1a | IV         |
+| T1a | N2  | M1b | IV         |
+| T1a | N2  | M1c | IV         |
+| T1a | N2  | M1d | IV         |
+| T1a | N2a | M1  | IV         |
+| T1a | N2a | M1a | IV         |
+| T1a | N2a | M1b | IV         |
+| T1a | N2a | M1c | IV         |
+| T1a | N2a | M1d | IV         |
+| T1a | N2b | M1  | IV         |
+| T1a | N2b | M1a | IV         |
+| T1a | N2b | M1b | IV         |
+| T1a | N2b | M1c | IV         |
+| T1a | N2b | M1d | IV         |
+| T1a | N2c | M1  | IV         |
+| T1a | N2c | M1a | IV         |
+| T1a | N2c | M1b | IV         |
+| T1a | N2c | M1c | IV         |
+| T1a | N2c | M1d | IV         |
+| T1a | N3  | M1  | IV         |
+| T1a | N3  | M1a | IV         |
+| T1a | N3  | M1b | IV         |
+| T1a | N3  | M1c | IV         |
+| T1a | N3  | M1d | IV         |
+| T1a | N3a | M1  | IV         |
+| T1a | N3a | M1a | IV         |
+| T1a | N3a | M1b | IV         |
+| T1a | N3a | M1c | IV         |
+| T1a | N3a | M1d | IV         |
+| T1a | N3b | M1  | IV         |
+| T1a | N3b | M1a | IV         |
+| T1a | N3b | M1b | IV         |
+| T1a | N3b | M1c | IV         |
+| T1a | N3b | M1d | IV         |
+| T1a | N3c | M1  | IV         |
+| T1a | N3c | M1a | IV         |
+| T1a | N3c | M1b | IV         |
+| T1a | N3c | M1c | IV         |
+| T1a | N3c | M1d | IV         |
+| T1b | N0  | M1  | IV         |
+| T1b | N0  | M1a | IV         |
+| T1b | N0  | M1b | IV         |
+| T1b | N0  | M1c | IV         |
+| T1b | N0  | M1d | IV         |
+| T1b | N1  | M1  | IV         |
+| T1b | N1  | M1a | IV         |
+| T1b | N1  | M1b | IV         |
+| T1b | N1  | M1c | IV         |
+| T1b | N1  | M1d | IV         |
+| T1b | N1a | M1  | IV         |
+| T1b | N1a | M1a | IV         |
+| T1b | N1a | M1b | IV         |
+| T1b | N1a | M1c | IV         |
+| T1b | N1a | M1d | IV         |
+| T1b | N1b | M1  | IV         |
+| T1b | N1b | M1a | IV         |
+| T1b | N1b | M1b | IV         |
+| T1b | N1b | M1c | IV         |
+| T1b | N1b | M1d | IV         |
+| T1b | N1c | M1  | IV         |
+| T1b | N1c | M1a | IV         |
+| T1b | N1c | M1b | IV         |
+| T1b | N1c | M1c | IV         |
+| T1b | N1c | M1d | IV         |
+| T1b | N2  | M1  | IV         |
+| T1b | N2  | M1a | IV         |
+| T1b | N2  | M1b | IV         |
+| T1b | N2  | M1c | IV         |
+| T1b | N2  | M1d | IV         |
+| T1b | N2a | M1  | IV         |
+| T1b | N2a | M1a | IV         |
+| T1b | N2a | M1b | IV         |
+| T1b | N2a | M1c | IV         |
+| T1b | N2a | M1d | IV         |
+| T1b | N2b | M1  | IV         |
+| T1b | N2b | M1a | IV         |
+| T1b | N2b | M1b | IV         |
+| T1b | N2b | M1c | IV         |
+| T1b | N2b | M1d | IV         |
+| T1b | N2c | M1  | IV         |
+| T1b | N2c | M1a | IV         |
+| T1b | N2c | M1b | IV         |
+| T1b | N2c | M1c | IV         |
+| T1b | N2c | M1d | IV         |
+| T1b | N3  | M1  | IV         |
+| T1b | N3  | M1a | IV         |
+| T1b | N3  | M1b | IV         |
+| T1b | N3  | M1c | IV         |
+| T1b | N3  | M1d | IV         |
+| T1b | N3a | M1  | IV         |
+| T1b | N3a | M1a | IV         |
+| T1b | N3a | M1b | IV         |
+| T1b | N3a | M1c | IV         |
+| T1b | N3a | M1d | IV         |
+| T1b | N3b | M1  | IV         |
+| T1b | N3b | M1a | IV         |
+| T1b | N3b | M1b | IV         |
+| T1b | N3b | M1c | IV         |
+| T1b | N3b | M1d | IV         |
+| T1b | N3c | M1  | IV         |
+| T1b | N3c | M1a | IV         |
+| T1b | N3c | M1b | IV         |
+| T1b | N3c | M1c | IV         |
+| T1b | N3c | M1d | IV         |
+| T2a | N0  | M1  | IV         |
+| T2a | N0  | M1a | IV         |
+| T2a | N0  | M1b | IV         |
+| T2a | N0  | M1c | IV         |
+| T2a | N0  | M1d | IV         |
+| T2a | N1  | M1  | IV         |
+| T2a | N1  | M1a | IV         |
+| T2a | N1  | M1b | IV         |
+| T2a | N1  | M1c | IV         |
+| T2a | N1  | M1d | IV         |
+| T2a | N1a | M1  | IV         |
+| T2a | N1a | M1a | IV         |
+| T2a | N1a | M1b | IV         |
+| T2a | N1a | M1c | IV         |
+| T2a | N1a | M1d | IV         |
+| T2a | N1b | M1  | IV         |
+| T2a | N1b | M1a | IV         |
+| T2a | N1b | M1b | IV         |
+| T2a | N1b | M1c | IV         |
+| T2a | N1b | M1d | IV         |
+| T2a | N1c | M1  | IV         |
+| T2a | N1c | M1a | IV         |
+| T2a | N1c | M1b | IV         |
+| T2a | N1c | M1c | IV         |
+| T2a | N1c | M1d | IV         |
+| T2a | N2  | M1  | IV         |
+| T2a | N2  | M1a | IV         |
+| T2a | N2  | M1b | IV         |
+| T2a | N2  | M1c | IV         |
+| T2a | N2  | M1d | IV         |
+| T2a | N2a | M1  | IV         |
+| T2a | N2a | M1a | IV         |
+| T2a | N2a | M1b | IV         |
+| T2a | N2a | M1c | IV         |
+| T2a | N2a | M1d | IV         |
+| T2a | N2b | M1  | IV         |
+| T2a | N2b | M1a | IV         |
+| T2a | N2b | M1b | IV         |
+| T2a | N2b | M1c | IV         |
+| T2a | N2b | M1d | IV         |
+| T2a | N2c | M1  | IV         |
+| T2a | N2c | M1a | IV         |
+| T2a | N2c | M1b | IV         |
+| T2a | N2c | M1c | IV         |
+| T2a | N2c | M1d | IV         |
+| T2a | N3  | M1  | IV         |
+| T2a | N3  | M1a | IV         |
+| T2a | N3  | M1b | IV         |
+| T2a | N3  | M1c | IV         |
+| T2a | N3  | M1d | IV         |
+| T2a | N3a | M1  | IV         |
+| T2a | N3a | M1a | IV         |
+| T2a | N3a | M1b | IV         |
+| T2a | N3a | M1c | IV         |
+| T2a | N3a | M1d | IV         |
+| T2a | N3b | M1  | IV         |
+| T2a | N3b | M1a | IV         |
+| T2a | N3b | M1b | IV         |
+| T2a | N3b | M1c | IV         |
+| T2a | N3b | M1d | IV         |
+| T2a | N3c | M1  | IV         |
+| T2a | N3c | M1a | IV         |
+| T2a | N3c | M1b | IV         |
+| T2a | N3c | M1c | IV         |
+| T2a | N3c | M1d | IV         |
+| T2b | N0  | M1  | IV         |
+| T2b | N0  | M1a | IV         |
+| T2b | N0  | M1b | IV         |
+| T2b | N0  | M1c | IV         |
+| T2b | N0  | M1d | IV         |
+| T2b | N1  | M1  | IV         |
+| T2b | N1  | M1a | IV         |
+| T2b | N1  | M1b | IV         |
+| T2b | N1  | M1c | IV         |
+| T2b | N1  | M1d | IV         |
+| T2b | N1a | M1  | IV         |
+| T2b | N1a | M1a | IV         |
+| T2b | N1a | M1b | IV         |
+| T2b | N1a | M1c | IV         |
+| T2b | N1a | M1d | IV         |
+| T2b | N1b | M1  | IV         |
+| T2b | N1b | M1a | IV         |
+| T2b | N1b | M1b | IV         |
+| T2b | N1b | M1c | IV         |
+| T2b | N1b | M1d | IV         |
+| T2b | N1c | M1  | IV         |
+| T2b | N1c | M1a | IV         |
+| T2b | N1c | M1b | IV         |
+| T2b | N1c | M1c | IV         |
+| T2b | N1c | M1d | IV         |
+| T2b | N2  | M1  | IV         |
+| T2b | N2  | M1a | IV         |
+| T2b | N2  | M1b | IV         |
+| T2b | N2  | M1c | IV         |
+| T2b | N2  | M1d | IV         |
+| T2b | N2a | M1  | IV         |
+| T2b | N2a | M1a | IV         |
+| T2b | N2a | M1b | IV         |
+| T2b | N2a | M1c | IV         |
+| T2b | N2a | M1d | IV         |
+| T2b | N2b | M1  | IV         |
+| T2b | N2b | M1a | IV         |
+| T2b | N2b | M1b | IV         |
+| T2b | N2b | M1c | IV         |
+| T2b | N2b | M1d | IV         |
+| T2b | N2c | M1  | IV         |
+| T2b | N2c | M1a | IV         |
+| T2b | N2c | M1b | IV         |
+| T2b | N2c | M1c | IV         |
+| T2b | N2c | M1d | IV         |
+| T2b | N3  | M1  | IV         |
+| T2b | N3  | M1a | IV         |
+| T2b | N3  | M1b | IV         |
+| T2b | N3  | M1c | IV         |
+| T2b | N3  | M1d | IV         |
+| T2b | N3a | M1  | IV         |
+| T2b | N3a | M1a | IV         |
+| T2b | N3a | M1b | IV         |
+| T2b | N3a | M1c | IV         |
+| T2b | N3a | M1d | IV         |
+| T2b | N3b | M1  | IV         |
+| T2b | N3b | M1a | IV         |
+| T2b | N3b | M1b | IV         |
+| T2b | N3b | M1c | IV         |
+| T2b | N3b | M1d | IV         |
+| T2b | N3c | M1  | IV         |
+| T2b | N3c | M1a | IV         |
+| T2b | N3c | M1b | IV         |
+| T2b | N3c | M1c | IV         |
+| T2b | N3c | M1d | IV         |
+| T3a | N0  | M1  | IV         |
+| T3a | N0  | M1a | IV         |
+| T3a | N0  | M1b | IV         |
+| T3a | N0  | M1c | IV         |
+| T3a | N0  | M1d | IV         |
+| T3a | N1  | M1  | IV         |
+| T3a | N1  | M1a | IV         |
+| T3a | N1  | M1b | IV         |
+| T3a | N1  | M1c | IV         |
+| T3a | N1  | M1d | IV         |
+| T3a | N1a | M1  | IV         |
+| T3a | N1a | M1a | IV         |
+| T3a | N1a | M1b | IV         |
+| T3a | N1a | M1c | IV         |
+| T3a | N1a | M1d | IV         |
+| T3a | N1b | M1  | IV         |
+| T3a | N1b | M1a | IV         |
+| T3a | N1b | M1b | IV         |
+| T3a | N1b | M1c | IV         |
+| T3a | N1b | M1d | IV         |
+| T3a | N1c | M1  | IV         |
+| T3a | N1c | M1a | IV         |
+| T3a | N1c | M1b | IV         |
+| T3a | N1c | M1c | IV         |
+| T3a | N1c | M1d | IV         |
+| T3a | N2  | M1  | IV         |
+| T3a | N2  | M1a | IV         |
+| T3a | N2  | M1b | IV         |
+| T3a | N2  | M1c | IV         |
+| T3a | N2  | M1d | IV         |
+| T3a | N2a | M1  | IV         |
+| T3a | N2a | M1a | IV         |
+| T3a | N2a | M1b | IV         |
+| T3a | N2a | M1c | IV         |
+| T3a | N2a | M1d | IV         |
+| T3a | N2b | M1  | IV         |
+| T3a | N2b | M1a | IV         |
+| T3a | N2b | M1b | IV         |
+| T3a | N2b | M1c | IV         |
+| T3a | N2b | M1d | IV         |
+| T3a | N2c | M1  | IV         |
+| T3a | N2c | M1a | IV         |
+| T3a | N2c | M1b | IV         |
+| T3a | N2c | M1c | IV         |
+| T3a | N2c | M1d | IV         |
+| T3a | N3  | M1  | IV         |
+| T3a | N3  | M1a | IV         |
+| T3a | N3  | M1b | IV         |
+| T3a | N3  | M1c | IV         |
+| T3a | N3  | M1d | IV         |
+| T3a | N3a | M1  | IV         |
+| T3a | N3a | M1a | IV         |
+| T3a | N3a | M1b | IV         |
+| T3a | N3a | M1c | IV         |
+| T3a | N3a | M1d | IV         |
+| T3a | N3b | M1  | IV         |
+| T3a | N3b | M1a | IV         |
+| T3a | N3b | M1b | IV         |
+| T3a | N3b | M1c | IV         |
+| T3a | N3b | M1d | IV         |
+| T3a | N3c | M1  | IV         |
+| T3a | N3c | M1a | IV         |
+| T3a | N3c | M1b | IV         |
+| T3a | N3c | M1c | IV         |
+| T3a | N3c | M1d | IV         |
+| T3b | N0  | M1  | IV         |
+| T3b | N0  | M1a | IV         |
+| T3b | N0  | M1b | IV         |
+| T3b | N0  | M1c | IV         |
+| T3b | N0  | M1d | IV         |
+| T3b | N1  | M1  | IV         |
+| T3b | N1  | M1a | IV         |
+| T3b | N1  | M1b | IV         |
+| T3b | N1  | M1c | IV         |
+| T3b | N1  | M1d | IV         |
+| T3b | N1a | M1  | IV         |
+| T3b | N1a | M1a | IV         |
+| T3b | N1a | M1b | IV         |
+| T3b | N1a | M1c | IV         |
+| T3b | N1a | M1d | IV         |
+| T3b | N1b | M1  | IV         |
+| T3b | N1b | M1a | IV         |
+| T3b | N1b | M1b | IV         |
+| T3b | N1b | M1c | IV         |
+| T3b | N1b | M1d | IV         |
+| T3b | N1c | M1  | IV         |
+| T3b | N1c | M1a | IV         |
+| T3b | N1c | M1b | IV         |
+| T3b | N1c | M1c | IV         |
+| T3b | N1c | M1d | IV         |
+| T3b | N2  | M1  | IV         |
+| T3b | N2  | M1a | IV         |
+| T3b | N2  | M1b | IV         |
+| T3b | N2  | M1c | IV         |
+| T3b | N2  | M1d | IV         |
+| T3b | N2a | M1  | IV         |
+| T3b | N2a | M1a | IV         |
+| T3b | N2a | M1b | IV         |
+| T3b | N2a | M1c | IV         |
+| T3b | N2a | M1d | IV         |
+| T3b | N2b | M1  | IV         |
+| T3b | N2b | M1a | IV         |
+| T3b | N2b | M1b | IV         |
+| T3b | N2b | M1c | IV         |
+| T3b | N2b | M1d | IV         |
+| T3b | N2c | M1  | IV         |
+| T3b | N2c | M1a | IV         |
+| T3b | N2c | M1b | IV         |
+| T3b | N2c | M1c | IV         |
+| T3b | N2c | M1d | IV         |
+| T3b | N3  | M1  | IV         |
+| T3b | N3  | M1a | IV         |
+| T3b | N3  | M1b | IV         |
+| T3b | N3  | M1c | IV         |
+| T3b | N3  | M1d | IV         |
+| T3b | N3a | M1  | IV         |
+| T3b | N3a | M1a | IV         |
+| T3b | N3a | M1b | IV         |
+| T3b | N3a | M1c | IV         |
+| T3b | N3a | M1d | IV         |
+| T3b | N3b | M1  | IV         |
+| T3b | N3b | M1a | IV         |
+| T3b | N3b | M1b | IV         |
+| T3b | N3b | M1c | IV         |
+| T3b | N3b | M1d | IV         |
+| T3b | N3c | M1  | IV         |
+| T3b | N3c | M1a | IV         |
+| T3b | N3c | M1b | IV         |
+| T3b | N3c | M1c | IV         |
+| T3b | N3c | M1d | IV         |
+| T4a | N0  | M1  | IV         |
+| T4a | N0  | M1a | IV         |
+| T4a | N0  | M1b | IV         |
+| T4a | N0  | M1c | IV         |
+| T4a | N0  | M1d | IV         |
+| T4a | N1  | M1  | IV         |
+| T4a | N1  | M1a | IV         |
+| T4a | N1  | M1b | IV         |
+| T4a | N1  | M1c | IV         |
+| T4a | N1  | M1d | IV         |
+| T4a | N1a | M1  | IV         |
+| T4a | N1a | M1a | IV         |
+| T4a | N1a | M1b | IV         |
+| T4a | N1a | M1c | IV         |
+| T4a | N1a | M1d | IV         |
+| T4a | N1b | M1  | IV         |
+| T4a | N1b | M1a | IV         |
+| T4a | N1b | M1b | IV         |
+| T4a | N1b | M1c | IV         |
+| T4a | N1b | M1d | IV         |
+| T4a | N1c | M1  | IV         |
+| T4a | N1c | M1a | IV         |
+| T4a | N1c | M1b | IV         |
+| T4a | N1c | M1c | IV         |
+| T4a | N1c | M1d | IV         |
+| T4a | N2  | M1  | IV         |
+| T4a | N2  | M1a | IV         |
+| T4a | N2  | M1b | IV         |
+| T4a | N2  | M1c | IV         |
+| T4a | N2  | M1d | IV         |
+| T4a | N2a | M1  | IV         |
+| T4a | N2a | M1a | IV         |
+| T4a | N2a | M1b | IV         |
+| T4a | N2a | M1c | IV         |
+| T4a | N2a | M1d | IV         |
+| T4a | N2b | M1  | IV         |
+| T4a | N2b | M1a | IV         |
+| T4a | N2b | M1b | IV         |
+| T4a | N2b | M1c | IV         |
+| T4a | N2b | M1d | IV         |
+| T4a | N2c | M1  | IV         |
+| T4a | N2c | M1a | IV         |
+| T4a | N2c | M1b | IV         |
+| T4a | N2c | M1c | IV         |
+| T4a | N2c | M1d | IV         |
+| T4a | N3  | M1  | IV         |
+| T4a | N3  | M1a | IV         |
+| T4a | N3  | M1b | IV         |
+| T4a | N3  | M1c | IV         |
+| T4a | N3  | M1d | IV         |
+| T4a | N3a | M1  | IV         |
+| T4a | N3a | M1a | IV         |
+| T4a | N3a | M1b | IV         |
+| T4a | N3a | M1c | IV         |
+| T4a | N3a | M1d | IV         |
+| T4a | N3b | M1  | IV         |
+| T4a | N3b | M1a | IV         |
+| T4a | N3b | M1b | IV         |
+| T4a | N3b | M1c | IV         |
+| T4a | N3b | M1d | IV         |
+| T4a | N3c | M1  | IV         |
+| T4a | N3c | M1a | IV         |
+| T4a | N3c | M1b | IV         |
+| T4a | N3c | M1c | IV         |
+| T4a | N3c | M1d | IV         |
+| T4b | N0  | M1  | IV         |
+| T4b | N0  | M1a | IV         |
+| T4b | N0  | M1b | IV         |
+| T4b | N0  | M1c | IV         |
+| T4b | N0  | M1d | IV         |
+| T4b | N1  | M1  | IV         |
+| T4b | N1  | M1a | IV         |
+| T4b | N1  | M1b | IV         |
+| T4b | N1  | M1c | IV         |
+| T4b | N1  | M1d | IV         |
+| T4b | N1a | M1  | IV         |
+| T4b | N1a | M1a | IV         |
+| T4b | N1a | M1b | IV         |
+| T4b | N1a | M1c | IV         |
+| T4b | N1a | M1d | IV         |
+| T4b | N1b | M1  | IV         |
+| T4b | N1b | M1a | IV         |
+| T4b | N1b | M1b | IV         |
+| T4b | N1b | M1c | IV         |
+| T4b | N1b | M1d | IV         |
+| T4b | N1c | M1  | IV         |
+| T4b | N1c | M1a | IV         |
+| T4b | N1c | M1b | IV         |
+| T4b | N1c | M1c | IV         |
+| T4b | N1c | M1d | IV         |
+| T4b | N2  | M1  | IV         |
+| T4b | N2  | M1a | IV         |
+| T4b | N2  | M1b | IV         |
+| T4b | N2  | M1c | IV         |
+| T4b | N2  | M1d | IV         |
+| T4b | N2a | M1  | IV         |
+| T4b | N2a | M1a | IV         |
+| T4b | N2a | M1b | IV         |
+| T4b | N2a | M1c | IV         |
+| T4b | N2a | M1d | IV         |
+| T4b | N2b | M1  | IV         |
+| T4b | N2b | M1a | IV         |
+| T4b | N2b | M1b | IV         |
+| T4b | N2b | M1c | IV         |
+| T4b | N2b | M1d | IV         |
+| T4b | N2c | M1  | IV         |
+| T4b | N2c | M1a | IV         |
+| T4b | N2c | M1b | IV         |
+| T4b | N2c | M1c | IV         |
+| T4b | N2c | M1d | IV         |
+| T4b | N3  | M1  | IV         |
+| T4b | N3  | M1a | IV         |
+| T4b | N3  | M1b | IV         |
+| T4b | N3  | M1c | IV         |
+| T4b | N3  | M1d | IV         |
+| T4b | N3a | M1  | IV         |
+| T4b | N3a | M1a | IV         |
+| T4b | N3a | M1b | IV         |
+| T4b | N3a | M1c | IV         |
+| T4b | N3a | M1d | IV         |
+| T4b | N3b | M1  | IV         |
+| T4b | N3b | M1a | IV         |
+| T4b | N3b | M1b | IV         |
+| T4b | N3b | M1c | IV         |
+| T4b | N3b | M1d | IV         |
+| T4b | N3c | M1  | IV         |
+| T4b | N3c | M1a | IV         |
+| T4b | N3c | M1b | IV         |
+| T4b | N3c | M1c | IV         |
+| T4b | N3c | M1d | IV         |
+| Tis | N0  | M1  | IV         |
+| Tis | N0  | M1a | IV         |
+| Tis | N0  | M1b | IV         |
+| Tis | N0  | M1c | IV         |
+| Tis | N0  | M1d | IV         |
+| Tis | N1  | M1  | IV         |
+| Tis | N1  | M1a | IV         |
+| Tis | N1  | M1b | IV         |
+| Tis | N1  | M1c | IV         |
+| Tis | N1  | M1d | IV         |
+| Tis | N1a | M1  | IV         |
+| Tis | N1a | M1a | IV         |
+| Tis | N1a | M1b | IV         |
+| Tis | N1a | M1c | IV         |
+| Tis | N1a | M1d | IV         |
+| Tis | N1b | M1  | IV         |
+| Tis | N1b | M1a | IV         |
+| Tis | N1b | M1b | IV         |
+| Tis | N1b | M1c | IV         |
+| Tis | N1b | M1d | IV         |
+| Tis | N1c | M1  | IV         |
+| Tis | N1c | M1a | IV         |
+| Tis | N1c | M1b | IV         |
+| Tis | N1c | M1c | IV         |
+| Tis | N1c | M1d | IV         |
+| Tis | N2  | M1  | IV         |
+| Tis | N2  | M1a | IV         |
+| Tis | N2  | M1b | IV         |
+| Tis | N2  | M1c | IV         |
+| Tis | N2  | M1d | IV         |
+| Tis | N2a | M1  | IV         |
+| Tis | N2a | M1a | IV         |
+| Tis | N2a | M1b | IV         |
+| Tis | N2a | M1c | IV         |
+| Tis | N2a | M1d | IV         |
+| Tis | N2b | M1  | IV         |
+| Tis | N2b | M1a | IV         |
+| Tis | N2b | M1b | IV         |
+| Tis | N2b | M1c | IV         |
+| Tis | N2b | M1d | IV         |
+| Tis | N2c | M1  | IV         |
+| Tis | N2c | M1a | IV         |
+| Tis | N2c | M1b | IV         |
+| Tis | N2c | M1c | IV         |
+| Tis | N2c | M1d | IV         |
+| Tis | N3  | M1  | IV         |
+| Tis | N3  | M1a | IV         |
+| Tis | N3  | M1b | IV         |
+| Tis | N3  | M1c | IV         |
+| Tis | N3  | M1d | IV         |
+| Tis | N3a | M1  | IV         |
+| Tis | N3a | M1a | IV         |
+| Tis | N3a | M1b | IV         |
+| Tis | N3a | M1c | IV         |
+| Tis | N3a | M1d | IV         |
+| Tis | N3b | M1  | IV         |
+| Tis | N3b | M1a | IV         |
+| Tis | N3b | M1b | IV         |
+| Tis | N3b | M1c | IV         |
+| Tis | N3b | M1d | IV         |
+| Tis | N3c | M1  | IV         |
+| Tis | N3c | M1a | IV         |
+| Tis | N3c | M1b | IV         |
+| Tis | N3c | M1c | IV         |
+| Tis | N3c | M1d | IV         |
+
+Pathological (829 rules)
+
+| T   | N   | M   | uicc_stage |
+|:----|:----|:----|:-----------|
+| Tis | N0  | M0  | 0          |
+| T1  | N0  | M0  | I          |
+| T1a | N0  | M0  | IA         |
+| T1b | N0  | M0  | IA         |
+| T2a | N0  | M0  | IB         |
+| T2b | N0  | M0  | IIA        |
+| T3a | N0  | M0  | IIA        |
+| T3b | N0  | M0  | IIB        |
+| T4a | N0  | M0  | IIB        |
+| T4b | N0  | M0  | IIC        |
+| T1  | N1  | M0  | III        |
+| T1  | N2  | M0  | III        |
+| T1a | N1  | M0  | III        |
+| T1a | N2  | M0  | III        |
+| T1b | N1  | M0  | III        |
+| T1b | N2  | M0  | III        |
+| T2a | N1  | M0  | III        |
+| T2a | N2  | M0  | III        |
+| T2b | N2  | M0  | III        |
+| T3a | N2  | M0  | III        |
+| T1a | N1a | M0  | IIIA       |
+| T1a | N2a | M0  | IIIA       |
+| T1b | N1a | M0  | IIIA       |
+| T1b | N2a | M0  | IIIA       |
+| T2a | N1a | M0  | IIIA       |
+| T2a | N2a | M0  | IIIA       |
+| T0  | N1b | M0  | IIIB       |
+| T0  | N1c | M0  | IIIB       |
+| T1a | N1b | M0  | IIIB       |
+| T1a | N1c | M0  | IIIB       |
+| T1a | N2b | M0  | IIIB       |
+| T1b | N1b | M0  | IIIB       |
+| T1b | N1c | M0  | IIIB       |
+| T1b | N2b | M0  | IIIB       |
+| T2a | N1b | M0  | IIIB       |
+| T2a | N1c | M0  | IIIB       |
+| T2a | N2b | M0  | IIIB       |
+| T2b | N1  | M0  | IIIB       |
+| T2b | N1a | M0  | IIIB       |
+| T2b | N1b | M0  | IIIB       |
+| T2b | N1c | M0  | IIIB       |
+| T2b | N2a | M0  | IIIB       |
+| T2b | N2b | M0  | IIIB       |
+| T3a | N1  | M0  | IIIB       |
+| T3a | N1a | M0  | IIIB       |
+| T3a | N1b | M0  | IIIB       |
+| T3a | N1c | M0  | IIIB       |
+| T3a | N2a | M0  | IIIB       |
+| T3a | N2b | M0  | IIIB       |
+| T0  | N2b | M0  | IIIC       |
+| T0  | N2c | M0  | IIIC       |
+| T0  | N3b | M0  | IIIC       |
+| T0  | N3c | M0  | IIIC       |
+| T1a | N2c | M0  | IIIC       |
+| T1a | N3  | M0  | IIIC       |
+| T1a | N3a | M0  | IIIC       |
+| T1a | N3b | M0  | IIIC       |
+| T1a | N3c | M0  | IIIC       |
+| T1b | N2c | M0  | IIIC       |
+| T1b | N3  | M0  | IIIC       |
+| T1b | N3a | M0  | IIIC       |
+| T1b | N3b | M0  | IIIC       |
+| T1b | N3c | M0  | IIIC       |
+| T2a | N2c | M0  | IIIC       |
+| T2a | N3  | M0  | IIIC       |
+| T2a | N3a | M0  | IIIC       |
+| T2a | N3b | M0  | IIIC       |
+| T2a | N3c | M0  | IIIC       |
+| T2b | N2c | M0  | IIIC       |
+| T2b | N3  | M0  | IIIC       |
+| T2b | N3a | M0  | IIIC       |
+| T2b | N3b | M0  | IIIC       |
+| T2b | N3c | M0  | IIIC       |
+| T3a | N2c | M0  | IIIC       |
+| T3a | N3  | M0  | IIIC       |
+| T3a | N3a | M0  | IIIC       |
+| T3a | N3b | M0  | IIIC       |
+| T3a | N3c | M0  | IIIC       |
+| T3b | N1  | M0  | IIIC       |
+| T3b | N1a | M0  | IIIC       |
+| T3b | N1b | M0  | IIIC       |
+| T3b | N1c | M0  | IIIC       |
+| T3b | N2  | M0  | IIIC       |
+| T3b | N2a | M0  | IIIC       |
+| T3b | N2b | M0  | IIIC       |
+| T3b | N2c | M0  | IIIC       |
+| T3b | N3  | M0  | IIIC       |
+| T3b | N3a | M0  | IIIC       |
+| T3b | N3b | M0  | IIIC       |
+| T3b | N3c | M0  | IIIC       |
+| T4a | N1  | M0  | IIIC       |
+| T4a | N1a | M0  | IIIC       |
+| T4a | N1b | M0  | IIIC       |
+| T4a | N1c | M0  | IIIC       |
+| T4a | N2  | M0  | IIIC       |
+| T4a | N2a | M0  | IIIC       |
+| T4a | N2b | M0  | IIIC       |
+| T4a | N2c | M0  | IIIC       |
+| T4a | N3  | M0  | IIIC       |
+| T4a | N3a | M0  | IIIC       |
+| T4a | N3b | M0  | IIIC       |
+| T4a | N3c | M0  | IIIC       |
+| T4b | N1  | M0  | IIIC       |
+| T4b | N1a | M0  | IIIC       |
+| T4b | N1b | M0  | IIIC       |
+| T4b | N1c | M0  | IIIC       |
+| T4b | N2  | M0  | IIIC       |
+| T4b | N2a | M0  | IIIC       |
+| T4b | N2b | M0  | IIIC       |
+| T4b | N2c | M0  | IIIC       |
+| T4b | N3  | M0  | IIID       |
+| T4b | N3a | M0  | IIID       |
+| T4b | N3b | M0  | IIID       |
+| T4b | N3c | M0  | IIID       |
+| T0  | N0  | M1  | IV         |
+| T0  | N0  | M1a | IV         |
+| T0  | N0  | M1b | IV         |
+| T0  | N0  | M1c | IV         |
+| T0  | N0  | M1d | IV         |
+| T0  | N1  | M1  | IV         |
+| T0  | N1  | M1a | IV         |
+| T0  | N1  | M1b | IV         |
+| T0  | N1  | M1c | IV         |
+| T0  | N1  | M1d | IV         |
+| T0  | N1a | M1  | IV         |
+| T0  | N1a | M1a | IV         |
+| T0  | N1a | M1b | IV         |
+| T0  | N1a | M1c | IV         |
+| T0  | N1a | M1d | IV         |
+| T0  | N1b | M1  | IV         |
+| T0  | N1b | M1a | IV         |
+| T0  | N1b | M1b | IV         |
+| T0  | N1b | M1c | IV         |
+| T0  | N1b | M1d | IV         |
+| T0  | N1c | M1  | IV         |
+| T0  | N1c | M1a | IV         |
+| T0  | N1c | M1b | IV         |
+| T0  | N1c | M1c | IV         |
+| T0  | N1c | M1d | IV         |
+| T0  | N2  | M1  | IV         |
+| T0  | N2  | M1a | IV         |
+| T0  | N2  | M1b | IV         |
+| T0  | N2  | M1c | IV         |
+| T0  | N2  | M1d | IV         |
+| T0  | N2a | M1  | IV         |
+| T0  | N2a | M1a | IV         |
+| T0  | N2a | M1b | IV         |
+| T0  | N2a | M1c | IV         |
+| T0  | N2a | M1d | IV         |
+| T0  | N2b | M1  | IV         |
+| T0  | N2b | M1a | IV         |
+| T0  | N2b | M1b | IV         |
+| T0  | N2b | M1c | IV         |
+| T0  | N2b | M1d | IV         |
+| T0  | N2c | M1  | IV         |
+| T0  | N2c | M1a | IV         |
+| T0  | N2c | M1b | IV         |
+| T0  | N2c | M1c | IV         |
+| T0  | N2c | M1d | IV         |
+| T0  | N3  | M1  | IV         |
+| T0  | N3  | M1a | IV         |
+| T0  | N3  | M1b | IV         |
+| T0  | N3  | M1c | IV         |
+| T0  | N3  | M1d | IV         |
+| T0  | N3a | M1  | IV         |
+| T0  | N3a | M1a | IV         |
+| T0  | N3a | M1b | IV         |
+| T0  | N3a | M1c | IV         |
+| T0  | N3a | M1d | IV         |
+| T0  | N3b | M1  | IV         |
+| T0  | N3b | M1a | IV         |
+| T0  | N3b | M1b | IV         |
+| T0  | N3b | M1c | IV         |
+| T0  | N3b | M1d | IV         |
+| T0  | N3c | M1  | IV         |
+| T0  | N3c | M1a | IV         |
+| T0  | N3c | M1b | IV         |
+| T0  | N3c | M1c | IV         |
+| T0  | N3c | M1d | IV         |
+| T1  | N0  | M1  | IV         |
+| T1  | N0  | M1a | IV         |
+| T1  | N0  | M1b | IV         |
+| T1  | N0  | M1c | IV         |
+| T1  | N0  | M1d | IV         |
+| T1  | N1  | M1  | IV         |
+| T1  | N1  | M1a | IV         |
+| T1  | N1  | M1b | IV         |
+| T1  | N1  | M1c | IV         |
+| T1  | N1  | M1d | IV         |
+| T1  | N1a | M1  | IV         |
+| T1  | N1a | M1a | IV         |
+| T1  | N1a | M1b | IV         |
+| T1  | N1a | M1c | IV         |
+| T1  | N1a | M1d | IV         |
+| T1  | N1b | M1  | IV         |
+| T1  | N1b | M1a | IV         |
+| T1  | N1b | M1b | IV         |
+| T1  | N1b | M1c | IV         |
+| T1  | N1b | M1d | IV         |
+| T1  | N1c | M1  | IV         |
+| T1  | N1c | M1a | IV         |
+| T1  | N1c | M1b | IV         |
+| T1  | N1c | M1c | IV         |
+| T1  | N1c | M1d | IV         |
+| T1  | N2  | M1  | IV         |
+| T1  | N2  | M1a | IV         |
+| T1  | N2  | M1b | IV         |
+| T1  | N2  | M1c | IV         |
+| T1  | N2  | M1d | IV         |
+| T1  | N2a | M1  | IV         |
+| T1  | N2a | M1a | IV         |
+| T1  | N2a | M1b | IV         |
+| T1  | N2a | M1c | IV         |
+| T1  | N2a | M1d | IV         |
+| T1  | N2b | M1  | IV         |
+| T1  | N2b | M1a | IV         |
+| T1  | N2b | M1b | IV         |
+| T1  | N2b | M1c | IV         |
+| T1  | N2b | M1d | IV         |
+| T1  | N2c | M1  | IV         |
+| T1  | N2c | M1a | IV         |
+| T1  | N2c | M1b | IV         |
+| T1  | N2c | M1c | IV         |
+| T1  | N2c | M1d | IV         |
+| T1  | N3  | M1  | IV         |
+| T1  | N3  | M1a | IV         |
+| T1  | N3  | M1b | IV         |
+| T1  | N3  | M1c | IV         |
+| T1  | N3  | M1d | IV         |
+| T1  | N3a | M1  | IV         |
+| T1  | N3a | M1a | IV         |
+| T1  | N3a | M1b | IV         |
+| T1  | N3a | M1c | IV         |
+| T1  | N3a | M1d | IV         |
+| T1  | N3b | M1  | IV         |
+| T1  | N3b | M1a | IV         |
+| T1  | N3b | M1b | IV         |
+| T1  | N3b | M1c | IV         |
+| T1  | N3b | M1d | IV         |
+| T1  | N3c | M1  | IV         |
+| T1  | N3c | M1a | IV         |
+| T1  | N3c | M1b | IV         |
+| T1  | N3c | M1c | IV         |
+| T1  | N3c | M1d | IV         |
+| T1a | N0  | M1  | IV         |
+| T1a | N0  | M1a | IV         |
+| T1a | N0  | M1b | IV         |
+| T1a | N0  | M1c | IV         |
+| T1a | N0  | M1d | IV         |
+| T1a | N1  | M1  | IV         |
+| T1a | N1  | M1a | IV         |
+| T1a | N1  | M1b | IV         |
+| T1a | N1  | M1c | IV         |
+| T1a | N1  | M1d | IV         |
+| T1a | N1a | M1  | IV         |
+| T1a | N1a | M1a | IV         |
+| T1a | N1a | M1b | IV         |
+| T1a | N1a | M1c | IV         |
+| T1a | N1a | M1d | IV         |
+| T1a | N1b | M1  | IV         |
+| T1a | N1b | M1a | IV         |
+| T1a | N1b | M1b | IV         |
+| T1a | N1b | M1c | IV         |
+| T1a | N1b | M1d | IV         |
+| T1a | N1c | M1  | IV         |
+| T1a | N1c | M1a | IV         |
+| T1a | N1c | M1b | IV         |
+| T1a | N1c | M1c | IV         |
+| T1a | N1c | M1d | IV         |
+| T1a | N2  | M1  | IV         |
+| T1a | N2  | M1a | IV         |
+| T1a | N2  | M1b | IV         |
+| T1a | N2  | M1c | IV         |
+| T1a | N2  | M1d | IV         |
+| T1a | N2a | M1  | IV         |
+| T1a | N2a | M1a | IV         |
+| T1a | N2a | M1b | IV         |
+| T1a | N2a | M1c | IV         |
+| T1a | N2a | M1d | IV         |
+| T1a | N2b | M1  | IV         |
+| T1a | N2b | M1a | IV         |
+| T1a | N2b | M1b | IV         |
+| T1a | N2b | M1c | IV         |
+| T1a | N2b | M1d | IV         |
+| T1a | N2c | M1  | IV         |
+| T1a | N2c | M1a | IV         |
+| T1a | N2c | M1b | IV         |
+| T1a | N2c | M1c | IV         |
+| T1a | N2c | M1d | IV         |
+| T1a | N3  | M1  | IV         |
+| T1a | N3  | M1a | IV         |
+| T1a | N3  | M1b | IV         |
+| T1a | N3  | M1c | IV         |
+| T1a | N3  | M1d | IV         |
+| T1a | N3a | M1  | IV         |
+| T1a | N3a | M1a | IV         |
+| T1a | N3a | M1b | IV         |
+| T1a | N3a | M1c | IV         |
+| T1a | N3a | M1d | IV         |
+| T1a | N3b | M1  | IV         |
+| T1a | N3b | M1a | IV         |
+| T1a | N3b | M1b | IV         |
+| T1a | N3b | M1c | IV         |
+| T1a | N3b | M1d | IV         |
+| T1a | N3c | M1  | IV         |
+| T1a | N3c | M1a | IV         |
+| T1a | N3c | M1b | IV         |
+| T1a | N3c | M1c | IV         |
+| T1a | N3c | M1d | IV         |
+| T1b | N0  | M1  | IV         |
+| T1b | N0  | M1a | IV         |
+| T1b | N0  | M1b | IV         |
+| T1b | N0  | M1c | IV         |
+| T1b | N0  | M1d | IV         |
+| T1b | N1  | M1  | IV         |
+| T1b | N1  | M1a | IV         |
+| T1b | N1  | M1b | IV         |
+| T1b | N1  | M1c | IV         |
+| T1b | N1  | M1d | IV         |
+| T1b | N1a | M1  | IV         |
+| T1b | N1a | M1a | IV         |
+| T1b | N1a | M1b | IV         |
+| T1b | N1a | M1c | IV         |
+| T1b | N1a | M1d | IV         |
+| T1b | N1b | M1  | IV         |
+| T1b | N1b | M1a | IV         |
+| T1b | N1b | M1b | IV         |
+| T1b | N1b | M1c | IV         |
+| T1b | N1b | M1d | IV         |
+| T1b | N1c | M1  | IV         |
+| T1b | N1c | M1a | IV         |
+| T1b | N1c | M1b | IV         |
+| T1b | N1c | M1c | IV         |
+| T1b | N1c | M1d | IV         |
+| T1b | N2  | M1  | IV         |
+| T1b | N2  | M1a | IV         |
+| T1b | N2  | M1b | IV         |
+| T1b | N2  | M1c | IV         |
+| T1b | N2  | M1d | IV         |
+| T1b | N2a | M1  | IV         |
+| T1b | N2a | M1a | IV         |
+| T1b | N2a | M1b | IV         |
+| T1b | N2a | M1c | IV         |
+| T1b | N2a | M1d | IV         |
+| T1b | N2b | M1  | IV         |
+| T1b | N2b | M1a | IV         |
+| T1b | N2b | M1b | IV         |
+| T1b | N2b | M1c | IV         |
+| T1b | N2b | M1d | IV         |
+| T1b | N2c | M1  | IV         |
+| T1b | N2c | M1a | IV         |
+| T1b | N2c | M1b | IV         |
+| T1b | N2c | M1c | IV         |
+| T1b | N2c | M1d | IV         |
+| T1b | N3  | M1  | IV         |
+| T1b | N3  | M1a | IV         |
+| T1b | N3  | M1b | IV         |
+| T1b | N3  | M1c | IV         |
+| T1b | N3  | M1d | IV         |
+| T1b | N3a | M1  | IV         |
+| T1b | N3a | M1a | IV         |
+| T1b | N3a | M1b | IV         |
+| T1b | N3a | M1c | IV         |
+| T1b | N3a | M1d | IV         |
+| T1b | N3b | M1  | IV         |
+| T1b | N3b | M1a | IV         |
+| T1b | N3b | M1b | IV         |
+| T1b | N3b | M1c | IV         |
+| T1b | N3b | M1d | IV         |
+| T1b | N3c | M1  | IV         |
+| T1b | N3c | M1a | IV         |
+| T1b | N3c | M1b | IV         |
+| T1b | N3c | M1c | IV         |
+| T1b | N3c | M1d | IV         |
+| T2a | N0  | M1  | IV         |
+| T2a | N0  | M1a | IV         |
+| T2a | N0  | M1b | IV         |
+| T2a | N0  | M1c | IV         |
+| T2a | N0  | M1d | IV         |
+| T2a | N1  | M1  | IV         |
+| T2a | N1  | M1a | IV         |
+| T2a | N1  | M1b | IV         |
+| T2a | N1  | M1c | IV         |
+| T2a | N1  | M1d | IV         |
+| T2a | N1a | M1  | IV         |
+| T2a | N1a | M1a | IV         |
+| T2a | N1a | M1b | IV         |
+| T2a | N1a | M1c | IV         |
+| T2a | N1a | M1d | IV         |
+| T2a | N1b | M1  | IV         |
+| T2a | N1b | M1a | IV         |
+| T2a | N1b | M1b | IV         |
+| T2a | N1b | M1c | IV         |
+| T2a | N1b | M1d | IV         |
+| T2a | N1c | M1  | IV         |
+| T2a | N1c | M1a | IV         |
+| T2a | N1c | M1b | IV         |
+| T2a | N1c | M1c | IV         |
+| T2a | N1c | M1d | IV         |
+| T2a | N2  | M1  | IV         |
+| T2a | N2  | M1a | IV         |
+| T2a | N2  | M1b | IV         |
+| T2a | N2  | M1c | IV         |
+| T2a | N2  | M1d | IV         |
+| T2a | N2a | M1  | IV         |
+| T2a | N2a | M1a | IV         |
+| T2a | N2a | M1b | IV         |
+| T2a | N2a | M1c | IV         |
+| T2a | N2a | M1d | IV         |
+| T2a | N2b | M1  | IV         |
+| T2a | N2b | M1a | IV         |
+| T2a | N2b | M1b | IV         |
+| T2a | N2b | M1c | IV         |
+| T2a | N2b | M1d | IV         |
+| T2a | N2c | M1  | IV         |
+| T2a | N2c | M1a | IV         |
+| T2a | N2c | M1b | IV         |
+| T2a | N2c | M1c | IV         |
+| T2a | N2c | M1d | IV         |
+| T2a | N3  | M1  | IV         |
+| T2a | N3  | M1a | IV         |
+| T2a | N3  | M1b | IV         |
+| T2a | N3  | M1c | IV         |
+| T2a | N3  | M1d | IV         |
+| T2a | N3a | M1  | IV         |
+| T2a | N3a | M1a | IV         |
+| T2a | N3a | M1b | IV         |
+| T2a | N3a | M1c | IV         |
+| T2a | N3a | M1d | IV         |
+| T2a | N3b | M1  | IV         |
+| T2a | N3b | M1a | IV         |
+| T2a | N3b | M1b | IV         |
+| T2a | N3b | M1c | IV         |
+| T2a | N3b | M1d | IV         |
+| T2a | N3c | M1  | IV         |
+| T2a | N3c | M1a | IV         |
+| T2a | N3c | M1b | IV         |
+| T2a | N3c | M1c | IV         |
+| T2a | N3c | M1d | IV         |
+| T2b | N0  | M1  | IV         |
+| T2b | N0  | M1a | IV         |
+| T2b | N0  | M1b | IV         |
+| T2b | N0  | M1c | IV         |
+| T2b | N0  | M1d | IV         |
+| T2b | N1  | M1  | IV         |
+| T2b | N1  | M1a | IV         |
+| T2b | N1  | M1b | IV         |
+| T2b | N1  | M1c | IV         |
+| T2b | N1  | M1d | IV         |
+| T2b | N1a | M1  | IV         |
+| T2b | N1a | M1a | IV         |
+| T2b | N1a | M1b | IV         |
+| T2b | N1a | M1c | IV         |
+| T2b | N1a | M1d | IV         |
+| T2b | N1b | M1  | IV         |
+| T2b | N1b | M1a | IV         |
+| T2b | N1b | M1b | IV         |
+| T2b | N1b | M1c | IV         |
+| T2b | N1b | M1d | IV         |
+| T2b | N1c | M1  | IV         |
+| T2b | N1c | M1a | IV         |
+| T2b | N1c | M1b | IV         |
+| T2b | N1c | M1c | IV         |
+| T2b | N1c | M1d | IV         |
+| T2b | N2  | M1  | IV         |
+| T2b | N2  | M1a | IV         |
+| T2b | N2  | M1b | IV         |
+| T2b | N2  | M1c | IV         |
+| T2b | N2  | M1d | IV         |
+| T2b | N2a | M1  | IV         |
+| T2b | N2a | M1a | IV         |
+| T2b | N2a | M1b | IV         |
+| T2b | N2a | M1c | IV         |
+| T2b | N2a | M1d | IV         |
+| T2b | N2b | M1  | IV         |
+| T2b | N2b | M1a | IV         |
+| T2b | N2b | M1b | IV         |
+| T2b | N2b | M1c | IV         |
+| T2b | N2b | M1d | IV         |
+| T2b | N2c | M1  | IV         |
+| T2b | N2c | M1a | IV         |
+| T2b | N2c | M1b | IV         |
+| T2b | N2c | M1c | IV         |
+| T2b | N2c | M1d | IV         |
+| T2b | N3  | M1  | IV         |
+| T2b | N3  | M1a | IV         |
+| T2b | N3  | M1b | IV         |
+| T2b | N3  | M1c | IV         |
+| T2b | N3  | M1d | IV         |
+| T2b | N3a | M1  | IV         |
+| T2b | N3a | M1a | IV         |
+| T2b | N3a | M1b | IV         |
+| T2b | N3a | M1c | IV         |
+| T2b | N3a | M1d | IV         |
+| T2b | N3b | M1  | IV         |
+| T2b | N3b | M1a | IV         |
+| T2b | N3b | M1b | IV         |
+| T2b | N3b | M1c | IV         |
+| T2b | N3b | M1d | IV         |
+| T2b | N3c | M1  | IV         |
+| T2b | N3c | M1a | IV         |
+| T2b | N3c | M1b | IV         |
+| T2b | N3c | M1c | IV         |
+| T2b | N3c | M1d | IV         |
+| T3a | N0  | M1  | IV         |
+| T3a | N0  | M1a | IV         |
+| T3a | N0  | M1b | IV         |
+| T3a | N0  | M1c | IV         |
+| T3a | N0  | M1d | IV         |
+| T3a | N1  | M1  | IV         |
+| T3a | N1  | M1a | IV         |
+| T3a | N1  | M1b | IV         |
+| T3a | N1  | M1c | IV         |
+| T3a | N1  | M1d | IV         |
+| T3a | N1a | M1  | IV         |
+| T3a | N1a | M1a | IV         |
+| T3a | N1a | M1b | IV         |
+| T3a | N1a | M1c | IV         |
+| T3a | N1a | M1d | IV         |
+| T3a | N1b | M1  | IV         |
+| T3a | N1b | M1a | IV         |
+| T3a | N1b | M1b | IV         |
+| T3a | N1b | M1c | IV         |
+| T3a | N1b | M1d | IV         |
+| T3a | N1c | M1  | IV         |
+| T3a | N1c | M1a | IV         |
+| T3a | N1c | M1b | IV         |
+| T3a | N1c | M1c | IV         |
+| T3a | N1c | M1d | IV         |
+| T3a | N2  | M1  | IV         |
+| T3a | N2  | M1a | IV         |
+| T3a | N2  | M1b | IV         |
+| T3a | N2  | M1c | IV         |
+| T3a | N2  | M1d | IV         |
+| T3a | N2a | M1  | IV         |
+| T3a | N2a | M1a | IV         |
+| T3a | N2a | M1b | IV         |
+| T3a | N2a | M1c | IV         |
+| T3a | N2a | M1d | IV         |
+| T3a | N2b | M1  | IV         |
+| T3a | N2b | M1a | IV         |
+| T3a | N2b | M1b | IV         |
+| T3a | N2b | M1c | IV         |
+| T3a | N2b | M1d | IV         |
+| T3a | N2c | M1  | IV         |
+| T3a | N2c | M1a | IV         |
+| T3a | N2c | M1b | IV         |
+| T3a | N2c | M1c | IV         |
+| T3a | N2c | M1d | IV         |
+| T3a | N3  | M1  | IV         |
+| T3a | N3  | M1a | IV         |
+| T3a | N3  | M1b | IV         |
+| T3a | N3  | M1c | IV         |
+| T3a | N3  | M1d | IV         |
+| T3a | N3a | M1  | IV         |
+| T3a | N3a | M1a | IV         |
+| T3a | N3a | M1b | IV         |
+| T3a | N3a | M1c | IV         |
+| T3a | N3a | M1d | IV         |
+| T3a | N3b | M1  | IV         |
+| T3a | N3b | M1a | IV         |
+| T3a | N3b | M1b | IV         |
+| T3a | N3b | M1c | IV         |
+| T3a | N3b | M1d | IV         |
+| T3a | N3c | M1  | IV         |
+| T3a | N3c | M1a | IV         |
+| T3a | N3c | M1b | IV         |
+| T3a | N3c | M1c | IV         |
+| T3a | N3c | M1d | IV         |
+| T3b | N0  | M1  | IV         |
+| T3b | N0  | M1a | IV         |
+| T3b | N0  | M1b | IV         |
+| T3b | N0  | M1c | IV         |
+| T3b | N0  | M1d | IV         |
+| T3b | N1  | M1  | IV         |
+| T3b | N1  | M1a | IV         |
+| T3b | N1  | M1b | IV         |
+| T3b | N1  | M1c | IV         |
+| T3b | N1  | M1d | IV         |
+| T3b | N1a | M1  | IV         |
+| T3b | N1a | M1a | IV         |
+| T3b | N1a | M1b | IV         |
+| T3b | N1a | M1c | IV         |
+| T3b | N1a | M1d | IV         |
+| T3b | N1b | M1  | IV         |
+| T3b | N1b | M1a | IV         |
+| T3b | N1b | M1b | IV         |
+| T3b | N1b | M1c | IV         |
+| T3b | N1b | M1d | IV         |
+| T3b | N1c | M1  | IV         |
+| T3b | N1c | M1a | IV         |
+| T3b | N1c | M1b | IV         |
+| T3b | N1c | M1c | IV         |
+| T3b | N1c | M1d | IV         |
+| T3b | N2  | M1  | IV         |
+| T3b | N2  | M1a | IV         |
+| T3b | N2  | M1b | IV         |
+| T3b | N2  | M1c | IV         |
+| T3b | N2  | M1d | IV         |
+| T3b | N2a | M1  | IV         |
+| T3b | N2a | M1a | IV         |
+| T3b | N2a | M1b | IV         |
+| T3b | N2a | M1c | IV         |
+| T3b | N2a | M1d | IV         |
+| T3b | N2b | M1  | IV         |
+| T3b | N2b | M1a | IV         |
+| T3b | N2b | M1b | IV         |
+| T3b | N2b | M1c | IV         |
+| T3b | N2b | M1d | IV         |
+| T3b | N2c | M1  | IV         |
+| T3b | N2c | M1a | IV         |
+| T3b | N2c | M1b | IV         |
+| T3b | N2c | M1c | IV         |
+| T3b | N2c | M1d | IV         |
+| T3b | N3  | M1  | IV         |
+| T3b | N3  | M1a | IV         |
+| T3b | N3  | M1b | IV         |
+| T3b | N3  | M1c | IV         |
+| T3b | N3  | M1d | IV         |
+| T3b | N3a | M1  | IV         |
+| T3b | N3a | M1a | IV         |
+| T3b | N3a | M1b | IV         |
+| T3b | N3a | M1c | IV         |
+| T3b | N3a | M1d | IV         |
+| T3b | N3b | M1  | IV         |
+| T3b | N3b | M1a | IV         |
+| T3b | N3b | M1b | IV         |
+| T3b | N3b | M1c | IV         |
+| T3b | N3b | M1d | IV         |
+| T3b | N3c | M1  | IV         |
+| T3b | N3c | M1a | IV         |
+| T3b | N3c | M1b | IV         |
+| T3b | N3c | M1c | IV         |
+| T3b | N3c | M1d | IV         |
+| T4a | N0  | M1  | IV         |
+| T4a | N0  | M1a | IV         |
+| T4a | N0  | M1b | IV         |
+| T4a | N0  | M1c | IV         |
+| T4a | N0  | M1d | IV         |
+| T4a | N1  | M1  | IV         |
+| T4a | N1  | M1a | IV         |
+| T4a | N1  | M1b | IV         |
+| T4a | N1  | M1c | IV         |
+| T4a | N1  | M1d | IV         |
+| T4a | N1a | M1  | IV         |
+| T4a | N1a | M1a | IV         |
+| T4a | N1a | M1b | IV         |
+| T4a | N1a | M1c | IV         |
+| T4a | N1a | M1d | IV         |
+| T4a | N1b | M1  | IV         |
+| T4a | N1b | M1a | IV         |
+| T4a | N1b | M1b | IV         |
+| T4a | N1b | M1c | IV         |
+| T4a | N1b | M1d | IV         |
+| T4a | N1c | M1  | IV         |
+| T4a | N1c | M1a | IV         |
+| T4a | N1c | M1b | IV         |
+| T4a | N1c | M1c | IV         |
+| T4a | N1c | M1d | IV         |
+| T4a | N2  | M1  | IV         |
+| T4a | N2  | M1a | IV         |
+| T4a | N2  | M1b | IV         |
+| T4a | N2  | M1c | IV         |
+| T4a | N2  | M1d | IV         |
+| T4a | N2a | M1  | IV         |
+| T4a | N2a | M1a | IV         |
+| T4a | N2a | M1b | IV         |
+| T4a | N2a | M1c | IV         |
+| T4a | N2a | M1d | IV         |
+| T4a | N2b | M1  | IV         |
+| T4a | N2b | M1a | IV         |
+| T4a | N2b | M1b | IV         |
+| T4a | N2b | M1c | IV         |
+| T4a | N2b | M1d | IV         |
+| T4a | N2c | M1  | IV         |
+| T4a | N2c | M1a | IV         |
+| T4a | N2c | M1b | IV         |
+| T4a | N2c | M1c | IV         |
+| T4a | N2c | M1d | IV         |
+| T4a | N3  | M1  | IV         |
+| T4a | N3  | M1a | IV         |
+| T4a | N3  | M1b | IV         |
+| T4a | N3  | M1c | IV         |
+| T4a | N3  | M1d | IV         |
+| T4a | N3a | M1  | IV         |
+| T4a | N3a | M1a | IV         |
+| T4a | N3a | M1b | IV         |
+| T4a | N3a | M1c | IV         |
+| T4a | N3a | M1d | IV         |
+| T4a | N3b | M1  | IV         |
+| T4a | N3b | M1a | IV         |
+| T4a | N3b | M1b | IV         |
+| T4a | N3b | M1c | IV         |
+| T4a | N3b | M1d | IV         |
+| T4a | N3c | M1  | IV         |
+| T4a | N3c | M1a | IV         |
+| T4a | N3c | M1b | IV         |
+| T4a | N3c | M1c | IV         |
+| T4a | N3c | M1d | IV         |
+| T4b | N0  | M1  | IV         |
+| T4b | N0  | M1a | IV         |
+| T4b | N0  | M1b | IV         |
+| T4b | N0  | M1c | IV         |
+| T4b | N0  | M1d | IV         |
+| T4b | N1  | M1  | IV         |
+| T4b | N1  | M1a | IV         |
+| T4b | N1  | M1b | IV         |
+| T4b | N1  | M1c | IV         |
+| T4b | N1  | M1d | IV         |
+| T4b | N1a | M1  | IV         |
+| T4b | N1a | M1a | IV         |
+| T4b | N1a | M1b | IV         |
+| T4b | N1a | M1c | IV         |
+| T4b | N1a | M1d | IV         |
+| T4b | N1b | M1  | IV         |
+| T4b | N1b | M1a | IV         |
+| T4b | N1b | M1b | IV         |
+| T4b | N1b | M1c | IV         |
+| T4b | N1b | M1d | IV         |
+| T4b | N1c | M1  | IV         |
+| T4b | N1c | M1a | IV         |
+| T4b | N1c | M1b | IV         |
+| T4b | N1c | M1c | IV         |
+| T4b | N1c | M1d | IV         |
+| T4b | N2  | M1  | IV         |
+| T4b | N2  | M1a | IV         |
+| T4b | N2  | M1b | IV         |
+| T4b | N2  | M1c | IV         |
+| T4b | N2  | M1d | IV         |
+| T4b | N2a | M1  | IV         |
+| T4b | N2a | M1a | IV         |
+| T4b | N2a | M1b | IV         |
+| T4b | N2a | M1c | IV         |
+| T4b | N2a | M1d | IV         |
+| T4b | N2b | M1  | IV         |
+| T4b | N2b | M1a | IV         |
+| T4b | N2b | M1b | IV         |
+| T4b | N2b | M1c | IV         |
+| T4b | N2b | M1d | IV         |
+| T4b | N2c | M1  | IV         |
+| T4b | N2c | M1a | IV         |
+| T4b | N2c | M1b | IV         |
+| T4b | N2c | M1c | IV         |
+| T4b | N2c | M1d | IV         |
+| T4b | N3  | M1  | IV         |
+| T4b | N3  | M1a | IV         |
+| T4b | N3  | M1b | IV         |
+| T4b | N3  | M1c | IV         |
+| T4b | N3  | M1d | IV         |
+| T4b | N3a | M1  | IV         |
+| T4b | N3a | M1a | IV         |
+| T4b | N3a | M1b | IV         |
+| T4b | N3a | M1c | IV         |
+| T4b | N3a | M1d | IV         |
+| T4b | N3b | M1  | IV         |
+| T4b | N3b | M1a | IV         |
+| T4b | N3b | M1b | IV         |
+| T4b | N3b | M1c | IV         |
+| T4b | N3b | M1d | IV         |
+| T4b | N3c | M1  | IV         |
+| T4b | N3c | M1a | IV         |
+| T4b | N3c | M1b | IV         |
+| T4b | N3c | M1c | IV         |
+| T4b | N3c | M1d | IV         |
+| Tis | N0  | M1  | IV         |
+| Tis | N0  | M1a | IV         |
+| Tis | N0  | M1b | IV         |
+| Tis | N0  | M1c | IV         |
+| Tis | N0  | M1d | IV         |
+| Tis | N1  | M1  | IV         |
+| Tis | N1  | M1a | IV         |
+| Tis | N1  | M1b | IV         |
+| Tis | N1  | M1c | IV         |
+| Tis | N1  | M1d | IV         |
+| Tis | N1a | M1  | IV         |
+| Tis | N1a | M1a | IV         |
+| Tis | N1a | M1b | IV         |
+| Tis | N1a | M1c | IV         |
+| Tis | N1a | M1d | IV         |
+| Tis | N1b | M1  | IV         |
+| Tis | N1b | M1a | IV         |
+| Tis | N1b | M1b | IV         |
+| Tis | N1b | M1c | IV         |
+| Tis | N1b | M1d | IV         |
+| Tis | N1c | M1  | IV         |
+| Tis | N1c | M1a | IV         |
+| Tis | N1c | M1b | IV         |
+| Tis | N1c | M1c | IV         |
+| Tis | N1c | M1d | IV         |
+| Tis | N2  | M1  | IV         |
+| Tis | N2  | M1a | IV         |
+| Tis | N2  | M1b | IV         |
+| Tis | N2  | M1c | IV         |
+| Tis | N2  | M1d | IV         |
+| Tis | N2a | M1  | IV         |
+| Tis | N2a | M1a | IV         |
+| Tis | N2a | M1b | IV         |
+| Tis | N2a | M1c | IV         |
+| Tis | N2a | M1d | IV         |
+| Tis | N2b | M1  | IV         |
+| Tis | N2b | M1a | IV         |
+| Tis | N2b | M1b | IV         |
+| Tis | N2b | M1c | IV         |
+| Tis | N2b | M1d | IV         |
+| Tis | N2c | M1  | IV         |
+| Tis | N2c | M1a | IV         |
+| Tis | N2c | M1b | IV         |
+| Tis | N2c | M1c | IV         |
+| Tis | N2c | M1d | IV         |
+| Tis | N3  | M1  | IV         |
+| Tis | N3  | M1a | IV         |
+| Tis | N3  | M1b | IV         |
+| Tis | N3  | M1c | IV         |
+| Tis | N3  | M1d | IV         |
+| Tis | N3a | M1  | IV         |
+| Tis | N3a | M1a | IV         |
+| Tis | N3a | M1b | IV         |
+| Tis | N3a | M1c | IV         |
+| Tis | N3a | M1d | IV         |
+| Tis | N3b | M1  | IV         |
+| Tis | N3b | M1a | IV         |
+| Tis | N3b | M1b | IV         |
+| Tis | N3b | M1c | IV         |
+| Tis | N3b | M1d | IV         |
+| Tis | N3c | M1  | IV         |
+| Tis | N3c | M1a | IV         |
+| Tis | N3c | M1b | IV         |
+| Tis | N3c | M1c | IV         |
+| Tis | N3c | M1d | IV         |
+
+## References
+
+Sobin, L. H., Gospodarowicz, M. K., & Wittekind, C. (Eds.). (2009). *TNM
+classification of malignant tumours* (7th ed.). Wiley-Blackwell.
+
+Brierley, J. D., Gospodarowicz, M. K., & Wittekind, C. (Eds.). (2016).
+*TNM classification of malignant tumours* (8th ed.). Wiley-Blackwell.
+
+Brierley, J. D., Giuliani, M., O’Sullivan, B., Rous, B., & Van Eycken,
+E. (Eds.). (2025). *TNM classification of malignant tumours* (9th ed.).
+Wiley.

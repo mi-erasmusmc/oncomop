@@ -4,8 +4,15 @@ Internal auxiliary files used to determine cancer stage.
 
 ## Source
 
-UICC_7th edition.pdf; UICC_8th edition.pdf corroborated by nhs/\*.pdf;
-uicc/UICC_9th edition.pdf
+- Sobin, L. H., Gospodarowicz, M. K., & Wittekind, C. (Eds.). (2009).
+  TNM classification of malignant tumours (7th ed.). Wiley-Blackwell.
+
+- Brierley, J. D., Gospodarowicz, M. K., & Wittekind, C. (Eds.). (2016).
+  TNM classification of malignant tumours (8th ed.). Wiley-Blackwell.
+
+- Brierley, J. D., Giuliani, M., O’Sullivan, B., Rous, B., & Van
+  Eycken, E. (Eds.). (2025). TNM classification of malignant tumours
+  (9th ed.). Wiley.
 
 ## Details
 
@@ -15,7 +22,7 @@ by cancer **site** (bladder, breast, colorectal, lung, oesophageal,
 prostate, skin), classification **type** (clinical, pathological, base)
 and classification **edition** (7th, 8th, unspecified). The files are:
 
-1.  `tnm_concepts.csv`: contains information about the individual TNM
+1.  `tnm_concepts.rds`: contains information about the individual TNM
     components and their concept ids, differentiated by type and
     edition. There are \\393\\ total concepts for \\44\\ unique
     components:
@@ -33,11 +40,11 @@ and classification **edition** (7th, 8th, unspecified). The files are:
       pathological (the `M0` component is not valid in the pathological
       setting, for any of the editions).
 
-2.  `tnm_stage_mapping.csv`: contains the rules to determine the cancer
-    stage based on a combination of individual TNM components,
-    differentiated by cancer site, type (clinical, pathological, base)
-    and by edition (7th, 8th, 9th). Each rule refers to a specific
-    source page of the UICC guidelines.
+2.  `tnm_mapping.rds`: contains the rules to determine the cancer stage
+    based on a combination of individual TNM components, differentiated
+    by cancer site, type (clinical, pathological, base) and by edition
+    (7th, 8th, 9th). Each rule refers to a specific source page of the
+    UICC guidelines.
 
     The currently available rules support the following concept
     categories.
@@ -94,14 +101,6 @@ and classification **edition** (7th, 8th, unspecified). The files are:
 
     - For 9th edition, only "clinical" and "pathological" types are
       available but not "base".
-
-3.  `tnm_stage_shortcut_mapping.csv`: contains some more general rules
-    to determine the cancer stage based on a subset of individual TNM
-    components, differentiated by cancer site, type and edition. In
-    fact, there are some special cases in which the value of one or two
-    components is enough to determine the stage, independently of the
-    others. Each rule refers to a specific source page of the UICC
-    guidelines.
 
 These files are meant for internal use and are not intended to be
 modified by users.

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">oncomop</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,8 +43,15 @@
 
     <div class="section level2">
     <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
-    <p>UICC_7th edition.pdf; UICC_8th edition.pdf corroborated by nhs/*.pdf; uicc/UICC_9th edition.pdf</p>
-    </div>
+
+<ul><li><p>Sobin, L. H., Gospodarowicz, M. K., &amp; Wittekind, C. (Eds.). (2009).
+TNM classification of malignant tumours (7th ed.). Wiley-Blackwell.</p></li>
+<li><p>Brierley, J. D., Gospodarowicz, M. K., &amp; Wittekind, C. (Eds.). (2016).
+TNM classification of malignant tumours (8th ed.). Wiley-Blackwell.</p></li>
+<li><p>Brierley, J. D., Giuliani, M., O’Sullivan, B., Rous, B., &amp;
+Van Eycken, E. (Eds.). (2025). TNM classification of malignant tumours
+(9th ed.). Wiley.</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The package stores three rule sets derived from UICC guidelines for the
@@ -52,7 +59,7 @@ TNM staging system. The rules stored in these files are differentiated by
 cancer <strong>site</strong> (bladder, breast, colorectal, lung, oesophageal, prostate,
 skin), classification <strong>type</strong> (clinical, pathological, base) and
 classification <strong>edition</strong> (7th, 8th, unspecified). The files are:</p>
-<ol><li><p><code>tnm_concepts.csv</code>: contains information about the individual TNM
+<ol><li><p><code>tnm_concepts.rds</code>: contains information about the individual TNM
 components and their concept ids, differentiated by type and edition.
 There are \(393\) total concepts for \(44\) unique components:</p>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>TX, T0, Tis, Ta, T1, T1a, T1b, T1c, T1mi, T2, T2a, T2b, T2c, T3, T3a,</span>
@@ -64,7 +71,7 @@ for unspecified;</p></li>
 for pathological (the <code>M0</code> component is not valid in the pathological
 setting, for any of the editions).</p></li>
 </ul></li>
-<li><p><code>tnm_stage_mapping.csv</code>: contains the rules to determine the cancer
+<li><p><code>tnm_mapping.rds</code>: contains the rules to determine the cancer
 stage based on a combination of individual TNM components, differentiated
 by cancer site, type (clinical, pathological, base) and by edition (7th,
 8th, 9th). Each rule refers to a specific source page of the UICC guidelines.</p>
@@ -87,12 +94,6 @@ by cancer site, type (clinical, pathological, base) and by edition (7th,
 <li><p>For 8th edition, only "clinical" and "pathological" types are available but not "base".</p></li>
 <li><p>For 9th edition, only "clinical" and "pathological" types are available but not "base".</p></li>
 </ul></li>
-<li><p><code>tnm_stage_shortcut_mapping.csv</code>: contains some more general rules to
-determine the cancer stage based on a subset of individual TNM components,
-differentiated by cancer site, type and edition. In fact, there are some
-special cases in which the value of one or two components
-is enough to determine the stage, independently of the others.
-Each rule refers to a specific source page of the UICC guidelines.</p></li>
 </ol><p>These files are meant for internal use and are not intended
 to be modified by users.</p>
     </div>
