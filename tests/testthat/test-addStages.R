@@ -21,7 +21,7 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
       edition = "8th",
       type = "clinical",
       order = "last",
-      showTnm = FALSE
+      showTnm = TRUE
     ) |>
     dplyr::pull(cancer_stage) |>
     expect_in(c("IV", "IA", "IIIC"))

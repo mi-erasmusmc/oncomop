@@ -12,64 +12,155 @@ knitr::opts_chunk$set(
 ```{r setup, include=FALSE}
 pkgload::load_all(".")
 library(dplyr)
-library(glue)
-library(htmltools)
-stopifnot(requireNamespace("visOmopResults", quietly = TRUE))
 ```
+
+## Overview
+
+Internal auxiliary files are used to determine cancer stage.
+
+## Details
+
+The package stores three rule sets derived from UICC guidelines for the TNM staging system. The rules stored in these files are differentiated by:
+
+- **Cancer site**: bladder, breast, colorectal, lung, oesophageal, prostate, skin
+- **Classification type**: clinical, pathological, base
+- **Classification edition**: 7th, 8th, 9th, unspecified
+
+The internal data is divided in two categories *concepts* and *mapping* rules. 
+
+## Concepts (tnm_concepts)
+
+Contains information about the individual TNM components and their concept IDs, differentiated by type and edition.
+
+There are **393 total concepts** for **44 unique components**:
+
+```{r, echo=FALSE}
+tnm_components <- c(
+  "TX", "T0", "Tis", "Ta", "T1", "T1a", "T1b", "T1c", "T1mi",
+  "T2", "T2a", "T2b", "T2c", "T3", "T3a", "T3b", "T4", "T4a",
+  "T4b", "T4c", "T4d", "NX", "N0", "N1", "N1a", "N1b", "N1c",
+  "N1mi", "N2", "N2a", "N2b", "N2c", "N3", "N3a", "N3b", "N3c",
+  "M0", "M1", "M1a", "M1b", "M1c", "M1c1", "M1c2", "M1d"
+)
+
+paste(tnm_components, collapse = ", ")
+```
+
+These components have different versions according to edition and type.
+
+### By edition
+
+| Edition | Number of concepts |
+|---|---:|
+| 7th edition | 131 |
+| 8th edition | 131 |
+| Unspecified edition | 131 |
+
+### By type
+
+| Type | Number of concepts |
+|---|---:|
+| Base | 132 |
+| Clinical | 132 |
+| Pathological | 129 |
+
+> The `M0` component is not valid in the pathological setting for any edition.
+
+## Mapping (tnm_mapping)
+
+Contains the rules used to determine cancer stage based on a combination of individual TNM components.
+
+Rules are differentiated by:
+
+| Rule dimension | Values |
+|---|---|
+| Cancer site | Bladder, breast, colorectal, lung, oesophageal, prostate, skin |
+| Classification type | Clinical, pathological, base |
+| Classification edition | 7th, 8th, 9th |
+
+Each rule refers to a specific source page of the UICC guidelines.
+
+The currently available rules support the following concept categories.
+
+```{r, echo=FALSE}
+stage_mapping <- readStagesRDS("mapping")
+
+available_rules <- stage_mapping |>
+  count(
+    site,
+    edition,
+    stage_grouping_scope,
+    name = "number_of_rules"
+  ) |>
+  filter(number_of_rules > 0) |>
+  arrange(site, edition, stage_grouping_scope)
+
+available_rules |>
+  rename(
+    `Cancer site` = site,
+    Edition = edition,
+    `Classification type` = stage_grouping_scope,
+    `Number of rules` = number_of_rules
+  ) |>
+  knitr::kable()
+```
+
+Browse the full rule sets below.
 
 ```{r, echo=FALSE, results='asis'}
-cancer <- c("bladder", "breast",
-            "colorectal", "lung",
-            "melanoma", "oesophagus",
-            "prostate")
-edition <- c("7th", "8th")
-type <- c("base", "clinical", "pathological")
+format_label <- function(x) {
+  paste0(toupper(substr(x, 1, 1)), substr(x, 2, nchar(x)))
+}
 
-for (i in seq_along(edition)) {
-  # Edition level 
-  edition_title <- glue(
-    "{edition[i]} edition"
-  )
+for (edition_value in unique(available_rules$edition)) {
   cat(sprintf(
-    "<details>
-       <summary>%s</summary>",
-    htmlEscape(edition_title)
+    "<details>\n<summary>%s edition</summary>\n\n",
+    htmltools::htmlEscape(edition_value)
   ))
-  for (j in seq_along(cancer)) {
-    # Cancer level
-    cancer_title <- glue(
-      "{cancer[j]}"
-    )
+
+  edition_rules <- available_rules |>
+    filter(edition == edition_value)
+
+  for (site_value in unique(edition_rules$site)) {
     cat(sprintf(
-      "<details style=\"text-indent: 20px;\">
-         <summary>%s</summary>",
-      htmlEscape(cancer_title)
+      "<details style=\"margin-left: 1rem;\">\n<summary>%s</summary>\n\n",
+      htmltools::htmlEscape(format_label(site_value))
     ))
-    for (k in seq_along(type)) {
-      # Cancer level
-      type_title <- glue(
-        "{type[k]}"
-        )
+
+    site_rules <- edition_rules |>
+      filter(site == site_value)
+
+    for (scope_value in unique(site_rules$stage_grouping_scope)) {
+      rules <- stage_mapping |>
+        filter(
+          edition == edition_value,
+          site == site_value,
+          stage_grouping_scope == scope_value
+        ) |>
+        select(T, N, M, uicc_stage) |>
+        arrange(uicc_stage, T, N, M)
+
       cat(sprintf(
-        "<details style=\"text-indent: 40px;\">
-         <summary>%s</summary>",
-         htmlEscape(type_title)
+        "<details style=\"margin-left: 1rem;\">\n<summary>%s (%s rules)</summary>\n\n",
+        htmltools::htmlEscape(format_label(scope_value)),
+        nrow(rules)
       ))
-      table <- stagesRules(
-        edition = edition[i],
-        cancer = cancer[j],
-        type = type[k]
-      ) |>
-        select(-rule_id) |>
-        arrange(uicc_stage) |>
-        visOmopResults::visTable(
-          groupColumn = "uicc_stage"
-        )
-      print(table)
-      cat("</details>\n")
+
+      cat(knitr::kable(rules, format = "html"))
+      cat("\n</details>\n\n")
     }
-    cat("</details>\n")
+
+    cat("</details>\n\n")
   }
-  cat("</details>\n")
+
+  cat("</details>\n\n")
 }
 ```
+
+## References
+
+Sobin, L. H., Gospodarowicz, M. K., & Wittekind, C. (Eds.). (2009). *TNM classification of malignant tumours* (7th ed.). Wiley-Blackwell.
+
+Brierley, J. D., Gospodarowicz, M. K., & Wittekind, C. (Eds.). (2016). *TNM classification of malignant tumours* (8th ed.). Wiley-Blackwell.
+
+Brierley, J. D., Giuliani, M., O'Sullivan, B., Rous, B., & Van Eycken, E. (Eds.). (2025). *TNM classification of malignant tumours* (9th ed.). Wiley.
