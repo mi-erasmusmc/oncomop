@@ -15,10 +15,10 @@
 #' @param type A choice from "base", "clinical" or "pathological" stage rule.
 #' @param order A choice from "first" or "last". If more than one code
 #' intersected, the order defines which code to intersect in the window.
-#' @param showTnm If TRUE, the cohort will show the date intersects
+#' @param showIntersect If TRUE, the cohort will show the date intersects
 #' for each matching code. Default FALSE.
 #' @importFrom omopgenerics validateCohortArgument validateCdmArgument assertList newCodelist
-#' @importFrom checkmate assertChoice assertFileExists assertTRUE assertDataFrame
+#' @importFrom checkmate assertChoice asseertLogical assertFileExists assertTRUE assertDataFrame
 #' @importFrom dplyr filter pull rowwise select_if mutate pick select
 #' @importFrom PatientProfiles addConceptIntersectDate
 #' @importFrom tidyselect any_of
@@ -33,27 +33,23 @@ addStages <- function(
   edition = "8th",
   type = "base",
   order = "last",
-  showTnm = FALSE
+  showIntersect = FALSE
 ) {
 
   # Assert parameters ---------------------------------
-  cohort |>
-    omopgenerics::validateCohortArgument()
-  cdm |>
-    omopgenerics::validateCdmArgument()
-  window |>
-    omopgenerics::assertList()
-  edition |>
-    checkmate::assertChoice(
-      c("unspecified", "7th", "8th")
-    )
-  type |>
-    checkmate::assertChoice(
-      c("base", "clinical", "pathological")
-    )
+  omopgenerics::validateCohortArgument(cohort)
+  omopgenerics::validateCdmArgument(cdm) 
+  checkmate::assertChoice(cancer, supportedCancerSites())
+  omopgenerics::assertList(window)
+  checkmate::assertChoice(
+    edition,
+    c("unspecified", supportedEdition())
+  )
+  checkmate::assertChoice(type, supportedType())
+  checkmate::assertChoice(order, c("first", "last"))
+  checkmate::assertLogical(showIntersect)
 
   # Extract codelist for intersection -----------------
-  # At this point, we can put any codelist for stages, subtypes, progression
   tnm_codelist <- readStagesRDS("concepts") |>
     createTNMCodelist(
       .edition = edition,
@@ -68,9 +64,7 @@ addStages <- function(
       .type = "base"
     )
 
-  # .addColumnRules() ---------------------------------
-  # General function to analyse if it can be reused for
-  # subtypes and progression
+  # Intersect cohorts ---------------------------------
   cancer_stage_cohort <- cohort |>
     .addColumnRules(
       conceptSet = tnm_codelist,
@@ -85,7 +79,8 @@ addStages <- function(
       ruleset = ruleset
     )
 
-  if (isFALSE(showTnm)) {
+  # Leave intersections in the cohort or not -----------
+  if (isFALSE(showIntersect)) {
     cancer_stage_cohort |>
       dplyr::select(
         cohort_definition_id,
@@ -198,4 +193,20 @@ filterStageConcepts <- function(
       pattern = "\\b[TMN]\\d\\b"
     )
   codelist[filterParents]
+}
+
+supportedCancerSites <- function() {
+  readStagesRDS("mapping") |> 
+    dplyr::pull(site) |> 
+    unique()
+}
+supportedEdition <- function() {
+  readStagesRDS("mapping") |> 
+    dplyr::pull(edition) |> 
+    unique()
+}
+supportedType <- function() {
+  readStagesRDS("mapping") |> 
+    dplyr::pull(stage_grouping_scope) |> 
+    unique()
 }
