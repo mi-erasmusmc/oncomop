@@ -1,4 +1,5 @@
 test_that("addStage() insert cancer column with last record multiple subjects", {
+  # Setup -------------------------------
   testName <- "default_rules_multiple_subjects"
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
@@ -11,9 +12,8 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
     name = "cancer_cohorts"
     )
 
-  # -------------------- Oncomop starts here
-
-  cdm$cancer_cohorts |>
+  # Oncomop execution -------------------- 
+  result_stages <- cdm$cancer_cohorts |>
     addStages(
       cdm,
       cancer = "breast",
@@ -21,10 +21,54 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
       edition = "8th",
       type = "clinical",
       order = "last",
-      showTnm = TRUE
-    ) |>
-    dplyr::pull(cancer_stage) |>
-    expect_in(c("IV", "IA", "IIIC"))
+      showIntersect = TRUE
+    ) 
+  
+  # Test ---------------------------------
+  result_stages |>
+    dplyr::pull(cancer_stage) |> 
+    sort() |> 
+    expect_in(
+      sort(
+        c("IV", "IA", "IIIC")
+      )
+    ) 
+  
+  # Summarised result --------------------
+  result_stages_summarised <- result_stages |>
+    PatientProfiles::summariseResult()
+
+  # Test stages --------------------------
+  result_stages_summarised |>
+    dplyr::filter(
+      variable_name == "cancer_stage",
+      estimate_name == "count",
+    ) |> 
+    pull(variable_level) |> 
+    sort() |> 
+    expect_in(
+      sort(
+        c("IV", "IA", "IIIC")
+      )
+    )
+  
+  # Test counts --------------------------
+  result_stages_summarised |>
+    dplyr::filter(
+      variable_name == "cancer_stage",
+      estimate_name == "count",
+    ) |> 
+    pull(estimate_value) |> 
+    as.numeric() |> 
+    unique() |> 
+    expect_equal(1)
+
+  # Test visOmopResults -------------------
+  expect_no_error({
+    result_stages_summarised |> 
+      visOmopResults::visOmopTable()
+  })
+
 })
 
 test_that("read stages rds", {
