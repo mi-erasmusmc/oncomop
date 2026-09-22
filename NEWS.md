@@ -1,3 +1,3 @@
-# oncomop (development version)
+# oncomop 0.1.0
 
-* Initial CRAN submission.
+* `oncomop::addStages()` initial release.
