@@ -10,5 +10,8 @@
 README.html
 tests/testthat/Rplots.pdf
 docs
+
 extras/ONCOMOP-SRS.docx
 extras/ema-presentation.qmd
+extras/oncomop-staging-flow.png
+extras/oncomop-staging-flow.svg
