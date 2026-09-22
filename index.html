@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">oncomop</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9004</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,48 +56,91 @@
 </h1></div>
 <!-- badges: start -->
 <!-- badges: end -->
-<p>A tool to determine stages and subtypes in cancer cohorts using UICC guidelines. The aim is facilite the characterisation of patients using OMOP analytical tools that rely on a ‘dplyr’ pipe-based workflow such as CohortConstructor, PatientProfiles and CohortCharacteristics.</p>
-<p>To start install the package from CRAN or remotes:</p>
+<p><code>oncomop</code> is designed to facilitate patient characterisation with OMOP analytical tools that follow a <code>dplyr</code> pipe-based workflow, such as PatientProfiles and CohortCharacteristics. It determines cancer stage in cohorts using UICC guidelines.</p>
+<p>To install the package, use <code>renv</code> or <code>remotes</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"oncomop"</span><span class="op">)</span></span>
+<span><span class="co"># install.packages("renv")</span></span>
+<span><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"mi-erasmusmc/oncomop"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ohdsi/oncomop"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"mi-erasmusmc/oncomop"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
-<h2 id="adding-a-stage-or-subtype">Adding a stage or subtype<a class="anchor" aria-label="anchor" href="#adding-a-stage-or-subtype"></a>
+<h2 id="create-a-cancer-cohort">Create a cancer cohort<a class="anchor" aria-label="anchor" href="#create-a-cancer-cohort"></a>
 </h2>
-<p>A cohort should be created in a CDM reference using tools such CohortConstructor and CDMConnector. From there, oncomop can be used in a pipe to add a column with the cancer stage or subtype for each subject record.</p>
+<p><code>oncomop</code> derives a stage using the intersection of T, N, and M concept sets. The example below derives the clinical eighth-edition stage for a breast-cancer cohort.</p>
+<p>Use CDMConnector to create a reference to an OMOP database and generate a cancer cohort as input to the <code>oncomop</code> package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="fu">CohortConstructor</span><span class="fu">::</span><span class="fu"><a href="https://ohdsi.github.io/CohortConstructor/reference/conceptCohort.html" class="external-link">conceptCohort</a></span><span class="op">(</span></span>
-<span>  <span class="va">cdm</span>,</span>
-<span>  conceptSet <span class="op">=</span> <span class="fl">4308306</span>,</span>
-<span>  name <span class="op">=</span> <span class="st">"breast_cancer"</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">cdm</span><span class="op">$</span><span class="va">breast_cancer</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="va">cdm</span><span class="op">$</span><span class="va">breast_cancer</span> <span class="op">&lt;-</span> <span class="fu">omopgenerics</span><span class="fu">::</span><span class="fu"><a href="https://darwin-eu.github.io/omopgenerics/reference/newCodelist.html" class="external-link">newCodelist</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>breast_cancer <span class="op">=</span> <span class="fl">4308306L</span><span class="op">)</span>, <span class="co"># Infiltrating ductal carcinoma</span></span>
+<span>  cdm <span class="op">=</span> <span class="va">cdm</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">CohortConstructor</span><span class="fu">::</span><span class="fu"><a href="https://ohdsi.github.io/CohortConstructor/reference/conceptCohort.html" class="external-link">conceptCohort</a></span><span class="op">(</span></span>
+<span>    cdm <span class="op">=</span> <span class="va">cdm</span>,</span>
+<span>    conceptSet <span class="op">=</span> <span class="va">_</span>,</span>
+<span>    name <span class="op">=</span> <span class="st">"breast_cancer"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#&gt; # A tibble: 3 x 4</span></span>
+<span><span class="co">#&gt;   cohort_definition_id subject_id cohort_start_date cohort_end_date</span></span>
+<span><span class="co">#&gt;                  &lt;int&gt;      &lt;int&gt; &lt;date&gt;            &lt;date&gt;</span></span>
+<span><span class="co">#&gt; 1                    1          1 2020-01-15        2023-12-31</span></span>
+<span><span class="co">#&gt; 2                    1          2 2021-06-20        2023-12-31</span></span>
+<span><span class="co">#&gt; 3                    1          3 2022-09-10        2023-12-31</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="derive-the-stage-for-each-record-in-the-cohort">Derive the stage for each record in the cohort<a class="anchor" aria-label="anchor" href="#derive-the-stage-for-each-record-in-the-cohort"></a>
+</h3>
+<p>Execute <code><a href="reference/addStages.html">oncomop::addStages()</a></code> and set <code>showIntersect = TRUE</code> to display the columns containing the T, N, and M date intersections:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cdm</span><span class="op">$</span><span class="va">breast_cancer</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">oncomop</span><span class="fu">::</span><span class="fu"><a href="reference/addStages.html">addStages</a></span><span class="op">(</span></span>
-<span>    <span class="va">cdm</span>,</span>
-<span>    <span class="va">cancer</span>,</span>
-<span>    <span class="va">window</span>,</span>
-<span>    <span class="va">edition</span>,</span>
-<span>    <span class="va">type</span></span>
-<span>    <span class="op">)</span></span>
-<span></span>
-<span><span class="va">cdm</span><span class="op">$</span><span class="va">breast_cancer</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">oncomop</span><span class="fu">::</span><span class="fu">addSubtypes</span><span class="op">(</span></span>
-<span>    <span class="va">cdm</span>,</span>
-<span>    <span class="va">cancer</span>,</span>
-<span>    <span class="va">window</span></span>
-<span>    <span class="op">)</span></span></code></pre></div>
+<span>    cdm <span class="op">=</span> <span class="va">cdm</span>,</span>
+<span>    cancer <span class="op">=</span> <span class="st">"breast"</span>,</span>
+<span>    window <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">7</span>, <span class="fl">60</span><span class="op">)</span><span class="op">)</span>, <span class="co"># Search from 7 days before to 60 days after the index date</span></span>
+<span>    edition <span class="op">=</span> <span class="st">"8th"</span>,</span>
+<span>    type <span class="op">=</span> <span class="st">"clinical"</span>,</span>
+<span>    order <span class="op">=</span> <span class="st">"last"</span>,</span>
+<span>    showIntersect <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#&gt; # A tibble: 3 x 13</span></span>
+<span><span class="co">#&gt;   cohort_definition_id subject_id cohort_start_date cohort_end_date t1         t1mi       t4d        n0         n1         n3a        m0         m1         cancer_stage</span></span>
+<span><span class="co">#&gt;                  &lt;int&gt;      &lt;int&gt; &lt;date&gt;            &lt;date&gt;         &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1                    1          1 2020-01-15        2023-12-31     2020-01-15 NA         NA         2020-01-15 NA         NA         2020-01-15 NA         IA</span></span>
+<span><span class="co">#&gt; 2                    1          2 2021-06-20        2023-12-31     NA         2021-06-20 NA         NA         NA         2021-06-20 2021-06-20 NA         IIIC</span></span>
+<span><span class="co">#&gt; 3                    1          3 2022-09-10        2023-12-31     NA         NA         2022-09-10 NA         2022-09-10 NA         NA         2022-09-10 IV</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="return-the-cancer-stage-only">Return the cancer stage only<a class="anchor" aria-label="anchor" href="#return-the-cancer-stage-only"></a>
+</h3>
+<p>If <code>showIntersect = FALSE</code>, <code>oncomop</code> will add a single <code>cancer_stage</code> column:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cdm</span><span class="op">$</span><span class="va">breast_cancer</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">oncomop</span><span class="fu">::</span><span class="fu"><a href="reference/addStages.html">addStages</a></span><span class="op">(</span></span>
+<span>    cdm <span class="op">=</span> <span class="va">cdm</span>,</span>
+<span>    cancer <span class="op">=</span> <span class="st">"breast"</span>,</span>
+<span>    window <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">7</span>, <span class="fl">60</span><span class="op">)</span><span class="op">)</span>, <span class="co"># Search from 7 days before to 60 days after the index date</span></span>
+<span>    edition <span class="op">=</span> <span class="st">"8th"</span>,</span>
+<span>    type <span class="op">=</span> <span class="st">"clinical"</span>,</span>
+<span>    order <span class="op">=</span> <span class="st">"last"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p>The result is the original cohort with a derived <code>cancer_stage</code> column:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#&gt; # A tibble: 3 x 5</span></span>
+<span><span class="co">#&gt;   cohort_definition_id subject_id cohort_start_date cohort_end_date cancer_stage</span></span>
+<span><span class="co">#&gt;                  &lt;int&gt;      &lt;int&gt; &lt;date&gt;            &lt;date&gt;          &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1                    1          1 2020-01-15        2023-12-31      IA</span></span>
+<span><span class="co">#&gt; 2                    1          2 2021-06-20        2023-12-31      IIIC</span></span>
+<span><span class="co">#&gt; 3                    1          3 2022-09-10        2023-12-31      IV</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="the-rules">The rules<a class="anchor" aria-label="anchor" href="#the-rules"></a>
 </h2>
-<p>Oncomop includes a set of predefined rules based on UICC guidelines to analyze eight different cancer types. In this article you can find a more detailed description or simply call <code>oncomop::ruleset()</code> to see the rules data.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<p><code>oncomop</code> includes a set of predefined, UICC-based rules for eight cancer types. Call <code>oncomop::ruleset()</code> to inspect the available rules.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="fu">omcomop</span><span class="fu">::</span><span class="fu">ruleset</span><span class="op">(</span></span>
+<span><span class="fu">oncomop</span><span class="fu">::</span><span class="fu">ruleset</span><span class="op">(</span></span>
 <span>  cancer <span class="op">=</span> <span class="st">"breast"</span>,</span>
 <span>  edition <span class="op">=</span> <span class="st">"9th"</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"clinical"</span></span>

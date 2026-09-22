@@ -11,13 +11,13 @@
 ## Citation
 
 Barboza C, Di Tullio C, Barchuk A (2026). *oncomop: Methods to Analyze
-Oncological Data In The OMOP-CDM*. R package version 0.0.0.9004,
+Oncological Data In The OMOP-CDM*. R package version 0.1.0,
 <https://mi-erasmusmc.github.io/oncomop/>.
 
     @Manual{,
       title = {oncomop: Methods to Analyze Oncological Data In The OMOP-CDM},
       author = {Cesar Barboza and Cristiana {Di Tullio} and Anton Barchuk},
       year = {2026},
-      note = {R package version 0.0.0.9004},
+      note = {R package version 0.1.0},
       url = {https://mi-erasmusmc.github.io/oncomop/},
     }
