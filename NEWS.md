@@ -1,4 +1,6 @@
-# oncomop (development version)
+# oncomop 0.1.1
+
+* `addSubtypes.R` file in wrong place.
 
 # oncomop 0.1.0
 
