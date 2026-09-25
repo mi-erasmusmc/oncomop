@@ -1,0 +1,7 @@
+subtype,breast_cancer_subtypes_pr,breast_cancer_subtypes_er,breast_cancer_subtypes_her2
+Estrogen/Progesteron Positive,,9191,
+Estrogen/Progesteron Positive,9191,,
+Estrogen/Progesteron Negative,9189,9189,
+HER2 positive,,,9191
+HER2 negative,,,9189
+Triple negative,9189,9189,9189

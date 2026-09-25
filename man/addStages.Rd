@@ -12,7 +12,7 @@ addStages(
   edition = "8th",
   type = "base",
   order = "last",
-  showTnm = FALSE
+  showIntersect = FALSE
 )
 }
 \arguments{
@@ -34,7 +34,7 @@ and "prostate".}
 \item{order}{A choice from "first" or "last". If more than one code
 intersected, the order defines which code to intersect in the window.}
 
-\item{showTnm}{If TRUE, the cohort will show the date intersects
+\item{showIntersect}{If TRUE, the cohort will show the date intersects
 for each matching code. Default FALSE.}
 }
 \value{

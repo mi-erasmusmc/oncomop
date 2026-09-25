@@ -6,7 +6,7 @@
 \usage{
 saveStagesRules(
   path = here::here("extras"),
-  results_path = system.file("tnm_data", package = "oncomop")
+  results_path = system.file("data", package = "oncomop")
 )
 }
 \arguments{
