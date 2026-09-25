@@ -66,7 +66,7 @@ addStages <- function(
 
   # Intersect cohorts ---------------------------------
   cancer_stage_cohort <- cohort |>
-    .addColumnRules(
+    .addStageRules(
       conceptSet = tnm_codelist,
       indexDate = "cohort_start_date",
       censorDate = NULL,
@@ -122,7 +122,7 @@ createTNMCodelist <- function(
   return(tnm_codelist)
 }
 
-.addColumnRules <- function(
+.addStageRules <- function(
   cohort,
   conceptSet,
   indexDate = "cohort_start_date",
@@ -148,10 +148,10 @@ createTNMCodelist <- function(
       nameStyle = "{concept_name}",
       name = NULL
     ) |>
-    .mapRules(ruleset)
+    .mapStageRules(ruleset)
 }
 
-.mapRules <- function(
+.mapStageRules <- function(
   cohort,
   ruleset
 ) {

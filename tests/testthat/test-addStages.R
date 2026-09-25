@@ -75,17 +75,29 @@ test_that("read stages rds", {
   readStagesRDS("concepts") |>
     names() |>
     expect_equal(
-      c("component_tnm", "type", "classification_version",
-      "concept_id", "note")
+      c("component_tnm",
+        "type",
+        "classification_version",
+        "concept_id",
+        "note")
     )
   readStagesRDS("mapping") |>
     names() |>
     expect_equal(
-      c("rule_id", "staging_system", "edition", 
-        "site", "stage_grouping_scope", "histology", 
-        "T", "N", "M", 
-        "uicc_stage", "source_file", "source_pages", 
-        "source_table", "notes")
+      c("rule_id",
+        "staging_system",
+        "edition", 
+        "site",
+        "stage_grouping_scope",
+        "histology", 
+        "T",
+        "N",
+        "M", 
+        "uicc_stage",
+        "source_file",
+        "source_pages", 
+        "source_table",
+        "notes")
     )
 })
 
@@ -140,7 +152,7 @@ test_that("Imposing rules with 'mappingRules' multiple subjects", {
     )
 
   cdm$cancer_cohorts |>
-    .addColumnRules(
+    .addStageRules(
       conceptSet = tnm_codelist,
       window = list(c(0, 0)),
       ruleset = ruleset
@@ -174,7 +186,7 @@ test_that("Imposing rules with 'mappingRules' single patient", {
       .type = "base"
     )
   cdm$cancer_cohorts |>
-    .addColumnRules(
+    .addStageRules(
       conceptSet = tnm_codelist,
       window = list(c(0, 0)),
       ruleset = ruleset
@@ -183,7 +195,7 @@ test_that("Imposing rules with 'mappingRules' single patient", {
     expect_equal("IA")
 })
 
-test_that("General .addColumnRules", {
+test_that("General .addStageRules", {
   testName <- "default_rules_single_subject"
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
@@ -207,7 +219,7 @@ test_that("General .addColumnRules", {
       .type = "base"
     )
   cdm$cancer_cohorts |>
-    .addColumnRules(
+    .addStageRules(
       conceptSet = tnm_codelist,
       window = list(c(0, 0)),
       ruleset = ruleset
@@ -218,7 +230,7 @@ test_that("General .addColumnRules", {
       as.Date("2023-01-15")
     )
   cdm$cancer_cohorts |>
-    .addColumnRules(
+    .addStageRules(
       conceptSet = tnm_codelist,
       window = list(c(0, 0)),
       ruleset = ruleset
@@ -229,7 +241,7 @@ test_that("General .addColumnRules", {
       as.Date("2023-01-15")
     )
   cdm$cancer_cohorts |>
-    .addColumnRules(
+    .addStageRules(
       conceptSet = tnm_codelist,
       window = list(c(0, 0)),
       ruleset = ruleset
