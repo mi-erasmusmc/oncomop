@@ -85,5 +85,3 @@ test_that("extractConceptName correctly", {
 #     ) |> 
 #     .mapSubtypeRules(ruleset)
 # })
-
-

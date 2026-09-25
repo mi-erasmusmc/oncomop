@@ -32,9 +32,13 @@ addSubtypes <- function(
   omopgenerics::assertList(window)
   checkmate::assertLogical(showIntersect)
 
-  # Map rules -------------------------
+  # Map rules ---------------------------------
   mapping <- readSubtypeRDS("mapping")
   codelist <- subtypeCodelist(c(35957667L, 35948983L, 35955862L), cdm)
+
+  # Intersection and mapping ------------------
+  
+
 
 
   
