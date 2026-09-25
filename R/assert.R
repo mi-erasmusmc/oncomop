@@ -1,3 +1,25 @@
+#' Assert that cohort names match selected cancer site(s)
+#'
+#' Validates that all names in a cohort table correspond to the selected cancer
+#' site(s). Cohort names must follow the `"<cancer>_cancer"` format.
+#'
+#' @param cohort A cohort table from a cdm reference object.
+#' @param cancer A character vector of supported cancer sites. Defaults to
+#'   `"breast"`.
+#'
+#' @returns `NULL`, invisibly, if validation succeeds.
+#'
+#' @details
+#' Throws an error of class `"Invalid cohort names"` if any cohort name does not
+#' correspond to the selected cancer site(s).
+#'
+#' @importFrom checkmate assertSubset checkSubset
+#' @importFrom cli cli_abort
+#' @importFrom dplyr pull
+#' @importFrom glue glue_collapse
+#' @importFrom omopgenerics validateCohortArgument
+#' @importFrom PatientProfiles addCohortName
+#' @export
 assertCancerCohortName <- function(
   cohort,
   cancer = "breast"
@@ -7,9 +29,9 @@ assertCancerCohortName <- function(
     cancer,
     supportedCancerSites()
     )
-  cohort_names <- cohort |> 
-    PatientProfiles::addCohortName() |> 
-    pull(cohort_name) |> 
+  cohort_names <- cohort |>
+    PatientProfiles::addCohortName() |>
+    dplyr::pull(cohort_name) |>
     unique()
   expected_cancer <- paste(
     cancer,
@@ -18,7 +40,7 @@ assertCancerCohortName <- function(
   )
   cancer_in_cohort <- checkmate::checkSubset(
     cohort_names,
-    expected_cancer    
+    expected_cancer
   )
   if (!isTRUE(cancer_in_cohort)) {
     cli::cli_abort(
