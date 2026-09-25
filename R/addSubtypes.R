@@ -24,13 +24,56 @@ addSubtypes <- function(
   window = list(c(0,0)),
   showIntersect = FALSE
 ) {
-  # Assert parameters ---------------------------------
-  omopgenerics::validateCohortArgument(cohort)
+  # Assert parameters -------------------------
+  checkmate::assertCharacter(cohort)
+  omopgenerics::validateCohortArgument(cdm[[cohort]])
   omopgenerics::validateCdmArgument(cdm) 
-  checkmate::assertChoice(cancer, supportedCancerSites())
+  assertCancerCohortName(cdm[[cohort]], cancer)
   omopgenerics::assertList(window)
   checkmate::assertLogical(showIntersect)
 
+  # Map rules -------------------------
+  mapping <- readSubtypeRDS("mapping")
+  codelist <- subtypeCodelist(c(35957667L, 35948983L, 35955862L), cdm)
+
+
   
   
+}
+
+subtypeCodelist <- function(
+  concepts,
+  cdm
+) {
+  checkmate::assertInteger(concepts)
+  omopgenerics::validateCdmArgument(cdm)
+  codelist <- list()
+  for (i in seq_along(concepts)) {
+    codelist[[extractConceptName(concepts[i], cdm)]] <- CodelistGenerator::getDescendants(cdm, concepts[i]) |> 
+      dplyr::pull(concept_id)
+  }
+  codelist |> 
+    omopgenerics::newCodelist(cdm)
+  }
+
+extractConceptName <- function(
+  concept,
+  cdm
+  ) {
+  CodelistGenerator::getDescendants(
+    cdm,
+    concept
+  ) |> 
+    dplyr::filter(
+      concept_id == concept 
+    ) |> 
+    dplyr::pull(.data$concept_name) |> 
+    tolower() |> 
+    stringr::str_remove_all(
+      "[()]"
+    ) |> 
+    stringr::str_replace_all(
+      " ",
+      "_"
+    )
 }
