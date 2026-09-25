@@ -18,7 +18,7 @@
 #' @param showIntersect If TRUE, the cohort will show the date intersects
 #' for each matching code. Default FALSE.
 #' @importFrom omopgenerics validateCohortArgument validateCdmArgument assertList newCodelist
-#' @importFrom checkmate assertChoice asseertLogical assertFileExists assertTRUE assertDataFrame
+#' @importFrom checkmate assertChoice assertLogical assertFileExists assertTRUE assertDataFrame
 #' @importFrom dplyr filter pull rowwise select_if mutate pick select
 #' @importFrom PatientProfiles addConceptIntersectDate
 #' @importFrom tidyselect any_of

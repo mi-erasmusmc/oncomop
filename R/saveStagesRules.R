@@ -19,7 +19,7 @@
 saveStagesRules <- function(
     path =  here::here("extras"),
     results_path =  system.file(
-      "tnm_data",
+      "data",
       package = "oncomop"
     )
     ) {
