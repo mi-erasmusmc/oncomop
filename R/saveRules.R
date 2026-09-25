@@ -159,3 +159,10 @@ readSubtypeRDS <- function(
     ) |> 
     readRDS()
 }
+
+conceptSetsPath <- function() {
+    system.file(
+      "concept_sets",
+    package = "oncomop"
+  )
+}

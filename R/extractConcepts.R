@@ -142,3 +142,20 @@ extractConceptIds <- function(
   checkmate::assertDataFrame(result)
   return(result)
 }
+
+filterCodelist <- function(
+  codelist,
+  pattern
+) {
+  codelist |>
+    omopgenerics::assertList(
+      named = TRUE
+    )
+  pattern |>
+    checkmate::assertCharacter()
+  index <- stringr::str_detect(
+    names(codelist),
+    pattern = pattern
+  )
+  codelist[index]
+}
