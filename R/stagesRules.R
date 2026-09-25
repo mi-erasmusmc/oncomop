@@ -132,24 +132,6 @@ stagesRules <- function(
     )   
 }
 
-readStagesRDS <- function(
-    type = "mapping"
-) {
-  checkmate::assertChoice(
-    type,
-    c("concepts", "mapping")
-  )
-  system.file(
-    "data",
-    package = "oncomop"
-  ) |>
-    list.files(
-      full.names = TRUE,
-      pattern = type
-    ) |> 
-    readRDS()
-}
-
 extractStageRuleset <- function(
   tnm_stage_mapping,
   .edition,
