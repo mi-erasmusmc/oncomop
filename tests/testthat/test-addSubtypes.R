@@ -34,5 +34,4 @@ test_that("assertCancerCohortName FUN", {
     },
     class = "Invalid cohort names"
   )
-
 })
