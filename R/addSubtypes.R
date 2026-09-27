@@ -33,8 +33,11 @@ addSubtypes <- function(
   checkmate::assertLogical(showIntersect)
 
   # Map rules ---------------------------------
-  mapping <- readSubtypeRDS("mapping")
-  codelist <- subtypeCodelist(c(35957667L, 35948983L, 35955862L), cdm)
+  codelist <- subtypeCodelist(
+    c(35957667L, 35948983L, 35955862L),
+    cdm
+  )
+  ruleset <- readSubtypeRDS("mapping")
 
   # Intersection and mapping ------------------
   
@@ -80,4 +83,39 @@ extractConceptName <- function(
       " ",
       "_"
     )
+}
+
+.mapSubtypeRules <- function(
+  cohort,
+  ruleset
+) {
+  omopgenerics::validateCohortArgument(cohort)
+  checkmate::assertDataFrame(ruleset)
+    cohort |>
+    dplyr::collect() |>
+    dplyr::rowwise() |>
+    dplyr::select_if(~ !all(is.na(.))) |>
+    dplyr::mutate(
+      cancer_stage = {
+        rowStages <- dplyr::pick(
+          tidyselect::any_of(tolower(unique(c(ruleset$T, ruleset$N, ruleset$M))))) |>
+          dplyr::select_if(~ !any(is.na(.)))
+        stageCombination <- names(rowStages)
+        rowStageT <- stageCombination[names(rowStages) |> stringr::str_detect("t")]
+        rowStageN <- stageCombination[names(rowStages) |> stringr::str_detect("n")]
+        rowStageM <- stageCombination[names(rowStages) |> stringr::str_detect("m")]
+        stage <- ruleset |>
+          dplyr::select(
+            T, N, M, uicc_stage
+          ) |>
+          dplyr::filter(
+            tolower(T) == rowStageT,
+            tolower(N) == rowStageN,
+            tolower(M) == rowStageM,
+          ) |>
+          dplyr::pull(uicc_stage)
+      }
+    )
+
+
 }
