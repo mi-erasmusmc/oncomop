@@ -60,7 +60,7 @@ test_that("extractConceptName correctly", {
   )
 })
 
-test_that(".mapStageRules correct breast cancer cohort", {
+test_that("subtypeIntersection correct breast cancer cohort", {
   testName <- "subtypes_six_rules"
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
@@ -77,8 +77,8 @@ test_that(".mapStageRules correct breast cancer cohort", {
   )
   window <- list(c(-90, 90))
   ruleset <- readSubtypeRDS("mapping")
-  cdm$cancer_cohorts |>
-    PatientProfiles::addConceptIntersectDate(
+  subtypes <- cdm$cancer_cohorts |>
+    addSubtypeIntersect(
       conceptSet = codelist,
       indexDate = "cohort_start_date",
       censorDate = NULL,
@@ -89,5 +89,84 @@ test_that(".mapStageRules correct breast cancer cohort", {
       nameStyle = "{concept_name}",
       name = NULL
     ) |> 
-    .mapSubtypeRules(ruleset)
+    dplyr::collect()
+
+  subtypes |> 
+    dplyr::filter(
+      subject_id == 1 
+    ) |> 
+      select(
+        "pgr_progesterone_receptor_gene_variant_measurement", 
+        "erbb2_erb_b2_receptor_tyrosine_kinase_2_gene_variant_measurement", 
+        "esr1_estrogen_receptor_1_gene_variant_measurement"
+      ) |> 
+          unlist(use.names = FALSE) |> 
+          sort() |> 
+          expect_equal(9191) # positive PGR
+  
+  subtypes |> 
+    dplyr::filter(
+      subject_id == 2 
+    ) |> 
+      select(
+        "pgr_progesterone_receptor_gene_variant_measurement", 
+        "erbb2_erb_b2_receptor_tyrosine_kinase_2_gene_variant_measurement", 
+        "esr1_estrogen_receptor_1_gene_variant_measurement"
+      ) |> 
+          unlist(use.names = FALSE) |> 
+          sort() |> 
+          expect_equal(9191) # positive ESR1
+
+  subtypes |> 
+    dplyr::filter(
+      subject_id == 3 
+    ) |> 
+      select(
+        "pgr_progesterone_receptor_gene_variant_measurement", 
+        "erbb2_erb_b2_receptor_tyrosine_kinase_2_gene_variant_measurement", 
+        "esr1_estrogen_receptor_1_gene_variant_measurement"
+      ) |> 
+          unlist(use.names = FALSE) |> 
+          sort() |> 
+          expect_equal(c(9189, 9189)) # positive PGR and ESR1
+
+  subtypes |> 
+    dplyr::filter(
+      subject_id == 4 
+    ) |> 
+      select(
+        "pgr_progesterone_receptor_gene_variant_measurement", 
+        "erbb2_erb_b2_receptor_tyrosine_kinase_2_gene_variant_measurement", 
+        "esr1_estrogen_receptor_1_gene_variant_measurement"
+      ) |> 
+          unlist(use.names = FALSE) |> 
+          sort() |> 
+          expect_equal(c(9191)) # positive HER2
+
+  subtypes |> 
+    dplyr::filter(
+      subject_id == 5 
+    ) |> 
+      select(
+        "pgr_progesterone_receptor_gene_variant_measurement", 
+        "erbb2_erb_b2_receptor_tyrosine_kinase_2_gene_variant_measurement", 
+        "esr1_estrogen_receptor_1_gene_variant_measurement"
+      ) |> 
+          unlist(use.names = FALSE) |> 
+          sort() |> 
+          expect_equal(c(9189)) # negative HER2
+
+  subtypes |> 
+    dplyr::filter(
+      subject_id == 6 
+    ) |> 
+      select(
+        "pgr_progesterone_receptor_gene_variant_measurement", 
+        "erbb2_erb_b2_receptor_tyrosine_kinase_2_gene_variant_measurement", 
+        "esr1_estrogen_receptor_1_gene_variant_measurement"
+      ) |> 
+          unlist(use.names = FALSE) |> 
+          sort() |> 
+          expect_equal(c(9189, 9189, 9189)) # negative HER2
+
 })
