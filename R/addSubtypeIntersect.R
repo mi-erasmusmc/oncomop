@@ -3,11 +3,11 @@ addSubtypeIntersect <- function(
   conceptSet,
   indexDate = "cohort_start_date",
   censorDate = NULL,
-  window = list(c(0, Inf)),
+  window = list(c(-90, 90)),
   targetDate = "event_start_date",
   order = "first",
   inObservation = TRUE,
-  nameStyle = "{concept_name}_{window_name}",
+  nameStyle = "{concept_name}",
   name = NULL
 ) {
 
@@ -31,20 +31,22 @@ addSubtypeIntersect <- function(
   )
 }
 
-.addConceptIntersect <- function(x,
-                                 conceptSet,
-                                 indexDate = "cohort_start_date",
-                                 censorDate = NULL,
-                                 window,
-                                 targetStartDate = "event_start_date",
-                                 targetEndDate = "event_end_date",
-                                 inObservation = TRUE,
-                                 order = "first",
-                                 value,
-                                 allowDuplicates = FALSE,
-                                 nameStyle = "{value}_{concept_name}_{window_name}",
-                                 name,
-                                 type = "auto") {
+.addConceptIntersect <- function(
+  x,
+  conceptSet,
+  indexDate = "cohort_start_date",
+  censorDate = NULL,
+  window,
+  targetStartDate = "event_start_date",
+  targetEndDate = "event_end_date",
+  inObservation = TRUE,
+  order = "first",
+  value,
+  allowDuplicates = FALSE,
+  nameStyle = "{value}_{concept_name}_{window_name}",
+  name,
+  type = "auto"
+) {
 
   cdm <- omopgenerics::cdmReference(x)
 
