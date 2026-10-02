@@ -75,47 +75,54 @@ extractConceptName <- function(
       concept_id == concept 
     ) |> 
     dplyr::pull(.data$concept_name) |> 
-    tolower() |> 
     stringr::str_remove_all(
       "[()]"
     ) |> 
     stringr::str_replace_all(
       " ",
       "_"
-    )
+    ) |> 
+    stringr::str_extract(
+      "^[^_]+"
+    ) |> 
+    tolower()
 }
 
 .mapSubtypeRules <- function(
   cohort,
-  ruleset
+  cdm,
+  name = "cancer_cohorts"
 ) {
   omopgenerics::validateCohortArgument(cohort)
-  checkmate::assertDataFrame(ruleset)
-    cohort |>
+  omopgenerics::validateCdmArgument(cdm)
+  checkmate::assertCharacter(name)
+  cancer_cohorts_subtype <- cohort |>
     dplyr::collect() |>
     dplyr::rowwise() |>
     dplyr::select_if(~ !all(is.na(.))) |>
     dplyr::mutate(
-      cancer_stage = {
-        rowStages <- dplyr::pick(
-          tidyselect::any_of(tolower(unique(c(ruleset$T, ruleset$N, ruleset$M))))) |>
-          dplyr::select_if(~ !any(is.na(.)))
-        stageCombination <- names(rowStages)
-        rowStageT <- stageCombination[names(rowStages) |> stringr::str_detect("t")]
-        rowStageN <- stageCombination[names(rowStages) |> stringr::str_detect("n")]
-        rowStageM <- stageCombination[names(rowStages) |> stringr::str_detect("m")]
-        stage <- ruleset |>
-          dplyr::select(
-            T, N, M, uicc_stage
-          ) |>
-          dplyr::filter(
-            tolower(T) == rowStageT,
-            tolower(N) == rowStageN,
-            tolower(M) == rowStageM,
-          ) |>
-          dplyr::pull(uicc_stage)
-      }
+      subtype = dplyr::case_when(
+          is.na(.data$pgr) & isTRUE(.data$esr1 == 9191) & is.na(.data$erbb2) ~ "ESR1/PGR positive",
+          isTRUE(.data$pgr == 9191) & is.na(.data$esr1) & is.na(.data$erbb2) ~ "ESR1/PGR positive",
+          isTRUE(.data$pgr == 9189) & isTRUE(.data$esr1 == 9189) & is.na(.data$erbb2) ~ "ESR1/PGR negative",
+          is.na(.data$pgr) & is.na(.data$esr1) & isTRUE(.data$erbb2 == 9191) ~ "HER2 positive",
+          is.na(.data$pgr) & is.na(.data$esr1) & isTRUE(.data$erbb2 == 9189) ~ "HER2 negative",
+          isTRUE(.data$pgr == 9189) & isTRUE(.data$esr1 == 9189) & isTRUE(.data$erbb2 == 9189) ~ "Triple negative",
+          .default = "No subtype found"
+        )
+      ) |> 
+    tibble::as_tibble() 
+  cancerCohortTableName <- omopgenerics::uniqueTableName()
+  cdm <- omopgenerics::insertTable(
+    cdm = cdm,
+    name = cancerCohortTableName,
+    table = cancer_cohorts_subtype
+  ) 
+  cdm[[name]] <- omopgenerics::newCohortTable(
+    cdm[[cancerCohortTableName]]
+  ) |>
+    dplyr::compute(
+      name = name
     )
-
-
+  return(cdm[[name]])
 }

@@ -281,3 +281,76 @@ test_that("subtypeIntersection patients in subtype_groups", {
           expect_equal(c(9189, 9189, 9189)) # negative HER2
 
 })
+
+test_that(".mapSubtypeRules correct six rules", {
+  testName <- "subtypes_six_rules"
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  ) |>
+    createCancerCohorts(
+      path = "cancer_cohorts",
+      name = "cancer_cohorts"
+    ) 
+  codelist <- subtypeCodelist(
+    c(35957667L, 35948983L, 35955862L),
+    cdm
+  )
+  cdm$cancer_cohorts |>
+    addSubtypeIntersect(
+      conceptSet = codelist,
+      indexDate = "cohort_start_date",
+      censorDate = NULL,
+      window = list(c(-90, 90)),
+      targetDate = "event_start_date",
+      order = "first",
+      inObservation = TRUE,
+      nameStyle = "{concept_name}",
+      name = NULL
+    ) |> 
+    .mapSubtypeRules(cdm) |> 
+    dplyr::collect() |> 
+    dplyr::arrange(subject_id) |> 
+    pull(subtype) |> 
+    expect_identical(
+      c("ESR1/PGR positive", 
+       "ESR1/PGR positive", 
+       "ESR1/PGR negative", 
+       "HER2 positive",
+       "HER2 negative", 
+       "Triple negative")
+      )
+})
+
+test_that(".mapSubtypeRules correct six rules", {
+  testName <- "subtypes_groups"
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  ) |>
+    createCancerCohorts(
+      path = "cancer_cohorts",
+      name = "cancer_cohorts"
+    ) 
+  codelist <- subtypeCodelist(
+    c(35957667L, 35948983L, 35955862L),
+    cdm
+  )
+  cdm$cancer_cohorts |>
+    addSubtypeIntersect(
+      conceptSet = codelist,
+      indexDate = "cohort_start_date",
+      censorDate = NULL,
+      window = list(c(-90, 90)),
+      targetDate = "event_start_date",
+      order = "first",
+      inObservation = TRUE,
+      nameStyle = "{concept_name}",
+      name = NULL
+    ) |> 
+    .mapSubtypeRules(cdm) |> 
+    dplyr::collect() |> 
+    dplyr::arrange(subject_id) 
+})
