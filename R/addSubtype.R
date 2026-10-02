@@ -17,11 +17,11 @@
 #' @importFrom checkmate assertChoice
 #' @importFrom checkmate assertLogical
 #' @export
-addSubtypes <- function(
+addSubtype <- function(
   cohort,
   cdm,
   cancer,
-  window = list(c(0,0)),
+  window = list(c(-90, 90)),
   showIntersect = FALSE
 ) {
   # Assert parameters -------------------------
