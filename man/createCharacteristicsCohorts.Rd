@@ -2,7 +2,7 @@
 % Please edit documentation in R/createCohorts.R
 \name{createCharacteristicsCohorts}
 \alias{createCharacteristicsCohorts}
-\title{Creates cancer-related characteristics cohorts}
+\title{Create cancer-related characteristic cohorts}
 \usage{
 createCharacteristicsCohorts(
   cdm,
@@ -12,18 +12,20 @@ createCharacteristicsCohorts(
 )
 }
 \arguments{
-\item{cdm}{A cdm instance.}
+\item{cdm}{A CDM reference in which to create the cohort table.}
 
-\item{path}{The character name of the folder where the concept
-sets are saved within the study package, default \code{"concept_sets"}.}
+\item{path}{A single directory name below \code{inst} containing characteristic
+concept-set directories. Defaults to \code{"concept_sets"}.}
 
-\item{name}{The character name of the new cohort table to be created.}
+\item{name}{A single name for the created cohort table. Defaults to
+\code{"cancer_characteristics"}.}
 
-\item{characteristics}{A character vector of cancer-related characteristics to include in the cohort, default \code{"all"}. Other possible values are
-"biomarkers", "cancer_cohorts_deck", "cancer_progression", "grade", "radiotherapy", "stage", "surgery" and "treatments_procedures"}
+\item{characteristics}{A character vector of characteristic directory names,
+or \code{"all"} to create all available characteristic cohorts. Defaults to
+\code{"all"}.}
 }
 \value{
-A cdm instance including with the newly created cohort table.
+\code{cdm} with a new cohort table named \code{name}.
 }
 \description{
 The function \code{createCharacteristicsCohorts} relies on the \code{CohortConstructor} package to generate cohorts

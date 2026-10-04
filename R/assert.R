@@ -3,8 +3,9 @@
 #' Validates that all names in a cohort table correspond to the selected cancer
 #' site(s). Cohort names must follow the `"<cancer>_cancer"` format.
 #'
-#' @param cohort A cohort table from a cdm reference object.
-#' @param cancer A character vector of supported cancer sites (e.g., `"breast"`).
+#' @param cohort A cohort table whose names are to be validated.
+#' @param cancer A character vector of supported cancer-site names, such as
+#'   `"breast"`.
 #'
 #' @returns `NULL`, invisibly, if validation succeeds.
 #'
@@ -12,12 +13,6 @@
 #' Throws an error of class `"Invalid cohort names"` if any cohort name does not
 #' correspond to the selected cancer site(s).
 #'
-#' @importFrom checkmate assertSubset checkSubset
-#' @importFrom cli cli_abort
-#' @importFrom dplyr pull
-#' @importFrom glue glue_collapse
-#' @importFrom omopgenerics validateCohortArgument
-#' @importFrom PatientProfiles addCohortName
 #' @export
 assertCancerCohortName <- function(
   cohort,
@@ -69,8 +64,6 @@ assertCancerCohortName <- function(
 #' Throws an error of class `"Invalid characteristics"` if any element in `x` 
 #' is not present in `characteristics`.
 #'
-#' @importFrom checkmate assertCharacter
-#' @importFrom cli cli_abort
 #' @keywords internal
 assertCharacteristic <- function(
   x,

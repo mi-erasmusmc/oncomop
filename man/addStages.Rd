@@ -2,7 +2,7 @@
 % Please edit documentation in R/addStages.R
 \name{addStages}
 \alias{addStages}
-\title{\code{addStages()} to a cohort}
+\title{Add TNM-derived cancer stages to a cohort}
 \usage{
 addStages(
   cohort,
@@ -16,32 +16,33 @@ addStages(
 )
 }
 \arguments{
-\item{cohort}{A cohort table with cancer patients from a
-cdm reference object.}
+\item{cohort}{A cohort table in \code{cdm} containing cancer patients.}
 
-\item{cdm}{A cdm reference object.}
+\item{cdm}{A CDM reference containing \code{cohort}.}
 
-\item{cancer}{In character, the affected site, a choice of:
-"bladder", "breast", "colorectal", "lung", "melanoma", "oesophagus"
-and "prostate".}
+\item{cancer}{A single supported cancer-site name, such as \code{"breast"}.}
 
-\item{window}{to look up stages codes.}
+\item{window}{A list of two-element numeric vectors giving the inclusive
+start and end offsets, in days, for TNM-code lookup relative to cohort start.
+Defaults to \code{list(c(0, 0))}.}
 
-\item{edition}{A choice of "unspecified", "7th" and "8th".}
+\item{edition}{A single staging-system edition. Defaults to \code{"8th"}.}
 
-\item{type}{A choice from "base", "clinical" or "pathological" stage rule.}
+\item{type}{A single stage-rule grouping. Defaults to \code{"base"}.}
 
-\item{order}{A choice from "first" or "last". If more than one code
-intersected, the order defines which code to intersect in the window.}
+\item{order}{Whether the \code{"first"} or \code{"last"} matching code in each lookup
+window is used. Defaults to \code{"last"}.}
 
-\item{showIntersect}{If TRUE, the cohort will show the date intersects
-for each matching code. Default FALSE.}
+\item{showIntersect}{Whether to retain columns created during concept
+intersection. Defaults to \code{FALSE}.}
 }
 \value{
-A cohort table containing the identified cancer stages.
+A cohort table with a \code{cancer_stage} column. When \code{showIntersect} is
+\code{FALSE}, it contains only
+\code{cohort_definition_id}, \code{subject_id}, \code{cohort_start_date},
+\code{cohort_end_date}, and \code{cancer_stage}.
 }
 \description{
-It uses a codelist to date intersect with a cancer cohort.
-Imposes a predefined or custom set of rules to identify
-summary stages.
+Intersects a cancer cohort with TNM concepts and applies the packaged staging
+rules to derive a summary cancer stage.
 }

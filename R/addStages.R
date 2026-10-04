@@ -1,33 +1,23 @@
-#' `addStages()` to a cohort
+#' Add TNM-derived cancer stages to a cohort
 #'
-#' It uses a codelist to date intersect with a cancer cohort.
-#' Imposes a predefined or custom set of rules to identify
-#' summary stages.
+#' Intersects a cancer cohort with TNM concepts and applies the packaged staging
+#' rules to derive a summary cancer stage.
 #'
-#' @param cohort A cohort table with cancer patients from a
-#' cdm reference object.
-#' @param cdm A cdm reference object.
-#' @param cancer A character string specifying the affected site (e.g., `"breast"`). 
-#'   Must be a valid value from `supportedCancerSites()`.
-#' @param window A list of numeric vectors defining the date windows for 
-#'   looking up stage codes.
-#' @param edition A character string specifying the edition (e.g., `"8th"`). 
-#'   Must be a valid value from `supportedEdition()`.
-#' @param type A character string specifying the stage rule type 
-#'   (e.g., `"base"`). Must be a valid value from `supportedType()`.
-#' @param order A character string, either `"first"` or `"last"`. If more than 
-#'   one code intersected, the order defines which code to intersect in the window.
-#' @param showIntersect A logical value. If `TRUE`, the cohort will include 
-#'   the date intersects for each matching code. If `FALSE`, only the 
-#'   final `cancer_stage` column is returned. Default is `FALSE`.
-#' @importFrom omopgenerics validateCohortArgument validateCdmArgument assertList newCodelist
-#' @importFrom checkmate assertChoice assertLogical assertFileExists assertTRUE assertDataFrame
-#' @importFrom dplyr filter pull rowwise select_if mutate pick select
-#' @importFrom PatientProfiles addConceptIntersectDate
-#' @importFrom tidyselect any_of
-#' @importFrom stringr str_detect
-#' @returns A cohort table containing the identified cancer stages. 
-#'   If `showIntersect` is `FALSE`, the returned table contains only: 
+#' @param cohort A cohort table in `cdm` containing cancer patients.
+#' @param cdm A CDM reference containing `cohort`.
+#' @param cancer A single supported cancer-site name, such as `"breast"`.
+#' @param window A list of two-element numeric vectors giving the inclusive
+#'   start and end offsets, in days, for TNM-code lookup relative to cohort start.
+#'   Defaults to `list(c(0, 0))`.
+#' @param edition A single staging-system edition. Defaults to `"8th"`.
+#' @param type A single stage-rule grouping. Defaults to `"base"`.
+#' @param order Whether the `"first"` or `"last"` matching code in each lookup
+#'   window is used. Defaults to `"last"`.
+#' @param showIntersect Whether to retain columns created during concept
+#'   intersection. Defaults to `FALSE`.
+#'
+#' @returns A cohort table with a `cancer_stage` column. When `showIntersect` is
+#'   `FALSE`, it contains only
 #'   `cohort_definition_id`, `subject_id`, `cohort_start_date`, 
 #'   `cohort_end_date`, and `cancer_stage`.
 #' @export
@@ -104,11 +94,11 @@ addStages <- function(
 
 #' Create a TNM codelist from concept data
 #'
-#' @param tnm_concepts A data frame containing TNM concept information.
-#' @param .edition A character string specifying the edition.
-#' @param .type A character string specifying the type.
-#' 
-#' @return An `omopgenerics` codelist object.
+#' @param tnm_concepts A data frame of packaged TNM concept definitions.
+#' @param .edition A single staging-system edition used to filter concepts.
+#' @param .type A single stage-rule grouping used to filter concepts.
+#'
+#' @returns An `omopgenerics` codelist of TNM concepts.
 #' @keywords internal
 createTNMCodelist <- function(
   tnm_concepts,
@@ -140,19 +130,19 @@ createTNMCodelist <- function(
 
 #' Add stage rules to a cohort
 #'
-#' @param cohort A cohort table from a cdm reference object.
+#' @param cohort A cohort table.
 #' @param conceptSet An `omopgenerics` codelist object.
-#' @param indexDate A character string specifying the index date column.
-#' @param censorDate A character string specifying the censor date column.
-#' @param window A list of numeric vectors defining the search windows.
-#' @param targetDate A character string specifying the target date column.
-#' @param order A character string, either `"first"` or `"last"`.
-#' @param inObservation A logical value.
-#' @param nameStyle A character string for the naming style.
-#' @param name A character string for the name.
-#' @param ruleset A data frame containing the stage rules.
-#' 
-#' @return A cohort table with applied stage rules.
+#' @param indexDate A column in `cohort` used as the lookup-date origin.
+#' @param censorDate An optional column in `cohort` that censors lookup events.
+#' @param window A list of two-element numeric lookup windows in days.
+#' @param targetDate The event-date column used for the intersection.
+#' @param order Whether the first or last matching event is selected.
+#' @param inObservation Whether to limit lookup to the observation period.
+#' @param nameStyle A glue specification used for generated column names.
+#' @param name An optional name for the generated table.
+#' @param ruleset A data frame that maps T, N, and M combinations to stages.
+#'
+#' @returns A cohort table with applied stage rules.
 #' @keywords internal
 .addStageRules <- function(
   cohort,
@@ -185,10 +175,10 @@ createTNMCodelist <- function(
 
 #' Map stage rules to a cohort
 #'
-#' @param cohort A cohort table.
+#' @param cohort A cohort table containing intersected TNM values.
 #' @param ruleset A data frame containing the stage rules.
 #' 
-#' @return A cohort table with a new `cancer_stage` column.
+#' @returns A cohort table with a new `cancer_stage` column.
 #' @keywords internal
 .mapStageRules <- function(
   cohort,
@@ -224,9 +214,9 @@ createTNMCodelist <- function(
 
 #' Filter stage concepts from a codelist
 #'
-#' @param codelist An `omopgenerics` codelist object.
-#' 
-#' @return A filtered codelist containing only parent stage concepts.
+#' @param codelist An `omopgenerics` codelist containing stage concepts.
+#'
+#' @returns A codelist containing only parent TNM stage concepts.
 #' @keywords internal
 filterStageConcepts <- function(
   codelist
@@ -242,7 +232,7 @@ filterStageConcepts <- function(
 
 #' Get supported cancer sites
 #'
-#' @return A character vector of supported cancer sites.
+#' @returns A character vector of supported cancer-site names.
 #' @keywords internal
 supportedCancerSites <- function() {
   readStagesRDS("mapping") |> 
@@ -252,7 +242,7 @@ supportedCancerSites <- function() {
 
 #' Get supported editions
 #'
-#' @return A character vector of supported editions.
+#' @returns A character vector of supported staging-system editions.
 #' @keywords internal
 supportedEdition <- function() {
   readStagesRDS("mapping") |> 
@@ -262,7 +252,7 @@ supportedEdition <- function() {
 
 #' Get supported type groupings
 #'
-#' @return A character vector of supported type groupings.
+#' @returns A character vector of supported stage-rule groupings.
 #' @keywords internal
 supportedType <- function() {
   readStagesRDS("mapping") |> 

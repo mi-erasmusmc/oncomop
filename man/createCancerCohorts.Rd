@@ -7,18 +7,18 @@
 createCancerCohorts(cdm, path = "cancer_cohorts", name, cancer = "all")
 }
 \arguments{
-\item{cdm}{A cdm instance.}
+\item{cdm}{A CDM reference in which to create the cohort table.}
 
-\item{path}{The character name of the folder where the concept
-sets are saved within the study package, default \code{"concept_sets"}.}
+\item{path}{A single directory name below \code{inst/concept_sets}. Defaults to
+\code{"cancer_cohorts"}.}
 
-\item{name}{The character name of the new cohort table to be created.}
+\item{name}{A single name for the created cohort table.}
 
-\item{cancer}{A character vector of cancer types to include in the cohort, default \code{"all"}. Other possible values are
-\code{"bladder_cancer"}, \code{"breast_cancer"}, \code{"colorectal_cancer"}, \code{"lung_cancer"}, \code{"melanoma_of_skin"}, \code{"oesophageal_cancer"}, \code{"prostate_cancer"}.}
+\item{cancer}{A character vector of cancer-cohort names to create, or \code{"all"}
+to create every packaged cancer cohort. Defaults to \code{"all"}.}
 }
 \value{
-A cdm instance including with the newly created cohort table.
+\code{cdm} with a new cohort table named \code{name}.
 }
 \description{
 The function \code{createCancerCohorts} relies on the \code{CohortConstructor} package to generate cohorts

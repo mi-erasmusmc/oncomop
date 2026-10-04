@@ -10,10 +10,10 @@
 #' * `tnm_mapping`: contains the complete rules to map all combinations of TNM components to a
 #'  summary stage I-IV, differentiated by edition of staging system and by cancer type.
 #'
-#' @param path Character directory where the original .csv files are stored.
-#' @param results_path Character directory where the RDS files are to be saved.
-#' 
-#' @importFrom here here
+#' @param path A single directory containing the source CSV files. Defaults to
+#'   the package's `extras` directory.
+#' @param results_path A single output directory for the generated RDS files.
+#'   Defaults to the package data directory.
 #'
 #' @returns `NULL`, called for its side effects.
 saveStagesRules <- function(
@@ -67,19 +67,19 @@ saveStagesRules <- function(
   }
 }
 
-#' `saveSubtypeRules()` to an RDS file
+#' Save subtype rules to an RDS file
 #'
 #' @description
-#' The function reads the `.csv` files containing the subtype rules to derive the summary stage.
+#' The function reads CSV files containing subtype-mapping rules.
 #'
 #' @details
 #' The files are:
 #' * `subtype_mapping`: contains the complete rules to map breast cancer subtypes
 #'
-#' @param path Character directory where the original .csv files are stored.
-#' @param results_path Character directory where the RDS files are to be saved.
-#' 
-#' @importFrom here here
+#' @param path A single directory containing the source CSV files. Defaults to
+#'   the package's `extras` directory.
+#' @param results_path A single output directory for the generated RDS files.
+#'   Defaults to the package data directory.
 #'
 #' @returns `NULL`, called for its side effects.
 saveSubtypeRules <- function(

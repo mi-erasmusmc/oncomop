@@ -15,23 +15,14 @@
 #'   2. Exclude males from patients with breast cancer.
 #'   3. Exclude females from patients with prostate cancer.
 #'
-#' @param cdm A cdm instance.
-#' @param path The character name of the folder where the concept
-#' sets are saved within the study package, default `"concept_sets"`.
-#' @param name The character name of the new cohort table to be created.
-#' @param cancer A character vector of cancer types to include in the cohort, default `"all"`. Other possible values are
-#' `"bladder_cancer"`, `"breast_cancer"`, `"colorectal_cancer"`, `"lung_cancer"`, `"melanoma_of_skin"`, `"oesophageal_cancer"`, `"prostate_cancer"`.
+#' @param cdm A CDM reference in which to create the cohort table.
+#' @param path A single directory name below `inst/concept_sets`. Defaults to
+#'   `"cancer_cohorts"`.
+#' @param name A single name for the created cohort table.
+#' @param cancer A character vector of cancer-cohort names to create, or `"all"`
+#'   to create every packaged cancer cohort. Defaults to `"all"`.
 #'
-#' @importFrom ParallelLogger logInfo
-#' @importFrom glue glue
-#' @importFrom checkmate assertDirectoryExists
-#' @importFrom omopgenerics importConceptSetExpression settings
-#' @importFrom CodelistGenerator asCodelist
-#' @importFrom CohortConstructor conceptCohort requireIsFirstEntry requireAge requireInDateRange exitAtObservationEnd requireTableIntersect requireSex
-#' @importFrom dplyr filter pull
-#' @importFrom stringr str_detect
-#'
-#' @returns A cdm instance including with the newly created cohort table.
+#' @returns `cdm` with a new cohort table named `name`.
 #' @export
 createCancerCohorts <- function(
     cdm,
@@ -155,7 +146,7 @@ createCancerCohorts <- function(
 
 }
 
-#' Creates cancer-related characteristics cohorts
+#' Create cancer-related characteristic cohorts
 #'
 #' The function `createCharacteristicsCohorts` relies on the `CohortConstructor` package to generate cohorts
 #' based on one or more concept sets and additional phenotype specifications.
@@ -163,23 +154,16 @@ createCancerCohorts <- function(
 #' characteristics (i.e. cancer stage and grade, cancer-specific biomarkers, performance status,
 #' cancer treatments, and laboratory tests and procedures)
 #'
-#' @param cdm A cdm instance.
-#' @param path The character name of the folder where the concept
-#' sets are saved within the study package, default `"concept_sets"`.
-#' @param name The character name of the new cohort table to be created.
-#' @param characteristics A character vector of cancer-related characteristics to include in the cohort, default `"all"`. Other possible values are
-#' "biomarkers", "cancer_cohorts_deck", "cancer_progression", "grade", "radiotherapy", "stage", "surgery" and "treatments_procedures"
+#' @param cdm A CDM reference in which to create the cohort table.
+#' @param path A single directory name below `inst` containing characteristic
+#'   concept-set directories. Defaults to `"concept_sets"`.
+#' @param name A single name for the created cohort table. Defaults to
+#'   `"cancer_characteristics"`.
+#' @param characteristics A character vector of characteristic directory names,
+#'   or `"all"` to create all available characteristic cohorts. Defaults to
+#'   `"all"`.
 #'
-#' @importFrom ParallelLogger logInfo
-#' @importFrom glue glue
-#' @importFrom checkmate assertDirectoryExists
-#' @importFrom omopgenerics importConceptSetExpression settings
-#' @importFrom CodelistGenerator asCodelist
-#' @importFrom CohortConstructor conceptCohort requireIsFirstEntry requireAge requireInDateRange exitAtObservationEnd requireTableIntersect requireSex
-#' @importFrom dplyr filter pull
-#' @importFrom stringr str_detect
-#'
-#' @returns A cdm instance including with the newly created cohort table.
+#' @returns `cdm` with a new cohort table named `name`.
 #' @export
 createCharacteristicsCohorts <- function(
     cdm,

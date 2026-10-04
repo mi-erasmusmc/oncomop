@@ -15,11 +15,12 @@
 #' To simply assess the presence of common codes, it is enough to set the diagonal to \eqn{0}
 #' and check if there is any other element \eqn{> 0} in the matrix.
 #'
-#' @param cdm A cdm instance, needed to extract concept sets.
-#' @param concept_folder A character string with the folder name under `inst/concept_sets/`
-#' containing the concept set JSON files, default `stages`.
+#' @param cdm A CDM reference used to extract concept sets.
+#' @param concept_folder A single folder name under `inst/concept_sets/`
+#' containing concept-set JSON files. Defaults to `"stages"`.
 #'
-#' @returns Invisible boolean: `TRUE` if the codelists elements are unique, `FALSE` otherwise.
+#' @returns Invisibly, `TRUE` when codelists have no shared elements and `FALSE`
+#'   otherwise.
 assertUniqueConcepts <- function(
     cdm,
     concept_folder = "stages"
@@ -65,15 +66,15 @@ assertUniqueConcepts <- function(
 #' The function `vizConceptDuplicates()` allows to filter available staging codelists by subcategory,
 #' edition or classification and plots the intersections of codelists of interest.
 #'
-#' @param cdm A cdm instance, needed to extract concept sets.
-#' @param concept_folder The character string indicating the folder under `inst/concept_sets`
-#' where the concept sets of interest are saved in json files, default `"stages"`.
-#' @param input_subcategory The specific subcategory to filter by (`"T0"`, `"N0"`, `"M0"`, `...`),
-#' default `NULL` (corresponds to all subcategories).
-#' @param input_edition The staging system edition to filter by (`"7th"`, `"8th"`, `"unspecified`),
-#' default `NULL` (corresponds to all editions).
-#' @param input_classification The classification type to filter by (`"clinical"`, `"pathological"`,
-#' `"unspecified"`), default `NULL` (corresponds to all classifications).
+#' @param cdm A CDM reference used to extract concept sets.
+#' @param concept_folder A single folder name under `inst/concept_sets` containing
+#'   concept-set JSON files. Defaults to `"stages"`.
+#' @param input_subcategory An optional TNM subcategory, such as `"T0"` or
+#'   `"N0"`. `NULL` includes all subcategories.
+#' @param input_edition An optional staging-system edition. `NULL` includes all
+#'   editions.
+#' @param input_classification An optional classification type. `NULL` includes
+#'   all classifications.
 #'
 #' @returns Prints the plot and returns `NULL`.
 vizConceptDuplicates <- function(
@@ -195,9 +196,9 @@ vizConceptDuplicates <- function(
 #' The function `shinyConceptDuplicates()` launches a simple shiny app with filters for subcategory,
 #' edition and classification to display a dynamic UpSet plot of staging codelists intersection.
 #'
-#' @param cdm A cdm instance, needed to extract concept sets.
-#' @param concept_folder The character string indicating the folder under `inst/concept_sets`
-#' where the concept sets of interest are saved in json files, default `"stages"`.
+#' @param cdm A CDM reference used to extract concept sets.
+#' @param concept_folder A single folder name under `inst/concept_sets` containing
+#'   concept-set JSON files. Defaults to `"stages"`.
 #'
 #' @returns Launches a Shiny app.
 shinyConceptDuplicates <- function(

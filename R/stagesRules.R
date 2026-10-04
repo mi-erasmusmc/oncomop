@@ -94,17 +94,15 @@ NULL
 
 # ----------------- end of documentation ---------------------------------------
 
-#' `stagesRuleset()` extracts and filters specific set of rules for every cancer 
-#' 
-#' @param edition A choice of "unspecified", "7th" and "8th".
-#' @param cancer In character, the affected site, a choice of:
-#' "bladder", "breast", "colorectal", "lung", "melanoma", "oesophagus"
-#' and "prostate".
-#' @param type A choice from "base", "clinical" or "pathological" stage rule.
-#' @importFrom checkmate assertDataFrame
-#' @importFrom dplyr filter
+#' Extract stage rules for a cancer site
 #'
-#' @returns `NULL`, called for its side effects.
+#' @param edition A single staging-system edition: `"unspecified"`, `"7th"`,
+#'   or `"8th"`.
+#' @param cancer A single cancer-site name supported by the packaged rules.
+#' @param type A single stage-rule grouping: `"base"`, `"clinical"`, or
+#'   `"pathological"`.
+#'
+#' @returns A data frame of TNM-to-summary-stage mapping rules.
 stagesRules <- function(
   edition,
   cancer,

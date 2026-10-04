@@ -2,7 +2,7 @@
 % Please edit documentation in R/saveRules.R
 \name{saveSubtypeRules}
 \alias{saveSubtypeRules}
-\title{\code{saveSubtypeRules()} to an RDS file}
+\title{Save subtype rules to an RDS file}
 \usage{
 saveSubtypeRules(
   path = here::here("extras"),
@@ -10,15 +10,17 @@ saveSubtypeRules(
 )
 }
 \arguments{
-\item{path}{Character directory where the original .csv files are stored.}
+\item{path}{A single directory containing the source CSV files. Defaults to
+the package's \code{extras} directory.}
 
-\item{results_path}{Character directory where the RDS files are to be saved.}
+\item{results_path}{A single output directory for the generated RDS files.
+Defaults to the package data directory.}
 }
 \value{
 \code{NULL}, called for its side effects.
 }
 \description{
-The function reads the \code{.csv} files containing the subtype rules to derive the summary stage.
+The function reads CSV files containing subtype-mapping rules.
 }
 \details{
 The files are:

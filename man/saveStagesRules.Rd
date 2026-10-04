@@ -10,9 +10,11 @@ saveStagesRules(
 )
 }
 \arguments{
-\item{path}{Character directory where the original .csv files are stored.}
+\item{path}{A single directory containing the source CSV files. Defaults to
+the package's \code{extras} directory.}
 
-\item{results_path}{Character directory where the RDS files are to be saved.}
+\item{results_path}{A single output directory for the generated RDS files.
+Defaults to the package data directory.}
 }
 \value{
 \code{NULL}, called for its side effects.

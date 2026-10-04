@@ -2,22 +2,22 @@
 % Please edit documentation in R/stagesRules.R
 \name{stagesRules}
 \alias{stagesRules}
-\title{\code{stagesRuleset()} extracts and filters specific set of rules for every cancer}
+\title{Extract stage rules for a cancer site}
 \usage{
 stagesRules(edition, cancer, type)
 }
 \arguments{
-\item{edition}{A choice of "unspecified", "7th" and "8th".}
+\item{edition}{A single staging-system edition: \code{"unspecified"}, \code{"7th"},
+or \code{"8th"}.}
 
-\item{cancer}{In character, the affected site, a choice of:
-"bladder", "breast", "colorectal", "lung", "melanoma", "oesophagus"
-and "prostate".}
+\item{cancer}{A single cancer-site name supported by the packaged rules.}
 
-\item{type}{A choice from "base", "clinical" or "pathological" stage rule.}
+\item{type}{A single stage-rule grouping: \code{"base"}, \code{"clinical"}, or
+\code{"pathological"}.}
 }
 \value{
-\code{NULL}, called for its side effects.
+A data frame of TNM-to-summary-stage mapping rules.
 }
 \description{
-\code{stagesRuleset()} extracts and filters specific set of rules for every cancer
+Extract stage rules for a cancer site
 }

@@ -7,9 +7,9 @@
 assertCancerCohortName(cohort, cancer = "breast")
 }
 \arguments{
-\item{cohort}{A cohort table from a cdm reference object.}
+\item{cohort}{A cohort table whose names are to be validated.}
 
-\item{cancer}{A character vector of supported cancer sites. Defaults to
+\item{cancer}{A character vector of supported cancer-site names, such as
 \code{"breast"}.}
 }
 \value{

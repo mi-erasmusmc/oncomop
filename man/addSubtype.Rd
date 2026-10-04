@@ -13,16 +13,20 @@ addSubtype(
 )
 }
 \arguments{
-\item{cohort}{A cohort table with cancer patients from a cdm reference object.}
+\item{cohort}{A character scalar naming a cohort table in \code{cdm}.}
 
-\item{cdm}{A cdm reference object.}
+\item{cdm}{A CDM reference containing \code{cohort}.}
 
-\item{cancer}{In character, the affected site, a choice of:
-"bladder", "breast", "colorectal", "lung", "melanoma", "oesophagus" and "prostate".}
+\item{cancer}{A single supported cancer-site name.}
 
-\item{window}{to look up stages codes.}
+\item{window}{A list of two-element numeric vectors giving subtype-code lookup
+windows in days relative to cohort start. Defaults to \code{list(c(-90, 90))}.}
 
-\item{showIntersect}{If TRUE, the cohort will show the date intersects for each matching code. Default FALSE.}
+\item{showIntersect}{Whether to retain columns created during concept
+intersection. Defaults to \code{FALSE}.}
+}
+\value{
+A cohort table with identified cancer subtypes.
 }
 \description{
 This function filters and appends specific cancer subtype information to the

@@ -7,10 +7,10 @@
 shinyConceptDuplicates(cdm, concept_folder = "stages")
 }
 \arguments{
-\item{cdm}{A cdm instance, needed to extract concept sets.}
+\item{cdm}{A CDM reference used to extract concept sets.}
 
-\item{concept_folder}{The character string indicating the folder under \code{inst/concept_sets}
-where the concept sets of interest are saved in json files, default \code{"stages"}.}
+\item{concept_folder}{A single folder name under \code{inst/concept_sets} containing
+concept-set JSON files. Defaults to \code{"stages"}.}
 }
 \value{
 Launches a Shiny app.

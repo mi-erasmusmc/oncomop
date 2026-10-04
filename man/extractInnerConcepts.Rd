@@ -7,10 +7,13 @@
 extractInnerConcepts(cdm, path, cancerName)
 }
 \arguments{
-\item{cdm}{A CDM reference created with \code{CDMConnector}.}
+\item{cdm}{A CDM reference used to resolve concept descendants.}
 
-\item{path}{A character string with the folder name under
+\item{path}{A single folder name under
 \verb{inst/concept_sets/} containing the concept set JSON files.}
+
+\item{cancerName}{An optional cancer-site pattern used to filter treatment and
+procedure concept sets.}
 }
 \value{
 An \code{omopgenerics} codelist object where names are concept names and

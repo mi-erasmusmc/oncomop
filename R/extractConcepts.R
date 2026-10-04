@@ -4,18 +4,15 @@
 #' and returns a codelist where each entry contains all descendants of each
 #' concept in the source concept sets.
 #'
-#' @param cdm A CDM reference created with `CDMConnector`.
-#' @param path A character string with the folder name under
+#' @param cdm A CDM reference used to resolve concept descendants.
+#' @param path A single folder name under
 #' `inst/concept_sets/` containing the concept set JSON files.
+#' @param cancerName An optional cancer-site pattern used to filter treatment and
+#'   procedure concept sets.
 #'
 #' @returns An `omopgenerics` codelist object where names are concept names and
 #' values are vectors of descendant concept IDs.
 #'
-#' @importFrom checkmate assertDirectoryExists
-#' @importFrom ParallelLogger logInfo
-#' @importFrom glue glue
-#' @importFrom omopgenerics importConceptSetExpression newCodelist
-#' @importFrom dplyr filter select collect pull
 #' @keywords internal
 extractInnerConcepts <- function(
   cdm,

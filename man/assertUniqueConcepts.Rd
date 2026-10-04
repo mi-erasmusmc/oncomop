@@ -7,13 +7,14 @@
 assertUniqueConcepts(cdm, concept_folder = "stages")
 }
 \arguments{
-\item{cdm}{A cdm instance, needed to extract concept sets.}
+\item{cdm}{A CDM reference used to extract concept sets.}
 
-\item{concept_folder}{A character string with the folder name under \verb{inst/concept_sets/}
-containing the concept set JSON files, default \code{stages}.}
+\item{concept_folder}{A single folder name under \verb{inst/concept_sets/}
+containing concept-set JSON files. Defaults to \code{"stages"}.}
 }
 \value{
-Invisible boolean: \code{TRUE} if the codelists elements are unique, \code{FALSE} otherwise.
+Invisibly, \code{TRUE} when codelists have no shared elements and \code{FALSE}
+otherwise.
 }
 \description{
 This function performs a simple boolean check to determine whether the codelists

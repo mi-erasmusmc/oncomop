@@ -13,19 +13,19 @@ vizConceptDuplicates(
 )
 }
 \arguments{
-\item{cdm}{A cdm instance, needed to extract concept sets.}
+\item{cdm}{A CDM reference used to extract concept sets.}
 
-\item{concept_folder}{The character string indicating the folder under \code{inst/concept_sets}
-where the concept sets of interest are saved in json files, default \code{"stages"}.}
+\item{concept_folder}{A single folder name under \code{inst/concept_sets} containing
+concept-set JSON files. Defaults to \code{"stages"}.}
 
-\item{input_subcategory}{The specific subcategory to filter by (\code{"T0"}, \code{"N0"}, \code{"M0"}, \code{...}),
-default \code{NULL} (corresponds to all subcategories).}
+\item{input_subcategory}{An optional TNM subcategory, such as \code{"T0"} or
+\code{"N0"}. \code{NULL} includes all subcategories.}
 
-\item{input_edition}{The staging system edition to filter by (\code{"7th"}, \code{"8th"}, \verb{"unspecified}),
-default \code{NULL} (corresponds to all editions).}
+\item{input_edition}{An optional staging-system edition. \code{NULL} includes all
+editions.}
 
-\item{input_classification}{The classification type to filter by (\code{"clinical"}, \code{"pathological"},
-\code{"unspecified"}), default \code{NULL} (corresponds to all classifications).}
+\item{input_classification}{An optional classification type. \code{NULL} includes
+all classifications.}
 }
 \value{
 Prints the plot and returns \code{NULL}.
