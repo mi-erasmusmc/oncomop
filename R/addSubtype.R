@@ -41,11 +41,6 @@ addSubtype <- function(
 
   # Intersection and mapping ------------------
   
-
-
-
-  
-  
 }
 
 subtypeCodelist <- function(
@@ -96,22 +91,40 @@ extractConceptName <- function(
   omopgenerics::validateCohortArgument(cohort)
   omopgenerics::validateCdmArgument(cdm)
   checkmate::assertCharacter(name)
+
+  # 1. Load the mapping rules
+  rules <- readSubtypeRDS("mapping") 
+  rule_cols <- setdiff(names(rules), "subtype")
+
+  # 2. Process cohort
   cancer_cohorts_subtype <- cohort |>
     dplyr::collect() |>
     dplyr::rowwise() |>
-    dplyr::select_if(~ !all(is.na(.))) |>
     dplyr::mutate(
-      subtype = dplyr::case_when(
-          is.na(.data$pgr) & isTRUE(.data$esr1 == 9191) & is.na(.data$erbb2) ~ "ESR1/PGR positive",
-          isTRUE(.data$pgr == 9191) & is.na(.data$esr1) & is.na(.data$erbb2) ~ "ESR1/PGR positive",
-          isTRUE(.data$pgr == 9189) & isTRUE(.data$esr1 == 9189) & is.na(.data$erbb2) ~ "ESR1/PGR negative",
-          is.na(.data$pgr) & is.na(.data$esr1) & isTRUE(.data$erbb2 == 9191) ~ "HER2 positive",
-          is.na(.data$pgr) & is.na(.data$esr1) & isTRUE(.data$erbb2 == 9189) ~ "HER2 negative",
-          isTRUE(.data$pgr == 9189) & isTRUE(.data$esr1 == 9189) & isTRUE(.data$erbb2 == 9189) ~ "Triple negative",
-          .default = "No subtype found"
-        )
-      ) |> 
-    tibble::as_tibble() 
+      subtype = {
+        # Get current row values for the rule columns (pgr, esr1, erbb2)
+        # We use current_vals to match against the rule columns
+        current_vals <- c(pgr, esr1, erbb2) 
+        
+        # Find the rule where:
+        # For every column in rule, (rule_val is NA and cohort_val is NA) OR (rule_val == cohort_val)
+        match_idx <- which(apply(rules[, rule_cols, drop = FALSE], 1, function(rule_row) {
+          all(ifelse(is.na(rule_row), 
+                     is.na(current_vals), 
+                     current_vals == rule_row))
+        }))
+
+        if (length(match_idx) > 0) {
+          rules$subtype[match_idx[1]]
+        } else {
+          "No subtype found"
+        }
+      }
+    ) |> 
+    dplyr::ungroup() |>
+    tibble::as_tibble()
+
+  # 3. Update CDM
   cancerCohortTableName <- omopgenerics::uniqueTableName()
   cdm <- omopgenerics::insertTable(
     cdm = cdm,

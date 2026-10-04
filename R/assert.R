@@ -4,8 +4,7 @@
 #' site(s). Cohort names must follow the `"<cancer>_cancer"` format.
 #'
 #' @param cohort A cohort table from a cdm reference object.
-#' @param cancer A character vector of supported cancer sites. Defaults to
-#'   `"breast"`.
+#' @param cancer A character vector of supported cancer sites (e.g., `"breast"`).
 #'
 #' @returns `NULL`, invisibly, if validation succeeds.
 #'
@@ -56,6 +55,23 @@ assertCancerCohortName <- function(
   
 }
 
+#' Assert that a character vector contains only allowed characteristics
+#'
+#' Validates that all elements in the input vector are present in the 
+#' provided list of allowed characteristics.
+#'
+#' @param x A character vector to validate.
+#' @param characteristics A character vector of allowed characteristic names.
+#'
+#' @returns `NULL`, invisibly, if validation succeeds.
+#'
+#' @details
+#' Throws an error of class `"Invalid characteristics"` if any element in `x` 
+#' is not present in `characteristics`.
+#'
+#' @importFrom checkmate assertCharacter
+#' @importFrom cli cli_abort
+#' @keywords internal
 assertCharacteristic <- function(
   x,
   characteristics
@@ -68,8 +84,8 @@ assertCharacteristic <- function(
   )
   if (length(invalidCharacteristics) > 0) {
     cli::cli_abort(c(
-      "!" = "Invalid characteristics: {invalidCharacteristics}",
-      "i" = "Provide any of this specific characteristics: are:\n{paste0('- ', characteristics, collapse = '\n')}",
+      "!" = "Invalid characteristics: {paste(invalidCharacteristics, collapse = ', ')}",
+      "i" = "Provide any of these specific characteristics: {paste0('- ', characteristics, collapse = '\n')}",
       "x" = "Your selected characteristic(s) is/are either misspelled or unavailable."
     ),
     class = "Invalid characteristics")
