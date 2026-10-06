@@ -22,12 +22,9 @@
 #' @param cancer A character vector of cancer types to include in the cohort, default `"all"`. Other possible values are
 #' `"bladder_cancer"`, `"breast_cancer"`, `"colorectal_cancer"`, `"lung_cancer"`, `"melanoma_of_skin"`, `"oesophageal_cancer"`, `"prostate_cancer"`.
 #'
-#' @importFrom ParallelLogger logInfo
 #' @importFrom glue glue
 #' @importFrom checkmate assertDirectoryExists
 #' @importFrom omopgenerics importConceptSetExpression settings
-#' @importFrom CodelistGenerator asCodelist
-#' @importFrom CohortConstructor conceptCohort requireIsFirstEntry requireAge requireInDateRange exitAtObservationEnd requireTableIntersect requireSex
 #' @importFrom dplyr filter pull
 #' @importFrom stringr str_detect
 #'
@@ -39,6 +36,8 @@ createCancerCohorts <- function(
     name,
     cancer = "all"
     ) {
+
+  requirePackage(c("CodelistGenerator", "CohortConstructor"))
 
   pathToCohortJsonFiles <- system.file(
     "concept_sets",
@@ -170,12 +169,9 @@ createCancerCohorts <- function(
 #' @param characteristics A character vector of cancer-related characteristics to include in the cohort, default `"all"`. Other possible values are
 #' "biomarkers", "cancer_cohorts_deck", "cancer_progression", "grade", "radiotherapy", "stage", "surgery" and "treatments_procedures"
 #'
-#' @importFrom ParallelLogger logInfo
 #' @importFrom glue glue
 #' @importFrom checkmate assertDirectoryExists
 #' @importFrom omopgenerics importConceptSetExpression settings
-#' @importFrom CodelistGenerator asCodelist
-#' @importFrom CohortConstructor conceptCohort requireIsFirstEntry requireAge requireInDateRange exitAtObservationEnd requireTableIntersect requireSex
 #' @importFrom dplyr filter pull
 #' @importFrom stringr str_detect
 #'
@@ -187,6 +183,8 @@ createCharacteristicsCohorts <- function(
     name = "cancer_characteristics",
     characteristics = "all"
     ) {
+
+  requirePackage(c("CodelistGenerator", "CohortConstructor"))
 
   ParallelLogger::logInfo(
     "Creating characteristics cohorts"

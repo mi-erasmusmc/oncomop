@@ -12,7 +12,6 @@
 #' values are vectors of descendant concept IDs.
 #'
 #' @importFrom checkmate assertDirectoryExists
-#' @importFrom ParallelLogger logInfo
 #' @importFrom glue glue
 #' @importFrom omopgenerics importConceptSetExpression newCodelist
 #' @importFrom dplyr filter select collect pull
@@ -22,6 +21,7 @@ extractInnerConcepts <- function(
   path,
   cancerName
 ) {
+  requirePackage("ParallelLogger")
   assertCharacteristic(
     path,
     characteristics = c(
