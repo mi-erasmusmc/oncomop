@@ -71,8 +71,8 @@ test_that("saveSubtypeRules saves expected RDS files", {
   ) |> 
     pull(subtype) |>
     expect_identical(
-      c("Estrogen/Progesteron Positive", "Estrogen/Progesteron Positive", 
-        "Estrogen/Progesteron Negative", "HER2 positive", "HER2 negative", 
+      c("ESR1/PGR positive", "ESR1/PGR positive", 
+        "ESR1/PGR negative", "HER2 positive", "HER2 negative", 
         "Triple negative")
       )
 })

@@ -232,7 +232,7 @@ test_that("test group", {
   #   Persons in Group A have exactly one measurement record, persons in Group B have exactly three, and persons in Group C have exactly two.
   #   Fill out the condition end date 2023-12-31 for everyone."
   # })
-  patientGenerator$save(testName)
+  # patientGenerator$save(testName)
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
     vocabulary = "v20260227_complete",
