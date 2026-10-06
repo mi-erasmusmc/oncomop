@@ -32,6 +32,14 @@ test_that("assertCancerCohortName FUN", {
   )
 })
 
+test_that("requirePackage checks package availability", {
+  expect_true(requirePackage("base"))
+  expect_error(
+    requirePackage("oncomop-package-that-does-not-exist"),
+    class = "missing_package"
+  )
+})
+
 # test_that("filters surgery codelist by cancer", {
 #   testName <- "stages_patients_one_patient"
 #   cdmVersion <- "5.4"

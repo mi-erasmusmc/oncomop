@@ -77,3 +77,31 @@ assertCharacteristic <- function(
     return(invisible())
   }
 }
+
+requirePackage <- function(package) {
+  checkmate::assertCharacter(
+    package,
+    min.len = 1,
+    any.missing = FALSE
+  )
+
+  is_installed <- vapply(
+    package,
+    requireNamespace,
+    logical(1),
+    quietly = TRUE
+  )
+
+  if (!all(is_installed)) {
+    missing_packages <- package[!is_installed]
+    cli::cli_abort(
+      c(
+        "x" = "Required package{?s} {missing_packages} {?is/are} not installed.",
+        "i" = "Install {?it/them} with `install.packages({missing_packages})`."
+      ),
+      class = "missing_package"
+    )
+  }
+
+  invisible(TRUE)
+}

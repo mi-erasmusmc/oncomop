@@ -19,7 +19,7 @@
 saveStagesRules <- function(
     path =  here::here("extras"),
     results_path =  system.file(
-      "data",
+      "extdata",
       package = "oncomop"
     )
     ) {
@@ -85,7 +85,7 @@ saveStagesRules <- function(
 saveSubtypeRules <- function(
     path =  here::here("extras"),
     results_path =  system.file(
-      "data",
+      "extdata",
       package = "oncomop"
     )
     ) {
@@ -129,7 +129,7 @@ readStagesRDS <- function(
     type <- "tnm_mapping"
   }
   system.file(
-    "data",
+    "extdata",
     package = "oncomop"
   ) |>
     list.files(
@@ -150,7 +150,7 @@ readSubtypeRDS <- function(
     type <- "subtype_mapping"
   }
   system.file(
-    "data",
+    "extdata",
     package = "oncomop"
   ) |>
     list.files(

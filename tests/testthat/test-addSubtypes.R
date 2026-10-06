@@ -297,7 +297,7 @@ test_that(".mapSubtypeRules correct six rules", {
     c(35957667L, 35948983L, 35955862L),
     cdm
   )
-  cdm$cancer_cohorts |>
+  subtypes_flags <- cdm$cancer_cohorts |>
     addSubtypeIntersect(
       conceptSet = codelist,
       indexDate = "cohort_start_date",
@@ -311,16 +311,24 @@ test_that(".mapSubtypeRules correct six rules", {
     ) |> 
     .mapSubtypeRules(cdm) |> 
     dplyr::collect() |> 
-    dplyr::arrange(subject_id) |> 
-    pull(subtype) |> 
-    expect_identical(
-      c("ESR1/PGR positive", 
-       "ESR1/PGR positive", 
-       "ESR1/PGR negative", 
-       "HER2 positive",
-       "HER2 negative", 
-       "Triple negative")
-      )
+    dplyr::arrange(subject_id) 
+  subtypes_flags |>
+    pull(esr1_pgr_positive) |>
+    sum() |> 
+    expect_equal(2)
+  subtypes_flags |>
+    pull(esr1_pgr_negative) |>
+    sum() |> 
+    expect_equal(2)
+  subtypes_flags |>
+    pull(her2_positive) |>
+    sum() |> 
+    expect_equal(2)
+  subtypes_flags |>
+    pull(triple_negative) |>
+    sum() |> 
+    expect_equal(2)
+
 })
 
 test_that(".mapSubtypeRules correct six rules", {
@@ -352,5 +360,18 @@ test_that(".mapSubtypeRules correct six rules", {
     ) |> 
     .mapSubtypeRules(cdm) |> 
     dplyr::collect() |> 
-    dplyr::arrange(subject_id) 
+    dplyr::arrange(subject_id) |> 
+    PatientProfiles::summariseResult() |> 
+    select(
+      variable_name,
+      estimate_name,
+      estimate_value
+    ) |> 
+      dplyr::filter(
+        variable_name %in% c("esr1_pgr_negative",
+        "esr1_pgr_positive", "her2_positive", 
+        "pgr", "triple_negative"),
+        estimate_name == "count"
+      ) 
+
 })

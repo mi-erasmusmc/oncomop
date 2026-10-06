@@ -91,32 +91,43 @@ extractConceptName <- function(
 .mapSubtypeRules <- function(
   cohort,
   cdm,
-  name = "cancer_cohorts"
+  name = "breast_cancer_subtypes"
 ) {
   omopgenerics::validateCohortArgument(cohort)
   omopgenerics::validateCdmArgument(cdm)
   checkmate::assertCharacter(name)
-  cancer_cohorts_subtype <- cohort |>
+  cancer_subtype <- cohort |>
     dplyr::collect() |>
     dplyr::rowwise() |>
-    dplyr::select_if(~ !all(is.na(.))) |>
+    # dplyr::select_if(~ !all(is.na(.))) |>
     dplyr::mutate(
-      subtype = dplyr::case_when(
-          is.na(.data$pgr) & isTRUE(.data$esr1 == 9191) & is.na(.data$erbb2) ~ "ESR1/PGR positive",
-          isTRUE(.data$pgr == 9191) & is.na(.data$esr1) & is.na(.data$erbb2) ~ "ESR1/PGR positive",
-          isTRUE(.data$pgr == 9189) & isTRUE(.data$esr1 == 9189) & is.na(.data$erbb2) ~ "ESR1/PGR negative",
-          is.na(.data$pgr) & is.na(.data$esr1) & isTRUE(.data$erbb2 == 9191) ~ "HER2 positive",
-          is.na(.data$pgr) & is.na(.data$esr1) & isTRUE(.data$erbb2 == 9189) ~ "HER2 negative",
-          isTRUE(.data$pgr == 9189) & isTRUE(.data$esr1 == 9189) & isTRUE(.data$erbb2 == 9189) ~ "Triple negative",
-          .default = "No subtype found"
-        )
-      ) |> 
+      esr1_pgr_positive = dplyr::case_when(
+          isTRUE(.data$esr1 == 9191) | isTRUE(.data$pgr == 9191) ~ 1,
+          .default = 0
+      ),
+      esr1_pgr_negative = dplyr::case_when(
+          isTRUE(.data$pgr == 9189) & isTRUE(.data$esr1 == 9189) ~ 1,
+          .default = 0
+      ),
+      her2_positive = dplyr::case_when(
+          isTRUE(.data$erbb2 == 9191) ~ 1,
+          .default = 0
+      ),
+      her2_positive = dplyr::case_when(
+          isTRUE(.data$erbb2 == 9189) ~ 1,
+          .default = 0
+      ),
+      triple_negative = dplyr::case_when(
+          isTRUE(.data$pgr == 9189) & isTRUE(.data$esr1 == 9189) & isTRUE(.data$erbb2 == 9189) ~ 1,
+          .default = 0
+      )
+    ) |> 
     tibble::as_tibble() 
   cancerCohortTableName <- omopgenerics::uniqueTableName()
   cdm <- omopgenerics::insertTable(
     cdm = cdm,
     name = cancerCohortTableName,
-    table = cancer_cohorts_subtype
+    table = cancer_subtype
   ) 
   cdm[[name]] <- omopgenerics::newCohortTable(
     cdm[[cancerCohortTableName]]
