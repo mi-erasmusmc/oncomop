@@ -1,3 +1,7 @@
+# oncomop 0.2.0
+
+* Onconet test release. 
+
 # oncomop 0.1.1
 
 * `addSubtypes.R` file in wrong place.
