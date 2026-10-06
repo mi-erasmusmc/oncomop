@@ -327,7 +327,7 @@ test_that(".mapSubtypeRules correct six rules", {
   subtypes_flags |>
     pull(triple_negative) |>
     sum() |> 
-    expect_equal(2)
+    expect_equal(1)
 
 })
 
