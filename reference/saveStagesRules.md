@@ -8,7 +8,7 @@ the summary stage.
 ``` r
 saveStagesRules(
   path = here::here("extras"),
-  results_path = system.file("tnm_data", package = "oncomop")
+  results_path = system.file("extdata", package = "oncomop")
 )
 ```
 

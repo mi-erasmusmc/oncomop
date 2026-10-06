@@ -14,7 +14,7 @@ addStages(
   edition = "8th",
   type = "base",
   order = "last",
-  showTnm = FALSE
+  showIntersect = FALSE
 )
 ```
 
@@ -50,7 +50,7 @@ addStages(
   A choice from "first" or "last". If more than one code intersected,
   the order defines which code to intersect in the window.
 
-- showTnm:
+- showIntersect:
 
   If TRUE, the cohort will show the date intersects for each matching
   code. Default FALSE.

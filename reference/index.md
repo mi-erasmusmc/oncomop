@@ -8,6 +8,12 @@
   [`addStages()`](https://mi-erasmusmc.github.io/oncomop/reference/addStages.md)
   to a cohort
 
+- [`addSubtype()`](https://mi-erasmusmc.github.io/oncomop/reference/addSubtype.md)
+  : Add cancer subtypes to a cohort
+
+- [`assertCancerCohortName()`](https://mi-erasmusmc.github.io/oncomop/reference/assertCancerCohortName.md)
+  : Assert that cohort names match selected cancer site(s)
+
 - [`assertUniqueConcepts()`](https://mi-erasmusmc.github.io/oncomop/reference/assertUniqueConcepts.md)
   : Check if codelists have common elements
 
@@ -19,6 +25,12 @@
 
 - [`saveStagesRules()`](https://mi-erasmusmc.github.io/oncomop/reference/saveStagesRules.md)
   : Save TNM staging rules to an RDS file
+
+- [`saveSubtypeRules()`](https://mi-erasmusmc.github.io/oncomop/reference/saveSubtypeRules.md)
+  :
+
+  [`saveSubtypeRules()`](https://mi-erasmusmc.github.io/oncomop/reference/saveSubtypeRules.md)
+  to an RDS file
 
 - [`shinyConceptDuplicates()`](https://mi-erasmusmc.github.io/oncomop/reference/shinyConceptDuplicates.md)
   : Visualize interactive UpSet plot of staging codelists with
