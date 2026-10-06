@@ -1,3 +1,7 @@
+# oncomop 0.2.1
+
+* Fix to pass checks. 
+
 # oncomop 0.2.0
 
 * Onconet test release. 
