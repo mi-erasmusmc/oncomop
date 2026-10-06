@@ -31,7 +31,7 @@ assertCancerCohortName <- function(
     )
   cohort_names <- cohort |>
     PatientProfiles::addCohortName() |>
-    dplyr::pull(cohort_name) |>
+    dplyr::pull(.data$cohort_name) |>
     unique()
   expected_cancer <- paste(
     cancer,

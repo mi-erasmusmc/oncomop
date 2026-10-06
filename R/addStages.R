@@ -23,6 +23,7 @@
 #' @importFrom PatientProfiles addConceptIntersectDate
 #' @importFrom tidyselect any_of
 #' @importFrom stringr str_detect
+#' @importFrom rlang .data .env :=
 #' @returns A cohort table containing the identified cancer stages.
 #' @export
 addStages <- function(
@@ -83,11 +84,13 @@ addStages <- function(
   if (isFALSE(showIntersect)) {
     cancer_stage_cohort |>
       dplyr::select(
-        cohort_definition_id,
-        subject_id,
-        cohort_start_date,
-        cohort_end_date,
-        cancer_stage
+        dplyr::all_of(c(
+          "cohort_definition_id",
+          "subject_id",
+          "cohort_start_date",
+          "cohort_end_date",
+          "cancer_stage"
+        ))
       )
   } else {
     return(cancer_stage_cohort)
@@ -110,12 +113,12 @@ createTNMCodelist <- function(
     )
   tnm_codelist <- tnm_stages_concept |>
     dplyr::pull(
-      concept_id
+      .data$concept_id
     ) |> lapply(
       FUN = function(x) {
         return(x)
       }
-    ) |> setNames(
+    ) |> stats::setNames(
       tnm_stages_concept$component_tnm
     ) |>
     omopgenerics::newCodelist()
@@ -171,14 +174,14 @@ createTNMCodelist <- function(
         rowStageM <- stageCombination[names(rowStages) |> stringr::str_detect("m")]
         stage <- ruleset |>
           dplyr::select(
-            T, N, M, uicc_stage
+            dplyr::all_of(c("T", "N", "M", "uicc_stage"))
           ) |>
           dplyr::filter(
-            tolower(T) == rowStageT,
-            tolower(N) == rowStageN,
-            tolower(M) == rowStageM,
+            tolower(.data$T) == rowStageT,
+            tolower(.data$N) == rowStageN,
+            tolower(.data$M) == rowStageM,
           ) |>
-          dplyr::pull(uicc_stage)
+          dplyr::pull(.data$uicc_stage)
       }
     )
 }
@@ -196,17 +199,17 @@ filterStageConcepts <- function(
 }
 
 supportedCancerSites <- function() {
-  readStagesRDS("mapping") |> 
-    dplyr::pull(site) |> 
+  readStagesRDS("mapping") |>
+    dplyr::pull(.data$site) |>
     unique()
 }
 supportedEdition <- function() {
-  readStagesRDS("mapping") |> 
-    dplyr::pull(edition) |> 
+  readStagesRDS("mapping") |>
+    dplyr::pull(.data$edition) |>
     unique()
 }
 supportedType <- function() {
-  readStagesRDS("mapping") |> 
-    dplyr::pull(stage_grouping_scope) |> 
+  readStagesRDS("mapping") |>
+    dplyr::pull(.data$stage_grouping_scope) |>
     unique()
 }

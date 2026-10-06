@@ -57,7 +57,7 @@ subtypeCodelist <- function(
   codelist <- list()
   for (i in seq_along(concepts)) {
     codelist[[extractConceptName(concepts[i], cdm)]] <- CodelistGenerator::getDescendants(cdm, concepts[i]) |> 
-      dplyr::pull(concept_id)
+      dplyr::pull(.data$concept_id)
   }
   codelist |> 
     omopgenerics::newCodelist(cdm)
@@ -72,7 +72,7 @@ extractConceptName <- function(
     concept
   ) |> 
     dplyr::filter(
-      concept_id == concept 
+      .data$concept_id == concept
     ) |> 
     dplyr::pull(.data$concept_name) |> 
     stringr::str_remove_all(

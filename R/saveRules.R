@@ -30,7 +30,7 @@ saveStagesRules <- function(
     dir.create(results_path)
   }
   for (i in seq_along(tnm_files)) {
-    data <- read.csv(
+    data <- utils::read.csv(
       file.path(path, paste0(tnm_files[i], ".csv"))
     )
     if (tnm_files[i] == "tnm_mapping") {
@@ -94,7 +94,7 @@ saveSubtypeRules <- function(
     dir.create(results_path)
   }
   for (i in seq_along(subtype_files)) {
-    data <- read.csv(
+    data <- utils::read.csv(
       file.path(
         path,
         paste0(
