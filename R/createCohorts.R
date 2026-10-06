@@ -125,12 +125,12 @@ createCancerCohorts <- function(
 
   # Impose sex requirements for specific cohorts
   breast_cancer_ids <- omopgenerics::settings(cdm[[name]]) |>
-    dplyr::filter(stringr::str_detect(cohort_name, "breast_cancer")) |>
-    dplyr::pull(cohort_definition_id)
+    dplyr::filter(stringr::str_detect(.data$cohort_name, "breast_cancer")) |>
+    dplyr::pull(.data$cohort_definition_id)
 
   prostate_cancer_ids <- omopgenerics::settings(cdm[[name]]) |>
-    dplyr::filter(stringr::str_detect(cohort_name, "prostate_cancer")) |>
-    dplyr::pull(cohort_definition_id)
+    dplyr::filter(stringr::str_detect(.data$cohort_name, "prostate_cancer")) |>
+    dplyr::pull(.data$cohort_definition_id)
 
   if (length(breast_cancer_ids) > 0) {
     cdm[[name]] <- cdm[[name]] |>
@@ -245,7 +245,7 @@ createCharacteristicsCohorts <- function(
       CodelistGenerator::asCodelist(cdm)
 
     if (length(characteristics_codelist) == 0) {
-      skip
+      next
     } else {
       result_codelist[characteristics[i]] <- characteristics_codelist
     }

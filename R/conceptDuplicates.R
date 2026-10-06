@@ -118,21 +118,21 @@ vizConceptDuplicates <- function(
   if (!is.null(input_subcategory)) {
     data <- data |>
       dplyr::filter(
-        subcategory == input_subcategory
+        .data$subcategory == input_subcategory
       )
   }
   # Filter by edition
   if (!is.null(input_edition)) {
     data <- data |>
       dplyr::filter(
-        edition == input_edition
+        .data$edition == input_edition
       )
   }
   # Filter by classification
   if (!is.null(input_classification)) {
     data <- data |>
       dplyr::filter(
-        classification == input_classification
+        .data$classification == input_classification
       )
   }
 
@@ -150,10 +150,10 @@ vizConceptDuplicates <- function(
     ))
   }
 
-  df <- stack(stage_concepts)
+  df <- utils::stack(stage_concepts)
   colnames(df) <- c("code", "codelist")
 
-  incidence <- xtabs(~ code + codelist, data = df)
+  incidence <- stats::xtabs(~ code + codelist, data = df)
   incidence[incidence > 0] <- 1
 
   upset_mat <- incidence[, data$concept_list, drop = FALSE]
@@ -342,21 +342,21 @@ shinyConceptDuplicates <- function(
       if (length(input$filter_edition) > 0) {
         selected_stages <- selected_stages |>
           dplyr::filter(
-            edition %in% tolower(input$filter_edition)
+            .data$edition %in% tolower(input$filter_edition)
           )
       }
       # Filter by classification
       if (length(input$filter_classification) > 0) {
         selected_stages <- selected_stages |>
           dplyr::filter(
-            classification %in% tolower(input$filter_classification)
+            .data$classification %in% tolower(input$filter_classification)
           )
       }
       # Filter by subcategory
       if (length(input$filter_subcategory) > 0) {
         selected_stages <- selected_stages |>
           dplyr::filter(
-            subcategory %in% input$filter_subcategory
+            .data$subcategory %in% input$filter_subcategory
           )
       }
 
@@ -375,10 +375,10 @@ shinyConceptDuplicates <- function(
       }
 
       # Creating incidence matrix
-      df <- stack(stage_concepts)
+      df <- utils::stack(stage_concepts)
       colnames(df) <- c("code", "codelist")
 
-      incidence <- xtabs(~ code + codelist, data = df)
+      incidence <- stats::xtabs(~ code + codelist, data = df)
       incidence[incidence > 0] <- 1
 
       # Select corresponding columns from incidence matrix

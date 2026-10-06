@@ -141,15 +141,15 @@ extractStageRuleset <- function(
   checkmate::assertDataFrame(tnm_stage_mapping)
   tnm_stage_mapping |>
     dplyr::filter(
-      edition == .edition
+      .data$edition == .edition
     ) |>
     dplyr::filter(
-      site == .cancer
+      .data$site == .cancer
     ) |>
     dplyr::filter(
-      stage_grouping_scope == .type
+      .data$stage_grouping_scope == .type
     ) |>
     dplyr::select(
-      rule_id, T, N, M, uicc_stage
+      dplyr::all_of(c("rule_id", "T", "N", "M", "uicc_stage"))
     )
 }

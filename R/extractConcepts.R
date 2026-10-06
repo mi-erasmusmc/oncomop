@@ -61,7 +61,7 @@ extractInnerConcepts <- function(
     )
     conceptIds <- dplyr::pull(
       conceptSetExpression[[i]],
-      concept_id
+      .data$concept_id
     )
     conceptSetExpressionNames <- dplyr::left_join(
       conceptSetExpression[[i]],
@@ -69,10 +69,10 @@ extractInnerConcepts <- function(
         dplyr::select(
           dplyr::filter(
             cdm$concept,
-            concept_id %in% conceptIds
+            .data$concept_id %in% .env$conceptIds
           ),
-          concept_id,
-          concept_name
+          .data$concept_id,
+          .data$concept_name
           )
         ),
         by = "concept_id"
@@ -107,7 +107,7 @@ extractDescendants <- function(
       cdm = cdm,
       conceptId = concept_id
     ) |>
-      dplyr::pull(concept_id)
+      dplyr::pull(.data$concept_id)
   } else {
     descendants_codes <- concept_id
   }
@@ -115,7 +115,7 @@ extractDescendants <- function(
     descendants_codes <- descendants_codes
     setdiff(concept_id)
   }
-  result <- setNames(
+  result <- stats::setNames(
     list(descendants_codes),
     concept_name
   )
@@ -138,7 +138,7 @@ extractConceptIds <- function(
   )
   }
   result <- result |>
-    dplyr::arrange(concept_set_name)
+    dplyr::arrange(.data$concept_set_name)
   checkmate::assertDataFrame(result)
   return(result)
 }
