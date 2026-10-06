@@ -10,32 +10,32 @@ Description: What the package does (one paragraph).
 License: Apache License (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-Suggests: 
-    testthat (>= 3.0.0)
 Config/testthat/edition: 3
-Imports: 
-    CodelistGenerator,
-    CohortConstructor,
-    ParallelLogger,
+Imports:
     PatientProfiles,
     checkmate,
     dplyr,
     glue,
-    here,
     omopgenerics,
     stringr,
     tidyselect,
     cli,
-    UpSetR,
     bit64,
-    bslib,
     clock,
     purrr,
     rlang,
-    shiny,
-    shinyWidgets,
     tibble,
     tidyr
+Suggests:
+    bslib,
+    CodelistGenerator,
+    CohortConstructor,
+    here,
+    ParallelLogger,
+    shiny,
+    shinyWidgets,
+    testthat (>= 3.0.0),
+    UpSetR
 Config/roxygen2/version: 8.0.0
 RoxygenNote: 8.0.0
 Config/Needs/website:

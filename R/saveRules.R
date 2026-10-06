@@ -13,8 +13,6 @@
 #' @param path Character directory where the original .csv files are stored.
 #' @param results_path Character directory where the RDS files are to be saved.
 #' 
-#' @importFrom here here
-#'
 #' @returns `NULL`, called for its side effects.
 saveStagesRules <- function(
     path =  here::here("extras"),
@@ -23,6 +21,7 @@ saveStagesRules <- function(
       package = "oncomop"
     )
     ) {
+  requirePackage("here")
   tnm_files <- c(
     "tnm_concepts",
     "tnm_mapping"
@@ -79,8 +78,6 @@ saveStagesRules <- function(
 #' @param path Character directory where the original .csv files are stored.
 #' @param results_path Character directory where the RDS files are to be saved.
 #' 
-#' @importFrom here here
-#'
 #' @returns `NULL`, called for its side effects.
 saveSubtypeRules <- function(
     path =  here::here("extras"),
@@ -89,6 +86,7 @@ saveSubtypeRules <- function(
       package = "oncomop"
     )
     ) {
+  requirePackage("here")
   subtype_files <- c(
     "subtype_mapping"
   )

@@ -83,6 +83,7 @@ vizConceptDuplicates <- function(
     input_edition = NULL,
     input_classification = NULL
     ) {
+  requirePackage("UpSetR")
 
   codelist <- extractInnerConcepts(
     cdm,
@@ -204,6 +205,7 @@ shinyConceptDuplicates <- function(
     cdm,
     concept_folder = "stages"
   ) {
+  requirePackage(c("bslib", "shiny", "shinyWidgets", "UpSetR"))
 
   ui <- bslib::page_sidebar(
 
