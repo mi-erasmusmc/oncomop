@@ -10,7 +10,7 @@ test_that("saveStagesRules saves expected RDS files", {
     expect_true(
       file.exists(
         system.file(
-          "data",
+          "extdata",
           paste0(f, ".rds"),
           package = "oncomop"
         )
@@ -59,7 +59,7 @@ test_that("saveSubtypeRules saves expected RDS files", {
     expect_true(
       file.exists(
         system.file(
-          "data",
+          "extdata",
           paste0(f, ".rds"),
           package = "oncomop"
         )
