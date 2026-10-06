@@ -12,7 +12,6 @@
 #' values are vectors of descendant concept IDs.
 #'
 #' @importFrom checkmate assertDirectoryExists
-#' @importFrom ParallelLogger logInfo
 #' @importFrom glue glue
 #' @importFrom omopgenerics importConceptSetExpression newCodelist
 #' @importFrom dplyr filter select collect pull
@@ -22,6 +21,7 @@ extractInnerConcepts <- function(
   path,
   cancerName
 ) {
+  requirePackage("ParallelLogger")
   assertCharacteristic(
     path,
     characteristics = c(
@@ -141,4 +141,21 @@ extractConceptIds <- function(
     dplyr::arrange(concept_set_name)
   checkmate::assertDataFrame(result)
   return(result)
+}
+
+filterCodelist <- function(
+  codelist,
+  pattern
+) {
+  codelist |>
+    omopgenerics::assertList(
+      named = TRUE
+    )
+  pattern |>
+    checkmate::assertCharacter()
+  index <- stringr::str_detect(
+    names(codelist),
+    pattern = pattern
+  )
+  codelist[index]
 }

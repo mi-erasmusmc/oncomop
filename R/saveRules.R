@@ -13,16 +13,15 @@
 #' @param path Character directory where the original .csv files are stored.
 #' @param results_path Character directory where the RDS files are to be saved.
 #' 
-#' @importFrom here here
-#'
 #' @returns `NULL`, called for its side effects.
 saveStagesRules <- function(
     path =  here::here("extras"),
     results_path =  system.file(
-      "tnm_data",
+      "extdata",
       package = "oncomop"
     )
     ) {
+  requirePackage("here")
   tnm_files <- c(
     "tnm_concepts",
     "tnm_mapping"
@@ -65,4 +64,103 @@ saveStagesRules <- function(
       file.path(results_path, paste0(tnm_files[i], ".rds"))
     )
   }
+}
+
+#' `saveSubtypeRules()` to an RDS file
+#'
+#' @description
+#' The function reads the `.csv` files containing the subtype rules to derive the summary stage.
+#'
+#' @details
+#' The files are:
+#' * `subtype_mapping`: contains the complete rules to map breast cancer subtypes
+#'
+#' @param path Character directory where the original .csv files are stored.
+#' @param results_path Character directory where the RDS files are to be saved.
+#' 
+#' @returns `NULL`, called for its side effects.
+saveSubtypeRules <- function(
+    path =  here::here("extras"),
+    results_path =  system.file(
+      "extdata",
+      package = "oncomop"
+    )
+    ) {
+  requirePackage("here")
+  subtype_files <- c(
+    "subtype_mapping"
+  )
+  if (!dir.exists(results_path)) {
+    dir.create(results_path)
+  }
+  for (i in seq_along(subtype_files)) {
+    data <- read.csv(
+      file.path(
+        path,
+        paste0(
+          subtype_files[i],
+          ".csv"
+        )
+      )
+    )
+    saveRDS(
+      data,
+      file.path(
+        results_path,
+        paste0(
+          subtype_files[i],
+          ".rds"
+        )
+      )
+    )
+  }
+}
+
+readStagesRDS <- function(
+    type = "mapping"
+) {
+  checkmate::assertChoice(
+    type,
+    c("concepts", "mapping")
+  )
+  if (type == "mapping") {
+    type <- "tnm_mapping"
+  }
+  system.file(
+    "extdata",
+    package = "oncomop"
+  ) |>
+    list.files(
+      full.names = TRUE,
+      pattern = type
+    ) |> 
+    readRDS()
+}
+
+readSubtypeRDS <- function(
+  type = "mapping"
+) {
+  checkmate::assertChoice(
+    type,
+    c("mapping")
+  )
+  if (type == "mapping") {
+    type <- "subtype_mapping"
+  }
+  system.file(
+    "extdata",
+    package = "oncomop"
+  ) |>
+    list.files(
+      full.names = TRUE,
+      pattern = type
+    ) |> 
+    readRDS()
+}
+
+conceptSetsPath <- function() {
+    system.file(
+      "concept_sets",
+    package = "oncomop"
+  )
 }

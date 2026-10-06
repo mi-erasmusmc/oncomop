@@ -1,3 +1,45 @@
+test_that("assertCancerCohortName FUN", {
+  testName <- "default_rules_multiple_subjects"
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+  cdm <- createCancerCohorts(
+    cdm,
+    path = "cancer_cohorts",
+    name = "cancer_cohorts"
+  )
+  expect_no_error({
+    cdm$cancer_cohorts |>
+      assertCancerCohortName(
+        cancer= "breast"
+      )
+    })
+  expect_no_error({
+    cdm$cancer_cohorts |>
+      assertCancerCohortName(
+        cancer = supportedCancerSites()
+      )
+    })
+  expect_error({
+    cdm$cancer_cohorts |>
+      assertCancerCohortName(
+        cancer = "bladder"
+      )
+    },
+    class = "Invalid cohort names"
+  )
+})
+
+test_that("requirePackage checks package availability", {
+  expect_true(requirePackage("base"))
+  expect_error(
+    requirePackage("oncomop-package-that-does-not-exist"),
+    class = "missing_package"
+  )
+})
+
 # test_that("filters surgery codelist by cancer", {
 #   testName <- "stages_patients_one_patient"
 #   cdmVersion <- "5.4"
