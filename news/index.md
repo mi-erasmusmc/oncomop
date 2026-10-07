@@ -1,5 +1,9 @@
 # Changelog
 
+## oncomop 0.2.2
+
+- Fixed test.
+
 ## oncomop 0.2.1
 
 - Fix to pass checks.
