@@ -22,13 +22,14 @@ addSubtype <- function(
   cdm,
   cancer,
   window = list(c(-90, 90)),
+  name = "breast_cancer_subtypes",
   showIntersect = FALSE
 ) {
+
   # Assert parameters -------------------------
-  checkmate::assertCharacter(cohort)
-  omopgenerics::validateCohortArgument(cdm[[cohort]])
+  omopgenerics::validateCohortArgument(cohort)
   omopgenerics::validateCdmArgument(cdm) 
-  assertCancerCohortName(cdm[[cohort]], cancer)
+  assertCancerCohortName(cohort, cancer)
   omopgenerics::assertList(window)
   checkmate::assertLogical(showIntersect)
 
@@ -37,15 +38,27 @@ addSubtype <- function(
     c(35957667L, 35948983L, 35955862L),
     cdm
   )
-  ruleset <- readSubtypeRDS("mapping")
 
   # Intersection and mapping ------------------
-  
-
-
-
-  
-  
+  cohort |>
+    addSubtypeIntersect(
+      conceptSet = codelist,
+      indexDate = "cohort_start_date",
+      censorDate = NULL,
+      window = window,
+      targetDate = "event_start_date",
+      order = "first",
+      inObservation = TRUE,
+      nameStyle = "{concept_name}",
+      name = NULL
+    ) |> 
+    .mapSubtypeRules(
+      cdm,
+      name = name
+    ) |> 
+    dplyr::select(
+      -pgr, -erbb2, -esr1
+    )
 }
 
 subtypeCodelist <- function(
@@ -91,7 +104,7 @@ extractConceptName <- function(
 .mapSubtypeRules <- function(
   cohort,
   cdm,
-  name = "breast_cancer_subtypes"
+  name
 ) {
   omopgenerics::validateCohortArgument(cohort)
   omopgenerics::validateCdmArgument(cdm)

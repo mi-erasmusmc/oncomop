@@ -1,6 +1,6 @@
 test_that("addSubtype to correct breast cancer cohort", {
-  testName <- "subtypes_six_rules"
-  TestGenerator::patientsCDM(
+  testName <- "subtypes_groups"
+  cdm <- TestGenerator::patientsCDM(
     testName = testName,
     vocabulary = "v20260227_complete",
     cdmVersion = "5.4"
@@ -8,15 +8,35 @@ test_that("addSubtype to correct breast cancer cohort", {
     createCancerCohorts(
       path = "cancer_cohorts",
       name = "cancer_cohorts"
+    )
+  expect_no_error(
+    cdm$breast_cancer_subtypes <- cdm$cancer_cohorts |> 
+      addSubtype(
+        cdm = cdm,
+        cancer = "breast",
+        window = list(c(-90, 90)),
+        name = "breast_cancer_subtypes",
+        showIntersect = TRUE
+      ) 
+  )
+  cdm$breast_cancer_subtypes |> 
+    PatientProfiles::summariseResult() |> 
+    dplyr::select(
+      variable_name,
+      estimate_name,
+      estimate_value
     ) |> 
-    addSubtype(
-      cohort = "cancer_cohorts",
-      cdm = _,
-      cancer = "breast",
-      window = list(c(-90 ,90)),
-      showIntersect = TRUE
-    ) |> 
-    expect_no_error()
+      dplyr::filter(
+        variable_name %in% c("esr1_pgr_negative",
+        "esr1_pgr_positive", "her2_positive",
+        "triple_negative"),
+        estimate_name == "count"
+      ) |> 
+        dplyr::pull("estimate_value") |> 
+        sort() |> 
+        expect_identical(
+          c("1", "15", "3", "9")
+        )
 })
 
 test_that("create subtypeCodelist correctly", {
@@ -309,7 +329,10 @@ test_that(".mapSubtypeRules correct six rules", {
       nameStyle = "{concept_name}",
       name = NULL
     ) |> 
-    .mapSubtypeRules(cdm) |> 
+    .mapSubtypeRules(
+      cdm,
+      name = "breast_cancer_cohorts"
+    ) |> 
     dplyr::collect() |> 
     dplyr::arrange(subject_id) 
   subtypes_flags |>
@@ -331,47 +354,57 @@ test_that(".mapSubtypeRules correct six rules", {
 
 })
 
-# test_that(".mapSubtypeRules correct six rules", {
-#   testName <- "subtypes_groups"
-#   cdm <- TestGenerator::patientsCDM(
-#     testName = testName,
-#     vocabulary = "v20260227_complete",
-#     cdmVersion = "5.4"
-#   ) |>
-#     createCancerCohorts(
-#       path = "cancer_cohorts",
-#       name = "cancer_cohorts"
-#     ) 
-#   codelist <- subtypeCodelist(
-#     c(35957667L, 35948983L, 35955862L),
-#     cdm
-#   )
-#   cdm$cancer_cohorts |>
-#     addSubtypeIntersect(
-#       conceptSet = codelist,
-#       indexDate = "cohort_start_date",
-#       censorDate = NULL,
-#       window = list(c(-90, 90)),
-#       targetDate = "event_start_date",
-#       order = "first",
-#       inObservation = TRUE,
-#       nameStyle = "{concept_name}",
-#       name = NULL
-#     ) |> 
-#     .mapSubtypeRules(cdm) |> 
-#     dplyr::collect() |> 
-#     dplyr::arrange(subject_id) |> 
-#     PatientProfiles::summariseResult() |> 
-#     select(
-#       variable_name,
-#       estimate_name,
-#       estimate_value
-#     ) |> 
-#       dplyr::filter(
-#         variable_name %in% c("esr1_pgr_negative",
-#         "esr1_pgr_positive", "her2_positive", 
-#         "pgr", "triple_negative"),
-#         estimate_name == "count"
-#       ) 
-
-# })
+test_that(".mapSubtypeRules correct six rules", {
+  testName <- "subtypes_groups"
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  ) |>
+    createCancerCohorts(
+      path = "cancer_cohorts",
+      name = "cancer_cohorts"
+    ) 
+  codelist <- subtypeCodelist(
+    c(35957667L, 35948983L, 35955862L),
+    cdm
+  )
+  cdm$cancer_cohorts |>
+    addSubtypeIntersect(
+      conceptSet = codelist,
+      indexDate = "cohort_start_date",
+      censorDate = NULL,
+      window = list(c(-90, 90)),
+      targetDate = "event_start_date",
+      order = "first",
+      inObservation = TRUE,
+      nameStyle = "{concept_name}",
+      name = NULL
+    ) |> 
+    .mapSubtypeRules(
+      cdm,
+      name = "breast_cancer_cohorts"
+    ) |> 
+    dplyr::collect() |> 
+    dplyr::arrange(subject_id) |> 
+    dplyr::select(
+      -pgr, -erbb2, -esr1
+    ) |> 
+    PatientProfiles::summariseResult() |> 
+    dplyr::select(
+      variable_name,
+      estimate_name,
+      estimate_value
+    ) |> 
+      dplyr::filter(
+        variable_name %in% c("esr1_pgr_negative",
+        "esr1_pgr_positive", "her2_positive",
+        "triple_negative"),
+        estimate_name == "count"
+      ) |> 
+        dplyr::pull("estimate_value") |> 
+        sort() |> 
+        expect_identical(
+          c("1", "15", "3", "9")
+        )
+})

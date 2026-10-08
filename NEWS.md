@@ -1,3 +1,7 @@
+# oncomop 0.2.3
+
+* `addSubtype()` integration.
+
 # oncomop 0.2.2
 
 * Fixed test.
