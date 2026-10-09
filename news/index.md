@@ -1,5 +1,10 @@
 # Changelog
 
+## oncomop 0.2.3
+
+- [`addSubtype()`](https://mi-erasmusmc.github.io/oncomop/reference/addSubtype.md)
+  integration.
+
 ## oncomop 0.2.2
 
 - Fixed test.
