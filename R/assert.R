@@ -39,14 +39,14 @@ assertCancerCohortName <- function(
     sep = "_"
   )
   cancer_in_cohort <- checkmate::checkSubset(
-    cohort_names,
-    expected_cancer
+    expected_cancer,
+    cohort_names
   )
   if (!isTRUE(cancer_in_cohort)) {
     cli::cli_abort(
       c(
-        "!" = "Invalid cohort names: {glue::glue_collapse(cohort_names, sep = ', ', last = 'and')}",
-        "x" = "They should be equal or a subset of: {glue::glue_collapse(expected_cancer, sep = ', ', last = 'and')}"
+        "!" = "Invalid cohort names: {glue::glue_collapse(cohort_names, sep = ', ', last = ' and ')}",
+        "x" = "They should be equal or a subset of: {glue::glue_collapse(expected_cancer, sep = ', ', last = ' and ')}"
       ),
       class = "Invalid cohort names"
     )

@@ -1,5 +1,5 @@
 test_that("assertCancerCohortName FUN", {
-  testName <- "default_rules_multiple_subjects"
+  testName <- "stages_baseline"
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
     vocabulary = "v20260227_complete",
@@ -13,15 +13,17 @@ test_that("assertCancerCohortName FUN", {
   expect_no_error({
     cdm$cancer_cohorts |>
       assertCancerCohortName(
-        cancer= "breast"
+        cancer = "breast"
       )
     })
-  expect_no_error({
+  expect_error({
     cdm$cancer_cohorts |>
       assertCancerCohortName(
         cancer = supportedCancerSites()
       )
-    })
+    }, 
+   class = "Invalid cohort names"
+  )
   expect_error({
     cdm$cancer_cohorts |>
       assertCancerCohortName(
