@@ -37,28 +37,36 @@ addSubtype <- function(
   codelist <- subtypeCodelist(
     c(35957667L, 35948983L, 35955862L),
     cdm
-  )
+  ) 
 
   # Intersection and mapping ------------------
-  cohort |>
-    addSubtypeIntersect(
-      conceptSet = codelist,
-      indexDate = "cohort_start_date",
-      censorDate = NULL,
-      window = window,
-      targetDate = "event_start_date",
-      order = "first",
-      inObservation = TRUE,
-      nameStyle = "{concept_name}",
-      name = NULL
-    ) |> 
-    .mapSubtypeRules(
-      cdm,
-      name = name
-    ) |> 
-    dplyr::select(
-      -pgr, -erbb2, -esr1
+  if (is.null(codelist)) {
+    cli::cli_abort(
+      message = glue::glue(
+        "Can't add breast cancer subtype. Hint: check OMOP Genomics is in your vocabulary"
+      ),
+      class = "Missing OMOP Genomics"
     )
+  } 
+    cohort |>
+      addSubtypeIntersect(
+        conceptSet = codelist,
+        indexDate = "cohort_start_date",
+        censorDate = NULL,
+        window = window,
+        targetDate = "event_start_date",
+        order = "first",
+        inObservation = TRUE,
+        nameStyle = "{concept_name}",
+        name = NULL
+      ) |> 
+      .mapSubtypeRules(
+        cdm,
+        name = name
+      ) |> 
+      dplyr::select(
+        -pgr, -erbb2, -esr1
+      )
 }
 
 subtypeCodelist <- function(
@@ -69,9 +77,19 @@ subtypeCodelist <- function(
   omopgenerics::validateCdmArgument(cdm)
   codelist <- list()
   for (i in seq_along(concepts)) {
-    codelist[[extractConceptName(concepts[i], cdm)]] <- CodelistGenerator::getDescendants(cdm, concepts[i]) |> 
-      dplyr::pull(.data$concept_id)
-  }
+    concept_name <- extractConceptName(concepts[i], cdm)
+    if (length(concept_name) == 0L) {
+      cli::cli_alert(
+        glue::glue(
+          "Concept id '{concepts[i]}' was not found"
+        )
+      )
+      return(invisible(NULL))
+      } else {
+      codelist[[extractConceptName(concepts[i], cdm)]] <- CodelistGenerator::getDescendants(cdm, concepts[i]) |> 
+        dplyr::pull(.data$concept_id)
+    }
+    }
   codelist |> 
     omopgenerics::newCodelist(cdm)
   }

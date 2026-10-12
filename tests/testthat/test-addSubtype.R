@@ -39,6 +39,30 @@ test_that("addSubtype to correct breast cancer cohort", {
         )
 })
 
+test_that("addSubtype without omopgenomic subtypeCodelist FUN returns invisible", {
+  testName <- "subtypes_groups"
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227",
+    cdmVersion = "5.4"
+  ) |>
+    createCancerCohorts(
+      path = "cancer_cohorts",
+      name = "cancer_cohorts"
+    )
+  expect_error(
+    cdm$breast_cancer_subtypes <- cdm$cancer_cohorts |> 
+      addSubtype(
+        cdm = cdm,
+        cancer = "breast",
+        window = list(c(-90, 90)),
+        name = "breast_cancer_subtypes",
+        showIntersect = TRUE
+      ),
+      class = "Missing OMOP Genomics"
+  )
+})
+
 test_that("create subtypeCodelist correctly", {
   testName <- "subtypes_six_rules"
   TestGenerator::patientsCDM(
@@ -57,6 +81,20 @@ test_that("create subtypeCodelist correctly", {
       "pgr"
     )
   )
+})
+
+test_that("subtypeCodelist returns invisible if concept is not found", {
+  testName <- "subtypes_six_rules"
+  TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227",
+    cdmVersion = "5.4"
+  ) |> 
+    subtypeCodelist(
+      concepts = c(35957667L, 35948983L, 35955862L),
+      cdm = _
+    ) |> 
+    expect_invisible()
 })
 
 test_that("extractConceptName correctly", {
