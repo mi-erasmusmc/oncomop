@@ -1,3 +1,7 @@
+# oncomop 0.2.4
+
+* `.addSubtype` now includes an alert and error message if the concept ids from 'OMOP genomics' are not in the vocabulary.
+
 # oncomop 0.2.3
 
 * `addSubtype()` integration.
