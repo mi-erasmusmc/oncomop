@@ -1,5 +1,10 @@
 # Changelog
 
+## oncomop 0.2.5
+
+- [`assertCancerCohortName()`](https://mi-erasmusmc.github.io/oncomop/reference/assertCancerCohortName.md)
+  bug fixed related to the name expectation.
+
 ## oncomop 0.2.4
 
 - `.addSubtype` now includes an alert and error message if the concept
