@@ -61,12 +61,13 @@ test_that("default rules multiple patients", {
          1635022L, 1635496L))
 })
 
-test_that("selection first T, N and M", {
+test_that("No stages", {
   skip_if(is.null(Sys.getenv("OPENAI_API_KEY")))
-  testName <- "selection_first_T_N_M"
+  testName <- "1_patient_no_stage_found"
   #------------------------------------------------
+
   patientGenerator <- PatientGenerator::patientChat$new(
-    model = "gpt-5.6-terra"
+    model = "gpt-5.6-luna"
   )
   patientGenerator$prompt({
     "PERSON table:
@@ -80,18 +81,10 @@ test_that("selection first T, N and M", {
     MEASUREMENT table:
     Cancer stage information is recorded in this table through TNM categories.
     The measurements occur on the cancer index date (condition_occurrence):
-      - The first female person with breast cancer has a measurement record of in chronological order between -90 and 90 days around index date which is the cancer condition:
-        - First this happened 10 days before index date: T1 (concept ID: 1633883), N0 (concept ID: 1634070) and a M0 (concept ID: 1634757),
-        - Then this staging happened on index date: T1mi (concept ID: 1633949), a N3a (concept ID: 1635496) and a M1 (concept ID: 1633974),
-        - Finally this measurement staging event happened after index date: T4d (concept ID: 1635022), a N1 (concept ID: 1633651) and a M1 (concept ID: 1633974)
+      - The first female person with breast cancer has a measurement record of:
+        - T1 (concept ID: 1633883), N0 (concept ID: 1634070) and a M0 (concept ID: 1634757)
       - The second female person with breast cancer has a measurement record of:
-        - First this happened 10 days before index date: T1 (concept ID: 1633883), N0 (concept ID: 1634070) and a M0 (concept ID: 1634757),
-        - Then this staging happened on index date: T1mi (concept ID: 1633949), a N3a (concept ID: 1635496) and another record M1 (concept ID: 1633974)
-        - Finally this measurement staging event happened happened after index date: T4d (concept ID: 1635022), a N1 (concept ID: 1633651) and a M1 (concept ID: 1633974)
-      - The third female person with breast cancer has a measurement record of
-        - First this happened 10 days before index date: T1 (concept ID: 1633883), N0 (concept ID: 1634070) and a M0 (concept ID: 1634757),
-        - Then this staging happened on index date: T1mi (concept ID: 1633949), a N3a (concept ID: 1635496) and another record M1 (concept ID: 1633974)
-        - Finally this measurement staging event happened after index date: T4d (concept ID: 1635022), a N1 (concept ID: 1633651) and a M1 (concept ID: 1633974)
+        - T1mi (concept ID: 1633949), a N3a (concept ID: 1635496) and a M0 (concept ID: 1634757)
     Output requirements:
       - All patients in PERSON have an observation period.
       - All conditions occurrences and measurement records of a patient must have happened during their observation period.
@@ -116,7 +109,7 @@ test_that("selection first T, N and M", {
   cdm$measurement |>
     collect() |>
     nrow() |>
-    expect_equal(27)
+    expect_equal(6)
   cdm$measurement |>
     collect() |>
     pull(measurement_concept_id) |>

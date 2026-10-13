@@ -167,6 +167,11 @@ createTNMCodelist <- function(
     dplyr::select_if(~ !all(is.na(.))) |>
     dplyr::mutate(
       cancer_stage = {
+        rowStages <- dplyr::pick(tidyselect::any_of(tolower(unique(c(ruleset[["T"]], ruleset[["N"]], ruleset[["M"]]))))) |>
+          dplyr::select_if(~ !any(is.na(.)))
+        if (length(names(rowStages)) != 3) {
+          "no_stage_found"
+        } else {
         rowStageT <- extractEarliestStage(
           ruleset,
           type = "T"
@@ -189,6 +194,7 @@ createTNMCodelist <- function(
             tolower(.data$M) == rowStageM,
           ) |>
           dplyr::pull(.data$uicc_stage)
+        }
       }
     )
 }
