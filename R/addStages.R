@@ -33,7 +33,7 @@ addStages <- function(
   window = list(c(0,0)),
   edition = "8th",
   type = "base",
-  order = "last",
+  order = "first",
   showIntersect = FALSE
 ) {
 
@@ -140,17 +140,18 @@ createTNMCodelist <- function(
 ) {
   omopgenerics::validateCohortArgument(cohort)
   cohort |>
-    PatientProfiles::addConceptIntersectDate(
-      conceptSet,
+    PatientProfiles::addConceptIntersectDays(
+      conceptSet = conceptSet,
       indexDate = "cohort_start_date",
       censorDate = NULL,
       window = window,
       targetDate = "event_start_date",
-      order = "last",
+      order = order,
       inObservation = TRUE,
       nameStyle = "{concept_name}",
-      name = NULL
-    ) |>
+      name = NULL,
+      type = "numeric"
+    ) |> 
     .mapStageRules(ruleset)
 }
 
@@ -166,12 +167,18 @@ createTNMCodelist <- function(
     dplyr::select_if(~ !all(is.na(.))) |>
     dplyr::mutate(
       cancer_stage = {
-        rowStages <- dplyr::pick(tidyselect::any_of(tolower(unique(c(ruleset$T, ruleset$N, ruleset$M))))) |>
-          dplyr::select_if(~ !any(is.na(.)))
-        stageCombination <- names(rowStages)
-        rowStageT <- stageCombination[names(rowStages) |> stringr::str_detect("t")]
-        rowStageN <- stageCombination[names(rowStages) |> stringr::str_detect("n")]
-        rowStageM <- stageCombination[names(rowStages) |> stringr::str_detect("m")]
+        rowStageT <- extractEarliestStage(
+          ruleset,
+          type = "T"
+        )
+        rowStageN <- extractEarliestStage(
+          ruleset,
+          type = "N"
+        )
+        rowStageM <- extractEarliestStage(
+          ruleset,
+          type = "M"
+        )
         stage <- ruleset |>
           dplyr::select(
             dplyr::all_of(c("T", "N", "M", "uicc_stage"))
@@ -186,14 +193,46 @@ createTNMCodelist <- function(
     )
 }
 
+extractEarliestStage <- function(
+  ruleset,
+  type
+) {
+  dplyr::pick(tidyselect::any_of(tolower(unique(c(ruleset[[type]]))))) |>
+          dplyr::select_if(~ !any(is.na(.))) |> 
+          unlist() |>
+          abs() |> 
+          (\(x) names(x)[which.min(x)])()
+} 
+
+extractStageRule <- function(
+  .T,
+  .N,
+  .M
+) {
+  readStagesRDS("mapping") |>
+    extractStageRuleset(
+      .cancer = "breast",
+      .edition = "8th",
+      .type = "base"
+    ) |> 
+    dplyr::filter(
+      .data$T == .T,
+      .data$N == .N,
+      .data$M == .M
+    ) |> 
+    dplyr::pull(uicc_stage) |> 
+    unique()
+}
+
 filterStageConcepts <- function(
-  codelist
+  codelist,
+  pattern = "\\b[TMN]\\d\\b"
 ) {
   codelist |>
     omopgenerics::assertList()
   filterParents <- names(codelist) |>
     stringr::str_detect(
-      pattern = "\\b[TMN]\\d\\b"
+      pattern = pattern
     )
   codelist[filterParents]
 }

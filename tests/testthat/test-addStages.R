@@ -6,6 +6,7 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
     vocabulary = "v20260227_complete",
     cdmVersion = "5.4"
   )
+
   cdm <- createCancerCohorts(
     cdm,
     path = "cancer_cohorts",
@@ -69,6 +70,88 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
       visOmopResults::visOmopTable()
   })
 
+})
+
+test_that("addStageIntersect T, N and M", {
+  testName <- "selection_first_T_N_M"
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+  cdm <- createCancerCohorts(
+    cdm,
+    path = "cancer_cohorts",
+    name = "cancer_cohorts"
+  )
+  tnm_codelist <- readStagesRDS("concepts") |>
+    createTNMCodelist(
+      .edition = "8th",
+      .type = "clinical"
+    )
+  ruleset <- readStagesRDS("mapping") |>
+    extractStageRuleset(
+      .cancer = "breast",
+      .edition = "8th",
+      .type = "base"
+    )
+  cdm$cancer_cohorts |> 
+    PatientProfiles::addConceptIntersectDate(
+    conceptSet = tnm_codelist,
+    indexDate = "cohort_start_date",
+    censorDate = NULL,
+    window = list(c(-90, 90)),
+    targetDate = "event_start_date",
+    order = "first",
+    inObservation = TRUE,
+    nameStyle = "{concept_name}",
+    name = NULL
+  )  |>
+    .mapStageRules(ruleset) |> 
+    pull(cancer_stage) |> 
+    expect_all_equal("IA")
+
+  # Closest to index
+  expect_stage <- extractStageRule(.T = "T1mi", .N = "N3a", .M = "M1")
+  cdm$cancer_cohorts |> 
+    PatientProfiles::addConceptIntersectDays(
+      conceptSet = tnm_codelist,
+      indexDate = "cohort_start_date",
+      censorDate = NULL,
+      window = list(c(-90, 90)),
+      targetDate = "event_start_date",
+      order = "first",
+      inObservation = TRUE,
+      nameStyle = "{concept_name}",
+      name = NULL
+    )  |>
+    .mapStageRules(ruleset) |> 
+    pull(cancer_stage) |> 
+    expect_all_equal(expect_stage)
+
+})
+
+test_that("filterConceptSet T, N and M", {
+  tnm_codelist <- readStagesRDS("concepts") |>
+    createTNMCodelist(
+      .edition = "8th",
+      .type = "clinical"
+  )
+  type <- "T"
+  pattern <- glue::glue(
+    glue::glue("^{type}")
+  )
+  tnm_codelist |> 
+    filterStageConcepts(
+      pattern = pattern
+    ) |> 
+    names() |>
+    sort() |> 
+    expect_equal(
+      sort(c("T0", "T1", "T1a", "T1b", "T1c", "T1mi", "T2", "T2a", "T2b", 
+        "T2c", "T3", "T3a", "T3b", "T4", "T4a", "T4b", "T4c", "T4d", 
+        "Ta", "Tis", "TX")
+      ))
 })
 
 test_that("read stages rds", {
@@ -282,6 +365,23 @@ test_that("addStage() insert cancer column with last record one staging patient"
 })
 
 test_that("Filter children concept sets after extraction", {
+  testName <- "stages_patients_one_patient"
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+  codelist <- extractInnerConcepts(
+    cdm,
+    path = "stages"
+  )
+  expect_no_error({
+    codelist |>
+      filterStageConcepts()
+    })
+  })
+
+test_that("Filter only T, N and M", {
   testName <- "stages_patients_one_patient"
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
