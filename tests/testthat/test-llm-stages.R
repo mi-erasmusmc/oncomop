@@ -61,6 +61,75 @@ test_that("default rules multiple patients", {
          1635022L, 1635496L))
 })
 
+test_that("selection first T, N and M", {
+  skip_if(is.null(Sys.getenv("OPENAI_API_KEY")))
+  testName <- "selection_first_T_N_M"
+  #------------------------------------------------
+
+  patientGenerator <- PatientGenerator::patientChat$new(
+    model = "gpt-5.6-terra"
+  )
+  # patientGenerator$prompt({
+  #   "PERSON table:
+  #     - A population of 3 persons over 18 years old.
+  #     - The 3 persons have observation period from 2000 to 2024.
+  #     - The 3 persons are females with gender_concept_id = 8532.
+  #   CONDITION_OCCURRENCE table:
+  #   The patients from the PERSON table have occurrences of 1 types of cancer recorded during their respective observation periods:
+  #     - All three persons (3 females) have breast cancer with condition_concept_id: 4308306
+  #     - Everyone has condition_type_concept_id 32817
+  #   MEASUREMENT table:
+  #   Cancer stage information is recorded in this table through TNM categories.
+  #   The measurements occur on the cancer index date (condition_occurrence):
+  #     - The first female person with breast cancer has a measurement record of in chronological order between -90 and 90 days around index date which is the cancer condition:
+  #       - First this happened: T1 (concept ID: 1633883), N0 (concept ID: 1634070) and a M0 (concept ID: 1634757),
+  #       - Then this staging happened: T1mi (concept ID: 1633949), a N3a (concept ID: 1635496) and a M0 (concept ID: 1634757)
+  #       - Finally this measurement staging event happened: T4d (concept ID: 1635022), a N1 (concept ID: 1633651) and a M1 (concept ID: 1633974)
+  #     - The second female person with breast cancer has a measurement record of:
+  #       - First this happened: T1 (concept ID: 1633883), N0 (concept ID: 1634070) and a M0 (concept ID: 1634757),
+  #       - Then this staging happened: T1mi (concept ID: 1633949), a N3a (concept ID: 1635496) and a M0 (concept ID: 1634757)
+  #       - Finally this measurement staging event happened: T4d (concept ID: 1635022), a N1 (concept ID: 1633651) and a M1 (concept ID: 1633974)
+  #     - The third female person with breast cancer has a measurement record of
+  #       - First this happened: T1 (concept ID: 1633883), N0 (concept ID: 1634070) and a M0 (concept ID: 1634757),
+  #       - Then this staging happened: T1mi (concept ID: 1633949), a N3a (concept ID: 1635496) and a M0 (concept ID: 1634757)
+  #       - Finally this measurement staging event happened: T4d (concept ID: 1635022), a N1 (concept ID: 1633651) and a M1 (concept ID: 1633974)
+  #   Output requirements:
+  #     - All patients in PERSON have an observation period.
+  #     - All conditions occurrences and measurement records of a patient must have happened during their observation period.
+  #     - Fill out the condition end date 2023-12-31 for everyone."
+  # })
+  # patientGenerator$save(testName)
+
+  #---------------------------------
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+  cdm <- createCancerCohorts(
+    cdm = cdm,
+    path = "cancer_cohorts",
+    name = "cancer_cohorts"
+  )
+  cdm$cancer_cohorts |>
+    collect() |>
+    nrow() |>
+    expect_equal(3)
+  cdm$measurement |>
+    collect() |>
+    nrow() |>
+    expect_equal(27)
+  cdm$measurement |>
+    collect() |>
+    pull(measurement_concept_id) |>
+    unique() |>
+    sort() |>
+    expect_equal(
+      c(1633651L, 1633883L, 1633949L,
+        1633974L, 1634070L, 1634757L,
+         1635022L, 1635496L))
+})
+
 test_that("default rules single patient", {
   skip_if(is.null(Sys.getenv("OPENAI_API_KEY")))
   testName <- "default_rules_single_subject"
