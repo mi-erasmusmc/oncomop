@@ -140,41 +140,8 @@ createTNMCodelist <- function(
 ) {
   omopgenerics::validateCohortArgument(cohort)
   cohort |>
-    PatientProfiles::addConceptIntersectDate(
-      conceptSet,
-      indexDate = "cohort_start_date",
-      censorDate = NULL,
-      window = window,
-      targetDate = "event_start_date",
-      order = "last",
-      inObservation = TRUE,
-      nameStyle = "{concept_name}",
-      name = NULL
-    ) |>
-    .mapStageRules(ruleset)
-}
-
-.addStageIntersect <- function(
-  cohort,
-  conceptSet,
-  window,
-  order,
-  type
-) {
-  checkmate::assertChoice(
-    order,
-    c("first", "last")
-  )
-  checkmate::assertChoice(
-    type,
-    c("T", "N", "M")
-  )
-  omopgenerics::validateCohortArgument(cohort)
-  conceptSet <- conceptSet |> 
-    filterStageConcepts(pattern = "^T") 
-  cohort |>
-    PatientProfiles::addConceptIntersectDate(
-      conceptSet,
+    PatientProfiles::addConceptIntersectDays(
+      conceptSet = conceptSet,
       indexDate = "cohort_start_date",
       censorDate = NULL,
       window = window,
@@ -182,9 +149,10 @@ createTNMCodelist <- function(
       order = order,
       inObservation = TRUE,
       nameStyle = "{concept_name}",
-      name = NULL
-    ) 
-
+      name = NULL,
+      type = "numeric"
+    ) |> 
+    .mapStageRules(ruleset)
 }
 
 .mapStageRules <- function(
@@ -232,8 +200,29 @@ extractEarliestStage <- function(
   dplyr::pick(tidyselect::any_of(tolower(unique(c(ruleset[[type]]))))) |>
           dplyr::select_if(~ !any(is.na(.))) |> 
           unlist() |>
+          abs() |> 
           (\(x) names(x)[which.min(x)])()
 } 
+
+extractStageRule <- function(
+  .T,
+  .N,
+  .M
+) {
+  readStagesRDS("mapping") |>
+    extractStageRuleset(
+      .cancer = "breast",
+      .edition = "8th",
+      .type = "base"
+    ) |> 
+    dplyr::filter(
+      .data$T == .T,
+      .data$N == .N,
+      .data$M == .M
+    ) |> 
+    dplyr::pull(uicc_stage) |> 
+    unique()
+}
 
 filterStageConcepts <- function(
   codelist,

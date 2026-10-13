@@ -110,6 +110,25 @@ test_that("addStageIntersect T, N and M", {
     .mapStageRules(ruleset) |> 
     pull(cancer_stage) |> 
     expect_all_equal("IA")
+
+  # Closest to index
+  expect_stage <- extractStageRule(.T = "T1mi", .N = "N3a", .M = "M1")
+  cdm$cancer_cohorts |> 
+    PatientProfiles::addConceptIntersectDays(
+      conceptSet = tnm_codelist,
+      indexDate = "cohort_start_date",
+      censorDate = NULL,
+      window = list(c(-90, 90)),
+      targetDate = "event_start_date",
+      order = "first",
+      inObservation = TRUE,
+      nameStyle = "{concept_name}",
+      name = NULL
+    )  |>
+    .mapStageRules(ruleset) |> 
+    pull(cancer_stage) |> 
+    expect_all_equal(expect_stage)
+
 })
 
 test_that("filterConceptSet T, N and M", {
