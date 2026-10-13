@@ -66,31 +66,31 @@ test_that("No stages", {
   testName <- "1_patient_no_stage_found"
   #------------------------------------------------
 
-  patientGenerator <- PatientGenerator::patientChat$new(
-    model = "gpt-5.6-luna"
-  )
-  patientGenerator$prompt({
-    "PERSON table:
-      - A population of 3 persons over 18 years old.
-      - The 3 persons have observation period from 2000 to 2024.
-      - The 3 persons are females with gender_concept_id = 8532.
-    CONDITION_OCCURRENCE table:
-    The patients from the PERSON table have occurrences of 1 types of cancer recorded during their respective observation periods:
-      - All three persons (3 females) have breast cancer with condition_concept_id: 4308306
-      - Everyone has condition_type_concept_id 32817
-    MEASUREMENT table:
-    Cancer stage information is recorded in this table through TNM categories.
-    The measurements occur on the cancer index date (condition_occurrence):
-      - The first female person with breast cancer has a measurement record of:
-        - T1 (concept ID: 1633883), N0 (concept ID: 1634070) and a M0 (concept ID: 1634757)
-      - The second female person with breast cancer has a measurement record of:
-        - T1mi (concept ID: 1633949), a N3a (concept ID: 1635496) and a M0 (concept ID: 1634757)
-    Output requirements:
-      - All patients in PERSON have an observation period.
-      - All conditions occurrences and measurement records of a patient must have happened during their observation period.
-      - Fill out the condition end date 2023-12-31 for everyone."
-  })
-  patientGenerator$save(testName)
+  # patientGenerator <- PatientGenerator::patientChat$new(
+  #   model = "gpt-5.6-luna"
+  # )
+  # patientGenerator$prompt({
+  #   "PERSON table:
+  #     - A population of 3 persons over 18 years old.
+  #     - The 3 persons have observation period from 2000 to 2024.
+  #     - The 3 persons are females with gender_concept_id = 8532.
+  #   CONDITION_OCCURRENCE table:
+  #   The patients from the PERSON table have occurrences of 1 types of cancer recorded during their respective observation periods:
+  #     - All three persons (3 females) have breast cancer with condition_concept_id: 4308306
+  #     - Everyone has condition_type_concept_id 32817
+  #   MEASUREMENT table:
+  #   Cancer stage information is recorded in this table through TNM categories.
+  #   The measurements occur on the cancer index date (condition_occurrence):
+  #     - The first female person with breast cancer has a measurement record of:
+  #       - T1 (concept ID: 1633883), N0 (concept ID: 1634070) and a M0 (concept ID: 1634757)
+  #     - The second female person with breast cancer has a measurement record of:
+  #       - T1mi (concept ID: 1633949), a N3a (concept ID: 1635496) and a M0 (concept ID: 1634757)
+  #   Output requirements:
+  #     - All patients in PERSON have an observation period.
+  #     - All conditions occurrences and measurement records of a patient must have happened during their observation period.
+  #     - Fill out the condition end date 2023-12-31 for everyone."
+  # })
+  # patientGenerator$save(testName)
   #---------------------------------
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
@@ -116,9 +116,7 @@ test_that("No stages", {
     unique() |>
     sort() |>
     expect_equal(
-      c(1633651L, 1633883L, 1633949L,
-        1633974L, 1634070L, 1634757L,
-         1635022L, 1635496L))
+      c(1633883, 633949, 1634070, 1634757,1635496))
 })
 
 test_that("default rules single patient", {
