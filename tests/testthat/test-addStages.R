@@ -71,6 +71,43 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
 
 })
 
+test_that("1 patient 'no_stage_found'", {
+  # Setup -------------------------------
+  testName <- "1_patient_no_stage_found"
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+  cdm <- createCancerCohorts(
+    cdm,
+    path = "cancer_cohorts",
+    name = "cancer_cohorts"
+    )
+
+  # Oncomop execution -------------------- 
+  result_stages <- cdm$cancer_cohorts |>
+    addStages(
+      cdm,
+      cancer = "breast",
+      window = list(c(0,0)),
+      edition = "8th",
+      type = "clinical",
+      order = "last",
+      showIntersect = TRUE
+    ) 
+  
+  # Test ---------------------------------
+  result_stages |>
+    dplyr::pull(cancer_stage) |> 
+    sort() |> 
+    expect_in(
+      sort(
+        c("IA", "IIIC", "no_stage_found")
+      )
+    ) 
+})
+
 test_that("read stages rds", {
   readStagesRDS("concepts") |>
     names() |>

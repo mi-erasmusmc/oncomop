@@ -169,19 +169,23 @@ createTNMCodelist <- function(
         rowStages <- dplyr::pick(tidyselect::any_of(tolower(unique(c(ruleset$T, ruleset$N, ruleset$M))))) |>
           dplyr::select_if(~ !any(is.na(.)))
         stageCombination <- names(rowStages)
-        rowStageT <- stageCombination[names(rowStages) |> stringr::str_detect("t")]
-        rowStageN <- stageCombination[names(rowStages) |> stringr::str_detect("n")]
-        rowStageM <- stageCombination[names(rowStages) |> stringr::str_detect("m")]
-        stage <- ruleset |>
-          dplyr::select(
-            dplyr::all_of(c("T", "N", "M", "uicc_stage"))
-          ) |>
-          dplyr::filter(
-            tolower(.data$T) == rowStageT,
-            tolower(.data$N) == rowStageN,
-            tolower(.data$M) == rowStageM,
-          ) |>
-          dplyr::pull(.data$uicc_stage)
+        if (length(stageCombination) != 3) {
+          "no_stage_found"
+        } else {
+          rowStageT <- stageCombination[names(rowStages) |> stringr::str_detect("t")]
+          rowStageN <- stageCombination[names(rowStages) |> stringr::str_detect("n")]
+          rowStageM <- stageCombination[names(rowStages) |> stringr::str_detect("m")]
+          stage <- ruleset |>
+            dplyr::select(
+              dplyr::all_of(c("T", "N", "M", "uicc_stage"))
+            ) |>
+            dplyr::filter(
+              tolower(.data$T) == rowStageT,
+              tolower(.data$N) == rowStageN,
+              tolower(.data$M) == rowStageM,
+            ) |>
+            dplyr::pull(.data$uicc_stage)
+        }
       }
     )
 }
