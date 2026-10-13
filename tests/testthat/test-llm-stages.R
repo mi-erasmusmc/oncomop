@@ -91,7 +91,6 @@ test_that("No stages", {
       - Fill out the condition end date 2023-12-31 for everyone."
   })
   patientGenerator$save(testName)
-
   #---------------------------------
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
