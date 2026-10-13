@@ -116,7 +116,7 @@ test_that("No stages", {
     unique() |>
     sort() |>
     expect_equal(
-      c(1633883, 633949, 1634070, 1634757,1635496))
+      c(1633883, 1633949, 1634070, 1634757,1635496))
 })
 
 test_that("default rules single patient", {
