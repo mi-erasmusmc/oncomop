@@ -19,7 +19,10 @@ saveStagesRules <- function(
       "extdata",
       package = "oncomop"
     ),
-    results_path = tempdir()
+    results_path = system.file(
+      "extdata",
+      package = "oncomop"
+    )
     ) {
   tnm_files <- c(
     "tnm_concepts",
@@ -40,7 +43,6 @@ saveStagesRules <- function(
         dplyr::mutate(
           site = dplyr::case_when(
             .data$site == "urinary bladder" ~ "bladder",
-            .data$site == "skin melanoma" ~ "skin",
             .default = .data$site
           ),
           stage_grouping_scope = dplyr::case_when(
