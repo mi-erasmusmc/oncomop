@@ -61,6 +61,9 @@ addStages <- function(
       .edition = edition,
       .type = "base"
     )
+  if (length(tnm_codelist) == 0 | length(ruleset) == 0) {
+    return(invisible(NULL))
+  }
 
   # Intersect cohorts ---------------------------------
   cancer_stage_cohort <- cohort |>
