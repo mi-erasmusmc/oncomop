@@ -334,3 +334,33 @@ test_that("Filter only T, N and M", {
       filterStageConcepts()
     })
   })
+
+test_that("9th edition prostate case from onconet", {
+  cdm <- TestGenerator::patientsCDM(
+    testName = "test_patients_staging_uicc7",
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+  cdm <- createCancerCohorts(
+    cdm = cdm,
+    path = "cancer_cohorts",
+    name = "cancer_cohorts"
+  )
+  expect_invisible({
+    cdm[["cancer_cohorts"]] |> 
+      CohortConstructor::subsetCohorts(
+        cohortId = "prostate_cancer"
+      ) |> 
+      addStages(
+        cancer = "prostate",
+        window = list(c(-90, 90)),
+        edition = "9th",
+        type = "base",
+        order = "first",
+        showIntersect = FALSE
+      )
+    })
+  
+})
+
+
