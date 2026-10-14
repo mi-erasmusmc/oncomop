@@ -1,3 +1,13 @@
+# oncomop 0.3.1
+
+* `extractStageRules()` now is exported. 
+
+* GitHub action for R CMD check standard. 
+
+* `PatientProfiles` >= 1.6.0 required in description. 
+
+* `readRDS` functions updated to pass all tests. 
+
 # oncomop 0.3.0
 
 * `.addStages` now detects the T, N and M closest to index. 
