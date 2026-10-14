@@ -6,7 +6,6 @@
 #'
 #' @param cohort A cohort table with cancer patients from a
 #' cdm reference object.
-#' @param cdm A cdm reference object.
 #' @param cancer In character, the affected site, a choice of:
 #' "bladder", "breast", "colorectal", "lung", "melanoma", "oesophagus"
 #' and "prostate".
@@ -28,7 +27,6 @@
 #' @export
 addStages <- function(
   cohort,
-  cdm,
   cancer,
   window = list(c(0,0)),
   edition = "8th",
@@ -39,7 +37,6 @@ addStages <- function(
 
   # Assert parameters ---------------------------------
   omopgenerics::validateCohortArgument(cohort)
-  omopgenerics::validateCdmArgument(cdm) 
   checkmate::assertChoice(cancer, supportedCancerSites())
   omopgenerics::assertList(window)
   checkmate::assertChoice(

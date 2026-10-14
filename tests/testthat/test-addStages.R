@@ -6,7 +6,6 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
     vocabulary = "v20260227_complete",
     cdmVersion = "5.4"
   )
-
   cdm <- createCancerCohorts(
     cdm,
     path = "cancer_cohorts",
@@ -16,7 +15,6 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
   # Oncomop execution -------------------- 
   result_stages <- cdm$cancer_cohorts |>
     addStages(
-      cdm,
       cancer = "breast",
       window = list(c(0,0)),
       edition = "8th",
@@ -52,7 +50,6 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
         c("IV", "IA", "IIIC")
       )
     )
-  
   # Test counts --------------------------
   result_stages_summarised |>
     dplyr::filter(
@@ -63,7 +60,6 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
     as.numeric() |> 
     unique() |> 
     expect_equal(1)
-
   # Test visOmopResults -------------------
   expect_no_error({
     result_stages_summarised |> 
@@ -84,12 +80,10 @@ test_that("1 patient 'no_stage_found'", {
     cdm,
     path = "cancer_cohorts",
     name = "cancer_cohorts"
-    )
-
+  )
   # Oncomop execution -------------------- 
   result_stages <- cdm$cancer_cohorts |>
     addStages(
-      cdm,
       cancer = "breast",
       window = list(c(0,0)),
       edition = "8th",
@@ -176,7 +170,6 @@ test_that("Imposing rules with 'mappingRules' multiple subjects", {
     path = "cancer_cohorts",
     name = "cancer_cohorts"
   )
-
   tnm_codelist <- readStagesRDS("concepts") |>
     createTNMCodelist(
       .edition = "8th",
@@ -188,7 +181,6 @@ test_that("Imposing rules with 'mappingRules' multiple subjects", {
       .edition = "8th",
       .type = "base"
     )
-
   cdm$cancer_cohorts |>
     .addStageRules(
       conceptSet = tnm_codelist,
@@ -197,7 +189,6 @@ test_that("Imposing rules with 'mappingRules' multiple subjects", {
     ) |>
     dplyr::pull(cancer_stage) |>
     expect_in(c("IV", "IA", "IIIC"))
-
 })
 
 test_that("Imposing rules with 'mappingRules' single patient", {
@@ -286,7 +277,6 @@ test_that("General .addStageRules", {
 })
 
 test_that("addStage() insert cancer column with last record one staging patient", {
-
   testName <- "stages_patients_one_patient"
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
@@ -297,11 +287,9 @@ test_that("addStage() insert cancer column with last record one staging patient"
     cdm,
     path = "cancer_cohorts",
     name = "cancer_cohorts"
-    )
-
+  )
   cdm$cancer_cohorts |>
     addStages(
-      cdm,
       cancer = "bladder",
       window = list(c(0, 30)),
       edition = "7th",
