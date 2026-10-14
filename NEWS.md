@@ -1,3 +1,7 @@
+# oncomop 0.3.2
+
+* Removing 'cdm' argument from addStages.
+
 # oncomop 0.3.1
 
 * `extractStageRules()` now is exported. 
