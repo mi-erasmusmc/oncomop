@@ -1,5 +1,11 @@
 # Changelog
 
+## oncomop 0.3.4
+
+- [`addStages()`](https://mi-erasmusmc.github.io/oncomop/reference/addStages.md)
+  logs and returns invisible if no rules or concepts found for
+  combination of parameters.
+
 ## oncomop 0.3.3
 
 - Updating cancer sites labeles to match onconet.
