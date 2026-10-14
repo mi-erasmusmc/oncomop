@@ -21,8 +21,8 @@ test_that("saveStagesRules saves expected RDS files", {
     sort() |> 
     expect_equal(
       c("bladder", "breast", "colorectal",
-      "lung", "oesophagus", 
-      "prostate", "skin")
+      "lung", "melanoma", "oesophageal", 
+      "prostate")
     )
   readRDS(file.path(results_path, "tnm_mapping.rds")) |>
     pull(stage_grouping_scope) |>
