@@ -62,6 +62,9 @@ addStages <- function(
       .type = "base"
     )
   if (length(tnm_codelist) == 0 | length(ruleset) == 0) {
+    cli::cli_alert_warning(
+      glue::glue("No concepts or mapping for parameters '{cancer} cancer', '{type}' '{edition} edition'")
+    )
     return(invisible(NULL))
   }
 
