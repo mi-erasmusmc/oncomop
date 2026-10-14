@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 # oncomop
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/mi-erasmusmc/oncomop/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mi-erasmusmc/oncomop/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 `oncomop` is designed to facilitate patient characterisation with OMOP analytical tools that follow a `dplyr` pipe-based workflow, such as PatientProfiles and CohortCharacteristics. It determines cancer stage in cohorts using UICC guidelines.

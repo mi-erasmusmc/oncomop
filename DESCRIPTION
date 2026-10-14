@@ -1,6 +1,6 @@
 Package: oncomop
 Title: Methods to Analyze Oncological Data In The OMOP-CDM
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: c(
     person("Cesar", "Barboza", , "c.barboza@mi-erasmusmc.nl", role = c("aut", "cre")),
     person("Cristiana", "Di Tullio", email = "c.ditullio@mi-erasmusmc.nl", role = c("aut")),
@@ -12,7 +12,7 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
 Imports:
-    PatientProfiles,
+    PatientProfiles (>= 1.6.0),
     checkmate,
     dplyr,
     glue,

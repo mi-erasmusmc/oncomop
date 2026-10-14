@@ -10,25 +10,24 @@
 #' * `tnm_mapping`: contains the complete rules to map all combinations of TNM components to a
 #'  summary stage I-IV, differentiated by edition of staging system and by cancer type.
 #'
-#' @param path Character directory where the original .csv files are stored.
-#' @param results_path Character directory where the RDS files are to be saved.
+#' @param path Character directory containing the packaged source `.csv` files.
+#' @param results_path Existing writable directory where the RDS files are saved.
 #' 
 #' @returns `NULL`, called for its side effects.
 saveStagesRules <- function(
-    path =  here::here("extras"),
-    results_path =  system.file(
+    path = system.file(
       "extdata",
       package = "oncomop"
-    )
+    ),
+    results_path = tempdir()
     ) {
-  requirePackage("here")
   tnm_files <- c(
     "tnm_concepts",
     "tnm_mapping"
   )
-  if (!dir.exists(results_path)) {
-    dir.create(results_path)
-  }
+  checkmate::assertDirectoryExists(path)
+  checkmate::assertDirectoryExists(results_path)
+  checkmate::assertTRUE(file.access(results_path, mode = 2) == 0)
   for (i in seq_along(tnm_files)) {
     data <- utils::read.csv(
       file.path(path, paste0(tnm_files[i], ".csv"))
@@ -75,24 +74,23 @@ saveStagesRules <- function(
 #' The files are:
 #' * `subtype_mapping`: contains the complete rules to map breast cancer subtypes
 #'
-#' @param path Character directory where the original .csv files are stored.
-#' @param results_path Character directory where the RDS files are to be saved.
+#' @param path Character directory containing the packaged source `.csv` file.
+#' @param results_path Existing writable directory where the RDS file is saved.
 #' 
 #' @returns `NULL`, called for its side effects.
 saveSubtypeRules <- function(
-    path =  here::here("extras"),
-    results_path =  system.file(
+    path = system.file(
       "extdata",
       package = "oncomop"
-    )
+    ),
+    results_path = tempdir()
     ) {
-  requirePackage("here")
   subtype_files <- c(
     "subtype_mapping"
   )
-  if (!dir.exists(results_path)) {
-    dir.create(results_path)
-  }
+  checkmate::assertDirectoryExists(path)
+  checkmate::assertDirectoryExists(results_path)
+  checkmate::assertTRUE(file.access(results_path, mode = 2) == 0)
   for (i in seq_along(subtype_files)) {
     data <- utils::read.csv(
       file.path(
@@ -132,7 +130,7 @@ readStagesRDS <- function(
   ) |>
     list.files(
       full.names = TRUE,
-      pattern = type
+      pattern = paste0(type, ".rds")
     ) |> 
     readRDS()
 }
@@ -153,7 +151,7 @@ readSubtypeRDS <- function(
   ) |>
     list.files(
       full.names = TRUE,
-      pattern = type
+      pattern = paste0(type, ".rds")
     ) |> 
     readRDS()
 }

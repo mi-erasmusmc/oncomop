@@ -5,14 +5,14 @@
 \title{\code{saveSubtypeRules()} to an RDS file}
 \usage{
 saveSubtypeRules(
-  path = here::here("extras"),
-  results_path = system.file("extdata", package = "oncomop")
+  path = system.file("extdata", package = "oncomop"),
+  results_path = tempdir()
 )
 }
 \arguments{
-\item{path}{Character directory where the original .csv files are stored.}
+\item{path}{Character directory containing the packaged source \code{.csv} file.}
 
-\item{results_path}{Character directory where the RDS files are to be saved.}
+\item{results_path}{Existing writable directory where the RDS file is saved.}
 }
 \value{
 \code{NULL}, called for its side effects.
