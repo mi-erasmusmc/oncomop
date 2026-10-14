@@ -1,5 +1,9 @@
 # Changelog
 
+## oncomop 0.3.0
+
+- `.addStages` now detects the T, N and M closest to index.
+
 ## oncomop 0.2.5
 
 - [`assertCancerCohortName()`](https://mi-erasmusmc.github.io/oncomop/reference/assertCancerCohortName.md)
