@@ -3,23 +3,19 @@ test_that("saveStagesRules saves expected RDS files", {
     "tnm_concepts",
     "tnm_mapping"
   )
+  results_path <- tempfile("oncomop-stage-rules-")
+  dir.create(results_path)
   # Save rules to RDS files
-  saveStagesRules()
+  saveStagesRules(results_path = results_path)
   # Check files exist
   for (f in tnm_files) {
     expect_true(
       file.exists(
-        system.file(
-          "extdata",
-          paste0(f, ".rds"),
-          package = "oncomop"
-        )
+        file.path(results_path, paste0(f, ".rds"))
       )
     )
   }
-  readStagesRDS(
-    "mapping"
-  ) |> 
+  readRDS(file.path(results_path, "tnm_mapping.rds")) |>
     pull(site) |>
     unique() |>
     sort() |> 
@@ -28,18 +24,14 @@ test_that("saveStagesRules saves expected RDS files", {
       "lung", "oesophagus", 
       "prostate", "skin")
     )
-  readStagesRDS(
-    "mapping"
-  ) |> 
+  readRDS(file.path(results_path, "tnm_mapping.rds")) |>
     pull(stage_grouping_scope) |>
     unique() |>
     sort() |> 
     expect_equal(
       c("base", "clinical", "pathological")
     )
-  readStagesRDS(
-    "mapping"
-  ) |> 
+  readRDS(file.path(results_path, "tnm_mapping.rds")) |>
     pull(edition) |>
     unique() |>
     sort() |> 
@@ -52,23 +44,19 @@ test_that("saveSubtypeRules saves expected RDS files", {
   subtype_files <- c(
     "subtype_mapping"
   )
+  results_path <- tempfile("oncomop-subtype-rules-")
+  dir.create(results_path)
   # Save rules to RDS files
-  saveSubtypeRules()
+  saveSubtypeRules(results_path = results_path)
   # Check files exist
   for (f in subtype_files) {
     expect_true(
       file.exists(
-        system.file(
-          "extdata",
-          paste0(f, ".rds"),
-          package = "oncomop"
-        )
+        file.path(results_path, paste0(f, ".rds"))
       )
     )
   }
-  readSubtypeRDS(
-    "mapping"
-  ) |> 
+  readRDS(file.path(results_path, "subtype_mapping.rds")) |>
     pull(subtype) |>
     expect_identical(
       c("ESR1/PGR positive", "ESR1/PGR positive", 

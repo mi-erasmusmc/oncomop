@@ -210,6 +210,17 @@ extractEarliestStage <- function(
           (\(x) names(x)[which.min(x)])()
 } 
 
+#' Extract a UICC stage rule
+#'
+#' Retrieves the UICC stage associated with a TNM combination for breast cancer
+#' using the eighth-edition base stage mapping.
+#'
+#' @param .T A character TNM T-category value.
+#' @param .N A character TNM N-category value.
+#' @param .M A character TNM M-category value.
+#' @returns A character vector containing the matching UICC stage, if any.
+#' @importFrom dplyr filter pull
+#' @export
 extractStageRule <- function(
   .T,
   .N,
