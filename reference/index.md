@@ -23,6 +23,9 @@
 - [`createCharacteristicsCohorts()`](https://mi-erasmusmc.github.io/oncomop/reference/createCharacteristicsCohorts.md)
   : Creates cancer-related characteristics cohorts
 
+- [`extractStageRule()`](https://mi-erasmusmc.github.io/oncomop/reference/extractStageRule.md)
+  : Extract a UICC stage rule
+
 - [`saveStagesRules()`](https://mi-erasmusmc.github.io/oncomop/reference/saveStagesRules.md)
   : Save TNM staging rules to an RDS file
 

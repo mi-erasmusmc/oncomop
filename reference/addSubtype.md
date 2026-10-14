@@ -12,6 +12,7 @@ addSubtype(
   cdm,
   cancer,
   window = list(c(-90, 90)),
+  name = "breast_cancer_subtypes",
   showIntersect = FALSE
 )
 ```

@@ -7,8 +7,8 @@ the summary stage.
 
 ``` r
 saveStagesRules(
-  path = here::here("extras"),
-  results_path = system.file("extdata", package = "oncomop")
+  path = system.file("extdata", package = "oncomop"),
+  results_path = tempdir()
 )
 ```
 
@@ -16,11 +16,11 @@ saveStagesRules(
 
 - path:
 
-  Character directory where the original .csv files are stored.
+  Character directory containing the packaged source `.csv` files.
 
 - results_path:
 
-  Character directory where the RDS files are to be saved.
+  Existing writable directory where the RDS files are saved.
 
 ## Value
 

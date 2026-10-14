@@ -7,8 +7,8 @@ derive the summary stage.
 
 ``` r
 saveSubtypeRules(
-  path = here::here("extras"),
-  results_path = system.file("extdata", package = "oncomop")
+  path = system.file("extdata", package = "oncomop"),
+  results_path = tempdir()
 )
 ```
 
@@ -16,11 +16,11 @@ saveSubtypeRules(
 
 - path:
 
-  Character directory where the original .csv files are stored.
+  Character directory containing the packaged source `.csv` file.
 
 - results_path:
 
-  Character directory where the RDS files are to be saved.
+  Existing writable directory where the RDS file is saved.
 
 ## Value
 

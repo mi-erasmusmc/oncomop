@@ -13,7 +13,7 @@ addStages(
   window = list(c(0, 0)),
   edition = "8th",
   type = "base",
-  order = "last",
+  order = "first",
   showIntersect = FALSE
 )
 ```
