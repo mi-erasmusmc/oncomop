@@ -1,5 +1,13 @@
 # Changelog
 
+## oncomop 0.3.3
+
+- Updating cancer sites labeles to match onconet.
+
+## oncomop 0.3.2
+
+- Removing ‘cdm’ argument from addStages.
+
 ## oncomop 0.3.1
 
 - `extractStageRules()` now is exported.
