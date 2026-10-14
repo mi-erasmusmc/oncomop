@@ -6,6 +6,7 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
     vocabulary = "v20260227_complete",
     cdmVersion = "5.4"
   )
+
   cdm <- createCancerCohorts(
     cdm,
     path = "cancer_cohorts",
@@ -69,6 +70,43 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
       visOmopResults::visOmopTable()
   })
 
+})
+
+test_that("1 patient 'no_stage_found'", {
+  # Setup -------------------------------
+  testName <- "1_patient_no_stage_found"
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+  cdm <- createCancerCohorts(
+    cdm,
+    path = "cancer_cohorts",
+    name = "cancer_cohorts"
+    )
+
+  # Oncomop execution -------------------- 
+  result_stages <- cdm$cancer_cohorts |>
+    addStages(
+      cdm,
+      cancer = "breast",
+      window = list(c(0,0)),
+      edition = "8th",
+      type = "clinical",
+      order = "last",
+      showIntersect = TRUE
+    ) 
+  
+  # Test ---------------------------------
+  result_stages |>
+    dplyr::pull(cancer_stage) |> 
+    sort() |> 
+    expect_in(
+      sort(
+        c("IA", "IIIC", "no_stage_found")
+      )
+    ) 
 })
 
 test_that("read stages rds", {
@@ -226,9 +264,7 @@ test_that("General .addStageRules", {
     ) |>
     collect() |>
     pull(t1) |>
-    expect_equal(
-      as.Date("2023-01-15")
-    )
+    expect_equal(0)
   cdm$cancer_cohorts |>
     .addStageRules(
       conceptSet = tnm_codelist,
@@ -237,9 +273,7 @@ test_that("General .addStageRules", {
     ) |>
     collect() |>
     pull(n0) |>
-    expect_equal(
-      as.Date("2023-01-15")
-    )
+    expect_equal(0)
   cdm$cancer_cohorts |>
     .addStageRules(
       conceptSet = tnm_codelist,
@@ -248,9 +282,7 @@ test_that("General .addStageRules", {
     ) |>
     collect() |>
     pull(m0) |>
-    expect_equal(
-      as.Date("2023-01-15")
-    )
+    expect_equal(0)
 })
 
 test_that("addStage() insert cancer column with last record one staging patient", {
@@ -282,6 +314,23 @@ test_that("addStage() insert cancer column with last record one staging patient"
 })
 
 test_that("Filter children concept sets after extraction", {
+  testName <- "stages_patients_one_patient"
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+  codelist <- extractInnerConcepts(
+    cdm,
+    path = "stages"
+  )
+  expect_no_error({
+    codelist |>
+      filterStageConcepts()
+    })
+  })
+
+test_that("Filter only T, N and M", {
   testName <- "stages_patients_one_patient"
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
