@@ -248,7 +248,7 @@ extractStageRule <- function(
       .data$N == .N,
       .data$M == .M
     ) |> 
-    dplyr::pull(uicc_stage) |> 
+    dplyr::pull("uicc_stage") |>
     unique()
 }
 

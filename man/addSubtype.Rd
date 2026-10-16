@@ -23,6 +23,8 @@ addSubtype(
 
 \item{window}{to look up stages codes.}
 
+\item{name}{For the new cohort, in character.}
+
 \item{showIntersect}{If TRUE, the cohort will show the date intersects for each matching code. Default FALSE.}
 }
 \description{
