@@ -172,31 +172,39 @@ createTNMCodelist <- function(
       cancer_stage = {
         rowStages <- dplyr::pick(tidyselect::any_of(tolower(unique(c(ruleset[["T"]], ruleset[["N"]], ruleset[["M"]]))))) |>
           dplyr::select_if(~ !any(is.na(.)))
-        if (length(names(rowStages)) != 3) {
+        hasT <- any(names(rowStages) %in% tolower(ruleset[["T"]]))
+        hasN <- any(names(rowStages) %in% tolower(ruleset[["N"]]))
+        hasM <- any(names(rowStages) %in% tolower(ruleset[["M"]]))
+        if (!hasT || !hasN || !hasM) {
           "no_stage_found"
         } else {
-        rowStageT <- extractEarliestStage(
-          ruleset,
-          type = "T"
-        )
-        rowStageN <- extractEarliestStage(
-          ruleset,
-          type = "N"
-        )
-        rowStageM <- extractEarliestStage(
-          ruleset,
-          type = "M"
-        )
-        stage <- ruleset |>
-          dplyr::select(
-            dplyr::all_of(c("T", "N", "M", "uicc_stage"))
-          ) |>
-          dplyr::filter(
-            tolower(.data$T) == rowStageT,
-            tolower(.data$N) == rowStageN,
-            tolower(.data$M) == rowStageM,
-          ) |>
-          dplyr::pull(.data$uicc_stage)
+          rowStageT <- extractEarliestStage(
+            ruleset,
+            type = "T"
+          )
+          rowStageN <- extractEarliestStage(
+            ruleset,
+            type = "N"
+          )
+          rowStageM <- extractEarliestStage(
+            ruleset,
+            type = "M"
+          )
+          stage <- ruleset |>
+            dplyr::select(
+              dplyr::all_of(c("T", "N", "M", "uicc_stage"))
+            ) |>
+            dplyr::filter(
+              tolower(.data$T) == rowStageT,
+              tolower(.data$N) == rowStageN,
+              tolower(.data$M) == rowStageM,
+            ) |>
+            dplyr::pull(.data$uicc_stage)
+          if (length(stage) == 0) {
+            "no_stage_found"
+          } else {
+            stage
+          }
         }
       }
     )
