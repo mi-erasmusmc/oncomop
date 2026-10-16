@@ -1,8 +1,14 @@
 # Changelog
 
+## oncomop 0.3.6
+
+- [`addStages()`](https://mi-erasmusmc.github.io/oncomop/reference/addStages.md)
+  updated documentation and bindings fixes.
+
 ## oncomop 0.3.5
 
-- `addStages` declares ‘no_stage_found’ if no matching rule found.
+- [`addStages()`](https://mi-erasmusmc.github.io/oncomop/reference/addStages.md)
+  declares ‘no_stage_found’ if no matching rule found.
 
 ## oncomop 0.3.4
 

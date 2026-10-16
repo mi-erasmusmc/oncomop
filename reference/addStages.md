@@ -8,7 +8,6 @@ predefined or custom set of rules to identify summary stages.
 ``` r
 addStages(
   cohort,
-  cdm,
   cancer,
   window = list(c(0, 0)),
   edition = "8th",
@@ -23,10 +22,6 @@ addStages(
 - cohort:
 
   A cohort table with cancer patients from a cdm reference object.
-
-- cdm:
-
-  A cdm reference object.
 
 - cancer:
 

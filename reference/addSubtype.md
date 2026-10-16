@@ -36,6 +36,10 @@ addSubtype(
 
   to look up stages codes.
 
+- name:
+
+  For the new cohort, in character.
+
 - showIntersect:
 
   If TRUE, the cohort will show the date intersects for each matching
