@@ -6,7 +6,7 @@
 \usage{
 saveStagesRules(
   path = system.file("extdata", package = "oncomop"),
-  results_path = tempdir()
+  results_path = system.file("extdata", package = "oncomop")
 )
 }
 \arguments{

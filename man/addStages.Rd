@@ -6,7 +6,6 @@
 \usage{
 addStages(
   cohort,
-  cdm,
   cancer,
   window = list(c(0, 0)),
   edition = "8th",
@@ -18,8 +17,6 @@ addStages(
 \arguments{
 \item{cohort}{A cohort table with cancer patients from a
 cdm reference object.}
-
-\item{cdm}{A cdm reference object.}
 
 \item{cancer}{In character, the affected site, a choice of:
 "bladder", "breast", "colorectal", "lung", "melanoma", "oesophagus"

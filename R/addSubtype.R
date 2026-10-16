@@ -9,6 +9,7 @@
 #' @param cancer In character, the affected site, a choice of: 
 #' "bladder", "breast", "colorectal", "lung", "melanoma", "oesophagus" and "prostate".
 #' @param window to look up stages codes.
+#' @param name For the new cohort, in character.
 #' @param showIntersect If TRUE, the cohort will show the date intersects for each matching code. Default FALSE.
 #' 
 #' @importFrom omopgenerics validateCohortArgument
@@ -65,7 +66,7 @@ addSubtype <- function(
         name = name
       ) |> 
       dplyr::select(
-        -pgr, -erbb2, -esr1
+        -dplyr::all_of(c("pgr", "erbb2", "esr1"))
       )
 }
 
