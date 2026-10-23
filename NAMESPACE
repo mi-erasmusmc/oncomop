@@ -2,6 +2,7 @@
 
 export(addStages)
 export(addSubtype)
+export(applyCARFiltering)
 export(assertCancerCohortName)
 export(createCancerCohorts)
 export(createCharacteristicsCohorts)
