@@ -94,8 +94,8 @@ NULL
 
 # ----------------- end of documentation ---------------------------------------
 
-#' `stagesRuleset()` extracts and filters specific set of rules for every cancer 
-#' 
+#' `stagesRuleset()` extracts and filters specific set of rules for every cancer
+#'
 #' @param edition A choice of "unspecified", "7th" and "8th".
 #' @param cancer In character, the affected site, a choice of:
 #' "bladder", "breast", "colorectal", "lung", "melanoma", "oesophagus"
@@ -114,11 +114,11 @@ stagesRules <- function(
     checkmate::assertChoice(
       c("unspecified", "7th", "8th")
     )
-  cancer |> 
+  cancer |>
     checkmate::assertChoice(
       c("bladder", "breast", "colorectal",
        "lung", "melanoma", "oesophagus",
-       "prostate")
+       "ovarian", "prostate")
     )
   type |>
     checkmate::assertChoice(
@@ -129,7 +129,7 @@ stagesRules <- function(
       .cancer = cancer,
       .edition = edition,
       .type = "base"
-    )   
+    )
 }
 
 extractStageRuleset <- function(
