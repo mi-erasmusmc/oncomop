@@ -7,7 +7,7 @@
 #' @param cohort A cohort table with cancer patients from a
 #' cdm reference object.
 #' @param cancer In character, the affected site, a choice of:
-#' "bladder", "breast", "colorectal", "lung", "melanoma", "oesophagus"
+#' "bladder", "breast", "colorectal", "lung", "melanoma", "oesophagus", "ovarian"
 #' and "prostate".
 #' @param window to look up stages codes.
 #' @param edition A choice of "unspecified", "7th" and "8th".
@@ -154,7 +154,7 @@ createTNMCodelist <- function(
       nameStyle = "{concept_name}",
       name = NULL,
       type = "numeric"
-    ) |> 
+    ) |>
     .mapStageRules(ruleset)
 }
 
@@ -215,11 +215,11 @@ extractEarliestStage <- function(
   type
 ) {
   dplyr::pick(tidyselect::any_of(tolower(unique(c(ruleset[[type]]))))) |>
-          dplyr::select_if(~ !any(is.na(.))) |> 
+          dplyr::select_if(~ !any(is.na(.))) |>
           unlist() |>
-          abs() |> 
+          abs() |>
           (\(x) names(x)[which.min(x)])()
-} 
+}
 
 #' Extract a UICC stage rule
 #'
@@ -242,12 +242,12 @@ extractStageRule <- function(
       .cancer = "breast",
       .edition = "8th",
       .type = "base"
-    ) |> 
+    ) |>
     dplyr::filter(
       .data$T == .T,
       .data$N == .N,
       .data$M == .M
-    ) |> 
+    ) |>
     dplyr::pull("uicc_stage") |>
     unique()
 }

@@ -19,7 +19,7 @@ addStages(
 cdm reference object.}
 
 \item{cancer}{In character, the affected site, a choice of:
-"bladder", "breast", "colorectal", "lung", "melanoma", "oesophagus"
+"bladder", "breast", "colorectal", "lung", "melanoma", "oesophagus", "ovarian"
 and "prostate".}
 
 \item{window}{to look up stages codes.}
