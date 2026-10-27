@@ -12,7 +12,7 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
     name = "cancer_cohorts"
     )
 
-  # Oncomop execution -------------------- 
+  # Oncomop execution --------------------
   result_stages <- cdm$cancer_cohorts |>
     addStages(
       cancer = "breast",
@@ -21,18 +21,18 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
       type = "clinical",
       order = "last",
       showIntersect = TRUE
-    ) 
-  
+    )
+
   # Test ---------------------------------
   result_stages |>
-    dplyr::pull(cancer_stage) |> 
-    sort() |> 
+    dplyr::pull(cancer_stage) |>
+    sort() |>
     expect_in(
       sort(
         c("IV", "IA", "IIIC")
       )
-    ) 
-  
+    )
+
   # Summarised result --------------------
   result_stages_summarised <- result_stages |>
     PatientProfiles::summariseResult()
@@ -42,9 +42,9 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
     dplyr::filter(
       variable_name == "cancer_stage",
       estimate_name == "count",
-    ) |> 
-    pull(variable_level) |> 
-    sort() |> 
+    ) |>
+    pull(variable_level) |>
+    sort() |>
     expect_in(
       sort(
         c("IV", "IA", "IIIC")
@@ -55,14 +55,14 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
     dplyr::filter(
       variable_name == "cancer_stage",
       estimate_name == "count",
-    ) |> 
-    pull(estimate_value) |> 
-    as.numeric() |> 
-    unique() |> 
+    ) |>
+    pull(estimate_value) |>
+    as.numeric() |>
+    unique() |>
     expect_equal(1)
   # Test visOmopResults -------------------
   expect_no_error({
-    result_stages_summarised |> 
+    result_stages_summarised |>
       visOmopResults::visOmopTable()
   })
 
@@ -81,7 +81,7 @@ test_that("1 patient 'no_stage_found'", {
     path = "cancer_cohorts",
     name = "cancer_cohorts"
   )
-  # Oncomop execution -------------------- 
+  # Oncomop execution --------------------
   result_stages <- cdm$cancer_cohorts |>
     addStages(
       cancer = "breast",
@@ -90,17 +90,17 @@ test_that("1 patient 'no_stage_found'", {
       type = "clinical",
       order = "last",
       showIntersect = TRUE
-    ) 
-  
+    )
+
   # Test ---------------------------------
   result_stages |>
-    dplyr::pull(cancer_stage) |> 
-    sort() |> 
+    dplyr::pull(cancer_stage) |>
+    sort() |>
     expect_in(
       sort(
         c("IA", "IIIC", "no_stage_found")
       )
-    ) 
+    )
 })
 
 test_that("read stages rds", {
@@ -118,16 +118,16 @@ test_that("read stages rds", {
     expect_equal(
       c("rule_id",
         "staging_system",
-        "edition", 
+        "edition",
         "site",
         "stage_grouping_scope",
-        "histology", 
+        "histology",
         "T",
         "N",
-        "M", 
+        "M",
         "uicc_stage",
         "source_file",
-        "source_pages", 
+        "source_pages",
         "source_table",
         "notes")
     )
@@ -347,10 +347,10 @@ test_that("9th edition prostate case from onconet", {
     name = "cancer_cohorts"
   )
   expect_invisible({
-    cdm[["cancer_cohorts"]] |> 
+    cdm[["cancer_cohorts"]] |>
       CohortConstructor::subsetCohorts(
         cohortId = "prostate_cancer"
-      ) |> 
+      ) |>
       addStages(
         cancer = "prostate",
         window = list(c(-90, 90)),
@@ -360,7 +360,57 @@ test_that("9th edition prostate case from onconet", {
         showIntersect = FALSE
       )
     })
-  
+
+})
+
+
+test_that("7th and 8th edition ovarian case from VTE", {
+
+  test_name <- "test_patients_stage_ovarian"
+
+  cdm <- TestGenerator::patientsCDM(
+    testName = test_name,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+
+  cdm <- createCancerCohorts(
+    cdm = cdm,
+    path = "cancer_cohorts",
+    name = "cancer_cohorts",
+    cancer = "all"
+  )
+
+  cdm[["cancer_cohorts"]] |>
+    CohortConstructor::subsetCohorts(
+      cohortId = "ovarian_cancer"
+    ) |>
+    addStages(
+      cancer = "ovarian",
+      window = list(c(-90, 90)),
+      edition = "7th",
+      type = "base",
+      order = "first",
+      showIntersect = FALSE
+    ) |>
+    dplyr::pull(cancer_stage) |>
+    expect_equal(c("I", "no_stage_found"))
+
+  cdm[["cancer_cohorts"]] |>
+    CohortConstructor::subsetCohorts(
+      cohortId = "ovarian_cancer"
+    ) |>
+    addStages(
+      cancer = "ovarian",
+      window = list(c(-90, 90)),
+      edition = "8th",
+      type = "base",
+      order = "first",
+      showIntersect = FALSE
+    ) |>
+    dplyr::pull(cancer_stage) |>
+    expect_equal(c("II", "no_stage_found"))
+
 })
 
 
