@@ -1,38 +1,3 @@
-test_that("FinOmop breast cancer issue", {
-  # Setup -------------------------------
-  testName <- "default_rules_multiple_subjects"
-  cdm <- TestGenerator::patientsCDM(
-    testName = testName,
-    vocabulary = "v20260227_complete",
-    cdmVersion = "5.4"
-  )
-  cdm <- createCancerCohorts(
-    cdm,
-    path = "cancer_cohorts",
-    name = "cancer_cohorts"
-    )
-  
-  # No pathological rule for breast cancer
-  readStagesRDS("mapping") |>
-    extractStageRuleset(
-      .cancer = "breast",
-      .edition = "8th",
-      .type = "pathological"
-    ) |> 
-    nrow() |> 
-    expect_equal(0)
-
-  # only base
-  readStagesRDS("mapping") |>
-    extractStageRuleset(
-      .cancer = "breast",
-      .edition = "8th",
-      .type = "base"
-    ) |> 
-    nrow() |> 
-    expect_equal(348)
-})
-
 test_that("addStage() insert cancer column with last record multiple subjects", {
   # Setup -------------------------------
   testName <- "default_rules_multiple_subjects"
@@ -448,4 +413,37 @@ test_that("7th and 8th edition ovarian case from VTE", {
 
 })
 
+test_that("FinOmop breast cancer issue", {
+  # Setup -------------------------------
+  testName <- "default_rules_multiple_subjects"
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+  cdm <- createCancerCohorts(
+    cdm,
+    path = "cancer_cohorts",
+    name = "cancer_cohorts"
+    )
+  
+  # No pathological rule for breast cancer
+  readStagesRDS("mapping") |>
+    extractStageRuleset(
+      .cancer = "breast",
+      .edition = "8th",
+      .type = "pathological"
+    ) |> 
+    nrow() |> 
+    expect_equal(0)
 
+  # only base
+  readStagesRDS("mapping") |>
+    extractStageRuleset(
+      .cancer = "breast",
+      .edition = "8th",
+      .type = "base"
+    ) |> 
+    nrow() |> 
+    expect_equal(348)
+})
