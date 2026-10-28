@@ -1,17 +1,17 @@
 #' Add cancer subtypes to a cohort
-#' 
+#'
 #' @description
-#' This function filters and appends specific cancer subtype information to the 
+#' This function filters and appends specific cancer subtype information to the
 #' cohort data based on the provided cancer site, timeframe window, and intersection logic.
 #'
 #' @param cohort A cohort table with cancer patients from a cdm reference object.
 #' @param cdm A cdm reference object.
-#' @param cancer In character, the affected site, a choice of: 
+#' @param cancer In character, the affected site, a choice of:
 #' "bladder", "breast", "colorectal", "lung", "melanoma", "oesophagus" and "prostate".
 #' @param window to look up stages codes.
 #' @param name For the new cohort, in character.
 #' @param showIntersect If TRUE, the cohort will show the date intersects for each matching code. Default FALSE.
-#' 
+#'
 #' @importFrom omopgenerics validateCohortArgument
 #' @importFrom omopgenerics validateCdmArgument
 #' @importFrom omopgenerics assertList
@@ -29,7 +29,7 @@ addSubtype <- function(
 
   # Assert parameters -------------------------
   omopgenerics::validateCohortArgument(cohort)
-  omopgenerics::validateCdmArgument(cdm) 
+  omopgenerics::validateCdmArgument(cdm)
   assertCancerCohortName(cohort, cancer)
   omopgenerics::assertList(window)
   checkmate::assertLogical(showIntersect)
@@ -38,7 +38,7 @@ addSubtype <- function(
   codelist <- subtypeCodelist(
     c(35957667L, 35948983L, 35955862L),
     cdm
-  ) 
+  )
 
   # Intersection and mapping ------------------
   if (is.null(codelist)) {
@@ -48,7 +48,7 @@ addSubtype <- function(
       ),
       class = "Missing OMOP Genomics"
     )
-  } 
+  }
     cohort |>
       addSubtypeIntersect(
         conceptSet = codelist,
@@ -60,11 +60,11 @@ addSubtype <- function(
         inObservation = TRUE,
         nameStyle = "{concept_name}",
         name = NULL
-      ) |> 
+      ) |>
       .mapSubtypeRules(
         cdm,
         name = name
-      ) |> 
+      ) |>
       dplyr::select(
         -dplyr::all_of(c("pgr", "erbb2", "esr1"))
       )
@@ -87,11 +87,11 @@ subtypeCodelist <- function(
       )
       return(invisible(NULL))
       } else {
-      codelist[[extractConceptName(concepts[i], cdm)]] <- CodelistGenerator::getDescendants(cdm, concepts[i]) |> 
+      codelist[[extractConceptName(concepts[i], cdm)]] <- CodelistGenerator::getDescendants(cdm, concepts[i]) |>
         dplyr::pull(.data$concept_id)
     }
     }
-  codelist |> 
+  codelist |>
     omopgenerics::newCodelist(cdm)
   }
 
@@ -102,21 +102,21 @@ extractConceptName <- function(
   CodelistGenerator::getDescendants(
     cdm,
     concept
-  ) |> 
+  ) |>
     dplyr::filter(
       .data$concept_id == concept
-    ) |> 
-    dplyr::pull(.data$concept_name) |> 
+    ) |>
+    dplyr::pull(.data$concept_name) |>
     stringr::str_remove_all(
       "[()]"
-    ) |> 
+    ) |>
     stringr::str_replace_all(
       " ",
       "_"
-    ) |> 
+    ) |>
     stringr::str_extract(
       "^[^_]+"
-    ) |> 
+    ) |>
     tolower()
 }
 
@@ -145,7 +145,7 @@ extractConceptName <- function(
           isTRUE(.data$erbb2 == 9191) ~ 1,
           .default = 0
       ),
-      her2_positive = dplyr::case_when(
+      her2_negative = dplyr::case_when(
           isTRUE(.data$erbb2 == 9189) ~ 1,
           .default = 0
       ),
@@ -153,14 +153,14 @@ extractConceptName <- function(
           isTRUE(.data$pgr == 9189) & isTRUE(.data$esr1 == 9189) & isTRUE(.data$erbb2 == 9189) ~ 1,
           .default = 0
       )
-    ) |> 
-    tibble::as_tibble() 
+    ) |>
+    tibble::as_tibble()
   cancerCohortTableName <- omopgenerics::uniqueTableName()
   cdm <- omopgenerics::insertTable(
     cdm = cdm,
     name = cancerCohortTableName,
     table = cancer_subtype
-  ) 
+  )
   cdm[[name]] <- omopgenerics::newCohortTable(
     cdm[[cancerCohortTableName]]
   ) |>

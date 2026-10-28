@@ -18,23 +18,23 @@ test_that("saveStagesRules saves expected RDS files", {
   readRDS(file.path(results_path, "tnm_mapping.rds")) |>
     pull(site) |>
     unique() |>
-    sort() |> 
+    sort() |>
     expect_equal(
       c("bladder", "breast", "colorectal",
-      "lung", "melanoma", "oesophageal", 
-      "prostate")
+      "lung", "melanoma", "oesophageal",
+      "ovarian", "prostate")
     )
   readRDS(file.path(results_path, "tnm_mapping.rds")) |>
     pull(stage_grouping_scope) |>
     unique() |>
-    sort() |> 
+    sort() |>
     expect_equal(
       c("base", "clinical", "pathological")
     )
   readRDS(file.path(results_path, "tnm_mapping.rds")) |>
     pull(edition) |>
     unique() |>
-    sort() |> 
+    sort() |>
     expect_equal(
       c("7th", "8th", "9th")
     )
@@ -59,8 +59,8 @@ test_that("saveSubtypeRules saves expected RDS files", {
   readRDS(file.path(results_path, "subtype_mapping.rds")) |>
     pull(subtype) |>
     expect_identical(
-      c("ESR1/PGR positive", "ESR1/PGR positive", 
-        "ESR1/PGR negative", "HER2 positive", "HER2 negative", 
+      c("ESR1/PGR positive", "ESR1/PGR positive",
+        "ESR1/PGR negative", "HER2 positive", "HER2 negative",
         "Triple negative")
       )
 })
