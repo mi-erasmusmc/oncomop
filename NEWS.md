@@ -1,3 +1,11 @@
+# oncomop 0.4.0
+
+* Fixed typo in HER2 positive rule for subtypes. 
+
+* Added ovarian cancer ruleset. 
+
+* Fixed bug related to columns in tnm_mapping.rds
+
 # oncomop 0.3.6
 
 * `addStages()` updated documentation and bindings fixes. 
