@@ -31,7 +31,6 @@ test_that("FinOmop breast cancer issue", {
     ) |> 
     nrow() |> 
     expect_equal(348)
-
 })
 
 test_that("addStage() insert cancer column with last record multiple subjects", {
