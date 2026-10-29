@@ -26,7 +26,8 @@ addStages(
 - cancer:
 
   In character, the affected site, a choice of: "bladder", "breast",
-  "colorectal", "lung", "melanoma", "oesophagus" and "prostate".
+  "colorectal", "lung", "melanoma", "oesophagus", "ovarian" and
+  "prostate".
 
 - window:
 

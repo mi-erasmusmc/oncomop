@@ -11,6 +11,9 @@
 - [`addSubtype()`](https://mi-erasmusmc.github.io/oncomop/reference/addSubtype.md)
   : Add cancer subtypes to a cohort
 
+- [`applyCARFiltering()`](https://mi-erasmusmc.github.io/oncomop/reference/applyCARFiltering.md)
+  : Apply CAR filtering for DK-DHR
+
 - [`assertCancerCohortName()`](https://mi-erasmusmc.github.io/oncomop/reference/assertCancerCohortName.md)
   : Assert that cohort names match selected cancer site(s)
 
