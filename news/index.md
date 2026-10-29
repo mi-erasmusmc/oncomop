@@ -2,6 +2,11 @@
 
 ## oncomop 0.4.1
 
+- Fixed bug base category hardwired in `addStages`.
+
+- `createTNMCodelist` internal function had to condense TNM codes from
+  clinical, pathological and base.
+
 ## oncomop 0.4.0
 
 - Fixed typo in HER2 positive rule for subtypes.
