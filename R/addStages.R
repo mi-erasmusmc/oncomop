@@ -50,14 +50,14 @@ addStages <- function(
   # Extract codelist for intersection -----------------
   tnm_codelist <- readStagesRDS("concepts") |>
     createTNMCodelist(
-      .edition = edition,
-      .type = type
+      .edition = edition
     ) |>
     assertTNMCodelist(
-      cancer = cancer,
-      type = type,
       edition = edition
     )
+  if (is.null(tnm_codelist)) {
+    return(invisible(NULL))
+  }
 
   # Extract ruleset -----------------------------------
   ruleset <- readStagesRDS("mapping") |>
@@ -71,6 +71,9 @@ addStages <- function(
       type = type,
       edition = edition
     )
+  if (is.null(ruleset)) {
+    return(invisible(NULL))
+  }
 
   # Intersect cohorts ---------------------------------
   cancer_stage_cohort <- cohort |>
@@ -106,28 +109,20 @@ addStages <- function(
 
 createTNMCodelist <- function(
   tnm_concepts,
-  .edition,
-  .type
+  .edition
 ) {
   checkmate::assertDataFrame(tnm_concepts)
   tnm_stages_concept <- tnm_concepts |>
     dplyr::filter(
-      .data$classification_version == .edition,
-      .data$type == .type,
+      .data$classification_version == .edition
     ) |>
     dplyr::filter(
       !is.na(.data$concept_id)
     )
-  tnm_codelist <- tnm_stages_concept |>
-    dplyr::pull(
-      .data$concept_id
-    ) |> lapply(
-      FUN = function(x) {
-        return(x)
-      }
-    ) |> stats::setNames(
-      tnm_stages_concept$component_tnm
-    ) |>
+  tnm_codelist <- split(
+    tnm_stages_concept$concept_id,
+    tnm_stages_concept$component_tnm
+  ) |>
     omopgenerics::newCodelist()
   return(tnm_codelist)
 }

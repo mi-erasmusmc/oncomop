@@ -106,12 +106,13 @@ requirePackage <- function(package) {
   invisible(TRUE)
 }
 
-assertTNMCodelist <- function(tnm_codelist, cancer, type, edition) {
+assertTNMCodelist <- function(tnm_codelist, edition) {
   omopgenerics::assertList(tnm_codelist)
   if (length(tnm_codelist) == 0) {
-    cli::cli_abort(
-      "No TNM concepts found for '{cancer} cancer', '{type}', '{edition} edition'"
+    cli::cli_alert_warning(
+      "No TNM concepts found for '{edition} edition'"
     )
+    return(invisible(NULL))
   }
   tnm_codelist
 }
@@ -119,9 +120,10 @@ assertTNMCodelist <- function(tnm_codelist, cancer, type, edition) {
 assertStageRuleset <- function(ruleset, cancer, type, edition) {
   checkmate::assertDataFrame(ruleset)
   if (nrow(ruleset) == 0) {
-    cli::cli_abort(
+    cli::cli_alert_warning(
       "No TNM mapping found for '{cancer} cancer', '{type}', '{edition} edition'"
     )
+    return(invisible(NULL))
   }
   ruleset
 }
