@@ -18,7 +18,7 @@ test_that("addStage() insert cancer column with last record multiple subjects", 
       cancer = "breast",
       window = list(c(0,0)),
       edition = "8th",
-      type = "clinical",
+      type = "base",
       order = "last",
       showIntersect = TRUE
     )
@@ -87,7 +87,7 @@ test_that("1 patient 'no_stage_found'", {
       cancer = "breast",
       window = list(c(0,0)),
       edition = "8th",
-      type = "clinical",
+      type = "base",
       order = "last",
       showIntersect = TRUE
     )
@@ -137,12 +137,32 @@ test_that("to form tnmCodelist", {
   expect_no_error({
     tnm_codelist <- readStagesRDS("concepts") |>
       createTNMCodelist(
-        .edition = "7th",
-        .type = "clinical"
+        .edition = "7th"
       )
     })
   tnm_codelist |>
     expect_length(42)
+
+  eighth_edition <- readStagesRDS("concepts") |>
+    createTNMCodelist(.edition = "8th")
+  expect_setequal(
+    eighth_edition[["M1b"]],
+    c(1634661L, 1633375L, 1634712L)
+  )
+})
+
+test_that("TNM codelist groups concept IDs by component", {
+  concepts <- data.frame(
+    component_tnm = c("M1b", "M1b", "M1c", "M1b"),
+    type = c("clinical", "pathology", "base", "clinical"),
+    classification_version = c("8th", "8th", "8th", "7th"),
+    concept_id = c(1L, 2L, 3L, 4L)
+  )
+
+  codelist <- createTNMCodelist(concepts, .edition = "8th")
+
+  expect_equal(codelist[["M1b"]], c(1L, 2L))
+  expect_equal(sum(names(codelist) == "M1b"), 1)
 })
 
 test_that("Extracting and formating rules from RDS data'", {
@@ -172,8 +192,7 @@ test_that("Imposing rules with 'mappingRules' multiple subjects", {
   )
   tnm_codelist <- readStagesRDS("concepts") |>
     createTNMCodelist(
-      .edition = "8th",
-      .type = "clinical"
+      .edition = "8th"
     )
   ruleset <- readStagesRDS("mapping") |>
     extractStageRuleset(
@@ -205,8 +224,7 @@ test_that("Imposing rules with 'mappingRules' single patient", {
   )
   tnm_codelist <- readStagesRDS("concepts") |>
     createTNMCodelist(
-      .edition = "8th",
-      .type = "clinical"
+      .edition = "8th"
     )
   ruleset <- readStagesRDS("mapping")|>
     extractStageRuleset(
@@ -238,8 +256,7 @@ test_that("General .addStageRules", {
   )
   tnm_codelist <- readStagesRDS("concepts") |>
     createTNMCodelist(
-      .edition = "8th",
-      .type = "clinical"
+      .edition = "8th"
     )
   ruleset <- readStagesRDS("mapping")|>
     extractStageRuleset(
@@ -293,7 +310,7 @@ test_that("addStage() insert cancer column with last record one staging patient"
       cancer = "bladder",
       window = list(c(0, 30)),
       edition = "7th",
-      type = "clinical",
+      type = "base",
       order = "last"
     ) |>
     dplyr::collect() |>

@@ -47,23 +47,31 @@ test_that("stage assertions return data or identify missing inputs", {
   ruleset <- data.frame(rule_id = 1L)
 
   expect_identical(
-    assertTNMCodelist(codelist, "breast", "clinical", "8th"),
+    assertTNMCodelist(codelist, "8th"),
     codelist
   )
   expect_identical(
     assertStageRuleset(ruleset, "breast", "clinical", "8th"),
     ruleset
   )
-  expect_error(
-    assertTNMCodelist(list(), "breast", "clinical", "8th"),
-    "No TNM concepts found for 'breast cancer', 'clinical', '8th edition'",
+  expect_message(
+    missing_codelist <- assertTNMCodelist(list(), "8th"),
+    "No TNM concepts found for '8th edition'",
     fixed = TRUE
   )
-  expect_error(
-    assertStageRuleset(ruleset[0, , drop = FALSE], "breast", "clinical", "8th"),
+  expect_null(missing_codelist)
+  expect_message(
+    missing_ruleset <- assertStageRuleset(ruleset[0, , drop = FALSE], "breast", "clinical", "8th"),
     "No TNM mapping found for 'breast cancer', 'clinical', '8th edition'",
     fixed = TRUE
   )
+  expect_null(missing_ruleset)
+  expect_false(withVisible(suppressMessages(
+    assertTNMCodelist(list(), "8th")
+  ))$visible)
+  expect_false(withVisible(suppressMessages(
+    assertStageRuleset(ruleset[0, , drop = FALSE], "breast", "clinical", "8th")
+  ))$visible)
 })
 
 # test_that("filters surgery codelist by cancer", {
