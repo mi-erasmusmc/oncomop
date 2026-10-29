@@ -994,3 +994,36 @@ test_that("Create test patients with TNM measurements UICC 7th and 8th edition",
     unique()
   expect_equal(prostate_gender, "Male")
 })
+
+test_that("oesophageal clinical T2 N0 M0 reproduces ambiguous stage lookup", {
+  testName <- "oesophageal_clinical_t2_n0_m0"
+  # patientGenerator <- PatientGenerator::patientChat$new(model = "gpt-5.4")
+  # patientGenerator$prompt(paste(
+  #   "Generate exactly one synthetic OMOP CDM v5.4 patient for a deterministic staging test.",
+  #   "PERSON: exactly one adult person, person_id 1, female gender_concept_id 8532, born in 1970.",
+  #   "OBSERVATION_PERIOD: exactly one period for person 1 from 2020-01-01 through 2024-12-31.",
+  #   "CONDITION_OCCURRENCE: exactly one oesophageal cancer diagnosis for person 1, condition_concept_id 4181343, condition_type_concept_id 32817, condition_start_date 2023-01-15, condition_end_date 2023-12-31.",
+  #   "MEASUREMENT: exactly three rows for person 1, all on 2023-01-15: clinical 8th-edition T2 measurement_concept_id 1634651; clinical 8th-edition N0 measurement_concept_id 1634070; clinical 8th-edition M0 measurement_concept_id 1634757. Use measurement_type_concept_id 32817.",
+  #   "Do not create any other people, diagnoses, measurements, or nonempty clinical tables.",
+  #   "All dates must fall in the observation period. Return only the structured patient data."
+  # ))
+  # patientGenerator$save(testName)
+  cdm <- TestGenerator::patientsCDM(
+    testName = testName,
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+  cdm <- createCancerCohorts(
+    cdm = cdm,
+    path = "cancer_cohorts",
+    name = "cancer_cohorts"
+  )
+
+  expect_equal(cdm$cancer_cohorts |> dplyr::collect() |> nrow(), 1L)
+  expect_setequal(
+    cdm$measurement |>
+      dplyr::collect() |>
+      dplyr::pull(measurement_concept_id),
+    c(1634651L, 1634070L, 1634757L)
+  )
+})
