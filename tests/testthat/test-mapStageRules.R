@@ -63,4 +63,22 @@ test_that("Stage mapping preserves patients with missing or unmatched TNM", {
     .mapStageRules(ruleset)
   expect_equal(result$subject_id, 2L)
   expect_equal(result$cancer_stage, "no_stage_found")
+
+  # Both oesophageal histologies map T1 N0 M0 to stage I.
+  oesophageal_ruleset <- readStagesRDS("mapping") |>
+    extractStageRuleset(
+      .cancer = "oesophageal",
+      .edition = "8th",
+      .type = "clinical"
+    )
+  expect_equal(
+    sum(oesophageal_ruleset$T == "T1" &
+      oesophageal_ruleset$N == "N0" &
+      oesophageal_ruleset$M == "M0"),
+    2L
+  )
+  result <- cdm$cancer_cohorts |>
+    dplyr::filter(.data$subject_id == 1L) |>
+    .mapStageRules(oesophageal_ruleset)
+  expect_equal(result$cancer_stage, "I")
 })

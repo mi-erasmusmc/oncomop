@@ -430,4 +430,51 @@ test_that("7th and 8th edition ovarian case from VTE", {
 
 })
 
+test_that("oesophageal clinical stages form a composite stage", {
+  cdm <- TestGenerator::patientsCDM(
+    testName = "oesophageal_clinical_t2_n0_m0",
+    vocabulary = "v20260227_complete",
+    cdmVersion = "5.4"
+  )
+  cdm <- createCancerCohorts(
+    cdm = cdm,
+    path = "cancer_cohorts",
+    name = "cancer_cohorts"
+  )
+  expect_equal(
+    cdm$cancer_cohorts |>
+      dplyr::collect() |>
+      nrow(),
+    1L
+  )
+  expect_setequal(
+    cdm$measurement |>
+      dplyr::collect() |>
+      dplyr::pull(measurement_concept_id),
+    c(1634651L, 1634070L, 1634757L)
+  )
+
+  ruleset <- readStagesRDS("mapping") |>
+    extractStageRuleset(
+      .cancer = "oesophageal",
+      .edition = "8th",
+      .type = "clinical"
+    ) |>
+    dplyr::filter(T == "T2", N == "N0", M == "M0")
+  expect_setequal(ruleset$uicc_stage, c("IIB", "II"))
+
+  result <- addStages(
+    cdm$cancer_cohorts,
+    cancer = "oesophageal",
+    edition = "8th",
+    type = "clinical"
+  )
+  expect_equal(result$cancer_stage, "II-IIB")
+})
+
+test_that("compositeStage orders and joins distinct stages", {
+  expect_equal(compositeStage(c("IIA", "I")), "I-IIA")
+  expect_equal(compositeStage(c("IV", "IIB", "IIB", "0")), "0-IIB-IV")
+  expect_equal(compositeStage("II"), "II")
+})
 

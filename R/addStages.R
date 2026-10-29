@@ -198,15 +198,23 @@ createTNMCodelist <- function(
               tolower(.data$N) == rowStageN,
               tolower(.data$M) == rowStageM,
             ) |>
-            dplyr::pull(.data$uicc_stage)
+            dplyr::pull(.data$uicc_stage) |>
+            unique()
           if (length(stage) == 0) {
             "no_stage_found"
-          } else {
+          } else if (length(stage) == 1) {
             stage
+          } else if (length(stage) > 1) {
+            compositeStage(stage)
           }
         }
       }
     )
+}
+
+compositeStage <- function(stage) {
+  checkmate::assertCharacter(stage, min.len = 1, any.missing = FALSE)
+  paste(sort(unique(stage)), collapse = "-")
 }
 
 extractEarliestStage <- function(
