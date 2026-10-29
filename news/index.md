@@ -1,5 +1,10 @@
 # Changelog
 
+## oncomop 0.4.2
+
+- `.mapStageRules` filters unique stages or uses `compositeStage` to
+  concatenate two different stages if found in the mapping file.
+
 ## oncomop 0.4.1
 
 - Fixed bug base category hardwired in `addStages`.
