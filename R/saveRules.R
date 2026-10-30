@@ -12,7 +12,7 @@
 #'
 #' @param path Character directory containing the packaged source `.csv` files.
 #' @param results_path Existing writable directory where the RDS files are saved.
-#' 
+#'
 #' @returns `NULL`, called for its side effects.
 saveStagesRules <- function(
     path = system.file(
@@ -36,10 +36,10 @@ saveStagesRules <- function(
       file.path(path, paste0(tnm_files[i], ".csv"))
     )
     if (tnm_files[i] == "tnm_mapping") {
-      data <- data |> 
+      data <- data |>
         dplyr::mutate(
           site = tolower(.data$site)
-        ) |> 
+        ) |>
         dplyr::mutate(
           site = dplyr::case_when(
             .data$site == "urinary bladder" ~ "bladder",
@@ -50,7 +50,7 @@ saveStagesRules <- function(
             .default = .data$stage_grouping_scope
           ),
           edition = as.character(.data$edition)
-        ) |> 
+        ) |>
         dplyr::mutate(
           edition = dplyr::case_when(
             as.character(.data$edition) == "7" ~ as.character("7th"),
@@ -78,7 +78,7 @@ saveStagesRules <- function(
 #'
 #' @param path Character directory containing the packaged source `.csv` file.
 #' @param results_path Existing writable directory where the RDS file is saved.
-#' 
+#'
 #' @returns `NULL`, called for its side effects.
 saveSubtypeRules <- function(
     path = system.file(
@@ -125,16 +125,22 @@ readStagesRDS <- function(
   )
   if (type == "mapping") {
     type <- "tnm_mapping"
+  } else if (type == "concepts") {
+    type <- "tnm_concepts"
   }
-  system.file(
+  dataframe_rds <- system.file(
     "extdata",
     package = "oncomop"
   ) |>
     list.files(
       full.names = TRUE,
       pattern = paste0(type, ".rds")
-    ) |> 
+    ) |>
     readRDS()
+  if ("X" %in% names(dataframe_rds)) {
+    dataframe_rds <- subset(dataframe_rds, select = -X)
+  }
+  return(dataframe_rds)
 }
 
 readSubtypeRDS <- function(
@@ -154,7 +160,7 @@ readSubtypeRDS <- function(
     list.files(
       full.names = TRUE,
       pattern = paste0(type, ".rds")
-    ) |> 
+    ) |>
     readRDS()
 }
 
