@@ -340,7 +340,7 @@ test_that("subtypeIntersection patients in subtype_groups", {
 
 })
 
-test_that(".mapSubtypeRules correct six rules", {
+test_that(".mapSubtypeRules correct six rules flags", {
   testName <- "subtypes_six_rules"
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
@@ -384,15 +384,14 @@ test_that(".mapSubtypeRules correct six rules", {
   subtypes_flags |>
     pull(her2_positive) |>
     sum() |> 
-    expect_equal(2)
+    expect_equal(1)
   subtypes_flags |>
     pull(triple_negative) |>
     sum() |> 
     expect_equal(1)
-
 })
 
-test_that(".mapSubtypeRules correct six rules", {
+test_that(".mapSubtypeRules correct six rules values", {
   testName <- "subtypes_groups"
   cdm <- TestGenerator::patientsCDM(
     testName = testName,
