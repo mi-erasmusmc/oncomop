@@ -442,16 +442,18 @@ test_that("Create test patients with TNM measurements for staging - UICC 7th edi
 
   # test 5 people in each cancer cohort (except prostate_cancer)
   n_persons_per_cohort <- cdm$cancer_cohorts |>
-    dplyr::count(cohort_definition_id) |>
-    dplyr::filter(cohort_definition_id != 8) |>
+    PatientProfiles::addCohortName() |> 
+    dplyr::count(cohort_name) |>
+    dplyr::filter(cohort_name != "prostate_cancer") |>
     dplyr::pull(n) |>
     unique()
   expect_equal(n_persons_per_cohort, 5)
 
   # test 4 persons in prostate cancer cohort
   n_persons_prostate <- cdm$cancer_cohorts |>
-    dplyr::count(cohort_definition_id) |>
-    dplyr::filter(cohort_definition_id == 8) |>
+    PatientProfiles::addCohortName() |> 
+    dplyr::count(cohort_name) |>
+    dplyr::filter(cohort_name == "prostate_cancer") |>
     dplyr::pull(n)
   expect_equal(n_persons_prostate, 4)
 
@@ -651,16 +653,18 @@ test_that("Create test patients with TNM measurements for staging - UICC 8th edi
 
   # test 5 people in each cancer cohort (except prostate_cancer)
   n_persons_per_cohort <- cdm$cancer_cohorts |>
-    dplyr::count(cohort_definition_id) |>
-    dplyr::filter(cohort_definition_id != 8) |>
+    PatientProfiles::addCohortName() |> 
+    dplyr::count(cohort_name) |>
+    dplyr::filter(cohort_name != "prostate_cancer") |>
     dplyr::pull(n) |>
     unique()
   expect_equal(n_persons_per_cohort, 5)
 
   # test 4 persons in prostate cancer cohort
   n_persons_prostate <- cdm$cancer_cohorts |>
-    dplyr::count(cohort_definition_id) |>
-    dplyr::filter(cohort_definition_id == 8) |>
+    PatientProfiles::addCohortName() |> 
+    dplyr::count(cohort_name) |>
+    dplyr::filter(cohort_name == "prostate_cancer") |>
     dplyr::pull(n)
   expect_equal(n_persons_prostate, 4)
 
@@ -912,16 +916,18 @@ test_that("Create test patients with TNM measurements UICC 7th and 8th edition",
 
   # test 10 people in each cancer cohort (except prostate_cancer)
   n_persons_per_cohort <- cdm$cancer_cohorts |>
-    dplyr::count(cohort_definition_id) |>
-    dplyr::filter(cohort_definition_id != 8) |>
+    PatientProfiles::addCohortName() |> 
+    dplyr::count(cohort_name) |>
+    dplyr::filter(cohort_name != "prostate_cancer") |>
     dplyr::pull(n) |>
     unique()
   expect_equal(n_persons_per_cohort, 10)
 
   # test 8 persons in prostate cancer cohort
   n_persons_prostate <- cdm$cancer_cohorts |>
-    dplyr::count(cohort_definition_id) |>
-    dplyr::filter(cohort_definition_id == 8) |>
+    PatientProfiles::addCohortName() |> 
+    dplyr::count(cohort_name) |>
+    dplyr::filter(cohort_name == "prostate_cancer") |>
     dplyr::pull(n)
   expect_equal(n_persons_prostate, 8)
 
